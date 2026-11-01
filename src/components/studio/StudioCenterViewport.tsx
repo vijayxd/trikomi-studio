@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { modelStore } from "../../store/modelStore";
+import { uvOrganizerStore } from "../../store/uvOrganizerStore";
 
 interface StudioCenterViewportProps {
   onToggleMaximize?: () => void;
@@ -17,13 +18,14 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
   useEffect(() => {
     if (containerRef.current) {
       modelStore.initThree(containerRef.current);
-      if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
-        setTimeout(() => {
-          if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
-            modelStore.loadCuratedModelByIndex(0);
-          }
-        }, 200);
-      }
+      const tryLoad = () => {
+        if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
+          modelStore.loadCuratedModelByIndex(0, uvOrganizerStore);
+        } else if (!modelStore.currentModel) {
+          setTimeout(tryLoad, 250);
+        }
+      };
+      setTimeout(tryLoad, 100);
     }
   }, []);
 
