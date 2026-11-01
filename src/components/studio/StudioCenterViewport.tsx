@@ -13,7 +13,7 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
   isMaximized = false
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [activeViewportTool, setActiveViewportTool] = useState<"select" | "draw" | "pivot" | "crosshair" | "measure">("select");
+  const [activeViewportTool, setActiveViewportTool] = useState<"select" | "measure">("select");
 
   useEffect(() => {
     if (containerRef.current) {
@@ -79,52 +79,21 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
       {/* 3D WebGL Canvas Stage */}
       <div className="viewport-3d-stage" style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-        {/* Floating 5-Tool Strip on Left */}
+        {/* Floating Tool Strip on Left: Select & Measure */}
         <div className="viewport-floating-strip" style={{ zIndex: 10 }}>
           <button
             className={`btn-viewport-tool ${activeViewportTool === "select" ? "active" : ""}`}
             onClick={() => setActiveViewportTool("select")}
-            title="Select Box"
+            title="Select & Inspect Mesh Panels"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="3" width="18" height="18" rx="2" strokeDasharray="3 3" />
             </svg>
           </button>
           <button
-            className={`btn-viewport-tool ${activeViewportTool === "draw" ? "active" : ""}`}
-            onClick={() => setActiveViewportTool("draw")}
-            title="Draw Annotate"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 19l7-7 3 3-7 7-3-3z" />
-              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-            </svg>
-          </button>
-          <button
-            className={`btn-viewport-tool ${activeViewportTool === "pivot" ? "active" : ""}`}
-            onClick={() => setActiveViewportTool("pivot")}
-            title="Center Pivot"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="9" />
-              <circle cx="12" cy="12" r="2" fill="currentColor" />
-            </svg>
-          </button>
-          <button
-            className={`btn-viewport-tool ${activeViewportTool === "crosshair" ? "active" : ""}`}
-            onClick={() => setActiveViewportTool("crosshair")}
-            title="Crosshair"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="9" />
-              <line x1="12" y1="3" x2="12" y2="21" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-            </svg>
-          </button>
-          <button
             className={`btn-viewport-tool ${activeViewportTool === "measure" ? "active" : ""}`}
             onClick={() => setActiveViewportTool("measure")}
-            title="Measure Distance"
+            title="Measure Garment Seam & Dimensions"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="4" y1="20" x2="20" y2="4" />

@@ -37,18 +37,6 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
             Optimize
           </button>
         </div>
-        <div className="uv-set-actions">
-          <div className="pill-uv-set-dropdown">
-            <span>UV Sets ∨</span>
-          </div>
-          <button
-            className="control-toggle-btn"
-            style={{ width: "20px", height: "20px", borderRadius: "5px" }}
-            title="Add UV Channel"
-          >
-            +
-          </button>
-        </div>
       </div>
 
       <div className="uv-split-container">
@@ -155,11 +143,12 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
             <div className="subcard-title-bar">
               <span>UV Tools</span>
             </div>
-            <div className="uv-actions-tile-grid">
+            <div className="uv-actions-tile-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
               <div
                 className="tile-action-item"
                 onClick={() => uvOrganizerStore.arrangeAssignedUVs()}
                 style={{ cursor: "pointer" }}
+                title="Arrange and align canonical islands"
               >
                 <div className="tile-icon-square">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -170,26 +159,11 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                 </div>
                 <span>Unwrap</span>
               </div>
-              <div className="tile-action-item">
-                <div className="tile-icon-square">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" strokeDasharray="2 2" />
-                  </svg>
-                </div>
-                <span>Straighten</span>
-              </div>
-              <div className="tile-action-item">
-                <div className="tile-icon-square">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 12h18M3 6h18M3 18h18" />
-                  </svg>
-                </div>
-                <span>Relax</span>
-              </div>
               <div
                 className="tile-action-item"
                 onClick={() => uvOrganizerStore.arrangeAssignedUVs()}
                 style={{ cursor: "pointer" }}
+                title="Pack islands into UV unit space"
               >
                 <div className="tile-icon-square">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

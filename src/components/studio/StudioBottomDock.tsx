@@ -217,10 +217,6 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
           </div>
           <div className="validation-line-item">
             <div className="check-mark-circle">✓</div>
-            <span>Mannequin-Free</span>
-          </div>
-          <div className="validation-line-item">
-            <div className="check-mark-circle">✓</div>
             <span>GLB Export Ready</span>
           </div>
         </div>
