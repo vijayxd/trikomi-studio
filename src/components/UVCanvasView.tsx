@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { uvOrganizerStore } from "../store/uvOrganizerStore";
 import { modelStore } from "../store/modelStore";
-import { Move } from "lucide-react";
 import * as THREE from "three";
 
 interface PieceBounds2D {
@@ -13,31 +12,60 @@ interface PieceBounds2D {
   maxV: number;
 }
 
-interface DragState2D {
+type TransformMode = "translate" | "scale-tl" | "scale-tr" | "scale-br" | "scale-bl" | "scale-r" | "scale-t" | "scale-l" | "scale-b";
+
+interface DragTransformState {
+  mode: TransformMode;
   pieceIds: string[];
   startMouseX: number;
   startMouseY: number;
+  origBounds: { minU: number; maxU: number; minV: number; maxV: number };
+  centerU: number;
+  centerV: number;
+}
+
+interface PanState {
+  startX: number;
+  startY: number;
+  startCamCenterU: number;
+  startCamCenterV: number;
 }
 
 export const UVCanvasView = observer(() => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [dragState, setDragState] = useState<DragState2D | null>(null);
+  
+  // Drag transform & pan states
+  const [transformState, setTransformState] = useState<DragTransformState | null>(null);
+  const [panState, setPanState] = useState<PanState | null>(null);
+  const [activeGizmoHandle, setActiveGizmoHandle] = useState<string | null>(null);
 
   // Synchronized hovered piece ID across 2D UV canvas and 3D viewport
   const activeHoveredPieceId = modelStore.hoveredPieceId;
 
-  // WebGL GPU Viewport System (Same architecture as Blender UV Editor)
+  // WebGL GPU Viewport System
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.OrthographicCamera | null>(null);
   const meshesGroupRef = useRef<THREE.Group | null>(null);
   const zonesGroupRef = useRef<THREE.Group | null>(null);
   const selectionBoxMeshRef = useRef<THREE.LineSegments | null>(null);
+  const gizmoGroupRef = useRef<THREE.Group | null>(null);
   const snapGuideLinesMeshRef = useRef<THREE.LineSegments | null>(null);
-  const [snapEnabled, setSnapEnabled] = useState(true);
+
+  // Pan & Zoom state in UV Coordinates
+  const viewStateRef = useRef<{ centerU: number; centerV: number; zoom: number }>({
+    centerU: 0.5,
+    centerV: 0.5,
+    zoom: 1.0
+  });
 
   const cachedBoundsRef = useRef<PieceBounds2D[]>([]);
-  const dragDeltaRef = useRef<{ u: number; v: number }>({ u: 0, v: 0 });
+  const dragDeltaRef = useRef<{ u: number; v: number; scaleX: number; scaleY: number }>({
+    u: 0,
+    v: 0,
+    scaleX: 1,
+    scaleY: 1
+  });
   const animFrameIdRef = useRef<number | null>(null);
 
   // Fast GPU Render trigger
@@ -51,12 +79,41 @@ export const UVCanvasView = observer(() => {
     });
   }, []);
 
+  // Update Camera Viewport Projection with Pan & Zoom
+  const updateCameraBounds = useCallback(() => {
+    if (!containerRef.current || !cameraRef.current) return;
+    const { clientWidth, clientHeight } = containerRef.current;
+    if (clientWidth === 0 || clientHeight === 0) return;
+
+    const camera = cameraRef.current;
+    const aspect = clientWidth / clientHeight;
+    const { centerU, centerV, zoom } = viewStateRef.current;
+
+    const halfSpan = 0.55 / zoom;
+    if (aspect >= 1.0) {
+      const halfU = halfSpan * aspect;
+      const halfV = halfSpan;
+      camera.left = centerU - halfU;
+      camera.right = centerU + halfU;
+      camera.top = centerV + halfV;
+      camera.bottom = centerV - halfV;
+    } else {
+      const halfU = halfSpan;
+      const halfV = halfSpan / aspect;
+      camera.left = centerU - halfU;
+      camera.right = centerU + halfU;
+      camera.top = centerV + halfV;
+      camera.bottom = centerV - halfV;
+    }
+    camera.updateProjectionMatrix();
+    requestRender();
+  }, [requestRender]);
+
   // 1. Rebuild Zones Overlay in WebGL
   const updateZonesOverlay = useCallback(() => {
     if (!zonesGroupRef.current) return;
     const group = zonesGroupRef.current;
     
-    // Clear old children
     while (group.children.length > 0) {
       const child = group.children[0];
       group.remove(child);
@@ -77,6 +134,17 @@ export const UVCanvasView = observer(() => {
     const gridMat = new THREE.LineBasicMaterial({ color: 0x1e293b, transparent: true, opacity: 0.5 });
     group.add(new THREE.LineSegments(gridGeom, gridMat));
 
+    // Outer UV Unit Square [0, 1] x [0, 1] Border Glow
+    const borderGeom = new THREE.BufferGeometry();
+    borderGeom.setAttribute("position", new THREE.Float32BufferAttribute([
+      0, 0, -0.9,  1, 0, -0.9,
+      1, 0, -0.9,  1, 1, -0.9,
+      1, 1, -0.9,  0, 1, -0.9,
+      0, 1, -0.9,  0, 0, -0.9
+    ], 3));
+    const borderMat = new THREE.LineBasicMaterial({ color: 0x14d9ff, transparent: true, opacity: 0.35, linewidth: 2 });
+    group.add(new THREE.LineSegments(borderGeom, borderMat));
+
     // Canonical zone rectangles
     Object.values(uvOrganizerStore.zones).forEach((zone) => {
       const zW = zone.uMax - zone.uMin;
@@ -87,7 +155,6 @@ export const UVCanvasView = observer(() => {
       const assignedCount = modelStore.pieces.filter(p => p.assignedZoneId === zone.id).length;
       const isEmpty = assignedCount === 0;
 
-      // Plane fill
       const planeGeom = new THREE.PlaneGeometry(zW, zH);
       const colorVal = new THREE.Color(zone.color);
       const planeMat = new THREE.MeshBasicMaterial({
@@ -100,12 +167,11 @@ export const UVCanvasView = observer(() => {
       planeMesh.position.set(zX, zY, -0.5);
       group.add(planeMesh);
 
-      // Border outline
       const edges = new THREE.EdgesGeometry(planeGeom);
       const edgeMat = new THREE.LineBasicMaterial({
         color: isEmpty ? 0x475569 : colorVal,
         transparent: true,
-        opacity: isEmpty ? 0.3 : 0.9,
+        opacity: isEmpty ? 0.25 : 0.85,
         linewidth: 1.5
       });
       const edgeLines = new THREE.LineSegments(edges, edgeMat);
@@ -116,12 +182,11 @@ export const UVCanvasView = observer(() => {
     requestRender();
   }, [requestRender]);
 
-  // 2. Build GPU UV Meshes (Takes < 1ms on GPU, 0 CPU bottleneck!)
+  // 2. Build GPU UV Meshes
   const rebuildUVMeshes = useCallback(() => {
     if (!meshesGroupRef.current) return;
     const group = meshesGroupRef.current;
 
-    // Clear old meshes
     while (group.children.length > 0) {
       const child = group.children[0];
       group.remove(child);
@@ -144,7 +209,6 @@ export const UVCanvasView = observer(() => {
         const arr = uvAttr.array;
         if (arr.length < 2) return;
 
-        // Compute 2D bounds for raycast/hit test
         let minU = arr[0], maxU = arr[0];
         let minV = arr[1], maxV = arr[1];
         for (let i = 2; i < arr.length; i += 2) {
@@ -158,9 +222,8 @@ export const UVCanvasView = observer(() => {
         boundsList.push({ id: piece.id, minU, maxU, minV, maxV });
 
         const assignedZone = piece.assignedZoneId ? uvOrganizerStore.zones[piece.assignedZoneId] : null;
-        const zoneColor = assignedZone ? new THREE.Color(assignedZone.color) : new THREE.Color(0x64748b);
+        const zoneColor = assignedZone ? new THREE.Color(assignedZone.color) : new THREE.Color(0x38bdf8);
 
-        // Build GPU Mesh directly from UV coordinates (X = U, Y = V, Z = 0)
         const uvGeom = new THREE.BufferGeometry();
         const vCount = uvAttr.count;
         const posArray = new Float32Array(vCount * 3);
@@ -176,23 +239,23 @@ export const UVCanvasView = observer(() => {
           uvGeom.setIndex(indexAttr.clone());
         }
 
-        // Shaded Fill (Transparent GPU surface)
+        // Shaded surface fill
         const fillMat = new THREE.MeshBasicMaterial({
           color: zoneColor,
           transparent: true,
-          opacity: 0.22,
+          opacity: 0.35,
           side: THREE.DoubleSide,
           depthWrite: false
         });
         const uvMesh = new THREE.Mesh(uvGeom, fillMat);
         uvMesh.name = piece.id;
 
-        // Wireframe Edge Overlay (Hardware line rasterizer)
+        // Clean wireframe lines overlay
         const wireMat = new THREE.MeshBasicMaterial({
           color: zoneColor,
           wireframe: true,
           transparent: true,
-          opacity: 0.55
+          opacity: 0.65
         });
         const wireMesh = new THREE.Mesh(uvGeom, wireMat);
         uvMesh.add(wireMesh);
@@ -205,36 +268,129 @@ export const UVCanvasView = observer(() => {
     requestRender();
   }, [requestRender]);
 
-  // Dynamic Fluid Resize Observer
-  const resizeCanvas = useCallback(() => {
-    if (!containerRef.current || !rendererRef.current || !cameraRef.current) return;
-    const { clientWidth, clientHeight } = containerRef.current;
-    if (clientWidth === 0 || clientHeight === 0) return;
+  // 3. Build & Update 2D Move & Scale Gizmo (Mockup Precision)
+  const updateGizmoMesh = useCallback(() => {
+    if (!gizmoGroupRef.current || !cameraRef.current) return;
+    const group = gizmoGroupRef.current;
 
-    rendererRef.current.setSize(clientWidth, clientHeight);
-    rendererRef.current.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    // Keep square aspect ratio for UV space [0, 1] x [0, 1] centered inside canvas
-    const aspect = clientWidth / clientHeight;
-    const camera = cameraRef.current;
-    if (aspect >= 1.0) {
-      // Wider than tall: fit vertical [0, 1] and center horizontal
-      const span = aspect;
-      const offset = (span - 1.0) / 2;
-      camera.left = -offset;
-      camera.right = 1.0 + offset;
-      camera.top = 1.0;
-      camera.bottom = 0.0;
-    } else {
-      // Taller than wide: fit horizontal [0, 1] and center vertical
-      const span = 1.0 / aspect;
-      const offset = (span - 1.0) / 2;
-      camera.left = 0.0;
-      camera.right = 1.0;
-      camera.top = 1.0 + offset;
-      camera.bottom = -offset;
+    while (group.children.length > 0) {
+      const child = group.children[0];
+      group.remove(child);
+      if (child instanceof THREE.Mesh) {
+        child.geometry.dispose();
+      }
     }
-    camera.updateProjectionMatrix();
+
+    const activeSelectedIds = modelStore.selectedPieceIds.length > 0 
+      ? modelStore.selectedPieceIds 
+      : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
+
+    if (activeSelectedIds.length === 0) {
+      requestRender();
+      return;
+    }
+
+    const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
+    if (selectedBounds.length === 0) {
+      requestRender();
+      return;
+    }
+
+    let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
+    selectedBounds.forEach(b => {
+      if (b.minU < gMinU) gMinU = b.minU;
+      if (b.maxU > gMaxU) gMaxU = b.maxU;
+      if (b.minV < gMinV) gMinV = b.minV;
+      if (b.maxV > gMaxV) gMaxV = b.maxV;
+    });
+
+    const pad = 0.008;
+    const u0 = gMinU - pad;
+    const u1 = gMaxU + pad;
+    const v0 = gMinV - pad;
+    const v1 = gMaxV + pad;
+    const cU = (u0 + u1) * 0.5;
+    const cV = (v0 + v1) * 0.5;
+
+    // Viewport relative scale for crisp handles
+    const zoom = viewStateRef.current.zoom;
+    const arrowLen = 0.07 / zoom;
+    const arrowHead = 0.018 / zoom;
+    const handleSize = 0.016 / zoom;
+
+    // --- Bounding Box Outline (Cyan Dashed Feel) ---
+    const bboxGeom = new THREE.BufferGeometry();
+    bboxGeom.setAttribute("position", new THREE.Float32BufferAttribute([
+      u0, v0, 0.4,  u1, v0, 0.4,
+      u1, v0, 0.4,  u1, v1, 0.4,
+      u1, v1, 0.4,  u0, v1, 0.4,
+      u0, v1, 0.4,  u0, v0, 0.4
+    ], 3));
+    const bboxMat = new THREE.LineBasicMaterial({ color: 0x14d9ff, linewidth: 2, depthTest: false });
+    group.add(new THREE.LineSegments(bboxGeom, bboxMat));
+
+    // --- 4 Corner Scale Handles ---
+    const corners = [
+      { name: "handle-scale-bl", x: u0, y: v0 },
+      { name: "handle-scale-br", x: u1, y: v0 },
+      { name: "handle-scale-tr", x: u1, y: v1 },
+      { name: "handle-scale-tl", x: u0, y: v1 }
+    ];
+
+    corners.forEach(c => {
+      const handleGeom = new THREE.PlaneGeometry(handleSize, handleSize);
+      const handleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, depthTest: false });
+      const handleMesh = new THREE.Mesh(handleGeom, handleMat);
+      handleMesh.position.set(c.x, c.y, 0.6);
+      handleMesh.name = c.name;
+      group.add(handleMesh);
+
+      // Dark border on handle
+      const hBorder = new THREE.LineSegments(
+        new THREE.EdgesGeometry(handleGeom),
+        new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1.5, depthTest: false })
+      );
+      hBorder.position.set(c.x, c.y, 0.65);
+      group.add(hBorder);
+    });
+
+    // --- 2D Move Translation Arrows (Red X / Green Y per Mockup) ---
+    // Red Arrow: +U (X-Axis)
+    const redGeom = new THREE.BufferGeometry();
+    redGeom.setAttribute("position", new THREE.Float32BufferAttribute([
+      cU, cV, 0.7,  cU + arrowLen, cV, 0.7
+    ], 3));
+    const redLine = new THREE.Line(redGeom, new THREE.LineBasicMaterial({ color: 0xef4444, linewidth: 3, depthTest: false }));
+    group.add(redLine);
+
+    const redHeadGeom = new THREE.ConeGeometry(arrowHead * 0.5, arrowHead, 4);
+    redHeadGeom.rotateZ(-Math.PI / 2);
+    const redHead = new THREE.Mesh(redHeadGeom, new THREE.MeshBasicMaterial({ color: 0xef4444, depthTest: false }));
+    redHead.position.set(cU + arrowLen, cV, 0.7);
+    redHead.name = "handle-move-x";
+    group.add(redHead);
+
+    // Green Arrow: +V (Y-Axis)
+    const greenGeom = new THREE.BufferGeometry();
+    greenGeom.setAttribute("position", new THREE.Float32BufferAttribute([
+      cU, cV, 0.7,  cU, cV + arrowLen, 0.7
+    ], 3));
+    const greenLine = new THREE.Line(greenGeom, new THREE.LineBasicMaterial({ color: 0x22c55e, linewidth: 3, depthTest: false }));
+    group.add(greenLine);
+
+    const greenHeadGeom = new THREE.ConeGeometry(arrowHead * 0.5, arrowHead, 4);
+    const greenHead = new THREE.Mesh(greenHeadGeom, new THREE.MeshBasicMaterial({ color: 0x22c55e, depthTest: false }));
+    greenHead.position.set(cU, cV + arrowLen, 0.7);
+    greenHead.name = "handle-move-y";
+    group.add(greenHead);
+
+    // Center Pivot White Box (Mockup Center Pivot Box)
+    const pivotGeom = new THREE.PlaneGeometry(handleSize * 0.7, handleSize * 0.7);
+    const pivotMesh = new THREE.Mesh(pivotGeom, new THREE.MeshBasicMaterial({ color: 0xffffff, depthTest: false }));
+    pivotMesh.position.set(cU, cV, 0.8);
+    pivotMesh.name = "handle-move-center";
+    group.add(pivotMesh);
+
     requestRender();
   }, [requestRender]);
 
@@ -257,7 +413,6 @@ export const UVCanvasView = observer(() => {
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
 
-    // Groups
     const zonesGroup = new THREE.Group();
     scene.add(zonesGroup);
     zonesGroupRef.current = zonesGroup;
@@ -266,7 +421,11 @@ export const UVCanvasView = observer(() => {
     scene.add(meshesGroup);
     meshesGroupRef.current = meshesGroup;
 
-    // Selection box helper
+    const gizmoGroup = new THREE.Group();
+    scene.add(gizmoGroup);
+    gizmoGroupRef.current = gizmoGroup;
+
+    // Selection box helper for hover
     const boxGeom = new THREE.BufferGeometry();
     boxGeom.setAttribute("position", new THREE.BufferAttribute(new Float32Array(8 * 3), 3));
     boxGeom.setIndex([0, 1, 1, 2, 2, 3, 3, 0]);
@@ -292,10 +451,14 @@ export const UVCanvasView = observer(() => {
     scene.add(snapGuideLines);
     snapGuideLinesMeshRef.current = snapGuideLines;
 
-    resizeCanvas();
+    updateCameraBounds();
 
     const resizeObserver = new ResizeObserver(() => {
-      resizeCanvas();
+      if (rendererRef.current && containerRef.current) {
+        rendererRef.current.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+      }
+      updateCameraBounds();
+      updateGizmoMesh();
     });
     resizeObserver.observe(container);
 
@@ -304,108 +467,44 @@ export const UVCanvasView = observer(() => {
       renderer.dispose();
       container.innerHTML = "";
     };
-  }, [resizeCanvas]);
+  }, [updateCameraBounds, updateGizmoMesh]);
 
   // Initial and reactive refresh
   useEffect(() => {
     updateZonesOverlay();
     rebuildUVMeshes();
+    updateGizmoMesh();
   }, [
     uvOrganizerStore.zones,
     uvOrganizerStore.layoutVersion,
     modelStore.pieces.length,
+    modelStore.selectedPiece?.id,
+    modelStore.selectedPieceIds.slice(),
     updateZonesOverlay,
-    rebuildUVMeshes
+    rebuildUVMeshes,
+    updateGizmoMesh
   ]);
 
-  // Update selection bounding box on GPU
-  useEffect(() => {
-    if (!selectionBoxMeshRef.current) return;
-    const box = selectionBoxMeshRef.current;
-    
-    // Check if we have multiple selected pieces
-    const activeSelectedIds = modelStore.selectedPieceIds.length > 0 
-      ? modelStore.selectedPieceIds 
-      : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
-
-    if (activeSelectedIds.length > 0) {
-      const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
-
-      if (selectedBounds.length > 0) {
-        let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-        selectedBounds.forEach(b => {
-          if (b.minU < gMinU) gMinU = b.minU;
-          if (b.maxU > gMaxU) gMaxU = b.maxU;
-          if (b.minV < gMinV) gMinV = b.minV;
-          if (b.maxV > gMaxV) gMaxV = b.maxV;
-        });
-
-        const pad = 0.006;
-        const dU = dragState ? dragDeltaRef.current.u : 0;
-        const dV = dragState ? dragDeltaRef.current.v : 0;
-        const u0 = gMinU - pad + dU;
-        const u1 = gMaxU + pad + dU;
-        const v0 = gMinV - pad + dV;
-        const v1 = gMaxV + pad + dV;
-
-        const posAttr = box.geometry.attributes.position;
-        if (posAttr instanceof THREE.BufferAttribute) {
-          const arr = posAttr.array as Float32Array;
-          arr[0] = u0; arr[1] = v0; arr[2] = 0.5;
-          arr[3] = u1; arr[4] = v0; arr[5] = 0.5;
-          arr[6] = u1; arr[7] = v1; arr[8] = 0.5;
-          arr[9] = u0; arr[10] = v1; arr[11] = 0.5;
-          posAttr.needsUpdate = true;
-          box.visible = true;
-          requestRender();
-          return;
-        }
-      }
-    }
-
-    // Hover highlight fallback
-    if (activeHoveredPieceId) {
-      const b = cachedBoundsRef.current.find(item => item.id === activeHoveredPieceId);
-      if (b) {
-        const pad = 0.005;
-        const u0 = b.minU - pad;
-        const u1 = b.maxU + pad;
-        const v0 = b.minV - pad;
-        const v1 = b.maxV + pad;
-
-        const posAttr = box.geometry.attributes.position;
-        if (posAttr instanceof THREE.BufferAttribute) {
-          const arr = posAttr.array as Float32Array;
-          arr[0] = u0; arr[1] = v0; arr[2] = 0.5;
-          arr[3] = u1; arr[4] = v0; arr[5] = 0.5;
-          arr[6] = u1; arr[7] = v1; arr[8] = 0.5;
-          arr[9] = u0; arr[10] = v1; arr[11] = 0.5;
-          posAttr.needsUpdate = true;
-          box.visible = true;
-          requestRender();
-          return;
-        }
-      }
-    }
-
-    box.visible = false;
-    requestRender();
-  }, [modelStore.selectedPiece?.id, modelStore.selectedPieceIds.slice(), activeHoveredPieceId, dragState, requestRender]);
-
-  // O(1) piece lookup from UV coordinates
-  const getPieceAtCanvasCoords = (clientX: number, clientY: number): string | null => {
+  // Coordinate Conversion Helpers
+  const getUVFromClient = (clientX: number, clientY: number): { u: number; v: number } | null => {
     const container = containerRef.current;
     if (!container || !cameraRef.current) return null;
     const rect = container.getBoundingClientRect();
     const camera = cameraRef.current;
 
-    // Map screen click into camera orthographic UV space
     const normX = (clientX - rect.left) / rect.width;
     const normY = (clientY - rect.top) / rect.height;
 
-    const clickU = camera.left + normX * (camera.right - camera.left);
-    const clickV = camera.top - normY * (camera.top - camera.bottom);
-    const pad = 0.015;
+    const u = camera.left + normX * (camera.right - camera.left);
+    const v = camera.top - normY * (camera.top - camera.bottom);
+    return { u, v };
+  };
+
+  const getPieceAtCanvasCoords = (clientX: number, clientY: number): string | null => {
+    const coords = getUVFromClient(clientX, clientY);
+    if (!coords) return null;
+    const { u: clickU, v: clickV } = coords;
+    const pad = 0.015 / viewStateRef.current.zoom;
 
     for (let i = cachedBoundsRef.current.length - 1; i >= 0; i--) {
       const b = cachedBoundsRef.current[i];
@@ -416,7 +515,126 @@ export const UVCanvasView = observer(() => {
     return null;
   };
 
+  // Hit-test Gizmo Handles
+  const getGizmoHandleAtCoords = (clientX: number, clientY: number): TransformMode | null => {
+    const coords = getUVFromClient(clientX, clientY);
+    if (!coords) return null;
+    const { u, v } = coords;
+
+    const activeSelectedIds = modelStore.selectedPieceIds.length > 0 
+      ? modelStore.selectedPieceIds 
+      : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
+
+    if (activeSelectedIds.length === 0) return null;
+
+    const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
+    if (selectedBounds.length === 0) return null;
+
+    let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
+    selectedBounds.forEach(b => {
+      if (b.minU < gMinU) gMinU = b.minU;
+      if (b.maxU > gMaxU) gMaxU = b.maxU;
+      if (b.minV < gMinV) gMinV = b.minV;
+      if (b.maxV > gMaxV) gMaxV = b.maxV;
+    });
+
+    const pad = 0.008;
+    const u0 = gMinU - pad, u1 = gMaxU + pad, v0 = gMinV - pad, v1 = gMaxV + pad;
+    const cU = (u0 + u1) * 0.5, cV = (v0 + v1) * 0.5;
+
+    const zoom = viewStateRef.current.zoom;
+    const handleR = 0.015 / zoom;
+    const arrowLen = 0.07 / zoom;
+
+    // Corner Scale Handles
+    if (Math.hypot(u - u0, v - v0) < handleR) return "scale-bl";
+    if (Math.hypot(u - u1, v - v0) < handleR) return "scale-br";
+    if (Math.hypot(u - u1, v - v1) < handleR) return "scale-tr";
+    if (Math.hypot(u - u0, v - v1) < handleR) return "scale-tl";
+
+    // Move Arrows and Center Pivot
+    if (Math.hypot(u - cU, v - cV) < handleR * 1.2) return "translate";
+    if (u >= cU && u <= cU + arrowLen && Math.abs(v - cV) < handleR) return "translate";
+    if (v >= cV && v <= cV + arrowLen && Math.abs(u - cU) < handleR) return "translate";
+
+    return null;
+  };
+
+  // Mouse Wheel Zoom
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const container = containerRef.current;
+    if (!container || !cameraRef.current) return;
+
+    const coords = getUVFromClient(e.clientX, e.clientY);
+    if (!coords) return;
+
+    const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+    const curZoom = viewStateRef.current.zoom;
+    const nextZoom = Math.max(0.4, Math.min(10.0, curZoom * zoomFactor));
+
+    // Zoom centered towards mouse cursor
+    const { u, v } = coords;
+    const curCenterU = viewStateRef.current.centerU;
+    const curCenterV = viewStateRef.current.centerV;
+
+    viewStateRef.current = {
+      zoom: nextZoom,
+      centerU: u + (curCenterU - u) * (curZoom / nextZoom),
+      centerV: v + (curCenterV - v) * (curZoom / nextZoom)
+    };
+
+    updateCameraBounds();
+    updateGizmoMesh();
+  };
+
+  // Pointer Down (Pan vs Gizmo Transform vs Island Select)
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // 1. Middle mouse click (or Spacebar / Alt + Left Click) -> PAN
+    if (e.button === 1 || e.altKey || e.button === 2) {
+      e.preventDefault();
+      setPanState({
+        startX: e.clientX,
+        startY: e.clientY,
+        startCamCenterU: viewStateRef.current.centerU,
+        startCamCenterV: viewStateRef.current.centerV
+      });
+      return;
+    }
+
+    if (e.button !== 0) return;
+
+    // 2. Check Gizmo Handle Hit
+    const gizmoMode = getGizmoHandleAtCoords(e.clientX, e.clientY);
+    if (gizmoMode) {
+      e.preventDefault();
+      const activeIds = modelStore.selectedPieceIds.length > 0 
+        ? [...modelStore.selectedPieceIds] 
+        : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
+
+      const selectedBounds = cachedBoundsRef.current.filter(b => activeIds.includes(b.id));
+      let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
+      selectedBounds.forEach(b => {
+        if (b.minU < gMinU) gMinU = b.minU;
+        if (b.maxU > gMaxU) gMaxU = b.maxU;
+        if (b.minV < gMinV) gMinV = b.minV;
+        if (b.maxV > gMaxV) gMaxV = b.maxV;
+      });
+
+      dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
+      setTransformState({
+        mode: gizmoMode,
+        pieceIds: activeIds,
+        startMouseX: e.clientX,
+        startMouseY: e.clientY,
+        origBounds: { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV },
+        centerU: (gMinU + gMaxU) * 0.5,
+        centerV: (gMinV + gMaxV) * 0.5
+      });
+      return;
+    }
+
+    // 3. Piece Selection & Direct Island Drag
     const hitId = getPieceAtCanvasCoords(e.clientX, e.clientY);
     const isMultiKey = e.shiftKey || e.metaKey || e.ctrlKey;
 
@@ -437,11 +655,24 @@ export const UVCanvasView = observer(() => {
         ? [...modelStore.selectedPieceIds]
         : [hitId];
 
-      dragDeltaRef.current = { u: 0, v: 0 };
-      setDragState({
+      const selectedBounds = cachedBoundsRef.current.filter(b => activeIds.includes(b.id));
+      let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
+      selectedBounds.forEach(b => {
+        if (b.minU < gMinU) gMinU = b.minU;
+        if (b.maxU > gMaxU) gMaxU = b.maxU;
+        if (b.minV < gMinV) gMinV = b.minV;
+        if (b.maxV > gMaxV) gMaxV = b.maxV;
+      });
+
+      dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
+      setTransformState({
+        mode: "translate",
         pieceIds: activeIds,
         startMouseX: e.clientX,
-        startMouseY: e.clientY
+        startMouseY: e.clientY,
+        origBounds: { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV },
+        centerU: (gMinU + gMaxU) * 0.5,
+        centerV: (gMinV + gMaxV) * 0.5
       });
     } else {
       if (!isMultiKey) {
@@ -450,164 +681,95 @@ export const UVCanvasView = observer(() => {
     }
   };
 
-  const handleContainerPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragState) {
-      const hitId = getPieceAtCanvasCoords(e.clientX, e.clientY);
-      modelStore.setHoveredPieceId(hitId);
-    }
-  };
-
-  const handleContainerPointerLeave = () => {
-    if (!dragState) {
-      modelStore.setHoveredPieceId(null);
-    }
-  };
-
   const handlePointerMove = (e: PointerEvent) => {
-    if (dragState) {
+    // 1. Pan Viewport Movement
+    if (panState) {
       const container = containerRef.current;
       if (!container || !cameraRef.current) return;
-      const rect = container.getBoundingClientRect();
       const camera = cameraRef.current;
 
       const spanU = camera.right - camera.left;
       const spanV = camera.top - camera.bottom;
 
-      let currentDeltaU = ((e.clientX - dragState.startMouseX) / rect.width) * spanU;
-      let currentDeltaV = -(((e.clientY - dragState.startMouseY) / rect.height) * spanV);
+      const deltaPixelX = e.clientX - panState.startX;
+      const deltaPixelY = e.clientY - panState.startY;
 
-      let snappedGuidelineU: number | null = null;
-      let snappedGuidelineV: number | null = null;
+      const deltaU = -(deltaPixelX / container.clientWidth) * spanU;
+      const deltaV = (deltaPixelY / container.clientHeight) * spanV;
 
-      if (snapEnabled && !e.altKey) {
-        const threshold = 0.012;
-        const myBounds = cachedBoundsRef.current.filter(b => dragState.pieceIds.includes(b.id));
+      viewStateRef.current.centerU = panState.startCamCenterU + deltaU;
+      viewStateRef.current.centerV = panState.startCamCenterV + deltaV;
 
-        if (myBounds.length > 0) {
-          let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-          myBounds.forEach(b => {
-            if (b.minU < gMinU) gMinU = b.minU;
-            if (b.maxU > gMaxU) gMaxU = b.maxU;
-            if (b.minV < gMinV) gMinV = b.minV;
-            if (b.maxV > gMaxV) gMaxV = b.maxV;
+      updateCameraBounds();
+      updateGizmoMesh();
+      return;
+    }
+
+    // 2. Gizmo Scale or Translate Movement
+    if (transformState) {
+      const container = containerRef.current;
+      if (!container || !cameraRef.current) return;
+      const camera = cameraRef.current;
+
+      const spanU = camera.right - camera.left;
+      const spanV = camera.top - camera.bottom;
+
+      const currentDeltaU = ((e.clientX - transformState.startMouseX) / container.clientWidth) * spanU;
+      const currentDeltaV = -(((e.clientY - transformState.startMouseY) / container.clientHeight) * spanV);
+
+      if (transformState.mode === "translate") {
+        dragDeltaRef.current.u = currentDeltaU;
+        dragDeltaRef.current.v = currentDeltaV;
+
+        if (meshesGroupRef.current) {
+          transformState.pieceIds.forEach(id => {
+            const activeMesh = meshesGroupRef.current?.children.find(c => c.name === id);
+            if (activeMesh) {
+              activeMesh.position.set(currentDeltaU, currentDeltaV, 0);
+            }
           });
+        }
+        if (gizmoGroupRef.current) {
+          gizmoGroupRef.current.position.set(currentDeltaU, currentDeltaV, 0);
+        }
+      } else {
+        // Corner Scaling relative to island bounding center
+        const origW = transformState.origBounds.maxU - transformState.origBounds.minU;
+        const origH = transformState.origBounds.maxV - transformState.origBounds.minV;
 
-          const curMinU = gMinU + currentDeltaU;
-          const curMaxU = gMaxU + currentDeltaU;
-          const curCenterU = (curMinU + curMaxU) * 0.5;
-          const myW = curMaxU - curMinU;
+        let scaleFactor = 1.0;
+        if (transformState.mode === "scale-tr") {
+          scaleFactor = 1.0 + (currentDeltaU + currentDeltaV) / (origW + origH);
+        } else if (transformState.mode === "scale-tl") {
+          scaleFactor = 1.0 + (-currentDeltaU + currentDeltaV) / (origW + origH);
+        } else if (transformState.mode === "scale-br") {
+          scaleFactor = 1.0 + (currentDeltaU - currentDeltaV) / (origW + origH);
+        } else if (transformState.mode === "scale-bl") {
+          scaleFactor = 1.0 + (-currentDeltaU - currentDeltaV) / (origW + origH);
+        }
 
-          const curMinV = gMinV + currentDeltaV;
-          const curMaxV = gMaxV + currentDeltaV;
-          const curCenterV = (curMinV + curMaxV) * 0.5;
-          const myH = curMaxV - curMinV;
+        scaleFactor = Math.max(0.2, Math.min(5.0, scaleFactor));
+        dragDeltaRef.current.scaleX = scaleFactor;
+        dragDeltaRef.current.scaleY = scaleFactor;
 
-          const otherBounds = cachedBoundsRef.current.filter(b => !dragState.pieceIds.includes(b.id));
-
-          let bestDiffU = threshold;
-          let bestSnapTargetU: number | null = null;
-          let snapSourceU: "min" | "max" | "center" | null = null;
-
-          let bestDiffV = threshold;
-          let bestSnapTargetV: number | null = null;
-          let snapSourceV: "min" | "max" | "center" | null = null;
-
-          otherBounds.forEach(other => {
-            const otherCenterU = (other.minU + other.maxU) * 0.5;
-            const otherCenterV = (other.minV + other.maxV) * 0.5;
-
-            [other.minU, other.maxU, otherCenterU].forEach(targetU => {
-              const diffMin = Math.abs(curMinU - targetU);
-              if (diffMin < bestDiffU) {
-                bestDiffU = diffMin;
-                bestSnapTargetU = targetU;
-                snapSourceU = "min";
-              }
-              const diffMax = Math.abs(curMaxU - targetU);
-              if (diffMax < bestDiffU) {
-                bestDiffU = diffMax;
-                bestSnapTargetU = targetU;
-                snapSourceU = "max";
-              }
-              const diffCenter = Math.abs(curCenterU - targetU);
-              if (diffCenter < bestDiffU) {
-                bestDiffU = diffCenter;
-                bestSnapTargetU = targetU;
-                snapSourceU = "center";
-              }
-            });
-
-            [other.minV, other.maxV, otherCenterV].forEach(targetV => {
-              const diffMin = Math.abs(curMinV - targetV);
-              if (diffMin < bestDiffV) {
-                bestDiffV = diffMin;
-                bestSnapTargetV = targetV;
-                snapSourceV = "min";
-              }
-              const diffMax = Math.abs(curMaxV - targetV);
-              if (diffMax < bestDiffV) {
-                bestDiffV = diffMax;
-                bestSnapTargetV = targetV;
-                snapSourceV = "max";
-              }
-              const diffCenter = Math.abs(curCenterV - targetV);
-              if (diffCenter < bestDiffV) {
-                bestDiffV = diffCenter;
-                bestSnapTargetV = targetV;
-                snapSourceV = "center";
-              }
-            });
+        // Apply visual scale preview on GPU
+        if (meshesGroupRef.current) {
+          const cU = transformState.centerU;
+          const cV = transformState.centerV;
+          transformState.pieceIds.forEach(id => {
+            const activeMesh = meshesGroupRef.current?.children.find(c => c.name === id);
+            if (activeMesh) {
+              activeMesh.scale.set(scaleFactor, scaleFactor, 1);
+              activeMesh.position.set(cU * (1 - scaleFactor), cV * (1 - scaleFactor), 0);
+            }
           });
-
-          if (bestSnapTargetU !== null && snapSourceU !== null) {
-            if (snapSourceU === "min") currentDeltaU = bestSnapTargetU - gMinU;
-            else if (snapSourceU === "max") currentDeltaU = bestSnapTargetU - gMaxU;
-            else if (snapSourceU === "center") currentDeltaU = bestSnapTargetU - (gMinU + myW * 0.5);
-            snappedGuidelineU = bestSnapTargetU;
-          }
-
-          if (bestSnapTargetV !== null && snapSourceV !== null) {
-            if (snapSourceV === "min") currentDeltaV = bestSnapTargetV - gMinV;
-            else if (snapSourceV === "max") currentDeltaV = bestSnapTargetV - gMaxV;
-            else if (snapSourceV === "center") currentDeltaV = bestSnapTargetV - (gMinV + myH * 0.5);
-            snappedGuidelineV = bestSnapTargetV;
-          }
         }
-      }
-
-      dragDeltaRef.current = { u: currentDeltaU, v: currentDeltaV };
-
-      // Update Visual Guide Lines
-      if (snapGuideLinesMeshRef.current) {
-        const guideMesh = snapGuideLinesMeshRef.current;
-        const posAttr = guideMesh.geometry.attributes.position;
-        if (posAttr instanceof THREE.BufferAttribute) {
-          const arr = posAttr.array as Float32Array;
-          if (snappedGuidelineU !== null) {
-            arr[0] = snappedGuidelineU; arr[1] = 0; arr[2] = 0.8;
-            arr[3] = snappedGuidelineU; arr[4] = 1; arr[5] = 0.8;
-          } else {
-            arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0; arr[4] = 0; arr[5] = 0;
-          }
-          if (snappedGuidelineV !== null) {
-            arr[6] = 0; arr[7] = snappedGuidelineV; arr[8] = 0.8;
-            arr[9] = 1; arr[10] = snappedGuidelineV; arr[11] = 0.8;
-          } else {
-            arr[6] = 0; arr[7] = 0; arr[8] = 0; arr[9] = 0; arr[10] = 0; arr[11] = 0;
-          }
-          posAttr.needsUpdate = true;
-          guideMesh.visible = snappedGuidelineU !== null || snappedGuidelineV !== null;
+        if (gizmoGroupRef.current) {
+          const cU = transformState.centerU;
+          const cV = transformState.centerV;
+          gizmoGroupRef.current.scale.set(scaleFactor, scaleFactor, 1);
+          gizmoGroupRef.current.position.set(cU * (1 - scaleFactor), cV * (1 - scaleFactor), 0);
         }
-      }
-
-      // Live GPU translation
-      if (meshesGroupRef.current) {
-        dragState.pieceIds.forEach(id => {
-          const activeMesh = meshesGroupRef.current?.children.find(c => c.name === id);
-          if (activeMesh) {
-            activeMesh.position.set(currentDeltaU, currentDeltaV, 0);
-          }
-        });
       }
 
       requestRender();
@@ -615,36 +777,50 @@ export const UVCanvasView = observer(() => {
   };
 
   const handlePointerUp = () => {
-    if (dragState) {
-      const finalDeltaU = dragDeltaRef.current.u;
-      const finalDeltaV = dragDeltaRef.current.v;
+    if (panState) {
+      setPanState(null);
+    }
 
-      if (snapGuideLinesMeshRef.current) {
-        snapGuideLinesMeshRef.current.visible = false;
+    if (transformState) {
+      const { mode, pieceIds } = transformState;
+      const { u, v, scaleX } = dragDeltaRef.current;
+
+      if (mode === "translate") {
+        if (Math.abs(u) > 0.0001 || Math.abs(v) > 0.0001) {
+          uvOrganizerStore.translatePiecesGroupUV(pieceIds, u, v);
+          modelStore.persistGarmentConfigToSQLite();
+        }
+      } else {
+        if (Math.abs(scaleX - 1.0) > 0.001) {
+          uvOrganizerStore.scalePiecesGroupUV(pieceIds, scaleX);
+          modelStore.persistGarmentConfigToSQLite();
+        }
       }
 
-      if (Math.abs(finalDeltaU) > 0.0001 || Math.abs(finalDeltaV) > 0.0001) {
-        uvOrganizerStore.translatePiecesGroupUV(dragState.pieceIds, finalDeltaU, finalDeltaV);
-        modelStore.persistGarmentConfigToSQLite();
-      }
-
+      // Reset GPU node transform
       if (meshesGroupRef.current) {
-        dragState.pieceIds.forEach(id => {
+        pieceIds.forEach(id => {
           const activeMesh = meshesGroupRef.current?.children.find(c => c.name === id);
           if (activeMesh) {
             activeMesh.position.set(0, 0, 0);
+            activeMesh.scale.set(1, 1, 1);
           }
         });
       }
+      if (gizmoGroupRef.current) {
+        gizmoGroupRef.current.position.set(0, 0, 0);
+        gizmoGroupRef.current.scale.set(1, 1, 1);
+      }
 
-      dragDeltaRef.current = { u: 0, v: 0 };
-      setDragState(null);
+      dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
+      setTransformState(null);
       rebuildUVMeshes();
+      updateGizmoMesh();
     }
   };
 
   useEffect(() => {
-    if (dragState) {
+    if (transformState || panState) {
       window.addEventListener("pointermove", handlePointerMove);
       window.addEventListener("pointerup", handlePointerUp);
       return () => {
@@ -652,20 +828,53 @@ export const UVCanvasView = observer(() => {
         window.removeEventListener("pointerup", handlePointerUp);
       };
     }
-  }, [dragState]);
+  }, [transformState, panState]);
+
+  // Cursor styling based on hover
+  const getCursor = () => {
+    if (panState) return "grabbing";
+    if (transformState) {
+      if (transformState.mode === "translate") return "move";
+      return "nwse-resize";
+    }
+    if (activeGizmoHandle) {
+      if (activeGizmoHandle === "translate") return "move";
+      return "nwse-resize";
+    }
+    if (activeHoveredPieceId) return "pointer";
+    return "default";
+  };
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+        cursor: getCursor()
+      }}
+      onWheel={handleWheel}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       <div
         ref={containerRef}
         onPointerDown={handlePointerDown}
-        onPointerMove={handleContainerPointerMove}
-        onPointerLeave={handleContainerPointerLeave}
-        style={{
-          width: "100%",
-          height: "100%",
-          cursor: dragState ? "grabbing" : (activeHoveredPieceId ? "grab" : "default")
+        onPointerMove={(e) => {
+          if (!transformState && !panState) {
+            const handle = getGizmoHandleAtCoords(e.clientX, e.clientY);
+            setActiveGizmoHandle(handle);
+            const hitId = getPieceAtCanvasCoords(e.clientX, e.clientY);
+            modelStore.setHoveredPieceId(hitId);
+          }
         }}
+        onPointerLeave={() => {
+          if (!transformState && !panState) {
+            setActiveGizmoHandle(null);
+            modelStore.setHoveredPieceId(null);
+          }
+        }}
+        style={{ width: "100%", height: "100%" }}
       />
 
       {/* Floating Hover Badge */}
@@ -693,53 +902,39 @@ export const UVCanvasView = observer(() => {
         </div>
       )}
 
-      {/* Bottom Floating Info Strip: Move hint + Magnetic Snap Toggle */}
+      {/* Zoom / Pan Reset Controls */}
       <div style={{
         position: "absolute",
         bottom: "8px",
-        left: "10px",
         right: "10px",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
-        pointerEvents: "auto"
+        gap: "4px",
+        background: "rgba(14, 21, 39, 0.85)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        borderRadius: "6px",
+        padding: "2px 5px",
+        fontSize: "9px",
+        color: "var(--text-secondary)"
       }}>
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "4px",
-          pointerEvents: "none",
-          background: "rgba(0,0,0,0.65)",
-          padding: "2px 6px",
-          borderRadius: "4px",
-          fontSize: "9px",
-          color: "#94a3b8"
-        }}>
-          <Move size={10} color="#38bdf8" /> Drag to move (Hold <span style={{ color: "#facc15", fontWeight: "700" }}>Alt</span> to free move)
-        </div>
-
+        <span>Zoom: {Math.round(viewStateRef.current.zoom * 100)}%</span>
         <button
-          type="button"
-          onClick={() => setSnapEnabled(prev => !prev)}
-          style={{
-            background: snapEnabled ? "rgba(250, 204, 21, 0.2)" : "rgba(0, 0, 0, 0.65)",
-            border: snapEnabled ? "1px solid rgba(250, 204, 21, 0.5)" : "1px solid rgba(255, 255, 255, 0.12)",
-            color: snapEnabled ? "#facc15" : "#94a3b8",
-            padding: "2px 7px",
-            borderRadius: "4px",
-            fontSize: "9px",
-            fontWeight: "700",
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            boxShadow: snapEnabled ? "0 0 8px rgba(250, 204, 21, 0.25)" : "none"
+          onClick={() => {
+            viewStateRef.current = { centerU: 0.5, centerV: 0.5, zoom: 1.0 };
+            updateCameraBounds();
+            updateGizmoMesh();
           }}
-          title="Magnetic Bounding Box Snapping: Automatically snaps dragged island edges and centers flush with other pattern islands"
+          style={{
+            background: "none",
+            border: "none",
+            color: "var(--neon-cyan)",
+            cursor: "pointer",
+            fontSize: "9px",
+            fontWeight: "600"
+          }}
+          title="Reset Zoom & Pan to Fit UV Space"
         >
-          <span>🧲</span>
-          <span>Snap: {snapEnabled ? "ON" : "OFF"}</span>
+          Reset
         </button>
       </div>
     </div>

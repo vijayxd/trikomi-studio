@@ -81,9 +81,9 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
       </div>
 
       <div className="uv-split-container">
-        {/* Left Vertical Strip: Essential UV Island Actions */}
+        {/* Left Vertical Strip: Clean Tool Toggles (Matching Mockup) */}
         <div className="uv-vertical-strip">
-          <button className="btn-uv-strip-icon active" title="Island Select Mode">
+          <button className="btn-uv-strip-icon active" title="Select & Transform Island (Move / Scale)">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="3" width="18" height="18" rx="2" strokeDasharray="3 3" />
             </svg>
@@ -144,37 +144,6 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
           </button>
           <button
             className="btn-uv-strip-icon"
-            title="Scale Up (+10%)"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.scalePieceUV(modelStore.selectedPiece.id, 1.1);
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              <line x1="11" y1="8" x2="11" y2="14" />
-              <line x1="8" y1="11" x2="14" y2="11" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Scale Down (-10%)"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.scalePieceUV(modelStore.selectedPiece.id, 0.9);
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              <line x1="8" y1="11" x2="14" y2="11" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
             title="Center Island in Assigned Zone"
             onClick={() => {
               if (modelStore.selectedPiece) {
@@ -203,7 +172,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
           </button>
         </div>
 
-        {/* 2D Canvas Stage: Clean Hardware-Accelerated WebGL UV Viewport */}
+        {/* 2D Canvas Stage: Clean Hardware-Accelerated WebGL UV Viewport with 2D Move & Scale Gizmo */}
         <div className="uv-2d-canvas-box" style={{ position: "relative", minHeight: "340px", flex: 1, overflow: "hidden" }}>
           <UVCanvasView />
         </div>
