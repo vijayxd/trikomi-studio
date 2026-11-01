@@ -69,7 +69,8 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
       <StudioCard
         title={`Hierarchy (${modelStore.pieces.length} Pieces)`}
         defaultCollapsed={false}
-        flex={1.2}
+        flex={1}
+        style={{ minHeight: "120px" }}
         headerRight={
           <span
             style={{ fontSize: "9px", color: "var(--text-muted)", cursor: "pointer" }}
@@ -168,7 +169,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
       <StudioCard
         title="Transforms"
         defaultCollapsed={false}
-        flex={0.8}
+        flex="0 0 auto"
         headerRight={<span style={{ fontSize: "8.5px", color: "var(--text-muted)" }}>LOCAL</span>}
       >
         <div className="transforms-form-content">
@@ -219,7 +220,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
       <StudioCard
         title="Quick Tools"
         defaultCollapsed={false}
-        flex={0.7}
+        flex="0 0 auto"
       >
         <div className="quick-tools-grid-box">
           <button
