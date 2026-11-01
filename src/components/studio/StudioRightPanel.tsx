@@ -2,6 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { modelStore } from "../../store/modelStore";
 import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { UVCanvasView } from "../UVCanvasView";
 
 interface StudioRightPanelProps {
   collapsed?: boolean;
@@ -58,93 +59,93 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
               <rect x="3" y="3" width="18" height="18" rx="2" strokeDasharray="3 3" />
             </svg>
           </button>
-          <button className="btn-uv-strip-icon" title="Pen Tool">
+          <button
+            className="btn-uv-strip-icon"
+            title="Rotate 90° Clockwise"
+            onClick={() => {
+              if (modelStore.selectedPiece) {
+                uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, 90);
+              }
+            }}
+          >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 19l7-7 3 3-7 7-3-3z" />
-              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67" />
             </svg>
           </button>
-          <button className="btn-uv-strip-icon" title="Circle Select">
+          <button
+            className="btn-uv-strip-icon"
+            title="Rotate 90° Counter-Clockwise"
+            onClick={() => {
+              if (modelStore.selectedPiece) {
+                uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, -90);
+              }
+            }}
+          >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="9" />
+              <path d="M2.5 2v6h6M2.66 15.57a10 10 0 00.57-8.38l-5.67-5.67" />
             </svg>
           </button>
-          <button className="btn-uv-strip-icon" title="Anchor Pivot">
+          <button
+            className="btn-uv-strip-icon"
+            title="Flip Horizontal (Mirror U)"
+            onClick={() => {
+              if (modelStore.selectedPiece) {
+                uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "horizontal");
+              }
+            }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
+          <button
+            className="btn-uv-strip-icon"
+            title="Flip Vertical (Mirror V)"
+            onClick={() => {
+              if (modelStore.selectedPiece) {
+                uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "vertical");
+              }
+            }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="17 14 12 9 7 14" />
+              <line x1="12" y1="9" x2="12" y2="21" />
+            </svg>
+          </button>
+          <button
+            className="btn-uv-strip-icon"
+            title="Center Island in Canvas"
+            onClick={() => {
+              if (modelStore.selectedPiece) {
+                uvOrganizerStore.arrangeAssignedUVs();
+              }
+            }}
+          >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="9" />
               <circle cx="12" cy="12" r="2" fill="currentColor" />
             </svg>
           </button>
-          <button className="btn-uv-strip-icon" title="Move Island">
+          <button
+            className="btn-uv-strip-icon"
+            title="Reset Island UV"
+            onClick={() => {
+              if (modelStore.selectedPiece) {
+                uvOrganizerStore.resetPieceUV(modelStore.selectedPiece.id);
+              }
+            }}
+          >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="5 9 2 12 5 15" />
-              <polyline points="9 5 12 2 15 5" />
-              <polyline points="15 19 12 22 9 19" />
-              <polyline points="19 9 22 12 19 15" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <line x1="12" y1="2" x2="12" y2="22" />
-            </svg>
-          </button>
-          <button className="btn-uv-strip-icon" title="Cut Seam">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="6" cy="6" r="3" />
-              <circle cx="6" cy="18" r="3" />
-              <line x1="20" y1="4" x2="8.12" y2="15.88" />
-              <line x1="14.47" y1="14.48" x2="20" y2="20" />
-              <line x1="8.12" y1="8.12" x2="12" y2="12" />
-            </svg>
-          </button>
-          <button className="btn-uv-strip-icon" title="Weld Seam">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="9" />
-              <line x1="12" y1="8" x2="12" y2="16" />
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
             </svg>
           </button>
         </div>
 
-        {/* 2D Canvas Stage with Wireframe Grid Quad Topology */}
-        <div className="uv-2d-canvas-box">
-          <svg viewBox="0 0 500 500" fill="none">
-            <defs>
-              <pattern id="uvQuadGrid" width="14" height="14" patternUnits="userSpaceOnUse">
-                <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(20,217,255,0.25)" strokeWidth="0.75" />
-              </pattern>
-            </defs>
-
-            {/* Collar Arc with Quad Topology */}
-            <path d="M 230 90 Q 250 115 270 90 L 295 98 Q 250 135 205 98 Z" fill="rgba(37,99,235,0.4)" stroke="#14d9ff" strokeWidth="1.8" />
-            <path d="M 230 90 Q 250 115 270 90 L 295 98 Q 250 135 205 98 Z" fill="url(#uvQuadGrid)" />
-
-            {/* Left Sleeve with Quad Topology */}
-            <polygon points="120,60 170,85 185,150 145,200 110,180" fill="rgba(37,99,235,0.4)" stroke="#14d9ff" strokeWidth="1.8" />
-            <polygon points="120,60 170,85 185,150 145,200 110,180" fill="url(#uvQuadGrid)" />
-
-            {/* Front Body with Quad Topology */}
-            <path d="M 175,220 L 210,185 L 250,195 L 290,185 L 325,220 L 315,360 L 185,360 Z" fill="rgba(37,99,235,0.45)" stroke="#14d9ff" strokeWidth="1.8" />
-            <path d="M 175,220 L 210,185 L 250,195 L 290,185 L 325,220 L 315,360 L 185,360 Z" fill="url(#uvQuadGrid)" />
-
-            {/* Back Body with Quad Topology */}
-            <path d="M 335,220 L 365,185 L 400,195 L 435,185 L 465,220 L 455,360 L 345,360 Z" fill="rgba(37,99,235,0.45)" stroke="#14d9ff" strokeWidth="1.8" />
-            <path d="M 335,220 L 365,185 L 400,195 L 435,185 L 465,220 L 455,360 L 345,360 Z" fill="url(#uvQuadGrid)" />
-
-            {/* Hem Bottoms */}
-            <rect x="185" y="375" width="130" height="28" rx="3" fill="rgba(37,99,235,0.4)" stroke="#14d9ff" strokeWidth="1.8" />
-            <rect x="185" y="375" width="130" height="28" fill="url(#uvQuadGrid)" />
-            <rect x="345" y="375" width="110" height="28" rx="3" fill="rgba(37,99,235,0.4)" stroke="#14d9ff" strokeWidth="1.8" />
-            <rect x="345" y="375" width="110" height="28" fill="url(#uvQuadGrid)" />
-
-            {/* Selected Right Sleeve with Transform Gizmo */}
-            <g transform="translate(350, 70)">
-              <rect x="-10" y="-10" width="85" height="110" fill="none" stroke="#14d9ff" strokeWidth="1.5" strokeDasharray="4 4" />
-              <polygon points="0,20 40,0 65,35 50,85 15,85" fill="rgba(37,99,235,0.55)" stroke="#14d9ff" strokeWidth="2" />
-              <polygon points="0,20 40,0 65,35 50,85 15,85" fill="url(#uvQuadGrid)" />
-              <line x1="32" y1="42" x2="32" y2="-22" stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-              <polygon points="32,-26 28,-18 36,-18" fill="#22c55e" />
-              <line x1="32" y1="42" x2="95" y2="42" stroke="#ef4444" strokeWidth="2.2" strokeLinecap="round" />
-              <polygon points="99,42 91,38 91,46" fill="#ef4444" />
-              <rect x="29" y="39" width="6" height="6" fill="#ffffff" stroke="#000" strokeWidth="1" />
-            </g>
-          </svg>
+        {/* 2D Canvas Stage: Interactive GPU WebGL UV Canvas */}
+        <div className="uv-2d-canvas-box" style={{ position: "relative", minHeight: "340px", flex: 1 }}>
+          <UVCanvasView />
         </div>
 
         {/* UV Inspector Column */}
