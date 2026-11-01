@@ -987,8 +987,7 @@
   .panel-bottom-dock {
     height: var(--bottom-dock-height);
     flex-shrink: 0;
-    display: grid;
-    grid-template-columns: 1.35fr 1fr 0.65fr 0.9fr 0.8fr;
+    display: flex;
     gap: 8px;
     overflow: hidden;
     transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin 0.3s ease;
@@ -1002,6 +1001,43 @@
     padding: 0;
     overflow: hidden;
     pointer-events: none;
+  }
+
+  /* Dock Card Collapsible Variations */
+  .dock-card-chassis {
+    background: rgba(10, 16, 32, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-subcard);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.22s ease-out;
+  }
+
+  .dock-card-chassis.dock-card-collapsed {
+    flex: 0 0 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+    cursor: pointer;
+  }
+
+  .dock-card-chassis.dock-card-collapsed .dock-card-content,
+  .dock-card-chassis.dock-card-collapsed .panel-header-titlebar .control-toggle-btn {
+    display: none !important;
+  }
+
+  .dock-card-chassis.dock-card-collapsed .panel-header-titlebar {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    height: 100%;
+    padding: 8px 4px;
+    justify-content: center;
+    border-bottom: none;
+    background: rgba(14, 21, 40, 0.95);
+  }
+
+  .dock-card-chassis.dock-card-collapsed .titlebar-text {
+    gap: 4px;
   }
 
   /* Card 1: Material Palette */

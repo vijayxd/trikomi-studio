@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { modelStore } from "../../store/modelStore";
 import { uvOrganizerStore } from "../../store/uvOrganizerStore";
 import { UVCanvasView } from "../UVCanvasView";
+import { StudioCard } from "./StudioCard";
 
 interface StudioRightPanelProps {
   collapsed?: boolean;
@@ -136,13 +137,10 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
           <UVCanvasView />
         </div>
 
-        {/* UV Inspector Column */}
+        {/* UV Inspector Column with Collapsible StudioCards */}
         <aside className="uv-inspector-panel">
           {/* UV Tools Subcard */}
-          <div className="studio-subcard">
-            <div className="subcard-title-bar">
-              <span>UV Tools</span>
-            </div>
+          <StudioCard title="UV Tools" flex="0 0 auto">
             <div className="uv-actions-tile-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
               <div
                 className="tile-action-item"
@@ -173,13 +171,10 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                 <span>Pack</span>
               </div>
             </div>
-          </div>
+          </StudioCard>
 
           {/* Transform Subcard */}
-          <div className="studio-subcard">
-            <div className="subcard-title-bar">
-              <span>Transform</span>
-            </div>
+          <StudioCard title="Transform" flex="0 0 auto">
             <div className="uv-transform-form">
               <div className="transform-axis-row">
                 <span>Position</span>
@@ -216,13 +211,14 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                 </button>
               </div>
             </div>
-          </div>
+          </StudioCard>
 
           {/* UV Islands Subcard */}
-          <div className="studio-subcard" style={{ flex: 1, minHeight: "80px" }}>
-            <div className="subcard-title-bar">
-              <span>UV Islands ({modelStore.pieces.length})</span>
-            </div>
+          <StudioCard
+            title={`UV Islands (${modelStore.pieces.length})`}
+            flex={1}
+            style={{ minHeight: "80px" }}
+          >
             <div className="islands-list-scroll">
               {modelStore.pieces.slice(0, 10).map((piece, idx) => {
                 const colors = ["#3b82f6", "#10b981", "#f97316", "#a855f7", "#06b6d4", "#eab308"];
@@ -251,7 +247,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                 );
               })}
             </div>
-          </div>
+          </StudioCard>
         </aside>
       </div>
     </section>

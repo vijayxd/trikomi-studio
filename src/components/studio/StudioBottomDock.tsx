@@ -16,6 +16,12 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const [selectedOrbIndex, setSelectedOrbIndex] = useState<number>(0);
   const [decimateTarget, setDecimateTarget] = useState<number>(0.5);
 
+  // Per-card collapsible state for bottom dock
+  const [materialsCollapsed, setMaterialsCollapsed] = useState<boolean>(false);
+  const [geometryCollapsed, setGeometryCollapsed] = useState<boolean>(false);
+  const [previewCollapsed, setPreviewCollapsed] = useState<boolean>(false);
+  const [validationCollapsed, setValidationCollapsed] = useState<boolean>(false);
+
   const curTriangles = modelStore.modelMeta.triangles || 0;
   const originalTris = modelStore.pieces.reduce((sum, p) => sum + (p.originalTriangles || p.triangles), 0) || curTriangles;
 
@@ -68,9 +74,20 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   return (
     <footer className={`panel-bottom-dock ${collapsed ? "collapsed" : ""}`} id="bottomDock">
       {/* 1. Card 1: Material Library (PBR Fabric Swatches) */}
-      <div className="cyber-chassis">
-        <div className="panel-header-titlebar">
+      <div
+        className={`dock-card-chassis cyber-chassis ${materialsCollapsed ? "dock-card-collapsed" : ""}`}
+        style={{ flex: materialsCollapsed ? "0 0 34px" : "1.35 1 0" }}
+      >
+        <div
+          className="panel-header-titlebar"
+          onClick={() => setMaterialsCollapsed(!materialsCollapsed)}
+          style={{ cursor: "pointer", userSelect: "none" }}
+          title={materialsCollapsed ? "Expand Material Library" : "Collapse Material Library"}
+        >
           <div className="titlebar-text">
+            <span style={{ fontSize: "8.5px", color: "var(--neon-cyan)" }}>
+              {materialsCollapsed ? "▸" : "▾"}
+            </span>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#14d9ff" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 2a10 10 0 000 20z" />
@@ -81,6 +98,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             className="control-toggle-btn"
             style={{ width: "18px", height: "18px", border: "none", background: "transparent" }}
             title="Search Fabrics"
+            onClick={(e) => e.stopPropagation()}
           >
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8" />
@@ -89,7 +107,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
           </button>
         </div>
 
-        <div className="material-palette-body">
+        <div className="dock-card-content material-palette-body">
           <div className="filter-pills-row">
             {["All", "Fabric", "Sports", "Custom", "+"].map((pill) => (
               <span
@@ -119,9 +137,20 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
       </div>
 
       {/* 2. Card 2: Geometry & Decimation Optimization */}
-      <div className="cyber-chassis">
-        <div className="panel-header-titlebar">
+      <div
+        className={`dock-card-chassis cyber-chassis ${geometryCollapsed ? "dock-card-collapsed" : ""}`}
+        style={{ flex: geometryCollapsed ? "0 0 34px" : "1 1 0" }}
+      >
+        <div
+          className="panel-header-titlebar"
+          onClick={() => setGeometryCollapsed(!geometryCollapsed)}
+          style={{ cursor: "pointer", userSelect: "none" }}
+          title={geometryCollapsed ? "Expand Geometry & Decimation" : "Collapse Geometry & Decimation"}
+        >
           <div className="titlebar-text">
+            <span style={{ fontSize: "8.5px", color: "var(--neon-cyan)" }}>
+              {geometryCollapsed ? "▸" : "▾"}
+            </span>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#14d9ff" strokeWidth="2">
               <polygon points="12 2 2 7 12 12 22 7 12 2" />
               <polyline points="2 17 12 22 22 17" />
@@ -131,14 +160,17 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
           </div>
           <span
             style={{ fontSize: "9px", color: "var(--neon-cyan)", cursor: "pointer", fontWeight: 600 }}
-            onClick={() => modelStore.revertDecimation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              modelStore.revertDecimation();
+            }}
             title="Revert to 100% Original Geometry"
           >
             Revert
           </span>
         </div>
 
-        <div className="uv-overview-content" style={{ flexDirection: "column", gap: "6px", justifyContent: "center" }}>
+        <div className="dock-card-content uv-overview-content" style={{ flexDirection: "column", gap: "6px", justifyContent: "center" }}>
           <div style={{ display: "flex", justifyContent: "space-between", width: "100%", fontSize: "8.5px", color: "var(--text-secondary)" }}>
             <span>Reduction Ratio</span>
             <strong style={{ color: "#fff" }}>{Math.round((1 - decimateTarget) * 100)}% ({Math.round(curTriangles / 1000)}k tris)</strong>
@@ -179,8 +211,28 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
       </div>
 
       {/* 3. Card 3: Live 3D Garment Preview */}
-      <div className="cyber-chassis">
-        <div className="preview-stage-frame">
+      <div
+        className={`dock-card-chassis cyber-chassis ${previewCollapsed ? "dock-card-collapsed" : ""}`}
+        style={{ flex: previewCollapsed ? "0 0 34px" : "0.65 1 0" }}
+      >
+        <div
+          className="panel-header-titlebar"
+          onClick={() => setPreviewCollapsed(!previewCollapsed)}
+          style={{ cursor: "pointer", userSelect: "none" }}
+          title={previewCollapsed ? "Expand Garment Preview" : "Collapse Garment Preview"}
+        >
+          <div className="titlebar-text">
+            <span style={{ fontSize: "8.5px", color: "var(--neon-cyan)" }}>
+              {previewCollapsed ? "▸" : "▾"}
+            </span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#14d9ff" strokeWidth="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span>Garment</span>
+          </div>
+        </div>
+        <div className="dock-card-content preview-stage-frame">
           <div className="badge-check-corner" title="Pipeline Certified Asset">✓</div>
           <svg viewBox="0 0 100 120" width="75%" height="75%" fill="none">
             <path
@@ -196,9 +248,20 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
       </div>
 
       {/* 4. Card 4: Validation Checklist */}
-      <div className="cyber-chassis">
-        <div className="panel-header-titlebar">
+      <div
+        className={`dock-card-chassis cyber-chassis ${validationCollapsed ? "dock-card-collapsed" : ""}`}
+        style={{ flex: validationCollapsed ? "0 0 34px" : "0.9 1 0" }}
+      >
+        <div
+          className="panel-header-titlebar"
+          onClick={() => setValidationCollapsed(!validationCollapsed)}
+          style={{ cursor: "pointer", userSelect: "none" }}
+          title={validationCollapsed ? "Expand Validation" : "Collapse Validation"}
+        >
           <div className="titlebar-text">
+            <span style={{ fontSize: "8.5px", color: "var(--neon-cyan)" }}>
+              {validationCollapsed ? "▸" : "▾"}
+            </span>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
               <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
               <polyline points="22 4 12 14.01 9 11.01" />
@@ -206,7 +269,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             <span>Validation</span>
           </div>
         </div>
-        <div className="validation-checklist-body">
+        <div className="dock-card-content validation-checklist-body">
           <div className="validation-line-item">
             <div className="check-mark-circle">✓</div>
             <span>No UV Overlap</span>
@@ -223,7 +286,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
       </div>
 
       {/* 5. Card 5: Export Action CTA Card */}
-      <div className="cyber-chassis export-cta-card-box">
+      <div className="cyber-chassis export-cta-card-box" style={{ flex: "0.8 1 0", minWidth: "120px" }}>
         <button className="btn-export-pill-glow" onClick={onExportGLB}>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <circle cx="12" cy="12" r="10" />
