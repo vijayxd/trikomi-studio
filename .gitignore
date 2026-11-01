@@ -1,0 +1,40 @@
+# Logs & Runtime
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node dependencies & Builds
+node_modules
+dist
+dist-ssr
+*.local
+last_transfer_debug.json
+*.backup
+
+# Heavy / Proprietary Assets & Databases (Preserved locally, excluded from git)
+public/fabric_library
+public/thumbnails
+public/models
+public/contact_sheets*
+public/litmus_test_grid
+public/uv_blueprints
+public/data/garments.db
+public/hdri/*.hdr
+public/hdri/*.exr
+test_env
+
+# Editor & System Files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.git_backup*
