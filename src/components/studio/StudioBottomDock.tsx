@@ -32,11 +32,36 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const handleApplyPreset = (index: number) => {
     setSelectedOrbIndex(index);
     const preset = fabricPresets[index];
-    if (preset && modelStore.selectedPiece && modelStore.selectedPiece.material) {
-      modelStore.selectedPiece.material.color.set(preset.color);
-      modelStore.selectedPiece.material.metalness = preset.metal;
-      modelStore.selectedPiece.material.roughness = preset.rough;
-      modelStore.selectedPiece.material.needsUpdate = true;
+    if (preset) {
+      if (modelStore.selectedPiece && modelStore.selectedPiece.material) {
+        // Guarantee isolated cloned material instance per Trikomi Rule #5
+        if (!(modelStore.selectedPiece.material.userData && modelStore.selectedPiece.material.userData.isClonedInstance)) {
+          modelStore.selectedPiece.material = modelStore.selectedPiece.material.clone();
+          modelStore.selectedPiece.material.userData = { isClonedInstance: true };
+          if (modelStore.selectedPiece.mesh) {
+            modelStore.selectedPiece.mesh.material = modelStore.selectedPiece.material;
+          }
+        }
+        modelStore.selectedPiece.material.color.set(preset.color);
+        modelStore.selectedPiece.material.metalness = preset.metal;
+        modelStore.selectedPiece.material.roughness = preset.rough;
+        modelStore.selectedPiece.material.needsUpdate = true;
+      } else if (modelStore.currentModel) {
+        // Apply to all pieces with individual cloned materials
+        modelStore.pieces.forEach(p => {
+          if (p.mesh && p.material) {
+            if (!(p.material.userData && p.material.userData.isClonedInstance)) {
+              p.material = p.material.clone();
+              p.material.userData = { isClonedInstance: true };
+              p.mesh.material = p.material;
+            }
+            p.material.color.set(preset.color);
+            p.material.metalness = preset.metal;
+            p.material.roughness = preset.rough;
+            p.material.needsUpdate = true;
+          }
+        });
+      }
     }
   };
 
