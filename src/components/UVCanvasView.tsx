@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { uvOrganizerStore } from "../store/uvOrganizerStore";
 import { modelStore } from "../store/modelStore";
-import { Sparkles, RefreshCw, X, LayoutGrid, Move, Wand2, RotateCcw, RotateCw, FlipHorizontal, FlipVertical, ZoomIn, ZoomOut, Target, Undo2, Scale, Grid, Download } from "lucide-react";
+import { Move } from "lucide-react";
 import * as THREE from "three";
 
 interface PieceBounds2D {
@@ -39,78 +39,6 @@ export const UVCanvasView = observer(() => {
   const cachedBoundsRef = useRef<PieceBounds2D[]>([]);
   const dragDeltaRef = useRef<{ u: number; v: number }>({ u: 0, v: 0 });
   const animFrameIdRef = useRef<number | null>(null);
-
-  // Initialize Three.js WebGL viewport for the UV Editor
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    const width = 400;
-    const height = 400;
-
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color("#090d16");
-    sceneRef.current = scene;
-
-    // Orthographic camera mapping exactly [0, 1] UV space to [0, 400] canvas coordinates
-    // UV space: U is [0, 1] left to right, V is [0, 1] bottom to top
-    const camera = new THREE.OrthographicCamera(0, 1, 1, 0, -10, 10);
-    camera.position.set(0, 0, 5);
-    cameraRef.current = camera;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    rendererRef.current = renderer;
-
-    container.innerHTML = "";
-    container.appendChild(renderer.domElement);
-
-    // Groups
-    const zonesGroup = new THREE.Group();
-    scene.add(zonesGroup);
-    zonesGroupRef.current = zonesGroup;
-
-    const meshesGroup = new THREE.Group();
-    scene.add(meshesGroup);
-    meshesGroupRef.current = meshesGroup;
-
-    // Selection box helper
-    const boxGeom = new THREE.BufferGeometry();
-    boxGeom.setAttribute("position", new THREE.BufferAttribute(new Float32Array(8 * 3), 3));
-    boxGeom.setIndex([0, 1, 1, 2, 2, 3, 3, 0]);
-    const boxMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2, depthTest: false });
-    const selectionBox = new THREE.LineSegments(boxGeom, boxMat);
-    selectionBox.visible = false;
-    scene.add(selectionBox);
-    selectionBoxMeshRef.current = selectionBox;
-
-    // Magnetic Snapping Guide Lines (Vertical & Horizontal infinite alignment guides)
-    const guideGeom = new THREE.BufferGeometry();
-    guideGeom.setAttribute("position", new THREE.BufferAttribute(new Float32Array(4 * 3), 3));
-    guideGeom.setIndex([0, 1, 2, 3]);
-    const guideMat = new THREE.LineBasicMaterial({
-      color: 0xfacc15, // High-visibility laser yellow
-      linewidth: 2,
-      depthTest: false,
-      transparent: true,
-      opacity: 0.95
-    });
-    const snapGuideLines = new THREE.LineSegments(guideGeom, guideMat);
-    snapGuideLines.visible = false;
-    scene.add(snapGuideLines);
-    snapGuideLinesMeshRef.current = snapGuideLines;
-
-    const render = () => {
-      renderer.render(scene, camera);
-    };
-
-    render();
-
-    return () => {
-      renderer.dispose();
-      container.innerHTML = "";
-    };
-  }, []);
 
   // Fast GPU Render trigger
   const requestRender = useCallback(() => {
@@ -252,19 +180,19 @@ export const UVCanvasView = observer(() => {
         const fillMat = new THREE.MeshBasicMaterial({
           color: zoneColor,
           transparent: true,
-          opacity: 0.18,
+          opacity: 0.22,
           side: THREE.DoubleSide,
           depthWrite: false
         });
         const uvMesh = new THREE.Mesh(uvGeom, fillMat);
         uvMesh.name = piece.id;
 
-        // Wireframe Edge Overlay (Hardware line rasterizer - 0ms CPU time!)
+        // Wireframe Edge Overlay (Hardware line rasterizer)
         const wireMat = new THREE.MeshBasicMaterial({
           color: zoneColor,
           wireframe: true,
           transparent: true,
-          opacity: 0.45
+          opacity: 0.55
         });
         const wireMesh = new THREE.Mesh(uvGeom, wireMat);
         uvMesh.add(wireMesh);
@@ -277,14 +205,112 @@ export const UVCanvasView = observer(() => {
     requestRender();
   }, [requestRender]);
 
+  // Dynamic Fluid Resize Observer
+  const resizeCanvas = useCallback(() => {
+    if (!containerRef.current || !rendererRef.current || !cameraRef.current) return;
+    const { clientWidth, clientHeight } = containerRef.current;
+    if (clientWidth === 0 || clientHeight === 0) return;
+
+    rendererRef.current.setSize(clientWidth, clientHeight);
+    rendererRef.current.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Keep square aspect ratio for UV space [0, 1] x [0, 1] centered inside canvas
+    const aspect = clientWidth / clientHeight;
+    const camera = cameraRef.current;
+    if (aspect >= 1.0) {
+      // Wider than tall: fit vertical [0, 1] and center horizontal
+      const span = aspect;
+      const offset = (span - 1.0) / 2;
+      camera.left = -offset;
+      camera.right = 1.0 + offset;
+      camera.top = 1.0;
+      camera.bottom = 0.0;
+    } else {
+      // Taller than wide: fit horizontal [0, 1] and center vertical
+      const span = 1.0 / aspect;
+      const offset = (span - 1.0) / 2;
+      camera.left = 0.0;
+      camera.right = 1.0;
+      camera.top = 1.0 + offset;
+      camera.bottom = -offset;
+    }
+    camera.updateProjectionMatrix();
+    requestRender();
+  }, [requestRender]);
+
+  // Initialize Three.js WebGL viewport for the UV Editor
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#060c1d");
+    sceneRef.current = scene;
+
+    const camera = new THREE.OrthographicCamera(0, 1, 1, 0, -10, 10);
+    camera.position.set(0, 0, 5);
+    cameraRef.current = camera;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
+    rendererRef.current = renderer;
+
+    container.innerHTML = "";
+    container.appendChild(renderer.domElement);
+
+    // Groups
+    const zonesGroup = new THREE.Group();
+    scene.add(zonesGroup);
+    zonesGroupRef.current = zonesGroup;
+
+    const meshesGroup = new THREE.Group();
+    scene.add(meshesGroup);
+    meshesGroupRef.current = meshesGroup;
+
+    // Selection box helper
+    const boxGeom = new THREE.BufferGeometry();
+    boxGeom.setAttribute("position", new THREE.BufferAttribute(new Float32Array(8 * 3), 3));
+    boxGeom.setIndex([0, 1, 1, 2, 2, 3, 3, 0]);
+    const boxMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2, depthTest: false });
+    const selectionBox = new THREE.LineSegments(boxGeom, boxMat);
+    selectionBox.visible = false;
+    scene.add(selectionBox);
+    selectionBoxMeshRef.current = selectionBox;
+
+    // Magnetic Snapping Guide Lines
+    const guideGeom = new THREE.BufferGeometry();
+    guideGeom.setAttribute("position", new THREE.BufferAttribute(new Float32Array(4 * 3), 3));
+    guideGeom.setIndex([0, 1, 2, 3]);
+    const guideMat = new THREE.LineBasicMaterial({
+      color: 0xfacc15,
+      linewidth: 2,
+      depthTest: false,
+      transparent: true,
+      opacity: 0.95
+    });
+    const snapGuideLines = new THREE.LineSegments(guideGeom, guideMat);
+    snapGuideLines.visible = false;
+    scene.add(snapGuideLines);
+    snapGuideLinesMeshRef.current = snapGuideLines;
+
+    resizeCanvas();
+
+    const resizeObserver = new ResizeObserver(() => {
+      resizeCanvas();
+    });
+    resizeObserver.observe(container);
+
+    return () => {
+      resizeObserver.disconnect();
+      renderer.dispose();
+      container.innerHTML = "";
+    };
+  }, [resizeCanvas]);
+
   // Initial and reactive refresh
   useEffect(() => {
-    if (uvOrganizerStore.isUVInspectOpen) {
-      updateZonesOverlay();
-      rebuildUVMeshes();
-    }
+    updateZonesOverlay();
+    rebuildUVMeshes();
   }, [
-    uvOrganizerStore.isUVInspectOpen,
     uvOrganizerStore.zones,
     uvOrganizerStore.layoutVersion,
     modelStore.pieces.length,
@@ -298,69 +324,67 @@ export const UVCanvasView = observer(() => {
     const box = selectionBoxMeshRef.current;
     
     // Check if we have multiple selected pieces
-    const selectedIds = modelStore.selectedPieceIds;
-    const isMultiSelected = selectedIds.length > 1;
+    const activeSelectedIds = modelStore.selectedPieceIds.length > 0 
+      ? modelStore.selectedPieceIds 
+      : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
 
-    let targetBounds: { minU: number; maxU: number; minV: number; maxV: number } | null = null;
-    let isCurrentlyDragged = false;
+    if (activeSelectedIds.length > 0) {
+      const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
 
-    if (isMultiSelected) {
-      // Calculate group bounding box from cached bounds
-      let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-      let count = 0;
-      selectedIds.forEach(id => {
-        const b = cachedBoundsRef.current.find(item => item.id === id);
-        if (b) {
+      if (selectedBounds.length > 0) {
+        let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
+        selectedBounds.forEach(b => {
           if (b.minU < gMinU) gMinU = b.minU;
           if (b.maxU > gMaxU) gMaxU = b.maxU;
           if (b.minV < gMinV) gMinV = b.minV;
           if (b.maxV > gMaxV) gMaxV = b.maxV;
-          count++;
-        }
-      });
-      if (count > 0) {
-        targetBounds = { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV };
-        if (dragState && dragState.pieceIds.some(id => selectedIds.includes(id))) {
-          isCurrentlyDragged = true;
-        }
-      }
-    } else {
-      const activePieceId = activeHoveredPieceId || modelStore.selectedPiece?.id;
-      if (activePieceId) {
-        const b = cachedBoundsRef.current.find(item => item.id === activePieceId);
-        if (b) {
-          targetBounds = { minU: b.minU, maxU: b.maxU, minV: b.minV, maxV: b.maxV };
-          if (dragState && dragState.pieceIds.includes(activePieceId)) {
-            isCurrentlyDragged = true;
-          }
+        });
+
+        const pad = 0.006;
+        const dU = dragState ? dragDeltaRef.current.u : 0;
+        const dV = dragState ? dragDeltaRef.current.v : 0;
+        const u0 = gMinU - pad + dU;
+        const u1 = gMaxU + pad + dU;
+        const v0 = gMinV - pad + dV;
+        const v1 = gMaxV + pad + dV;
+
+        const posAttr = box.geometry.attributes.position;
+        if (posAttr instanceof THREE.BufferAttribute) {
+          const arr = posAttr.array as Float32Array;
+          arr[0] = u0; arr[1] = v0; arr[2] = 0.5;
+          arr[3] = u1; arr[4] = v0; arr[5] = 0.5;
+          arr[6] = u1; arr[7] = v1; arr[8] = 0.5;
+          arr[9] = u0; arr[10] = v1; arr[11] = 0.5;
+          posAttr.needsUpdate = true;
+          box.visible = true;
+          requestRender();
+          return;
         }
       }
     }
 
-    if (targetBounds) {
-      let minU = targetBounds.minU, maxU = targetBounds.maxU, minV = targetBounds.minV, maxV = targetBounds.maxV;
-      if (isCurrentlyDragged) {
-        minU += dragDeltaRef.current.u;
-        maxU += dragDeltaRef.current.u;
-        minV += dragDeltaRef.current.v;
-        maxV += dragDeltaRef.current.v;
-      }
+    // Hover highlight fallback
+    if (activeHoveredPieceId) {
+      const b = cachedBoundsRef.current.find(item => item.id === activeHoveredPieceId);
+      if (b) {
+        const pad = 0.005;
+        const u0 = b.minU - pad;
+        const u1 = b.maxU + pad;
+        const v0 = b.minV - pad;
+        const v1 = b.maxV + pad;
 
-      const posAttr = box.geometry.attributes.position;
-      if (posAttr instanceof THREE.BufferAttribute) {
-        const p = posAttr.array as Float32Array;
-        // Bottom-left
-        p[0] = minU; p[1] = minV; p[2] = 0.5;
-        // Bottom-right
-        p[3] = maxU; p[4] = minV; p[5] = 0.5;
-        // Top-right
-        p[6] = maxU; p[7] = maxV; p[8] = 0.5;
-        // Top-left
-        p[9] = minU; p[10] = maxV; p[11] = 0.5;
-        posAttr.needsUpdate = true;
-        box.visible = true;
-        requestRender();
-        return;
+        const posAttr = box.geometry.attributes.position;
+        if (posAttr instanceof THREE.BufferAttribute) {
+          const arr = posAttr.array as Float32Array;
+          arr[0] = u0; arr[1] = v0; arr[2] = 0.5;
+          arr[3] = u1; arr[4] = v0; arr[5] = 0.5;
+          arr[6] = u1; arr[7] = v1; arr[8] = 0.5;
+          arr[9] = u0; arr[10] = v1; arr[11] = 0.5;
+          posAttr.needsUpdate = true;
+          box.visible = true;
+          requestRender();
+          return;
+        }
       }
     }
 
@@ -371,10 +395,16 @@ export const UVCanvasView = observer(() => {
   // O(1) piece lookup from UV coordinates
   const getPieceAtCanvasCoords = (clientX: number, clientY: number): string | null => {
     const container = containerRef.current;
-    if (!container) return null;
+    if (!container || !cameraRef.current) return null;
     const rect = container.getBoundingClientRect();
-    const clickU = (clientX - rect.left) / rect.width;
-    const clickV = 1.0 - ((clientY - rect.top) / rect.height);
+    const camera = cameraRef.current;
+
+    // Map screen click into camera orthographic UV space
+    const normX = (clientX - rect.left) / rect.width;
+    const normY = (clientY - rect.top) / rect.height;
+
+    const clickU = camera.left + normX * (camera.right - camera.left);
+    const clickV = camera.top - normY * (camera.top - camera.bottom);
     const pad = 0.015;
 
     for (let i = cachedBoundsRef.current.length - 1; i >= 0; i--) {
@@ -397,14 +427,12 @@ export const UVCanvasView = observer(() => {
         if (isMultiKey) {
           modelStore.togglePieceSelection(p.mesh, true);
         } else {
-          // If clicking an island that's already part of multi-selection, keep the group selected for dragging!
           if (!modelStore.selectedPieceIds.includes(hitId)) {
             modelStore.selectPiece(p.mesh);
           }
         }
       }
 
-      // Determine which pieces are being dragged together
       const activeIds = modelStore.selectedPieceIds.includes(hitId)
         ? [...modelStore.selectedPieceIds]
         : [hitId];
@@ -438,66 +466,57 @@ export const UVCanvasView = observer(() => {
   const handlePointerMove = (e: PointerEvent) => {
     if (dragState) {
       const container = containerRef.current;
-      if (!container) return;
+      if (!container || !cameraRef.current) return;
       const rect = container.getBoundingClientRect();
-      let currentDeltaU = (e.clientX - dragState.startMouseX) / rect.width;
-      let currentDeltaV = -((e.clientY - dragState.startMouseY) / rect.height);
+      const camera = cameraRef.current;
 
-      // -------------------------------------------------------------
-      // MAGNETIC BOUNDING BOX SNAPPING (UV Space)
-      // Snaps dragged group bounding box flush against other islands' edges/centers
-      // -------------------------------------------------------------
+      const spanU = camera.right - camera.left;
+      const spanV = camera.top - camera.bottom;
+
+      let currentDeltaU = ((e.clientX - dragState.startMouseX) / rect.width) * spanU;
+      let currentDeltaV = -(((e.clientY - dragState.startMouseY) / rect.height) * spanV);
+
       let snappedGuidelineU: number | null = null;
       let snappedGuidelineV: number | null = null;
 
-      // Allow holding Alt/Option to temporarily bypass snapping
-      const isAltKey = e.altKey;
-      if (snapEnabled && !isAltKey) {
-        // Compute collective bounding box of the dragged pieces
-        let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-        let validPieces = 0;
-        dragState.pieceIds.forEach(id => {
-          const b = cachedBoundsRef.current.find(item => item.id === id);
-          if (b) {
+      if (snapEnabled && !e.altKey) {
+        const threshold = 0.012;
+        const myBounds = cachedBoundsRef.current.filter(b => dragState.pieceIds.includes(b.id));
+
+        if (myBounds.length > 0) {
+          let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
+          myBounds.forEach(b => {
             if (b.minU < gMinU) gMinU = b.minU;
             if (b.maxU > gMaxU) gMaxU = b.maxU;
             if (b.minV < gMinV) gMinV = b.minV;
             if (b.maxV > gMaxV) gMaxV = b.maxV;
-            validPieces++;
-          }
-        });
+          });
 
-        if (validPieces > 0) {
-          const myW = gMaxU - gMinU;
-          const myH = gMaxV - gMinV;
           const curMinU = gMinU + currentDeltaU;
           const curMaxU = gMaxU + currentDeltaU;
-          const curCenterU = curMinU + myW * 0.5;
+          const curCenterU = (curMinU + curMaxU) * 0.5;
+          const myW = curMaxU - curMinU;
 
           const curMinV = gMinV + currentDeltaV;
           const curMaxV = gMaxV + currentDeltaV;
-          const curCenterV = curMinV + myH * 0.5;
+          const curCenterV = (curMinV + curMaxV) * 0.5;
+          const myH = curMaxV - curMinV;
 
-          const snapThreshold = 0.015; // ~6px magnetic snap threshold in UV space
-          let bestDiffU = snapThreshold;
+          const otherBounds = cachedBoundsRef.current.filter(b => !dragState.pieceIds.includes(b.id));
+
+          let bestDiffU = threshold;
           let bestSnapTargetU: number | null = null;
           let snapSourceU: "min" | "max" | "center" | null = null;
 
-          let bestDiffV = snapThreshold;
+          let bestDiffV = threshold;
           let bestSnapTargetV: number | null = null;
           let snapSourceV: "min" | "max" | "center" | null = null;
 
-          // Test against all other UV islands not in the dragged group
-          cachedBoundsRef.current.forEach((other) => {
-            if (dragState.pieceIds.includes(other.id)) return;
-            const otherW = other.maxU - other.minU;
-            const otherH = other.maxV - other.minV;
-            const otherCenterU = other.minU + otherW * 0.5;
-            const otherCenterV = other.minV + otherH * 0.5;
+          otherBounds.forEach(other => {
+            const otherCenterU = (other.minU + other.maxU) * 0.5;
+            const otherCenterV = (other.minV + other.maxV) * 0.5;
 
-            // X-axis (U) snap candidates: min, max, center against other min, max, center
-            const testTargetsU = [other.minU, other.maxU, otherCenterU];
-            testTargetsU.forEach(targetU => {
+            [other.minU, other.maxU, otherCenterU].forEach(targetU => {
               const diffMin = Math.abs(curMinU - targetU);
               if (diffMin < bestDiffU) {
                 bestDiffU = diffMin;
@@ -518,9 +537,7 @@ export const UVCanvasView = observer(() => {
               }
             });
 
-            // Y-axis (V) snap candidates: min, max, center against other min, max, center
-            const testTargetsV = [other.minV, other.maxV, otherCenterV];
-            testTargetsV.forEach(targetV => {
+            [other.minV, other.maxV, otherCenterV].forEach(targetV => {
               const diffMin = Math.abs(curMinV - targetV);
               if (diffMin < bestDiffV) {
                 bestDiffV = diffMin;
@@ -542,27 +559,17 @@ export const UVCanvasView = observer(() => {
             });
           });
 
-          // Apply U snap
           if (bestSnapTargetU !== null && snapSourceU !== null) {
-            if (snapSourceU === "min") {
-              currentDeltaU = bestSnapTargetU - gMinU;
-            } else if (snapSourceU === "max") {
-              currentDeltaU = bestSnapTargetU - gMaxU;
-            } else if (snapSourceU === "center") {
-              currentDeltaU = bestSnapTargetU - (gMinU + myW * 0.5);
-            }
+            if (snapSourceU === "min") currentDeltaU = bestSnapTargetU - gMinU;
+            else if (snapSourceU === "max") currentDeltaU = bestSnapTargetU - gMaxU;
+            else if (snapSourceU === "center") currentDeltaU = bestSnapTargetU - (gMinU + myW * 0.5);
             snappedGuidelineU = bestSnapTargetU;
           }
 
-          // Apply V snap
           if (bestSnapTargetV !== null && snapSourceV !== null) {
-            if (snapSourceV === "min") {
-              currentDeltaV = bestSnapTargetV - gMinV;
-            } else if (snapSourceV === "max") {
-              currentDeltaV = bestSnapTargetV - gMaxV;
-            } else if (snapSourceV === "center") {
-              currentDeltaV = bestSnapTargetV - (gMinV + myH * 0.5);
-            }
+            if (snapSourceV === "min") currentDeltaV = bestSnapTargetV - gMinV;
+            else if (snapSourceV === "max") currentDeltaV = bestSnapTargetV - gMaxV;
+            else if (snapSourceV === "center") currentDeltaV = bestSnapTargetV - (gMinV + myH * 0.5);
             snappedGuidelineV = bestSnapTargetV;
           }
         }
@@ -570,7 +577,7 @@ export const UVCanvasView = observer(() => {
 
       dragDeltaRef.current = { u: currentDeltaU, v: currentDeltaV };
 
-      // Update Visual Guide Lines (Yellow alignment lasers)
+      // Update Visual Guide Lines
       if (snapGuideLinesMeshRef.current) {
         const guideMesh = snapGuideLinesMeshRef.current;
         const posAttr = guideMesh.geometry.attributes.position;
@@ -580,29 +587,25 @@ export const UVCanvasView = observer(() => {
             arr[0] = snappedGuidelineU; arr[1] = 0; arr[2] = 0.8;
             arr[3] = snappedGuidelineU; arr[4] = 1; arr[5] = 0.8;
           } else {
-            arr[0] = -10; arr[1] = -10; arr[2] = 0.8;
-            arr[3] = -10; arr[4] = -10; arr[5] = 0.8;
+            arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0; arr[4] = 0; arr[5] = 0;
           }
-
           if (snappedGuidelineV !== null) {
             arr[6] = 0; arr[7] = snappedGuidelineV; arr[8] = 0.8;
             arr[9] = 1; arr[10] = snappedGuidelineV; arr[11] = 0.8;
           } else {
-            arr[6] = -10; arr[7] = -10; arr[8] = 0.8;
-            arr[9] = -10; arr[10] = -10; arr[11] = 0.8;
+            arr[6] = 0; arr[7] = 0; arr[8] = 0; arr[9] = 0; arr[10] = 0; arr[11] = 0;
           }
-
           posAttr.needsUpdate = true;
-          guideMesh.visible = (snappedGuidelineU !== null || snappedGuidelineV !== null);
+          guideMesh.visible = snappedGuidelineU !== null || snappedGuidelineV !== null;
         }
       }
 
-      // Instantaneous 60fps GPU Mesh Translation for ALL dragged pieces
+      // Live GPU translation
       if (meshesGroupRef.current) {
         dragState.pieceIds.forEach(id => {
           const activeMesh = meshesGroupRef.current?.children.find(c => c.name === id);
           if (activeMesh) {
-            activeMesh.position.set(currentDeltaU, currentDeltaV, 0.1);
+            activeMesh.position.set(currentDeltaU, currentDeltaV, 0);
           }
         });
       }
@@ -616,18 +619,15 @@ export const UVCanvasView = observer(() => {
       const finalDeltaU = dragDeltaRef.current.u;
       const finalDeltaV = dragDeltaRef.current.v;
 
-      // Hide guide lines
       if (snapGuideLinesMeshRef.current) {
         snapGuideLinesMeshRef.current.visible = false;
       }
 
       if (Math.abs(finalDeltaU) > 0.0001 || Math.abs(finalDeltaV) > 0.0001) {
-        // Commit actual 3D vertex UV buffer translation for group
         uvOrganizerStore.translatePiecesGroupUV(dragState.pieceIds, finalDeltaU, finalDeltaV);
         modelStore.persistGarmentConfigToSQLite();
       }
 
-      // Reset GPU node transform for all dragged pieces
       if (meshesGroupRef.current) {
         dragState.pieceIds.forEach(id => {
           const activeMesh = meshesGroupRef.current?.children.find(c => c.name === id);
@@ -639,7 +639,6 @@ export const UVCanvasView = observer(() => {
 
       dragDeltaRef.current = { u: 0, v: 0 };
       setDragState(null);
-      // Re-read updated UV positions into GPU buffer
       rebuildUVMeshes();
     }
   };
@@ -655,576 +654,93 @@ export const UVCanvasView = observer(() => {
     }
   }, [dragState]);
 
-  if (!uvOrganizerStore.isUVInspectOpen) return null;
-
-  const assignedCount = uvOrganizerStore.assignedPanels.length;
-
   return (
-    <div
-      className="uv-canvas-container"
-      style={{
-        width: "440px",
-        height: "100%",
-        background: "rgba(15, 23, 42, 0.95)",
-        backdropFilter: "blur(16px)",
-        borderLeft: "1px solid var(--border-color)",
-        display: "flex",
-        flexDirection: "column",
-        zIndex: 15
-      }}
-    >
-      {/* Header */}
+    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <div
-        className="panel-header"
+        ref={containerRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handleContainerPointerMove}
+        onPointerLeave={handleContainerPointerLeave}
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "8px"
+          width: "100%",
+          height: "100%",
+          cursor: dragState ? "grabbing" : (activeHoveredPieceId ? "grab" : "default")
         }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Sparkles size={16} color="#38bdf8" />
-          <div>
-            <span style={{ fontWeight: "700", fontSize: "13px" }}>
-              Hardware-Accelerated UV Editor
-            </span>
-            <div style={{ fontSize: "10px", color: "var(--text-dim)" }}>
-              WebGL GPU Viewport (Blender architecture)
-            </div>
-          </div>
-        </div>
+      />
 
-        {/* Category Switcher Tabs: Topwear vs Bottomwear */}
-        <div style={{ display: "flex", background: "rgba(0, 0, 0, 0.4)", padding: "2.5px", borderRadius: "8px", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
-          <button
-            type="button"
-            onClick={() => uvOrganizerStore.switchGarmentType("TOPWEAR")}
-            style={{
-              padding: "4px 10px",
-              borderRadius: "6px",
-              fontSize: "10.5px",
-              fontWeight: "600",
-              cursor: "pointer",
-              border: uvOrganizerStore.activeGarmentType === "TOPWEAR" ? "1px solid rgba(56, 189, 248, 0.3)" : "1px solid transparent",
-              background: uvOrganizerStore.activeGarmentType === "TOPWEAR" ? "linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(37, 99, 235, 0.4))" : "transparent",
-              color: uvOrganizerStore.activeGarmentType === "TOPWEAR" ? "#fff" : "#94a3b8",
-              boxShadow: uvOrganizerStore.activeGarmentType === "TOPWEAR" ? "0 2px 8px rgba(2, 132, 199, 0.25)" : "none",
-              transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}
-            title="Switch to Topwear Slots (Front/Back Body, Sleeves, Collar, Waistband, Trims)"
-          >
-            👕 Topwear
-          </button>
-          <button
-            type="button"
-            onClick={() => uvOrganizerStore.switchGarmentType("BOTTOMWEAR")}
-            style={{
-              padding: "4px 10px",
-              borderRadius: "6px",
-              fontSize: "10.5px",
-              fontWeight: "600",
-              cursor: "pointer",
-              border: uvOrganizerStore.activeGarmentType === "BOTTOMWEAR" ? "1px solid rgba(56, 189, 248, 0.3)" : "1px solid transparent",
-              background: uvOrganizerStore.activeGarmentType === "BOTTOMWEAR" ? "linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(37, 99, 235, 0.4))" : "transparent",
-              color: uvOrganizerStore.activeGarmentType === "BOTTOMWEAR" ? "#fff" : "#94a3b8",
-              boxShadow: uvOrganizerStore.activeGarmentType === "BOTTOMWEAR" ? "0 2px 8px rgba(2, 132, 199, 0.25)" : "none",
-              transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}
-            title="Switch to Bottomwear Slots (Left/Right Leg, Waistband, Ankle Ribs, Trims/Pockets)"
-          >
-            👖 Bottomwear
-          </button>
+      {/* Floating Hover Badge */}
+      {activeHoveredPieceId && (
+        <div style={{
+          position: "absolute",
+          top: "8px",
+          left: "10px",
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          pointerEvents: "none",
+          background: "rgba(15, 23, 42, 0.88)",
+          backdropFilter: "blur(6px)",
+          padding: "3px 8px",
+          borderRadius: "6px",
+          fontSize: "10px",
+          color: "#38bdf8",
+          fontWeight: "600",
+          border: "1px solid rgba(56, 189, 248, 0.35)",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.4)"
+        }}>
+          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#38bdf8", boxShadow: "0 0 6px #38bdf8" }} />
+          <span>{modelStore.pieces.find(p => p.id === activeHoveredPieceId)?.name || "Pattern Island"}</span>
+        </div>
+      )}
+
+      {/* Bottom Floating Info Strip: Move hint + Magnetic Snap Toggle */}
+      <div style={{
+        position: "absolute",
+        bottom: "8px",
+        left: "10px",
+        right: "10px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        pointerEvents: "auto"
+      }}>
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "4px",
+          pointerEvents: "none",
+          background: "rgba(0,0,0,0.65)",
+          padding: "2px 6px",
+          borderRadius: "4px",
+          fontSize: "9px",
+          color: "#94a3b8"
+        }}>
+          <Move size={10} color="#38bdf8" /> Drag to move (Hold <span style={{ color: "#facc15", fontWeight: "700" }}>Alt</span> to free move)
         </div>
 
         <button
-          className="control-pill"
-          style={{ padding: "4px", border: "none", background: "transparent" }}
-          onClick={() => uvOrganizerStore.closeUVInspect()}
-          title="Close UV Map Inspector"
-        >
-          <X size={15} />
-        </button>
-      </div>
-
-      {/* Main UV WebGL Viewport */}
-      <div style={{ padding: "16px", flex: 1, display: "flex", flexDirection: "column", alignItems: "center", overflowY: "auto", overflowX: "hidden" }}>
-        <div style={{ position: "relative", flexShrink: 0 }}>
-          <div
-            ref={containerRef}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handleContainerPointerMove}
-            onPointerLeave={handleContainerPointerLeave}
-            style={{
-              width: "400px",
-              height: "400px",
-              borderRadius: "10px",
-              overflow: "hidden",
-              border: activeHoveredPieceId ? "1px solid rgba(56, 189, 248, 0.45)" : "1px solid rgba(255, 255, 255, 0.12)",
-              boxShadow: activeHoveredPieceId ? "0 0 20px rgba(56, 189, 248, 0.2), 0 12px 32px rgba(0,0,0,0.5)" : "0 12px 32px rgba(0,0,0,0.5)",
-              cursor: dragState ? "grabbing" : (activeHoveredPieceId ? "grab" : "default"),
-              transition: "border-color 0.15s ease, box-shadow 0.15s ease"
-            }}
-          />
-          {activeHoveredPieceId && (
-            <div style={{
-              position: "absolute",
-              top: "8px",
-              left: "10px",
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              pointerEvents: "none",
-              background: "rgba(15, 23, 42, 0.88)",
-              backdropFilter: "blur(6px)",
-              padding: "4px 8px",
-              borderRadius: "6px",
-              fontSize: "10.5px",
-              color: "#38bdf8",
-              fontWeight: "600",
-              border: "1px solid rgba(56, 189, 248, 0.35)",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.4)"
-            }}>
-              <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#38bdf8", boxShadow: "0 0 6px #38bdf8" }} />
-              <span>{modelStore.pieces.find(p => p.id === activeHoveredPieceId)?.name || "Pattern Island"}</span>
-              {(() => {
-                const p = modelStore.pieces.find(item => item.id === activeHoveredPieceId);
-                const zone = p?.assignedZoneId ? uvOrganizerStore.zones[p.assignedZoneId] : null;
-                return zone ? (
-                  <span style={{ fontSize: "9px", padding: "1px 5px", borderRadius: "4px", background: `${zone.color}25`, color: zone.color, border: `1px solid ${zone.color}50` }}>
-                    {zone.label}
-                  </span>
-                ) : null;
-              })()}
-            </div>
-          )}
-          <div style={{ position: "absolute", bottom: "8px", left: "10px", right: "10px", display: "flex", alignItems: "center", justifyContent: "space-between", pointerEvents: "auto" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "4px", pointerEvents: "none", background: "rgba(0,0,0,0.65)", padding: "2px 6px", borderRadius: "4px", fontSize: "9.5px", color: "#94a3b8" }}>
-              <Move size={10} color="#38bdf8" /> Drag to move (Hold <span style={{ color: "#facc15", fontWeight: "700" }}>Alt</span> to free move)
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setSnapEnabled(prev => !prev)}
-              style={{
-                background: snapEnabled ? "rgba(250, 204, 21, 0.2)" : "rgba(0, 0, 0, 0.65)",
-                border: snapEnabled ? "1px solid rgba(250, 204, 21, 0.5)" : "1px solid rgba(255, 255, 255, 0.12)",
-                color: snapEnabled ? "#facc15" : "#94a3b8",
-                padding: "2px 7px",
-                borderRadius: "4px",
-                fontSize: "9.5px",
-                fontWeight: "700",
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-                boxShadow: snapEnabled ? "0 0 8px rgba(250, 204, 21, 0.25)" : "none"
-              }}
-              title="Magnetic Bounding Box Snapping: Automatically snaps dragged island edges and centers flush with other pattern islands"
-            >
-              <span>🧲</span>
-              <span>Snap: {snapEnabled ? "ON" : "OFF"}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Island Transform Toolbar (Single & Multi-Island Group) */}
-        {modelStore.selectedPiece && (
-          <div style={{
-            marginTop: "10px",
-            width: "100%",
-            background: "rgba(15, 23, 42, 0.85)",
-            border: modelStore.selectedPieceIds.length > 1 ? "1px solid rgba(250, 204, 21, 0.35)" : "1px solid rgba(56, 189, 248, 0.25)",
-            borderRadius: "8px",
-            padding: "8px 10px",
+          type="button"
+          onClick={() => setSnapEnabled(prev => !prev)}
+          style={{
+            background: snapEnabled ? "rgba(250, 204, 21, 0.2)" : "rgba(0, 0, 0, 0.65)",
+            border: snapEnabled ? "1px solid rgba(250, 204, 21, 0.5)" : "1px solid rgba(255, 255, 255, 0.12)",
+            color: snapEnabled ? "#facc15" : "#94a3b8",
+            padding: "2px 7px",
+            borderRadius: "4px",
+            fontSize: "9px",
+            fontWeight: "700",
             display: "flex",
-            flexDirection: "column",
-            gap: "6px",
-            boxShadow: modelStore.selectedPieceIds.length > 1 ? "0 4px 16px rgba(250, 204, 21, 0.15)" : "0 4px 16px rgba(0,0,0,0.3)"
-          }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <span style={{ fontSize: "10.5px", fontWeight: "700", color: modelStore.selectedPieceIds.length > 1 ? "#facc15" : "#38bdf8", display: "flex", alignItems: "center", gap: "4px" }}>
-                <span>{modelStore.selectedPieceIds.length > 1 ? "👥" : "🎯"}</span>
-                {modelStore.selectedPieceIds.length > 1
-                  ? `Group Selection (${modelStore.selectedPieceIds.length} pieces)`
-                  : `${modelStore.selectedPiece.name} Controls`}
-              </span>
-              <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                {modelStore.selectedPieceIds.length > 1 ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      modelStore.deselectPiece();
-                    }}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "#94a3b8",
-                      cursor: "pointer",
-                      fontSize: "9.5px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "3px",
-                      padding: "2px 4px"
-                    }}
-                    title="Deselect all pieces"
-                  >
-                    <X size={11} /> Deselect
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.resetPieceUV(modelStore.selectedPiece.id);
-                        rebuildUVMeshes();
-                      }
-                    }}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "#94a3b8",
-                      cursor: "pointer",
-                      fontSize: "9.5px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "3px",
-                      padding: "2px 4px"
-                    }}
-                    title="Reset this piece's UV island to its original unwrap"
-                  >
-                    <Undo2 size={11} /> Reset
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: modelStore.selectedPieceIds.length > 1 ? "repeat(4, 1fr)" : "repeat(6, 1fr)", gap: "4px" }}>
-              <button
-                type="button"
-                onClick={() => {
-                  if (modelStore.selectedPieceIds.length > 1) {
-                    uvOrganizerStore.rotatePiecesGroupUV(modelStore.selectedPieceIds, -90);
-                  } else if (modelStore.selectedPiece) {
-                    uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, -90);
-                  }
-                  rebuildUVMeshes();
-                }}
-                className="btn-icon"
-                style={{ padding: "5px", height: "auto", borderRadius: "6px", fontSize: "10px", gap: "2px", flexDirection: "column" }}
-                title={modelStore.selectedPieceIds.length > 1 ? "Rotate Group 90° CCW around Group Center" : "Rotate Island 90° Counter-Clockwise"}
-              >
-                <RotateCcw size={12} color={modelStore.selectedPieceIds.length > 1 ? "#facc15" : "#38bdf8"} />
-                <span style={{ fontSize: "8.5px" }}>-90°</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (modelStore.selectedPieceIds.length > 1) {
-                    uvOrganizerStore.rotatePiecesGroupUV(modelStore.selectedPieceIds, 90);
-                  } else if (modelStore.selectedPiece) {
-                    uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, 90);
-                  }
-                  rebuildUVMeshes();
-                }}
-                className="btn-icon"
-                style={{ padding: "5px", height: "auto", borderRadius: "6px", fontSize: "10px", gap: "2px", flexDirection: "column" }}
-                title={modelStore.selectedPieceIds.length > 1 ? "Rotate Group 90° CW around Group Center" : "Rotate Island 90° Clockwise"}
-              >
-                <RotateCw size={12} color={modelStore.selectedPieceIds.length > 1 ? "#facc15" : "#38bdf8"} />
-                <span style={{ fontSize: "8.5px" }}>+90°</span>
-              </button>
-
-              {modelStore.selectedPieceIds.length <= 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "horizontal");
-                        rebuildUVMeshes();
-                      }
-                    }}
-                    className="btn-icon"
-                    style={{ padding: "5px", height: "auto", borderRadius: "6px", fontSize: "10px", gap: "2px", flexDirection: "column" }}
-                    title="Flip Island Horizontally (Mirror U)"
-                  >
-                    <FlipHorizontal size={12} color="#38bdf8" />
-                    <span style={{ fontSize: "8.5px" }}>Flip H</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "vertical");
-                        rebuildUVMeshes();
-                      }
-                    }}
-                    className="btn-icon"
-                    style={{ padding: "5px", height: "auto", borderRadius: "6px", fontSize: "10px", gap: "2px", flexDirection: "column" }}
-                    title="Flip Island Vertically (Mirror V)"
-                  >
-                    <FlipVertical size={12} color="#38bdf8" />
-                    <span style={{ fontSize: "8.5px" }}>Flip V</span>
-                  </button>
-                </>
-              )}
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (modelStore.selectedPieceIds.length > 1) {
-                    uvOrganizerStore.scalePiecesGroupUV(modelStore.selectedPieceIds, 1.1);
-                  } else if (modelStore.selectedPiece) {
-                    uvOrganizerStore.scalePieceUV(modelStore.selectedPiece.id, 1.1);
-                  }
-                  rebuildUVMeshes();
-                }}
-                className="btn-icon"
-                style={{ padding: "5px", height: "auto", borderRadius: "6px", fontSize: "10px", gap: "2px", flexDirection: "column" }}
-                title={modelStore.selectedPieceIds.length > 1 ? "Scale Group Up (+10%) around Group Center" : "Scale Island Up (+10%)"}
-              >
-                <ZoomIn size={12} color={modelStore.selectedPieceIds.length > 1 ? "#facc15" : "#38bdf8"} />
-                <span style={{ fontSize: "8.5px" }}>+10%</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (modelStore.selectedPieceIds.length > 1) {
-                    uvOrganizerStore.scalePiecesGroupUV(modelStore.selectedPieceIds, 0.9);
-                  } else if (modelStore.selectedPiece) {
-                    uvOrganizerStore.scalePieceUV(modelStore.selectedPiece.id, 0.9);
-                  }
-                  rebuildUVMeshes();
-                }}
-                className="btn-icon"
-                style={{ padding: "5px", height: "auto", borderRadius: "6px", fontSize: "10px", gap: "2px", flexDirection: "column" }}
-                title={modelStore.selectedPieceIds.length > 1 ? "Scale Group Down (-10%) around Group Center" : "Scale Island Down (-10%)"}
-              >
-                <ZoomOut size={12} color={modelStore.selectedPieceIds.length > 1 ? "#facc15" : "#38bdf8"} />
-                <span style={{ fontSize: "8.5px" }}>-10%</span>
-              </button>
-            </div>
-
-            {modelStore.selectedPieceIds.length <= 1 && (
-              <div style={{ display: "flex", gap: "4px", marginTop: "2px" }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (modelStore.selectedPiece) {
-                      uvOrganizerStore.centerPieceInZone(modelStore.selectedPiece.id);
-                      rebuildUVMeshes();
-                    }
-                  }}
-                  className="btn btn-secondary"
-                  style={{ flex: 1, padding: "4px 8px", fontSize: "10.5px", justifyContent: "center", gap: "4px" }}
-                  title="Center island directly into its assigned zone slot"
-                >
-                  <Target size={11} color="#38bdf8" />
-                  <span>Center in Zone</span>
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Legend */}
-        <div style={{ marginTop: "14px", width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", maxHeight: "120px", overflowY: "auto" }}>
-          {Object.values(uvOrganizerStore.zones).map((z) => {
-            const count = modelStore.pieces.filter(p => p.assignedZoneId === z.id).length;
-            const isEmpty = count === 0;
-            return (
-              <div
-                key={z.id}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  fontSize: "11px",
-                  color: isEmpty ? "var(--text-dim)" : "var(--text-muted)",
-                  opacity: isEmpty ? 0.6 : 1
-                }}
-              >
-                <div style={{ width: "9px", height: "9px", borderRadius: "3px", background: isEmpty ? "#475569" : z.color }} />
-                <span>{z.label} {isEmpty ? "(Empty)" : `(${count})`}</span>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Action Controls */}
-        <div style={{ marginTop: "auto", width: "100%", display: "flex", flexDirection: "column", gap: "10px", paddingTop: "8px" }}>
-          {/* Arrange Strategy Selector: Fixed Zones vs Auto-Rearrange Empty Zones */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-            <span style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.04em", color: "#64748b" }}>
-              Empty Zone Strategy
-            </span>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", background: "rgba(0, 0, 0, 0.35)", padding: "3px", borderRadius: "8px", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
-              <button
-                type="button"
-                onClick={() => uvOrganizerStore.setArrangeMode("fixed")}
-                style={{
-                  padding: "6px 8px",
-                  borderRadius: "6px",
-                  fontSize: "10.5px",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                  border: uvOrganizerStore.arrangeMode === "fixed" ? "1px solid rgba(56, 189, 248, 0.3)" : "1px solid transparent",
-                  background: uvOrganizerStore.arrangeMode === "fixed" ? "linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(37, 99, 235, 0.4))" : "transparent",
-                  color: uvOrganizerStore.arrangeMode === "fixed" ? "#fff" : "#94a3b8",
-                  boxShadow: uvOrganizerStore.arrangeMode === "fixed" ? "0 2px 8px rgba(2, 132, 199, 0.25)" : "none",
-                  transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
-                  textAlign: "center"
-                }}
-                title="Keep standardized canonical coordinates intact even if unassigned panels are missing"
-              >
-                🔒 Keep Fixed
-              </button>
-              <button
-                type="button"
-                onClick={() => uvOrganizerStore.setArrangeMode("dynamic")}
-                style={{
-                  padding: "6px 8px",
-                  borderRadius: "6px",
-                  fontSize: "10.5px",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                  border: uvOrganizerStore.arrangeMode === "dynamic" ? "1px solid rgba(56, 189, 248, 0.3)" : "1px solid transparent",
-                  background: uvOrganizerStore.arrangeMode === "dynamic" ? "linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(37, 99, 235, 0.4))" : "transparent",
-                  color: uvOrganizerStore.arrangeMode === "dynamic" ? "#fff" : "#94a3b8",
-                  boxShadow: uvOrganizerStore.arrangeMode === "dynamic" ? "0 2px 8px rgba(2, 132, 199, 0.25)" : "none",
-                  transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
-                  textAlign: "center"
-                }}
-                title="If no panel is assigned to a zone, dynamically collapse empty space and repack active zones across UV [0,1]"
-              >
-                🔄 Auto-Repack
-              </button>
-            </div>
-          </div>
-
-          {/* Seam Bleed Padding Selector (Phase 3) */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: "10px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.04em", color: "#64748b" }}>
-                Seam Bleed Margin (Padding)
-              </span>
-              <span style={{ fontSize: "10px", color: "#38bdf8", fontWeight: "600" }}>
-                {uvOrganizerStore.islandPaddingPx}px
-              </span>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", background: "rgba(0, 0, 0, 0.35)", padding: "3px", borderRadius: "8px", border: "1px solid rgba(255, 255, 255, 0.08)", gap: "2px" }}>
-              {([4, 8, 12, 16] as const).map((px) => (
-                <button
-                  key={px}
-                  type="button"
-                  onClick={() => uvOrganizerStore.setIslandPaddingPx(px)}
-                  style={{
-                    padding: "4px",
-                    borderRadius: "5px",
-                    fontSize: "10px",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    border: uvOrganizerStore.islandPaddingPx === px ? "1px solid rgba(56, 189, 248, 0.4)" : "1px solid transparent",
-                    background: uvOrganizerStore.islandPaddingPx === px ? "linear-gradient(135deg, rgba(2, 132, 199, 0.5), rgba(37, 99, 235, 0.5))" : "transparent",
-                    color: uvOrganizerStore.islandPaddingPx === px ? "#fff" : "#94a3b8",
-                    textAlign: "center"
-                  }}
-                  title={`Set ${px}px gutter padding between islands to prevent seam bleeding`}
-                >
-                  {px}px
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Equalize Texel Density & UV Checker Grid (Phase 3) */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
-            <button
-              className="btn btn-secondary"
-              style={{ justifyContent: "center", padding: "6px 8px", fontSize: "11px", gap: "4px" }}
-              onClick={() => {
-                const res = uvOrganizerStore.equalizeTexelDensity();
-                rebuildUVMeshes();
-              }}
-              title="Scale islands so fabric weave and texture pixel density is 100% uniform across all garment panels"
-              disabled={!modelStore.currentModel}
-            >
-              <Scale size={12} color="#34d399" />
-              <span>Equalize Density</span>
-            </button>
-
-            <button
-              className="btn btn-secondary"
-              style={{
-                justifyContent: "center",
-                padding: "6px 8px",
-                fontSize: "11px",
-                gap: "4px",
-                border: modelStore.uvGridMode ? "1px solid rgba(250, 204, 21, 0.5)" : "var(--border-color)",
-                color: modelStore.uvGridMode ? "#facc15" : "var(--text-color)"
-              }}
-              onClick={() => modelStore.toggleUVGridMode()}
-              title="Toggle numbered checkerboard texture on 3D garment to inspect texture stretching"
-              disabled={!modelStore.currentModel}
-            >
-              <Grid size={12} color={modelStore.uvGridMode ? "#facc15" : "#38bdf8"} />
-              <span>Checker: {modelStore.uvGridMode ? "ON" : "OFF"}</span>
-            </button>
-          </div>
-
-          <button
-            className="btn btn-secondary"
-            style={{ width: "100%", justifyContent: "center", padding: "8px", fontSize: "11.5px", gap: "6px" }}
-            onClick={() => {
-              uvOrganizerStore.autoDetectPatternAssignments(true);
-              rebuildUVMeshes();
-            }}
-            title="Auto-detect zones using Two-Pass bounding box center & UV math"
-            disabled={!modelStore.currentModel}
-          >
-            <Wand2 size={13} color="#38bdf8" />
-            <span>Auto-Detect Zones ({uvOrganizerStore.activeGarmentType === "BOTTOMWEAR" ? "Bottomwear" : "Topwear"})</span>
-          </button>
-
-          <button
-            className="btn btn-secondary"
-            style={{ width: "100%", justifyContent: "center", padding: "8px", fontSize: "11.5px" }}
-            onClick={() => uvOrganizerStore.setShowZoneEditorModal(true)}
-            title="Create, arrange, or resize fixed UV slot zones"
-          >
-            <LayoutGrid size={13} color="#38bdf8" />
-            <span>Customize Blueprint Zones</span>
-          </button>
-
-          <button
-            className="btn btn-primary"
-            style={{ width: "100%", padding: "10px", justifyContent: "center", fontWeight: "700", fontSize: "12.5px" }}
-            onClick={() => {
-              uvOrganizerStore.arrangeAssignedUVs();
-              rebuildUVMeshes();
-            }}
-          >
-            <RefreshCw size={14} />
-            <span>Arrange UVs ({assignedCount} Assigned)</span>
-          </button>
-
-          {/* Phase 5: Production Blueprint Exporter */}
-          <button
-            className="btn btn-secondary"
-            style={{ width: "100%", justifyContent: "center", padding: "8px", fontSize: "11.5px", gap: "6px", border: "1px solid rgba(56, 189, 248, 0.3)", color: "#38bdf8" }}
-            onClick={() => uvOrganizerStore.exportProductionBlueprint(2048, "png")}
-            title="Export 2048x2048 high-resolution transparent blueprint PNG with panel names and wireframes for manufacturing tech packs"
-            disabled={!modelStore.currentModel}
-          >
-            <Download size={13} color="#38bdf8" />
-            <span>Export Blueprint PNG (2K)</span>
-          </button>
-        </div>
+            alignItems: "center",
+            gap: "4px",
+            cursor: "pointer",
+            transition: "all 0.15s ease",
+            boxShadow: snapEnabled ? "0 0 8px rgba(250, 204, 21, 0.25)" : "none"
+          }}
+          title="Magnetic Bounding Box Snapping: Automatically snaps dragged island edges and centers flush with other pattern islands"
+        >
+          <span>🧲</span>
+          <span>Snap: {snapEnabled ? "ON" : "OFF"}</span>
+        </button>
       </div>
     </div>
   );

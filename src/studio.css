@@ -710,6 +710,13 @@
     transition: flex 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin 0.3s ease;
   }
 
+  .panel-uv-studio.maximized {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+    background: var(--bg-universe);
+  }
+
   .panel-uv-studio.collapsed {
     flex: 0;
     width: 0;
