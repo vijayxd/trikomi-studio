@@ -380,6 +380,16 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: flex 0.22s ease-out;
+  }
+
+  .studio-subcard.subcard-collapsed {
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .studio-subcard.subcard-collapsed .subcard-title-bar {
+    border-bottom: none;
+    opacity: 0.75;
   }
 
   .subcard-title-bar {
@@ -393,6 +403,7 @@
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     background: rgba(16, 26, 52, 0.4);
+    transition: opacity 0.2s;
   }
 
   /* Scene Tree */

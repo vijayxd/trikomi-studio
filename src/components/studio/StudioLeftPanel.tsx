@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { modelStore } from "../../store/modelStore";
 import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { StudioCard } from "./StudioCard";
 
 interface StudioLeftPanelProps {
   collapsed?: boolean;
@@ -64,21 +65,21 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
         </div>
       </div>
 
-      {/* 1. Scene Tree Subcard */}
-      <div className="studio-subcard" style={{ flex: 1.1, minHeight: "90px" }}>
-        <div className="subcard-title-bar">
-          <span style={{ fontSize: "10px" }}>Hierarchy ({modelStore.pieces.length} Pieces)</span>
-          <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            <span
-              style={{ fontSize: "9px", color: "var(--text-muted)", cursor: "pointer" }}
-              onClick={() => modelStore.toggleAllPiecesVisibility()}
-              title="Toggle All Visibility"
-            >
-              👁 All
-            </span>
-          </div>
-        </div>
-
+      {/* 1. Scene Tree Collapsible Card */}
+      <StudioCard
+        title={`Hierarchy (${modelStore.pieces.length} Pieces)`}
+        defaultCollapsed={false}
+        flex={1.2}
+        headerRight={
+          <span
+            style={{ fontSize: "9px", color: "var(--text-muted)", cursor: "pointer" }}
+            onClick={() => modelStore.toggleAllPiecesVisibility()}
+            title="Toggle All Visibility"
+          >
+            👁 All
+          </span>
+        }
+      >
         {/* Piece Search Filter Input */}
         <div style={{ padding: "4px 6px" }}>
           <input
@@ -161,14 +162,15 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
             );
           })}
         </div>
-      </div>
+      </StudioCard>
 
-      {/* 2. Transforms Subcard */}
-      <div className="studio-subcard">
-        <div className="subcard-title-bar">
-          <span>Transforms</span>
-          <span style={{ fontSize: "8.5px", color: "var(--text-muted)" }}>LOCAL</span>
-        </div>
+      {/* 2. Transforms Collapsible Card */}
+      <StudioCard
+        title="Transforms"
+        defaultCollapsed={false}
+        flex={0.8}
+        headerRight={<span style={{ fontSize: "8.5px", color: "var(--text-muted)" }}>LOCAL</span>}
+      >
         <div className="transforms-form-content">
           <div className="transform-axis-row">
             <span>Position</span>
@@ -211,11 +213,14 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
             Reset
           </button>
         </div>
-      </div>
+      </StudioCard>
 
-      {/* 3. Quick Tools Subcard */}
-      <div className="studio-subcard">
-        <div className="subcard-title-bar">Quick Tools</div>
+      {/* 3. Quick Tools Collapsible Card */}
+      <StudioCard
+        title="Quick Tools"
+        defaultCollapsed={false}
+        flex={0.7}
+      >
         <div className="quick-tools-grid-box">
           <button
             className={`btn-tool-square ${transformTool === "select" ? "active" : ""}`}
@@ -265,7 +270,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
             <span>Scale</span>
           </button>
         </div>
-      </div>
+      </StudioCard>
     </aside>
   );
 });
