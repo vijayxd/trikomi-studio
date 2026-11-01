@@ -79,6 +79,26 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
           </div>
         </div>
 
+        {/* Piece Search Filter Input */}
+        <div style={{ padding: "4px 6px" }}>
+          <input
+            type="text"
+            placeholder="Filter pieces..."
+            value={searchFilter}
+            onChange={(e) => setSearchFilter(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "3px 6px",
+              fontSize: "9px",
+              background: "rgba(0,0,0,0.4)",
+              border: "1px solid rgba(20,217,255,0.2)",
+              borderRadius: "4px",
+              color: "#fff",
+              outline: "none"
+            }}
+          />
+        </div>
+
         <div className="scene-tree-content">
           {/* Root Group Node */}
           <div className="tree-node-item">
@@ -153,31 +173,35 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
           <div className="transform-axis-row">
             <span>Position</span>
             <div className="triplet-inputs">
-              <div className="cell-axis-val">X 0.00</div>
-              <div className="cell-axis-val">Y 0.00</div>
-              <div className="cell-axis-val">Z 0.00</div>
+              <div className="cell-axis-val">X {(modelStore.selectedPiece?.mesh.position.x || 0).toFixed(2)}</div>
+              <div className="cell-axis-val">Y {(modelStore.selectedPiece?.mesh.position.y || 0).toFixed(2)}</div>
+              <div className="cell-axis-val">Z {(modelStore.selectedPiece?.mesh.position.z || 0).toFixed(2)}</div>
             </div>
           </div>
           <div className="transform-axis-row">
             <span>Rotation</span>
             <div className="triplet-inputs">
-              <div className="cell-axis-val">X 0.00</div>
-              <div className="cell-axis-val">Y 0.00</div>
-              <div className="cell-axis-val">Z 0.00</div>
+              <div className="cell-axis-val">X {(modelStore.selectedPiece?.mesh.rotation.x || 0).toFixed(2)}</div>
+              <div className="cell-axis-val">Y {(modelStore.selectedPiece?.mesh.rotation.y || 0).toFixed(2)}</div>
+              <div className="cell-axis-val">Z {(modelStore.selectedPiece?.mesh.rotation.z || 0).toFixed(2)}</div>
             </div>
           </div>
           <div className="transform-axis-row">
             <span>Scale</span>
             <div className="triplet-inputs">
-              <div className="cell-axis-val">X 1.00</div>
-              <div className="cell-axis-val">Y 1.00</div>
-              <div className="cell-axis-val">Z 1.00</div>
+              <div className="cell-axis-val">X {(modelStore.selectedPiece?.mesh.scale.x || 1).toFixed(2)}</div>
+              <div className="cell-axis-val">Y {(modelStore.selectedPiece?.mesh.scale.y || 1).toFixed(2)}</div>
+              <div className="cell-axis-val">Z {(modelStore.selectedPiece?.mesh.scale.z || 1).toFixed(2)}</div>
             </div>
           </div>
           <button
             className="btn-reset-full"
             onClick={() => {
-              if (modelStore.currentModel) {
+              if (modelStore.selectedPiece?.mesh) {
+                modelStore.selectedPiece.mesh.position.set(0, 0, 0);
+                modelStore.selectedPiece.mesh.rotation.set(0, 0, 0);
+                modelStore.selectedPiece.mesh.scale.set(1, 1, 1);
+              } else if (modelStore.currentModel) {
                 modelStore.currentModel.position.set(0, 0, 0);
                 modelStore.currentModel.rotation.set(0, 0, 0);
                 modelStore.currentModel.scale.set(1, 1, 1);
