@@ -93,11 +93,12 @@ trikomi-studio/
 ├── src/
 │   ├── components/
 │   │   ├── studio/              # Reusable semantic Studio chassis components
+│   │   │   ├── StudioCard.tsx             # Nested collapsible card with dynamic flex redistribution
 │   │   │   ├── StudioTopBar.tsx           # Brand + Mode tabs + Dock toggles
-│   │   │   ├── StudioLeftPanel.tsx        # Scene Explorer, Piece Tree, Transforms
+│   │   │   ├── StudioLeftPanel.tsx        # Scene Explorer, Piece Tree, Transforms (Nested Cards)
 │   │   │   ├── StudioCenterViewport.tsx   # 3D Garment Viewport & Controls
-│   │   │   ├── StudioRightPanel.tsx       # UV Editor Canvas & Canonical slots
-│   │   │   └── StudioBottomDock.tsx       # Material Library & Decimation card
+│   │   │   ├── StudioRightPanel.tsx       # UV Editor Canvas & Canonical slots (Nested Cards)
+│   │   │   └── StudioBottomDock.tsx       # Material Library & Decimation (Nested Collapsible Cards)
 │   │   ├── UVCanvasView.tsx     # 2D UV island canvas renderer
 │   │   └── UVZoneEditorModal.tsx# Canonical zone editor dialog
 │   ├── plugins/                 # Trikomi Addon Plugins (IViewerPlugin)
