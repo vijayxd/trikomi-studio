@@ -33,7 +33,7 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
     <section className="panel-viewport-center cyber-chassis">
       {/* Top Viewport Toolbar */}
       <div className="viewport-top-toolbar">
-        <div className="camera-dropdown-pill" onClick={() => modelStore.resetCamera?.()} title="Reset Camera">
+        <div className="camera-dropdown-pill" onClick={() => modelStore.resetCamera()} title="Reset Camera View to Frame Garment">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#14d9ff" strokeWidth="2">
             <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
           </svg>
@@ -44,7 +44,7 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
           <button
             className={`control-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
             title="Toggle Wireframe Shading"
-            onClick={() => modelStore.toggleWireframe?.()}
+            onClick={() => modelStore.toggleWireframe()}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />
@@ -54,7 +54,7 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
           <button
             className="control-toggle-btn"
             title="Focus Framing (F key)"
-            onClick={() => modelStore.resetCamera?.()}
+            onClick={() => modelStore.resetCamera()}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" />
