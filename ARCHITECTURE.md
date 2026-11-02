@@ -23,6 +23,18 @@ Trikomi Studio is a lightweight, headless-first **Workstation Shell / UI Present
     - `UVCanonicalEngine`: 2D UV canonical transforms, packing, island boundary extraction, and isotropic scaling.
     - `PBRMaterialSynthesizer`: Dynamic PBR fabric material synthesis with dedicated cloned instances per garment piece.
     - `StudioModelStore` & `StudioUVOrganizerStore`: Pure state stores exported from `@trikomi/core/studio`.
+    - `GarmentAuditModule`: Headless 3D Front & Back view snapshots, color ID palettes, piece verification, and UV canonical grid audit generation.
+
+## 2. Curated Garments Canonical UV Organization & Visual Audit Pipeline
+Curated assets located in `/public/models_storage` (symlinked to `/home/vijaykc/Downloads/style3d_models`) are audited and arranged using Trikomi Core modules:
+- **3D Spatial Piece Classification**:
+  - Automatically analyzes piece elevation (`normY`), coronal depth (`relZ`), and lateral position (`normAbsX`) against the global garment bounding box.
+  - Classifies pieces into canonical zones (`COLLAR_NECK`, `FRONT_TORSO`, `BACK_TORSO`, `SLEEVE_LEFT`, `SLEEVE_RIGHT`, `WAISTBAND`, `TRIMS` / `LEG_LEFT`, `LEG_RIGHT`, `CUFF_LEFT`, `CUFF_RIGHT`).
+  - Separates trims and hardware via island aspect ratio ($\ge 12.0$) and mini bounding box volume ($< 500$).
+- **UV Canonical Packing**:
+  - Packs islands neatly into their respective canonical zone bounding boxes with strict 1:1 isotropic scaling to prevent garment texture distortion.
+- **Visual Audit Grid Sheet**:
+  - Accessible via `/audit/index.html` displaying high-contrast Color ID 3D Front view (+Z), 3D Back view (-Z), 2D Canonical UV layout diagram, and piece triangle statistics.
     - `StudioSqliteService`: SQLite / IndexedDB garment persistence layer.
 
 ---

@@ -1,0 +1,4556 @@
+[
+  {
+    "id": "01jmm9pxnf0mysaf3yrpfabktn",
+    "name": "Grey V-neck shock proof sports bra",
+    "category": "TOPWEAR",
+    "isBottomwear": false,
+    "piecesCount": 14,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern29_1",
+        "color": "#38bdf8",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 1000
+      },
+      {
+        "index": 1,
+        "name": "pattern39_2",
+        "color": "#fb7185",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 1000
+      },
+      {
+        "index": 2,
+        "name": "pattern49_3",
+        "color": "#34d399",
+        "zone": "WAISTBAND",
+        "triangles": 4474
+      },
+      {
+        "index": 3,
+        "name": "pattern1_4",
+        "color": "#fbbf24",
+        "zone": "BACK_TORSO",
+        "triangles": 4486
+      },
+      {
+        "index": 4,
+        "name": "pattern9_5",
+        "color": "#a78bfa",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 1894
+      },
+      {
+        "index": 5,
+        "name": "pattern15_6",
+        "color": "#f472b6",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 1894
+      },
+      {
+        "index": 6,
+        "name": "pattern21_7",
+        "color": "#2dd4bf",
+        "zone": "FRONT_TORSO",
+        "triangles": 3996
+      },
+      {
+        "index": 7,
+        "name": "pattern81_8",
+        "color": "#f87171",
+        "zone": "FRONT_TORSO",
+        "triangles": 3954
+      },
+      {
+        "index": 8,
+        "name": "pattern89_9",
+        "color": "#818cf8",
+        "zone": "WAISTBAND",
+        "triangles": 4190
+      },
+      {
+        "index": 9,
+        "name": "pattern95_10",
+        "color": "#4ade80",
+        "zone": "WAISTBAND",
+        "triangles": 4476
+      },
+      {
+        "index": 10,
+        "name": "pattern55_11",
+        "color": "#facc15",
+        "zone": "WAISTBAND",
+        "triangles": 4172
+      },
+      {
+        "index": 11,
+        "name": "pattern61_12",
+        "color": "#c084fc",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 1871
+      },
+      {
+        "index": 12,
+        "name": "pattern67_13",
+        "color": "#60a5fa",
+        "zone": "BACK_TORSO",
+        "triangles": 4508
+      },
+      {
+        "index": 13,
+        "name": "pattern75_14",
+        "color": "#e879f9",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 1871
+      }
+    ],
+    "frontImg": "/audit/01jmm9pxnf0mysaf3yrpfabktn_front.png",
+    "backImg": "/audit/01jmm9pxnf0mysaf3yrpfabktn_back.png",
+    "uvImg": "/audit/01jmm9pxnf0mysaf3yrpfabktn_uv.png"
+  },
+  {
+    "id": "01jmv8ns4bj9y7w7x3mttjkcbv",
+    "name": "Light purple stand collar knitted long sleeved T-shirt",
+    "category": "TOPWEAR",
+    "isBottomwear": false,
+    "piecesCount": 26,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern43_1",
+        "color": "#38bdf8",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 9997
+      },
+      {
+        "index": 1,
+        "name": "pattern52_2",
+        "color": "#fb7185",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 19820
+      },
+      {
+        "index": 2,
+        "name": "pattern1_3",
+        "color": "#34d399",
+        "zone": "COLLAR_NECK",
+        "triangles": 2434
+      },
+      {
+        "index": 3,
+        "name": "pattern10_4",
+        "color": "#fbbf24",
+        "zone": "BACK_TORSO",
+        "triangles": 23622
+      },
+      {
+        "index": 4,
+        "name": "piping72_5",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 564
+      },
+      {
+        "index": 5,
+        "name": "piping73_6",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 564
+      },
+      {
+        "index": 6,
+        "name": "piping74_7",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 552
+      },
+      {
+        "index": 7,
+        "name": "piping75_8",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 552
+      },
+      {
+        "index": 8,
+        "name": "piping76_9",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 1316
+      },
+      {
+        "index": 9,
+        "name": "piping77_10",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 1288
+      },
+      {
+        "index": 10,
+        "name": "piping78_11",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 1288
+      },
+      {
+        "index": 11,
+        "name": "piping79_12",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 1316
+      },
+      {
+        "index": 12,
+        "name": "图案2_13",
+        "color": "#60a5fa",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 1637
+      },
+      {
+        "index": 13,
+        "name": "默认明线_14",
+        "color": "#e879f9",
+        "zone": "WAISTBAND",
+        "triangles": 428
+      },
+      {
+        "index": 14,
+        "name": "明线2_15",
+        "color": "#94a3b8",
+        "zone": "WAISTBAND",
+        "triangles": 428
+      },
+      {
+        "index": 15,
+        "name": "默认明线 3_16",
+        "color": "#38bdf8",
+        "zone": "WAISTBAND",
+        "triangles": 433
+      },
+      {
+        "index": 16,
+        "name": "明线6_17",
+        "color": "#fb7185",
+        "zone": "WAISTBAND",
+        "triangles": 433
+      },
+      {
+        "index": 17,
+        "name": "默认明线 2_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 348
+      },
+      {
+        "index": 18,
+        "name": "默认明线 1_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 331
+      },
+      {
+        "index": 19,
+        "name": "默认明线复制1 1_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 380
+      },
+      {
+        "index": 20,
+        "name": "明线14_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 70
+      },
+      {
+        "index": 21,
+        "name": "默认明线复制1 2_22",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 380
+      },
+      {
+        "index": 22,
+        "name": "默认明线复制1_23",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 70
+      },
+      {
+        "index": 23,
+        "name": "pattern62_24",
+        "color": "#818cf8",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 19854
+      },
+      {
+        "index": 24,
+        "name": "pattern22_25",
+        "color": "#4ade80",
+        "zone": "FRONT_TORSO",
+        "triangles": 22310
+      },
+      {
+        "index": 25,
+        "name": "pattern34_26",
+        "color": "#facc15",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 10168
+      }
+    ],
+    "frontImg": "/audit/01jmv8ns4bj9y7w7x3mttjkcbv_front.png",
+    "backImg": "/audit/01jmv8ns4bj9y7w7x3mttjkcbv_back.png",
+    "uvImg": "/audit/01jmv8ns4bj9y7w7x3mttjkcbv_uv.png"
+  },
+  {
+    "id": "01jmmm4a2060z9tygk241hfe74",
+    "name": "Athletic Wear",
+    "category": "TOPWEAR",
+    "isBottomwear": false,
+    "piecesCount": 76,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "明线36_1",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 784
+      },
+      {
+        "index": 1,
+        "name": "明线14_2",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 396
+      },
+      {
+        "index": 2,
+        "name": "默认明线 6_3",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 396
+      },
+      {
+        "index": 3,
+        "name": "zipperSlider259_4",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 6260
+      },
+      {
+        "index": 4,
+        "name": "zipperPuller260_5",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 704
+      },
+      {
+        "index": 5,
+        "name": "zipperBottomStopper261_6",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 756
+      },
+      {
+        "index": 6,
+        "name": "zipperBottomStopper262_7",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 12
+      },
+      {
+        "index": 7,
+        "name": "zipperPullTeeth263_8",
+        "color": "#f87171",
+        "zone": "FRONT_TORSO",
+        "triangles": 71500
+      },
+      {
+        "index": 8,
+        "name": "zipperPullTeeth264_9",
+        "color": "#818cf8",
+        "zone": "FRONT_TORSO",
+        "triangles": 71280
+      },
+      {
+        "index": 9,
+        "name": "zipperPiece265_10",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 9878
+      },
+      {
+        "index": 10,
+        "name": "zipperPiece271_11",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 9878
+      },
+      {
+        "index": 11,
+        "name": "trim277_12",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 6260
+      },
+      {
+        "index": 12,
+        "name": "trim278_13",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 704
+      },
+      {
+        "index": 13,
+        "name": "pattern157_14",
+        "color": "#e879f9",
+        "zone": "FRONT_TORSO",
+        "triangles": 16648
+      },
+      {
+        "index": 14,
+        "name": "pattern164_15",
+        "color": "#94a3b8",
+        "zone": "FRONT_TORSO",
+        "triangles": 16648
+      },
+      {
+        "index": 15,
+        "name": "pattern171_16",
+        "color": "#38bdf8",
+        "zone": "COLLAR_NECK",
+        "triangles": 7624
+      },
+      {
+        "index": 16,
+        "name": "pattern178_17",
+        "color": "#fb7185",
+        "zone": "COLLAR_NECK",
+        "triangles": 7624
+      },
+      {
+        "index": 17,
+        "name": "明线40_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 340
+      },
+      {
+        "index": 18,
+        "name": "默认明线 5_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 340
+      },
+      {
+        "index": 19,
+        "name": "默认明线_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 430
+      },
+      {
+        "index": 20,
+        "name": "默认明线 1_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 55
+      },
+      {
+        "index": 21,
+        "name": "默认明线 2_22",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 430
+      },
+      {
+        "index": 22,
+        "name": "默认明线 3_23",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 51
+      },
+      {
+        "index": 23,
+        "name": "默认明线 4_24",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 357
+      },
+      {
+        "index": 24,
+        "name": "明线20_25",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 524
+      },
+      {
+        "index": 25,
+        "name": "明线22_26",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 296
+      },
+      {
+        "index": 26,
+        "name": "明线24_27",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 529
+      },
+      {
+        "index": 27,
+        "name": "明线38_28",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 242
+      },
+      {
+        "index": 28,
+        "name": "明线2_29",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 430
+      },
+      {
+        "index": 29,
+        "name": "明线4_30",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 55
+      },
+      {
+        "index": 30,
+        "name": "明线6_31",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 430
+      },
+      {
+        "index": 31,
+        "name": "明线8_32",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 51
+      },
+      {
+        "index": 32,
+        "name": "明线10_33",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 357
+      },
+      {
+        "index": 33,
+        "name": "默认明线复制1_34",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 524
+      },
+      {
+        "index": 34,
+        "name": "默认明线复制1 1_35",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 296
+      },
+      {
+        "index": 35,
+        "name": "默认明线复制1 2_36",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 529
+      },
+      {
+        "index": 36,
+        "name": "默认明线复制2 2_37",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 242
+      },
+      {
+        "index": 37,
+        "name": "默认明线 7_38",
+        "color": "#f87171",
+        "zone": "WAISTBAND",
+        "triangles": 1401
+      },
+      {
+        "index": 38,
+        "name": "默认明线复制1 5_39",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 789
+      },
+      {
+        "index": 39,
+        "name": "默认明线复制1 6_40",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 789
+      },
+      {
+        "index": 40,
+        "name": "默认明线复制2_41",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 765
+      },
+      {
+        "index": 41,
+        "name": "明线30_42",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 790
+      },
+      {
+        "index": 42,
+        "name": "明线32_43",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 790
+      },
+      {
+        "index": 43,
+        "name": "明线34_44",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 760
+      },
+      {
+        "index": 44,
+        "name": "默认明线 8_45",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 901
+      },
+      {
+        "index": 45,
+        "name": "默认明线复制1 3_46",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 740
+      },
+      {
+        "index": 46,
+        "name": "明线28_47",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 740
+      },
+      {
+        "index": 47,
+        "name": "默认明线复制2 1_48",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 784
+      },
+      {
+        "index": 48,
+        "name": "明线18_49",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 901
+      },
+      {
+        "index": 49,
+        "name": "明线26_50",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 740
+      },
+      {
+        "index": 50,
+        "name": "默认明线复制1 4_51",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 740
+      },
+      {
+        "index": 51,
+        "name": "pattern1_52",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 1592
+      },
+      {
+        "index": 52,
+        "name": "pattern11_53",
+        "color": "#f87171",
+        "zone": "COLLAR_NECK",
+        "triangles": 1790
+      },
+      {
+        "index": 53,
+        "name": "pattern17_54",
+        "color": "#818cf8",
+        "zone": "COLLAR_NECK",
+        "triangles": 11704
+      },
+      {
+        "index": 54,
+        "name": "pattern24_55",
+        "color": "#4ade80",
+        "zone": "COLLAR_NECK",
+        "triangles": 3080
+      },
+      {
+        "index": 55,
+        "name": "pattern29_56",
+        "color": "#facc15",
+        "zone": "COLLAR_NECK",
+        "triangles": 11670
+      },
+      {
+        "index": 56,
+        "name": "pattern36_57",
+        "color": "#c084fc",
+        "zone": "COLLAR_NECK",
+        "triangles": 1790
+      },
+      {
+        "index": 57,
+        "name": "pattern42_58",
+        "color": "#60a5fa",
+        "zone": "CUFF_LEFT",
+        "triangles": 2168
+      },
+      {
+        "index": 58,
+        "name": "pattern48_59",
+        "color": "#e879f9",
+        "zone": "CUFF_RIGHT",
+        "triangles": 2168
+      },
+      {
+        "index": 59,
+        "name": "pattern54_60",
+        "color": "#94a3b8",
+        "zone": "FRONT_TORSO",
+        "triangles": 3846
+      },
+      {
+        "index": 60,
+        "name": "pattern61_61",
+        "color": "#38bdf8",
+        "zone": "FRONT_TORSO",
+        "triangles": 3846
+      },
+      {
+        "index": 61,
+        "name": "pattern68_62",
+        "color": "#fb7185",
+        "zone": "WAISTBAND",
+        "triangles": 9124
+      },
+      {
+        "index": 62,
+        "name": "pattern77_63",
+        "color": "#34d399",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 10726
+      },
+      {
+        "index": 63,
+        "name": "pattern83_64",
+        "color": "#fbbf24",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 10726
+      },
+      {
+        "index": 64,
+        "name": "pattern89_65",
+        "color": "#a78bfa",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 6123
+      },
+      {
+        "index": 65,
+        "name": "trim279_66",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 6260
+      },
+      {
+        "index": 66,
+        "name": "trim280_67",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 704
+      },
+      {
+        "index": 67,
+        "name": "pattern95_68",
+        "color": "#f87171",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 6123
+      },
+      {
+        "index": 68,
+        "name": "pattern101_69",
+        "color": "#818cf8",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 14649
+      },
+      {
+        "index": 69,
+        "name": "pattern107_70",
+        "color": "#4ade80",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 14643
+      },
+      {
+        "index": 70,
+        "name": "pattern113_71",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 400
+      },
+      {
+        "index": 71,
+        "name": "pattern119_72",
+        "color": "#c084fc",
+        "zone": "COLLAR_NECK",
+        "triangles": 1790
+      },
+      {
+        "index": 72,
+        "name": "pattern125_73",
+        "color": "#60a5fa",
+        "zone": "COLLAR_NECK",
+        "triangles": 1790
+      },
+      {
+        "index": 73,
+        "name": "pattern131_74",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 400
+      },
+      {
+        "index": 74,
+        "name": "pattern137_75",
+        "color": "#94a3b8",
+        "zone": "COLLAR_NECK",
+        "triangles": 18252
+      },
+      {
+        "index": 75,
+        "name": "pattern147_76",
+        "color": "#38bdf8",
+        "zone": "BACK_TORSO",
+        "triangles": 33750
+      }
+    ],
+    "frontImg": "/audit/01jmmm4a2060z9tygk241hfe74_front.png",
+    "backImg": "/audit/01jmmm4a2060z9tygk241hfe74_back.png",
+    "uvImg": "/audit/01jmmm4a2060z9tygk241hfe74_uv.png"
+  },
+  {
+    "id": "01jmmm3k9scajhejexa8ydnd8y",
+    "name": "Women's sportswear",
+    "category": "BOTTOMWEAR",
+    "isBottomwear": true,
+    "piecesCount": 46,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern25_1",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 10076
+      },
+      {
+        "index": 1,
+        "name": "pattern31_2",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 10095
+      },
+      {
+        "index": 2,
+        "name": "pattern37_3",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 1786
+      },
+      {
+        "index": 3,
+        "name": "pattern43_4",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 13437
+      },
+      {
+        "index": 4,
+        "name": "pattern50_5",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 1786
+      },
+      {
+        "index": 5,
+        "name": "pattern56_6",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 13467
+      },
+      {
+        "index": 6,
+        "name": "pattern63_7",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 7696
+      },
+      {
+        "index": 7,
+        "name": "pattern70_8",
+        "color": "#f87171",
+        "zone": "LEG_RIGHT",
+        "triangles": 1482
+      },
+      {
+        "index": 8,
+        "name": "pattern92_9",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1482
+      },
+      {
+        "index": 9,
+        "name": "pattern114_10",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 7696
+      },
+      {
+        "index": 10,
+        "name": "pattern121_11",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 1556
+      },
+      {
+        "index": 11,
+        "name": "pattern148_12",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 7499
+      },
+      {
+        "index": 12,
+        "name": "pattern168_13",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 1556
+      },
+      {
+        "index": 13,
+        "name": "pattern195_14",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 7499
+      },
+      {
+        "index": 14,
+        "name": "pattern215_15",
+        "color": "#94a3b8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1682
+      },
+      {
+        "index": 15,
+        "name": "pattern221_16",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1682
+      },
+      {
+        "index": 16,
+        "name": "pattern227_17",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 1782
+      },
+      {
+        "index": 17,
+        "name": "pattern233_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 1786
+      },
+      {
+        "index": 18,
+        "name": "pattern239_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 310
+      },
+      {
+        "index": 19,
+        "name": "pattern245_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 310
+      },
+      {
+        "index": 20,
+        "name": "默认明线 2_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 678
+      },
+      {
+        "index": 21,
+        "name": "默认明线 3_22",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 744
+      },
+      {
+        "index": 22,
+        "name": "默认明线 4_23",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 739
+      },
+      {
+        "index": 23,
+        "name": "默认明线 5_24",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 678
+      },
+      {
+        "index": 24,
+        "name": "默认明线_25",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 616
+      },
+      {
+        "index": 25,
+        "name": "默认明线 1_26",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 517
+      },
+      {
+        "index": 26,
+        "name": "明线2_27",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 623
+      },
+      {
+        "index": 27,
+        "name": "明线4_28",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 517
+      },
+      {
+        "index": 28,
+        "name": "明线10_29",
+        "color": "#e879f9",
+        "zone": "LEG_RIGHT",
+        "triangles": 1225
+      },
+      {
+        "index": 29,
+        "name": "明线12_30",
+        "color": "#94a3b8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1274
+      },
+      {
+        "index": 30,
+        "name": "明线14_31",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1312
+      },
+      {
+        "index": 31,
+        "name": "202 Singlethread Chainstitch-F复制1_32",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 1225
+      },
+      {
+        "index": 32,
+        "name": "202 Singlethread Chainstitch-F复制1 1_33",
+        "color": "#34d399",
+        "zone": "LEG_LEFT",
+        "triangles": 1274
+      },
+      {
+        "index": 33,
+        "name": "202 Singlethread Chainstitch-F复制1 2_34",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 1312
+      },
+      {
+        "index": 34,
+        "name": "明线16_35",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1268
+      },
+      {
+        "index": 35,
+        "name": "明线18_36",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 1315
+      },
+      {
+        "index": 36,
+        "name": "明线20_37",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 1347
+      },
+      {
+        "index": 37,
+        "name": "202 Singlethread Chainstitch-F复制1 3_38",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 1268
+      },
+      {
+        "index": 38,
+        "name": "pattern1_39",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 39861
+      },
+      {
+        "index": 39,
+        "name": "pattern14_40",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 41178
+      },
+      {
+        "index": 40,
+        "name": "202 Singlethread Chainstitch-F复制1 4_41",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 1315
+      },
+      {
+        "index": 41,
+        "name": "202 Singlethread Chainstitch-F复制1 5_42",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 1347
+      },
+      {
+        "index": 42,
+        "name": "trim291_43",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 792
+      },
+      {
+        "index": 43,
+        "name": "trim292_44",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 912
+      },
+      {
+        "index": 44,
+        "name": "trim293_45",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 912
+      },
+      {
+        "index": 45,
+        "name": "trim294_46",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 792
+      }
+    ],
+    "frontImg": "/audit/01jmmm3k9scajhejexa8ydnd8y_front.png",
+    "backImg": "/audit/01jmmm3k9scajhejexa8ydnd8y_back.png",
+    "uvImg": "/audit/01jmmm3k9scajhejexa8ydnd8y_uv.png"
+  },
+  {
+    "id": "01jmmh4kq1rzbyz1aacf69kgmj",
+    "name": "Yoga-skc-03",
+    "category": "TOPWEAR",
+    "isBottomwear": true,
+    "piecesCount": 55,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "明线22_1",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 574
+      },
+      {
+        "index": 1,
+        "name": "明线26_2",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 596
+      },
+      {
+        "index": 2,
+        "name": "明线24_3",
+        "color": "#34d399",
+        "zone": "WAISTBAND",
+        "triangles": 473
+      },
+      {
+        "index": 3,
+        "name": "明线20_4",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 1639
+      },
+      {
+        "index": 4,
+        "name": "明线29_5",
+        "color": "#a78bfa",
+        "zone": "WAISTBAND",
+        "triangles": 715
+      },
+      {
+        "index": 5,
+        "name": "明线27_6",
+        "color": "#f472b6",
+        "zone": "WAISTBAND",
+        "triangles": 720
+      },
+      {
+        "index": 6,
+        "name": "明线35_7",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 126
+      },
+      {
+        "index": 7,
+        "name": "明线51_8",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 24
+      },
+      {
+        "index": 8,
+        "name": "明线49_9",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 24
+      },
+      {
+        "index": 9,
+        "name": "明线54_10",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 24
+      },
+      {
+        "index": 10,
+        "name": "明线56_11",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 24
+      },
+      {
+        "index": 11,
+        "name": "明线52_12",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 451
+      },
+      {
+        "index": 12,
+        "name": "明线50_13",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 451
+      },
+      {
+        "index": 13,
+        "name": "明线53_14",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 451
+      },
+      {
+        "index": 14,
+        "name": "明线55_15",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 451
+      },
+      {
+        "index": 15,
+        "name": "明线4_16",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 661
+      },
+      {
+        "index": 16,
+        "name": "明线8_17",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 224
+      },
+      {
+        "index": 17,
+        "name": "明线2_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 481
+      },
+      {
+        "index": 18,
+        "name": "明线1_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 476
+      },
+      {
+        "index": 19,
+        "name": "明线3_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 164
+      },
+      {
+        "index": 20,
+        "name": "明线5_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 224
+      },
+      {
+        "index": 21,
+        "name": "pattern1_22",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 165
+      },
+      {
+        "index": 22,
+        "name": "pattern2_23",
+        "color": "#f87171",
+        "zone": "LEG_RIGHT",
+        "triangles": 164
+      },
+      {
+        "index": 23,
+        "name": "pattern3_24",
+        "color": "#818cf8",
+        "zone": "WAISTBAND",
+        "triangles": 143
+      },
+      {
+        "index": 24,
+        "name": "pattern4_25",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 4415
+      },
+      {
+        "index": 25,
+        "name": "pattern5_26",
+        "color": "#facc15",
+        "zone": "WAISTBAND",
+        "triangles": 204
+      },
+      {
+        "index": 26,
+        "name": "pattern6_27",
+        "color": "#c084fc",
+        "zone": "WAISTBAND",
+        "triangles": 203
+      },
+      {
+        "index": 27,
+        "name": "pattern7_28",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 3759
+      },
+      {
+        "index": 28,
+        "name": "pattern8_29",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 40
+      },
+      {
+        "index": 29,
+        "name": "pattern9_30",
+        "color": "#94a3b8",
+        "zone": "WAISTBAND",
+        "triangles": 204
+      },
+      {
+        "index": 30,
+        "name": "pattern10_31",
+        "color": "#38bdf8",
+        "zone": "WAISTBAND",
+        "triangles": 143
+      },
+      {
+        "index": 31,
+        "name": "pattern11_32",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 165
+      },
+      {
+        "index": 32,
+        "name": "pattern12_33",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 164
+      },
+      {
+        "index": 33,
+        "name": "pattern13_34",
+        "color": "#fbbf24",
+        "zone": "WAISTBAND",
+        "triangles": 203
+      },
+      {
+        "index": 34,
+        "name": "pattern14_35",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 40
+      },
+      {
+        "index": 35,
+        "name": "pattern19_36",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 156
+      },
+      {
+        "index": 36,
+        "name": "pattern20_37",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 156
+      },
+      {
+        "index": 37,
+        "name": "pattern21_38",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 156
+      },
+      {
+        "index": 38,
+        "name": "pattern22_39",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 156
+      },
+      {
+        "index": 39,
+        "name": "pattern23_40",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 559
+      },
+      {
+        "index": 40,
+        "name": "pattern24_41",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 650
+      },
+      {
+        "index": 41,
+        "name": "pattern25_42",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 559
+      },
+      {
+        "index": 42,
+        "name": "pattern26_43",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 3729
+      },
+      {
+        "index": 43,
+        "name": "pattern27_44",
+        "color": "#e879f9",
+        "zone": "LEG_RIGHT",
+        "triangles": 8625
+      },
+      {
+        "index": 44,
+        "name": "pattern28_45",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 98
+      },
+      {
+        "index": 45,
+        "name": "pattern29_46",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 99
+      },
+      {
+        "index": 46,
+        "name": "pattern30_47",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 8625
+      },
+      {
+        "index": 47,
+        "name": "明线6_48",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 307
+      },
+      {
+        "index": 48,
+        "name": "明线19_49",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 1445
+      },
+      {
+        "index": 49,
+        "name": "明线28_50",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 126
+      },
+      {
+        "index": 50,
+        "name": "明线34_51",
+        "color": "#f472b6",
+        "zone": "WAISTBAND",
+        "triangles": 715
+      },
+      {
+        "index": 51,
+        "name": "明线38_52",
+        "color": "#2dd4bf",
+        "zone": "WAISTBAND",
+        "triangles": 473
+      },
+      {
+        "index": 52,
+        "name": "明线37_53",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 574
+      },
+      {
+        "index": 53,
+        "name": "明线36_54",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 596
+      },
+      {
+        "index": 54,
+        "name": "明线33_55",
+        "color": "#4ade80",
+        "zone": "WAISTBAND",
+        "triangles": 720
+      }
+    ],
+    "frontImg": "/audit/01jmmh4kq1rzbyz1aacf69kgmj_front.png",
+    "backImg": "/audit/01jmmh4kq1rzbyz1aacf69kgmj_back.png",
+    "uvImg": "/audit/01jmmh4kq1rzbyz1aacf69kgmj_uv.png"
+  },
+  {
+    "id": "01jmmh3a089xj40xgzz8ahd4me",
+    "name": "Yoga-skc-05",
+    "category": "BOTTOMWEAR",
+    "isBottomwear": true,
+    "piecesCount": 24,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern46_1",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 9350
+      },
+      {
+        "index": 1,
+        "name": "pattern52_2",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 8062
+      },
+      {
+        "index": 2,
+        "name": "pattern61_3",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 1368
+      },
+      {
+        "index": 3,
+        "name": "pattern67_4",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 763
+      },
+      {
+        "index": 4,
+        "name": "pattern73_5",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1363
+      },
+      {
+        "index": 5,
+        "name": "pattern79_6",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 1368
+      },
+      {
+        "index": 6,
+        "name": "pattern85_7",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 1363
+      },
+      {
+        "index": 7,
+        "name": "pattern1_8",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 763
+      },
+      {
+        "index": 8,
+        "name": "pattern7_9",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 8062
+      },
+      {
+        "index": 9,
+        "name": "pattern16_10",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 21261
+      },
+      {
+        "index": 10,
+        "name": "pattern178_11",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 270
+      },
+      {
+        "index": 11,
+        "name": "pattern91_12",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 2410
+      },
+      {
+        "index": 12,
+        "name": "pattern100_13",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 2424
+      },
+      {
+        "index": 13,
+        "name": "pattern117_14",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 450
+      },
+      {
+        "index": 14,
+        "name": "pattern123_15",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 450
+      },
+      {
+        "index": 15,
+        "name": "pattern129_16",
+        "color": "#38bdf8",
+        "zone": "WAISTBAND",
+        "triangles": 318
+      },
+      {
+        "index": 16,
+        "name": "pattern137_17",
+        "color": "#fb7185",
+        "zone": "WAISTBAND",
+        "triangles": 3236
+      },
+      {
+        "index": 17,
+        "name": "pattern144_18",
+        "color": "#34d399",
+        "zone": "WAISTBAND",
+        "triangles": 7620
+      },
+      {
+        "index": 18,
+        "name": "pattern154_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 330
+      },
+      {
+        "index": 19,
+        "name": "pattern160_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 9
+      },
+      {
+        "index": 20,
+        "name": "pattern166_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 9
+      },
+      {
+        "index": 21,
+        "name": "pattern172_22",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 270
+      },
+      {
+        "index": 22,
+        "name": "pattern28_23",
+        "color": "#f87171",
+        "zone": "LEG_RIGHT",
+        "triangles": 9325
+      },
+      {
+        "index": 23,
+        "name": "pattern34_24",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 21234
+      }
+    ],
+    "frontImg": "/audit/01jmmh3a089xj40xgzz8ahd4me_front.png",
+    "backImg": "/audit/01jmmh3a089xj40xgzz8ahd4me_back.png",
+    "uvImg": "/audit/01jmmh3a089xj40xgzz8ahd4me_uv.png"
+  },
+  {
+    "id": "01jmmh371x32dy9kx3hzktkp7b",
+    "name": "Yoga-skc-02",
+    "category": "TOPWEAR",
+    "isBottomwear": false,
+    "piecesCount": 75,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern7_1",
+        "color": "#38bdf8",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 2719
+      },
+      {
+        "index": 1,
+        "name": "pattern8_2",
+        "color": "#fb7185",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 685
+      },
+      {
+        "index": 2,
+        "name": "pattern9_3",
+        "color": "#34d399",
+        "zone": "FRONT_TORSO",
+        "triangles": 165
+      },
+      {
+        "index": 3,
+        "name": "pattern10_4",
+        "color": "#fbbf24",
+        "zone": "FRONT_TORSO",
+        "triangles": 165
+      },
+      {
+        "index": 4,
+        "name": "pattern11_5",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 570
+      },
+      {
+        "index": 5,
+        "name": "pattern12_6",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 570
+      },
+      {
+        "index": 6,
+        "name": "pattern13_7",
+        "color": "#2dd4bf",
+        "zone": "COLLAR_NECK",
+        "triangles": 356
+      },
+      {
+        "index": 7,
+        "name": "pattern14_8",
+        "color": "#f87171",
+        "zone": "FRONT_TORSO",
+        "triangles": 71
+      },
+      {
+        "index": 8,
+        "name": "pattern15_9",
+        "color": "#818cf8",
+        "zone": "FRONT_TORSO",
+        "triangles": 71
+      },
+      {
+        "index": 9,
+        "name": "pattern16_10",
+        "color": "#4ade80",
+        "zone": "BACK_TORSO",
+        "triangles": 24943
+      },
+      {
+        "index": 10,
+        "name": "pattern17_11",
+        "color": "#facc15",
+        "zone": "COLLAR_NECK",
+        "triangles": 95
+      },
+      {
+        "index": 11,
+        "name": "pattern1_12",
+        "color": "#c084fc",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 18831
+      },
+      {
+        "index": 12,
+        "name": "pattern2_13",
+        "color": "#60a5fa",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 18874
+      },
+      {
+        "index": 13,
+        "name": "pattern3_14",
+        "color": "#e879f9",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 685
+      },
+      {
+        "index": 14,
+        "name": "pattern4_15",
+        "color": "#94a3b8",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 246
+      },
+      {
+        "index": 15,
+        "name": "pattern5_16",
+        "color": "#38bdf8",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 2719
+      },
+      {
+        "index": 16,
+        "name": "pattern6_17",
+        "color": "#fb7185",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 245
+      },
+      {
+        "index": 17,
+        "name": "明线13_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 712
+      },
+      {
+        "index": 18,
+        "name": "明线10_19",
+        "color": "#fbbf24",
+        "zone": "COLLAR_NECK",
+        "triangles": 611
+      },
+      {
+        "index": 19,
+        "name": "zipperSlider112_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 1582
+      },
+      {
+        "index": 20,
+        "name": "zipperPuller113_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 740
+      },
+      {
+        "index": 21,
+        "name": "zipperTopStopper114_22",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 340
+      },
+      {
+        "index": 22,
+        "name": "zipperTopStopper115_23",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 340
+      },
+      {
+        "index": 23,
+        "name": "zipperPullTeeth116_24",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 120
+      },
+      {
+        "index": 24,
+        "name": "zipperPullTeeth117_25",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 120
+      },
+      {
+        "index": 25,
+        "name": "zipperPullTeeth118_26",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 120
+      },
+      {
+        "index": 26,
+        "name": "zipperPullTeeth119_27",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 120
+      },
+      {
+        "index": 27,
+        "name": "zipperPiece120_28",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 90
+      },
+      {
+        "index": 28,
+        "name": "zipperPiece121_29",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 90
+      },
+      {
+        "index": 29,
+        "name": "默认明线 10_30",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 111
+      },
+      {
+        "index": 30,
+        "name": "默认明线 11_31",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 137
+      },
+      {
+        "index": 31,
+        "name": "默认明线 12_32",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 69
+      },
+      {
+        "index": 32,
+        "name": "默认明线 13_33",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 97
+      },
+      {
+        "index": 33,
+        "name": "默认明线 14_34",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 56
+      },
+      {
+        "index": 34,
+        "name": "默认明线 15_35",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 78
+      },
+      {
+        "index": 35,
+        "name": "默认明线 16_36",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 44
+      },
+      {
+        "index": 36,
+        "name": "默认明线 17_37",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 67
+      },
+      {
+        "index": 37,
+        "name": "默认明线 18_38",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 79
+      },
+      {
+        "index": 38,
+        "name": "默认明线 19_39",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 102
+      },
+      {
+        "index": 39,
+        "name": "默认明线 20_40",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 76
+      },
+      {
+        "index": 40,
+        "name": "默认明线 21_41",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 96
+      },
+      {
+        "index": 41,
+        "name": "默认明线 22_42",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 118
+      },
+      {
+        "index": 42,
+        "name": "默认明线 23_43",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 19
+      },
+      {
+        "index": 43,
+        "name": "默认明线 24_44",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 50
+      },
+      {
+        "index": 44,
+        "name": "默认明线 27_45",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 153
+      },
+      {
+        "index": 45,
+        "name": "默认明线 28_46",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 133
+      },
+      {
+        "index": 46,
+        "name": "默认明线 29_47",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 134
+      },
+      {
+        "index": 47,
+        "name": "默认明线 30_48",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 22
+      },
+      {
+        "index": 48,
+        "name": "默认明线 26_49",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 284
+      },
+      {
+        "index": 49,
+        "name": "默认明线_50",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 16
+      },
+      {
+        "index": 50,
+        "name": "默认明线 31_51",
+        "color": "#f472b6",
+        "zone": "FRONT_TORSO",
+        "triangles": 550
+      },
+      {
+        "index": 51,
+        "name": "默认明线 34_52",
+        "color": "#2dd4bf",
+        "zone": "FRONT_TORSO",
+        "triangles": 491
+      },
+      {
+        "index": 52,
+        "name": "默认明线 35_53",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 12
+      },
+      {
+        "index": 53,
+        "name": "默认明线 36_54",
+        "color": "#818cf8",
+        "zone": "FRONT_TORSO",
+        "triangles": 477
+      },
+      {
+        "index": 54,
+        "name": "默认明线 37_55",
+        "color": "#4ade80",
+        "zone": "FRONT_TORSO",
+        "triangles": 519
+      },
+      {
+        "index": 55,
+        "name": "明线3_56",
+        "color": "#facc15",
+        "zone": "COLLAR_NECK",
+        "triangles": 621
+      },
+      {
+        "index": 56,
+        "name": "明线8_57",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 10
+      },
+      {
+        "index": 57,
+        "name": "明线9_58",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 8
+      },
+      {
+        "index": 58,
+        "name": "明线11_59",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 727
+      },
+      {
+        "index": 59,
+        "name": "明线12_60",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 725
+      },
+      {
+        "index": 60,
+        "name": "pattern18_61",
+        "color": "#38bdf8",
+        "zone": "FRONT_TORSO",
+        "triangles": 23218
+      },
+      {
+        "index": 61,
+        "name": "pattern19_62",
+        "color": "#fb7185",
+        "zone": "COLLAR_NECK",
+        "triangles": 104
+      },
+      {
+        "index": 62,
+        "name": "默认明线复制3_63",
+        "color": "#34d399",
+        "zone": "COLLAR_NECK",
+        "triangles": 578
+      },
+      {
+        "index": 63,
+        "name": "默认明线复制3 1_64",
+        "color": "#fbbf24",
+        "zone": "COLLAR_NECK",
+        "triangles": 578
+      },
+      {
+        "index": 64,
+        "name": "明线68_65",
+        "color": "#a78bfa",
+        "zone": "COLLAR_NECK",
+        "triangles": 578
+      },
+      {
+        "index": 65,
+        "name": "默认明线复制3 2_66",
+        "color": "#f472b6",
+        "zone": "COLLAR_NECK",
+        "triangles": 576
+      },
+      {
+        "index": 66,
+        "name": "默认明线 1_67",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 132
+      },
+      {
+        "index": 67,
+        "name": "默认明线 2_68",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 123
+      },
+      {
+        "index": 68,
+        "name": "默认明线 3_69",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 14
+      },
+      {
+        "index": 69,
+        "name": "默认明线 4_70",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 152
+      },
+      {
+        "index": 70,
+        "name": "默认明线 5_71",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 157
+      },
+      {
+        "index": 71,
+        "name": "默认明线 6_72",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 291
+      },
+      {
+        "index": 72,
+        "name": "默认明线 7_73",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 22
+      },
+      {
+        "index": 73,
+        "name": "默认明线 8_74",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 48
+      },
+      {
+        "index": 74,
+        "name": "默认明线 9_75",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 75
+      }
+    ],
+    "frontImg": "/audit/01jmmh371x32dy9kx3hzktkp7b_front.png",
+    "backImg": "/audit/01jmmh371x32dy9kx3hzktkp7b_back.png",
+    "uvImg": "/audit/01jmmh371x32dy9kx3hzktkp7b_uv.png"
+  },
+  {
+    "id": "01jmmh35htm6zejx1fmfdgb7h6",
+    "name": "Yoga-skc-01",
+    "category": "BOTTOMWEAR",
+    "isBottomwear": true,
+    "piecesCount": 21,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern65_1",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 21191
+      },
+      {
+        "index": 1,
+        "name": "pattern76_2",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 9329
+      },
+      {
+        "index": 2,
+        "name": "pattern88_3",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 9338
+      },
+      {
+        "index": 3,
+        "name": "pattern100_4",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 11593
+      },
+      {
+        "index": 4,
+        "name": "pattern111_5",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 11606
+      },
+      {
+        "index": 5,
+        "name": "pattern120_6",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 7620
+      },
+      {
+        "index": 6,
+        "name": "pattern130_7",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 20235
+      },
+      {
+        "index": 7,
+        "name": "pattern138_8",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 407
+      },
+      {
+        "index": 8,
+        "name": "pattern145_9",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 407
+      },
+      {
+        "index": 9,
+        "name": "pattern152_10",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 20235
+      },
+      {
+        "index": 10,
+        "name": "pattern160_11",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 20870
+      },
+      {
+        "index": 11,
+        "name": "pattern1_12",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 450
+      },
+      {
+        "index": 12,
+        "name": "pattern7_13",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 450
+      },
+      {
+        "index": 13,
+        "name": "pattern13_14",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 318
+      },
+      {
+        "index": 14,
+        "name": "pattern21_15",
+        "color": "#94a3b8",
+        "zone": "LEG_RIGHT",
+        "triangles": 3236
+      },
+      {
+        "index": 15,
+        "name": "pattern28_16",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 5868
+      },
+      {
+        "index": 16,
+        "name": "pattern34_17",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 5868
+      },
+      {
+        "index": 17,
+        "name": "pattern40_18",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 7576
+      },
+      {
+        "index": 18,
+        "name": "pattern47_19",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 7516
+      },
+      {
+        "index": 19,
+        "name": "pattern54_20",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 21191
+      },
+      {
+        "index": 20,
+        "name": "pattern174_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 292
+      }
+    ],
+    "frontImg": "/audit/01jmmh35htm6zejx1fmfdgb7h6_front.png",
+    "backImg": "/audit/01jmmh35htm6zejx1fmfdgb7h6_back.png",
+    "uvImg": "/audit/01jmmh35htm6zejx1fmfdgb7h6_uv.png"
+  },
+  {
+    "id": "01jmmh33akan9vvz53ttaq4cce",
+    "name": "Yoga-Skc-03",
+    "category": "TOPWEAR",
+    "isBottomwear": true,
+    "piecesCount": 65,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern1_1",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 3298
+      },
+      {
+        "index": 1,
+        "name": "pattern7_2",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 1153
+      },
+      {
+        "index": 2,
+        "name": "pattern11_3",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 1153
+      },
+      {
+        "index": 3,
+        "name": "pattern15_4",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 1277
+      },
+      {
+        "index": 4,
+        "name": "pattern19_5",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 1277
+      },
+      {
+        "index": 5,
+        "name": "pattern23_6",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 1646
+      },
+      {
+        "index": 6,
+        "name": "pattern24_7",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 450
+      },
+      {
+        "index": 7,
+        "name": "pattern31_8",
+        "color": "#f87171",
+        "zone": "LEG_RIGHT",
+        "triangles": 1639
+      },
+      {
+        "index": 8,
+        "name": "pattern32_9",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 452
+      },
+      {
+        "index": 9,
+        "name": "pattern39_10",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 2390
+      },
+      {
+        "index": 10,
+        "name": "pattern40_11",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 1626
+      },
+      {
+        "index": 11,
+        "name": "pattern47_12",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 2390
+      },
+      {
+        "index": 12,
+        "name": "pattern48_13",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1626
+      },
+      {
+        "index": 13,
+        "name": "pattern55_14",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 1740
+      },
+      {
+        "index": 14,
+        "name": "pattern56_15",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 78
+      },
+      {
+        "index": 15,
+        "name": "pattern57_16",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 82
+      },
+      {
+        "index": 16,
+        "name": "pattern67_17",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 1739
+      },
+      {
+        "index": 17,
+        "name": "pattern68_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 79
+      },
+      {
+        "index": 18,
+        "name": "pattern69_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 80
+      },
+      {
+        "index": 19,
+        "name": "pattern79_20",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 319
+      },
+      {
+        "index": 20,
+        "name": "pattern80_21",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 905
+      },
+      {
+        "index": 21,
+        "name": "pattern88_22",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 313
+      },
+      {
+        "index": 22,
+        "name": "zipperPullTeeth295_23",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 180
+      },
+      {
+        "index": 23,
+        "name": "zipperPullTeeth297_24",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 180
+      },
+      {
+        "index": 24,
+        "name": "zipperPiece299_25",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 132
+      },
+      {
+        "index": 25,
+        "name": "zipperPiece305_26",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 132
+      },
+      {
+        "index": 26,
+        "name": "pattern219_27",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 524
+      },
+      {
+        "index": 27,
+        "name": "pattern220_28",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 523
+      },
+      {
+        "index": 28,
+        "name": "pattern221_29",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 11416
+      },
+      {
+        "index": 29,
+        "name": "pattern222_30",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 1211
+      },
+      {
+        "index": 30,
+        "name": "pattern223_31",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1228
+      },
+      {
+        "index": 31,
+        "name": "pattern247_32",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 421
+      },
+      {
+        "index": 32,
+        "name": "pattern253_33",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 421
+      },
+      {
+        "index": 33,
+        "name": "pattern259_34",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 3087
+      },
+      {
+        "index": 34,
+        "name": "pattern260_35",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 7207
+      },
+      {
+        "index": 35,
+        "name": "pattern261_36",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 375
+      },
+      {
+        "index": 36,
+        "name": "pattern262_37",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 584
+      },
+      {
+        "index": 37,
+        "name": "pattern263_38",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 1454
+      },
+      {
+        "index": 38,
+        "name": "pattern281_39",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 379
+      },
+      {
+        "index": 39,
+        "name": "pattern287_40",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 379
+      },
+      {
+        "index": 40,
+        "name": "zipperSlider293_41",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 1752
+      },
+      {
+        "index": 41,
+        "name": "zipperPuller294_42",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 740
+      },
+      {
+        "index": 42,
+        "name": "pattern89_43",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 912
+      },
+      {
+        "index": 43,
+        "name": "pattern97_44",
+        "color": "#e879f9",
+        "zone": "LEG_RIGHT",
+        "triangles": 1697
+      },
+      {
+        "index": 44,
+        "name": "pattern103_45",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 1697
+      },
+      {
+        "index": 45,
+        "name": "pattern109_46",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 729
+      },
+      {
+        "index": 46,
+        "name": "pattern117_47",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 729
+      },
+      {
+        "index": 47,
+        "name": "pattern125_48",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 120
+      },
+      {
+        "index": 48,
+        "name": "pattern126_49",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 1952
+      },
+      {
+        "index": 49,
+        "name": "pattern127_50",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 111
+      },
+      {
+        "index": 50,
+        "name": "pattern136_51",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 120
+      },
+      {
+        "index": 51,
+        "name": "pattern137_52",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 1948
+      },
+      {
+        "index": 52,
+        "name": "pattern138_53",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 111
+      },
+      {
+        "index": 53,
+        "name": "pattern147_54",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 3180
+      },
+      {
+        "index": 54,
+        "name": "pattern153_55",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 3180
+      },
+      {
+        "index": 55,
+        "name": "pattern159_56",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 1891
+      },
+      {
+        "index": 56,
+        "name": "pattern160_57",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 2129
+      },
+      {
+        "index": 57,
+        "name": "pattern166_58",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1869
+      },
+      {
+        "index": 58,
+        "name": "pattern167_59",
+        "color": "#e879f9",
+        "zone": "LEG_RIGHT",
+        "triangles": 2116
+      },
+      {
+        "index": 59,
+        "name": "pattern173_60",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 11759
+      },
+      {
+        "index": 60,
+        "name": "pattern174_61",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 3406
+      },
+      {
+        "index": 61,
+        "name": "pattern190_62",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 11759
+      },
+      {
+        "index": 62,
+        "name": "pattern191_63",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 3406
+      },
+      {
+        "index": 63,
+        "name": "pattern207_64",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 742
+      },
+      {
+        "index": 64,
+        "name": "pattern213_65",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 742
+      }
+    ],
+    "frontImg": "/audit/01jmmh33akan9vvz53ttaq4cce_front.png",
+    "backImg": "/audit/01jmmh33akan9vvz53ttaq4cce_back.png",
+    "uvImg": "/audit/01jmmh33akan9vvz53ttaq4cce_uv.png"
+  },
+  {
+    "id": "01jmmh2nytvynddkg0anb99mg2",
+    "name": "Yoga-Skc-05",
+    "category": "TOPWEAR",
+    "isBottomwear": true,
+    "piecesCount": 133,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern161_1",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1700
+      },
+      {
+        "index": 1,
+        "name": "pattern169_2",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 1805
+      },
+      {
+        "index": 2,
+        "name": "pattern177_3",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 1769
+      },
+      {
+        "index": 3,
+        "name": "pattern188_4",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 347
+      },
+      {
+        "index": 4,
+        "name": "pattern198_5",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 1406
+      },
+      {
+        "index": 5,
+        "name": "pattern207_6",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 293
+      },
+      {
+        "index": 6,
+        "name": "pattern215_7",
+        "color": "#2dd4bf",
+        "zone": "CUFF_RIGHT",
+        "triangles": 910
+      },
+      {
+        "index": 7,
+        "name": "pattern220_8",
+        "color": "#f87171",
+        "zone": "CUFF_RIGHT",
+        "triangles": 176
+      },
+      {
+        "index": 8,
+        "name": "pattern226_9",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1862
+      },
+      {
+        "index": 9,
+        "name": "pattern232_10",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 258
+      },
+      {
+        "index": 10,
+        "name": "pattern238_11",
+        "color": "#facc15",
+        "zone": "CUFF_LEFT",
+        "triangles": 1745
+      },
+      {
+        "index": 11,
+        "name": "pattern244_12",
+        "color": "#c084fc",
+        "zone": "CUFF_LEFT",
+        "triangles": 202
+      },
+      {
+        "index": 12,
+        "name": "pattern250_13",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 1718
+      },
+      {
+        "index": 13,
+        "name": "pattern256_14",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 234
+      },
+      {
+        "index": 14,
+        "name": "pattern262_15",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 2542
+      },
+      {
+        "index": 15,
+        "name": "pattern269_16",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 144
+      },
+      {
+        "index": 16,
+        "name": "pattern275_17",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 1233
+      },
+      {
+        "index": 17,
+        "name": "pattern282_18",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 1027
+      },
+      {
+        "index": 18,
+        "name": "pattern288_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 167
+      },
+      {
+        "index": 19,
+        "name": "pattern294_20",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 2439
+      },
+      {
+        "index": 20,
+        "name": "pattern305_21",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 373
+      },
+      {
+        "index": 21,
+        "name": "pattern315_22",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 1719
+      },
+      {
+        "index": 22,
+        "name": "pattern322_23",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 319
+      },
+      {
+        "index": 23,
+        "name": "pattern330_24",
+        "color": "#818cf8",
+        "zone": "CUFF_RIGHT",
+        "triangles": 844
+      },
+      {
+        "index": 24,
+        "name": "pattern335_25",
+        "color": "#4ade80",
+        "zone": "CUFF_RIGHT",
+        "triangles": 164
+      },
+      {
+        "index": 25,
+        "name": "pattern341_26",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 1976
+      },
+      {
+        "index": 26,
+        "name": "pattern347_27",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 265
+      },
+      {
+        "index": 27,
+        "name": "pattern353_28",
+        "color": "#60a5fa",
+        "zone": "CUFF_LEFT",
+        "triangles": 1521
+      },
+      {
+        "index": 28,
+        "name": "pattern359_29",
+        "color": "#e879f9",
+        "zone": "CUFF_LEFT",
+        "triangles": 207
+      },
+      {
+        "index": 29,
+        "name": "pattern365_30",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 2245
+      },
+      {
+        "index": 30,
+        "name": "pattern371_31",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 249
+      },
+      {
+        "index": 31,
+        "name": "pattern377_32",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 2702
+      },
+      {
+        "index": 32,
+        "name": "pattern384_33",
+        "color": "#34d399",
+        "zone": "LEG_LEFT",
+        "triangles": 166
+      },
+      {
+        "index": 33,
+        "name": "pattern390_34",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 1398
+      },
+      {
+        "index": 34,
+        "name": "图案53_35",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1233
+      },
+      {
+        "index": 35,
+        "name": "图案 2 拷贝 1 2_36",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 1233
+      },
+      {
+        "index": 36,
+        "name": "图案54_37",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 1027
+      },
+      {
+        "index": 37,
+        "name": "图案 2 拷贝 1 1_38",
+        "color": "#f87171",
+        "zone": "LEG_RIGHT",
+        "triangles": 1027
+      },
+      {
+        "index": 38,
+        "name": "图案55_39",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 167
+      },
+      {
+        "index": 39,
+        "name": "小网眼_40",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 2439
+      },
+      {
+        "index": 40,
+        "name": "条纹密 4_41",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 2439
+      },
+      {
+        "index": 41,
+        "name": "小网眼 1_42",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 1719
+      },
+      {
+        "index": 42,
+        "name": "条纹密 3_43",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 1719
+      },
+      {
+        "index": 43,
+        "name": "大网眼 5_44",
+        "color": "#e879f9",
+        "zone": "CUFF_RIGHT",
+        "triangles": 844
+      },
+      {
+        "index": 44,
+        "name": "图案 2 4_45",
+        "color": "#94a3b8",
+        "zone": "CUFF_RIGHT",
+        "triangles": 844
+      },
+      {
+        "index": 45,
+        "name": "大网眼 2_46",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1976
+      },
+      {
+        "index": 46,
+        "name": "图案 2 5_47",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 1976
+      },
+      {
+        "index": 47,
+        "name": "大网眼 4_48",
+        "color": "#34d399",
+        "zone": "CUFF_LEFT",
+        "triangles": 1521
+      },
+      {
+        "index": 48,
+        "name": "图案 2 6_49",
+        "color": "#fbbf24",
+        "zone": "CUFF_LEFT",
+        "triangles": 1521
+      },
+      {
+        "index": 49,
+        "name": "大网眼 3_50",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 2245
+      },
+      {
+        "index": 50,
+        "name": "图案 2 7_51",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 2245
+      },
+      {
+        "index": 51,
+        "name": "大网眼_52",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 2702
+      },
+      {
+        "index": 52,
+        "name": "条纹密_53",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 2702
+      },
+      {
+        "index": 53,
+        "name": "大网眼 1_54",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1398
+      },
+      {
+        "index": 54,
+        "name": "条纹密 1_55",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 1398
+      },
+      {
+        "index": 55,
+        "name": "小网眼 2_56",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 1582
+      },
+      {
+        "index": 56,
+        "name": "条纹密 2_57",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 1582
+      },
+      {
+        "index": 57,
+        "name": "图案2_58",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 9299
+      },
+      {
+        "index": 58,
+        "name": "图案6_59",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 10712
+      },
+      {
+        "index": 59,
+        "name": "明线26_60",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 547
+      },
+      {
+        "index": 60,
+        "name": "明线27_61",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 547
+      },
+      {
+        "index": 61,
+        "name": "明线32_62",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 243
+      },
+      {
+        "index": 62,
+        "name": "明线34_63",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 243
+      },
+      {
+        "index": 63,
+        "name": "明线4_64",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 83
+      },
+      {
+        "index": 64,
+        "name": "明线5_65",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 81
+      },
+      {
+        "index": 65,
+        "name": "明线6_66",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 410
+      },
+      {
+        "index": 66,
+        "name": "明线9_67",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 301
+      },
+      {
+        "index": 67,
+        "name": "明线10_68",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 55
+      },
+      {
+        "index": 68,
+        "name": "明线12_69",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 55
+      },
+      {
+        "index": 69,
+        "name": "默认明线_70",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 1626
+      },
+      {
+        "index": 70,
+        "name": "明线2_71",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 1626
+      },
+      {
+        "index": 71,
+        "name": "默认明线 2_72",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 1463
+      },
+      {
+        "index": 72,
+        "name": "明线11_73",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 1463
+      },
+      {
+        "index": 73,
+        "name": "默认明线 1_74",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 1624
+      },
+      {
+        "index": 74,
+        "name": "明线7_75",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 1624
+      },
+      {
+        "index": 75,
+        "name": "默认明线 3_76",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1565
+      },
+      {
+        "index": 76,
+        "name": "pattern1_77",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 164
+      },
+      {
+        "index": 77,
+        "name": "pattern7_78",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 1112
+      },
+      {
+        "index": 78,
+        "name": "pattern15_79",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 160
+      },
+      {
+        "index": 79,
+        "name": "pattern21_80",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 3198
+      },
+      {
+        "index": 80,
+        "name": "pattern28_81",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 3230
+      },
+      {
+        "index": 81,
+        "name": "pattern35_82",
+        "color": "#2dd4bf",
+        "zone": "LEG_RIGHT",
+        "triangles": 1707
+      },
+      {
+        "index": 82,
+        "name": "pattern41_83",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 1707
+      },
+      {
+        "index": 83,
+        "name": "pattern47_84",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1131
+      },
+      {
+        "index": 84,
+        "name": "pattern55_85",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 1131
+      },
+      {
+        "index": 85,
+        "name": "pattern63_86",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 1173
+      },
+      {
+        "index": 86,
+        "name": "pattern71_87",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 1173
+      },
+      {
+        "index": 87,
+        "name": "pattern79_88",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 511
+      },
+      {
+        "index": 88,
+        "name": "pattern85_89",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 511
+      },
+      {
+        "index": 89,
+        "name": "pattern91_90",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 141
+      },
+      {
+        "index": 90,
+        "name": "pattern97_91",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 141
+      },
+      {
+        "index": 91,
+        "name": "pattern103_92",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 102
+      },
+      {
+        "index": 92,
+        "name": "pattern109_93",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 72
+      },
+      {
+        "index": 93,
+        "name": "pattern115_94",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 15112
+      },
+      {
+        "index": 94,
+        "name": "pattern129_95",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 14447
+      },
+      {
+        "index": 95,
+        "name": "pattern141_96",
+        "color": "#f472b6",
+        "zone": "WAISTBAND",
+        "triangles": 320
+      },
+      {
+        "index": 96,
+        "name": "pattern149_97",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 220
+      },
+      {
+        "index": 97,
+        "name": "pattern155_98",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 220
+      },
+      {
+        "index": 98,
+        "name": "明线14_99",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1565
+      },
+      {
+        "index": 99,
+        "name": "pattern396_100",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 204
+      },
+      {
+        "index": 100,
+        "name": "pattern402_101",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 1582
+      },
+      {
+        "index": 101,
+        "name": "pattern409_102",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 1217
+      },
+      {
+        "index": 102,
+        "name": "pattern415_103",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1217
+      },
+      {
+        "index": 103,
+        "name": "pattern421_104",
+        "color": "#e879f9",
+        "zone": "LEG_RIGHT",
+        "triangles": 2107
+      },
+      {
+        "index": 104,
+        "name": "pattern427_105",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 2096
+      },
+      {
+        "index": 105,
+        "name": "pattern433_106",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 9298
+      },
+      {
+        "index": 106,
+        "name": "pattern447_107",
+        "color": "#fb7185",
+        "zone": "WAISTBAND",
+        "triangles": 508
+      },
+      {
+        "index": 107,
+        "name": "pattern456_108",
+        "color": "#34d399",
+        "zone": "LEG_LEFT",
+        "triangles": 240
+      },
+      {
+        "index": 108,
+        "name": "pattern462_109",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 240
+      },
+      {
+        "index": 109,
+        "name": "pattern468_110",
+        "color": "#a78bfa",
+        "zone": "LEG_LEFT",
+        "triangles": 1605
+      },
+      {
+        "index": 110,
+        "name": "pattern473_111",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 1605
+      },
+      {
+        "index": 111,
+        "name": "pattern478_112",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 166
+      },
+      {
+        "index": 112,
+        "name": "pattern484_113",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 166
+      },
+      {
+        "index": 113,
+        "name": "pattern490_114",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 10712
+      },
+      {
+        "index": 114,
+        "name": "图案10_115",
+        "color": "#4ade80",
+        "zone": "LEG_RIGHT",
+        "triangles": 1769
+      },
+      {
+        "index": 115,
+        "name": "图案 2 拷贝 1 4_116",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 1769
+      },
+      {
+        "index": 116,
+        "name": "图案19_117",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 347
+      },
+      {
+        "index": 117,
+        "name": "图案28_118",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 1406
+      },
+      {
+        "index": 118,
+        "name": "图案 2 拷贝 1 3_119",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 1406
+      },
+      {
+        "index": 119,
+        "name": "图案36_120",
+        "color": "#94a3b8",
+        "zone": "LEG_LEFT",
+        "triangles": 293
+      },
+      {
+        "index": 120,
+        "name": "网眼 拷贝 1_121",
+        "color": "#38bdf8",
+        "zone": "CUFF_RIGHT",
+        "triangles": 910
+      },
+      {
+        "index": 121,
+        "name": "图案 2_122",
+        "color": "#fb7185",
+        "zone": "CUFF_RIGHT",
+        "triangles": 910
+      },
+      {
+        "index": 122,
+        "name": "图案42_123",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 1862
+      },
+      {
+        "index": 123,
+        "name": "图案 2 1_124",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 1862
+      },
+      {
+        "index": 124,
+        "name": "图案43_125",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 258
+      },
+      {
+        "index": 125,
+        "name": "图案45_126",
+        "color": "#f472b6",
+        "zone": "CUFF_LEFT",
+        "triangles": 1745
+      },
+      {
+        "index": 126,
+        "name": "图案 2 2_127",
+        "color": "#2dd4bf",
+        "zone": "CUFF_LEFT",
+        "triangles": 1745
+      },
+      {
+        "index": 127,
+        "name": "图案48_128",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 1718
+      },
+      {
+        "index": 128,
+        "name": "图案 2 3_129",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1718
+      },
+      {
+        "index": 129,
+        "name": "图案49_130",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 234
+      },
+      {
+        "index": 130,
+        "name": "图案51_131",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 2542
+      },
+      {
+        "index": 131,
+        "name": "图案 2 拷贝 1_132",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 2542
+      },
+      {
+        "index": 132,
+        "name": "图案52_133",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 144
+      }
+    ],
+    "frontImg": "/audit/01jmmh2nytvynddkg0anb99mg2_front.png",
+    "backImg": "/audit/01jmmh2nytvynddkg0anb99mg2_back.png",
+    "uvImg": "/audit/01jmmh2nytvynddkg0anb99mg2_uv.png"
+  },
+  {
+    "id": "01jmmh0jgtcgjdyd8eshafzb33",
+    "name": "Yoga-skc-01",
+    "category": "TOPWEAR",
+    "isBottomwear": true,
+    "piecesCount": 84,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "明线19_1",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 26
+      },
+      {
+        "index": 1,
+        "name": "明线26_2",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 76
+      },
+      {
+        "index": 2,
+        "name": "明线25_3",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 26
+      },
+      {
+        "index": 3,
+        "name": "明线31_4",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 57
+      },
+      {
+        "index": 4,
+        "name": "明线 1复制2 1_5",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 119
+      },
+      {
+        "index": 5,
+        "name": "明线 1 21_6",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 834
+      },
+      {
+        "index": 6,
+        "name": "明线 1复制2_7",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 109
+      },
+      {
+        "index": 7,
+        "name": "明线 1 20_8",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 638
+      },
+      {
+        "index": 8,
+        "name": "明线29_9",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 138
+      },
+      {
+        "index": 9,
+        "name": "明线33_10",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 125
+      },
+      {
+        "index": 10,
+        "name": "明线 1复制1_11",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 138
+      },
+      {
+        "index": 11,
+        "name": "明线 1复制1 1_12",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 125
+      },
+      {
+        "index": 12,
+        "name": "明线 1 16_13",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 1371
+      },
+      {
+        "index": 13,
+        "name": "明线45_14",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 1359
+      },
+      {
+        "index": 14,
+        "name": "明线 1 17_15",
+        "color": "#94a3b8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1364
+      },
+      {
+        "index": 15,
+        "name": "明线47_16",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 1377
+      },
+      {
+        "index": 16,
+        "name": "明线41_17",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 1312
+      },
+      {
+        "index": 17,
+        "name": "明线43_18",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 1335
+      },
+      {
+        "index": 18,
+        "name": "明线 1 14_19",
+        "color": "#fbbf24",
+        "zone": "TRIMS",
+        "triangles": 1312
+      },
+      {
+        "index": 19,
+        "name": "明线 1 15_20",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 1335
+      },
+      {
+        "index": 20,
+        "name": "trim430_21",
+        "color": "#f472b6",
+        "zone": "TRIMS",
+        "triangles": 2598
+      },
+      {
+        "index": 21,
+        "name": "trim431_22",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 2598
+      },
+      {
+        "index": 22,
+        "name": "pattern1_23",
+        "color": "#f87171",
+        "zone": "CUFF_LEFT",
+        "triangles": 1104
+      },
+      {
+        "index": 23,
+        "name": "pattern9_24",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 150
+      },
+      {
+        "index": 24,
+        "name": "pattern17_25",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 150
+      },
+      {
+        "index": 25,
+        "name": "pattern25_26",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 6950
+      },
+      {
+        "index": 26,
+        "name": "pattern37_27",
+        "color": "#c084fc",
+        "zone": "TRIMS",
+        "triangles": 250
+      },
+      {
+        "index": 27,
+        "name": "pattern49_28",
+        "color": "#60a5fa",
+        "zone": "LEG_RIGHT",
+        "triangles": 231
+      },
+      {
+        "index": 28,
+        "name": "pattern55_29",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 231
+      },
+      {
+        "index": 29,
+        "name": "pattern61_30",
+        "color": "#94a3b8",
+        "zone": "LEG_RIGHT",
+        "triangles": 310
+      },
+      {
+        "index": 30,
+        "name": "pattern73_31",
+        "color": "#38bdf8",
+        "zone": "LEG_LEFT",
+        "triangles": 239
+      },
+      {
+        "index": 31,
+        "name": "pattern79_32",
+        "color": "#fb7185",
+        "zone": "LEG_RIGHT",
+        "triangles": 239
+      },
+      {
+        "index": 32,
+        "name": "pattern85_33",
+        "color": "#34d399",
+        "zone": "WAISTBAND",
+        "triangles": 228
+      },
+      {
+        "index": 33,
+        "name": "pattern93_34",
+        "color": "#fbbf24",
+        "zone": "LEG_RIGHT",
+        "triangles": 10800
+      },
+      {
+        "index": 34,
+        "name": "pattern103_35",
+        "color": "#a78bfa",
+        "zone": "TRIMS",
+        "triangles": 996
+      },
+      {
+        "index": 35,
+        "name": "pattern111_36",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 5644
+      },
+      {
+        "index": 36,
+        "name": "trim432_37",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 22818
+      },
+      {
+        "index": 37,
+        "name": "pattern125_38",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 28
+      },
+      {
+        "index": 38,
+        "name": "pattern133_39",
+        "color": "#818cf8",
+        "zone": "TRIMS",
+        "triangles": 28
+      },
+      {
+        "index": 39,
+        "name": "pattern141_40",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 26
+      },
+      {
+        "index": 40,
+        "name": "pattern149_41",
+        "color": "#facc15",
+        "zone": "TRIMS",
+        "triangles": 32
+      },
+      {
+        "index": 41,
+        "name": "pattern157_42",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 508
+      },
+      {
+        "index": 42,
+        "name": "pattern165_43",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 58
+      },
+      {
+        "index": 43,
+        "name": "pattern173_44",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 58
+      },
+      {
+        "index": 44,
+        "name": "pattern181_45",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 60
+      },
+      {
+        "index": 45,
+        "name": "pattern189_46",
+        "color": "#38bdf8",
+        "zone": "TRIMS",
+        "triangles": 60
+      },
+      {
+        "index": 46,
+        "name": "pattern197_47",
+        "color": "#fb7185",
+        "zone": "TRIMS",
+        "triangles": 1950
+      },
+      {
+        "index": 47,
+        "name": "pattern207_48",
+        "color": "#34d399",
+        "zone": "TRIMS",
+        "triangles": 1351
+      },
+      {
+        "index": 48,
+        "name": "pattern214_49",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 2494
+      },
+      {
+        "index": 49,
+        "name": "pattern224_50",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 707
+      },
+      {
+        "index": 50,
+        "name": "pattern231_51",
+        "color": "#f472b6",
+        "zone": "LEG_LEFT",
+        "triangles": 707
+      },
+      {
+        "index": 51,
+        "name": "pattern238_52",
+        "color": "#2dd4bf",
+        "zone": "TRIMS",
+        "triangles": 70
+      },
+      {
+        "index": 52,
+        "name": "pattern244_53",
+        "color": "#f87171",
+        "zone": "TRIMS",
+        "triangles": 70
+      },
+      {
+        "index": 53,
+        "name": "pattern250_54",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 1063
+      },
+      {
+        "index": 54,
+        "name": "pattern258_55",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 7730
+      },
+      {
+        "index": 55,
+        "name": "pattern274_56",
+        "color": "#facc15",
+        "zone": "LEG_LEFT",
+        "triangles": 1911
+      },
+      {
+        "index": 56,
+        "name": "pattern289_57",
+        "color": "#c084fc",
+        "zone": "LEG_RIGHT",
+        "triangles": 1914
+      },
+      {
+        "index": 57,
+        "name": "pattern304_58",
+        "color": "#60a5fa",
+        "zone": "TRIMS",
+        "triangles": 2782
+      },
+      {
+        "index": 58,
+        "name": "pattern312_59",
+        "color": "#e879f9",
+        "zone": "TRIMS",
+        "triangles": 1282
+      },
+      {
+        "index": 59,
+        "name": "pattern318_60",
+        "color": "#94a3b8",
+        "zone": "TRIMS",
+        "triangles": 1282
+      },
+      {
+        "index": 60,
+        "name": "明线 1 28_61",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 252
+      },
+      {
+        "index": 61,
+        "name": "明线72_62",
+        "color": "#fb7185",
+        "zone": "LEG_LEFT",
+        "triangles": 253
+      },
+      {
+        "index": 62,
+        "name": "明线 1 29_63",
+        "color": "#34d399",
+        "zone": "LEG_RIGHT",
+        "triangles": 258
+      },
+      {
+        "index": 63,
+        "name": "明线74_64",
+        "color": "#fbbf24",
+        "zone": "LEG_LEFT",
+        "triangles": 258
+      },
+      {
+        "index": 64,
+        "name": "明线 1 34_65",
+        "color": "#a78bfa",
+        "zone": "LEG_RIGHT",
+        "triangles": 464
+      },
+      {
+        "index": 65,
+        "name": "明线 1 35_66",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 480
+      },
+      {
+        "index": 66,
+        "name": "明线84_67",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 464
+      },
+      {
+        "index": 67,
+        "name": "明线86_68",
+        "color": "#f87171",
+        "zone": "LEG_LEFT",
+        "triangles": 480
+      },
+      {
+        "index": 68,
+        "name": "明线 1 30_69",
+        "color": "#818cf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 286
+      },
+      {
+        "index": 69,
+        "name": "明线76_70",
+        "color": "#4ade80",
+        "zone": "LEG_LEFT",
+        "triangles": 285
+      },
+      {
+        "index": 70,
+        "name": "明线 1 31_71",
+        "color": "#facc15",
+        "zone": "LEG_RIGHT",
+        "triangles": 290
+      },
+      {
+        "index": 71,
+        "name": "明线78_72",
+        "color": "#c084fc",
+        "zone": "LEG_LEFT",
+        "triangles": 280
+      },
+      {
+        "index": 72,
+        "name": "明线80_73",
+        "color": "#60a5fa",
+        "zone": "LEG_LEFT",
+        "triangles": 500
+      },
+      {
+        "index": 73,
+        "name": "明线82_74",
+        "color": "#e879f9",
+        "zone": "LEG_LEFT",
+        "triangles": 476
+      },
+      {
+        "index": 74,
+        "name": "明线 1 32_75",
+        "color": "#94a3b8",
+        "zone": "LEG_RIGHT",
+        "triangles": 500
+      },
+      {
+        "index": 75,
+        "name": "明线 1 33_76",
+        "color": "#38bdf8",
+        "zone": "LEG_RIGHT",
+        "triangles": 476
+      },
+      {
+        "index": 76,
+        "name": "明线 1 26_77",
+        "color": "#fb7185",
+        "zone": "WAISTBAND",
+        "triangles": 226
+      },
+      {
+        "index": 77,
+        "name": "明线66_78",
+        "color": "#34d399",
+        "zone": "WAISTBAND",
+        "triangles": 236
+      },
+      {
+        "index": 78,
+        "name": "明线 1 27_79",
+        "color": "#fbbf24",
+        "zone": "WAISTBAND",
+        "triangles": 231
+      },
+      {
+        "index": 79,
+        "name": "明线68_80",
+        "color": "#a78bfa",
+        "zone": "WAISTBAND",
+        "triangles": 235
+      },
+      {
+        "index": 80,
+        "name": "明线1_81",
+        "color": "#f472b6",
+        "zone": "LEG_RIGHT",
+        "triangles": 504
+      },
+      {
+        "index": 81,
+        "name": "明线4_82",
+        "color": "#2dd4bf",
+        "zone": "LEG_LEFT",
+        "triangles": 515
+      },
+      {
+        "index": 82,
+        "name": "明线7_83",
+        "color": "#f87171",
+        "zone": "LEG_RIGHT",
+        "triangles": 1033
+      },
+      {
+        "index": 83,
+        "name": "明线15_84",
+        "color": "#818cf8",
+        "zone": "LEG_LEFT",
+        "triangles": 506
+      }
+    ],
+    "frontImg": "/audit/01jmmh0jgtcgjdyd8eshafzb33_front.png",
+    "backImg": "/audit/01jmmh0jgtcgjdyd8eshafzb33_back.png",
+    "uvImg": "/audit/01jmmh0jgtcgjdyd8eshafzb33_uv.png"
+  },
+  {
+    "id": "01jmmh0bbewq923s6z4qttnm72",
+    "name": "Yoga-Skc-08",
+    "category": "TOPWEAR",
+    "isBottomwear": false,
+    "piecesCount": 11,
+    "pieces": [
+      {
+        "index": 0,
+        "name": "pattern1_1",
+        "color": "#38bdf8",
+        "zone": "BACK_TORSO",
+        "triangles": 5486
+      },
+      {
+        "index": 1,
+        "name": "pattern13_2",
+        "color": "#fb7185",
+        "zone": "COLLAR_NECK",
+        "triangles": 1561
+      },
+      {
+        "index": 2,
+        "name": "pattern19_3",
+        "color": "#34d399",
+        "zone": "COLLAR_NECK",
+        "triangles": 2995
+      },
+      {
+        "index": 3,
+        "name": "pattern27_4",
+        "color": "#fbbf24",
+        "zone": "COLLAR_NECK",
+        "triangles": 1581
+      },
+      {
+        "index": 4,
+        "name": "pattern33_5",
+        "color": "#a78bfa",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 1879
+      },
+      {
+        "index": 5,
+        "name": "pattern77_6",
+        "color": "#f472b6",
+        "zone": "FRONT_TORSO",
+        "triangles": 42095
+      },
+      {
+        "index": 6,
+        "name": "pattern38_7",
+        "color": "#2dd4bf",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 1877
+      },
+      {
+        "index": 7,
+        "name": "pattern43_8",
+        "color": "#f87171",
+        "zone": "SLEEVE_LEFT",
+        "triangles": 974
+      },
+      {
+        "index": 8,
+        "name": "pattern51_9",
+        "color": "#818cf8",
+        "zone": "SLEEVE_RIGHT",
+        "triangles": 974
+      },
+      {
+        "index": 9,
+        "name": "pattern59_10",
+        "color": "#4ade80",
+        "zone": "TRIMS",
+        "triangles": 1444
+      },
+      {
+        "index": 10,
+        "name": "pattern65_11",
+        "color": "#facc15",
+        "zone": "BACK_TORSO",
+        "triangles": 21930
+      }
+    ],
+    "frontImg": "/audit/01jmmh0bbewq923s6z4qttnm72_front.png",
+    "backImg": "/audit/01jmmh0bbewq923s6z4qttnm72_back.png",
+    "uvImg": "/audit/01jmmh0bbewq923s6z4qttnm72_uv.png"
+  }
+]

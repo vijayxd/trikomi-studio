@@ -26,6 +26,24 @@ let activeTransfer = null;
 let sseClients = [];
 
 // Built-in Vite Plugin: Direct Local Bridge API
+const serveSecurityTxtPlugin = () => ({
+  name: 'serve-security-txt',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      if (req.url === '/packages/core/dist/security.txt') {
+        const targetPath = path.resolve(__dirname, '../trikomi/packages/core/dist/security.txt');
+        if (fs.existsSync(targetPath)) {
+          const content = fs.readFileSync(targetPath);
+          res.setHeader('Content-Type', 'text/plain');
+          res.end(content);
+          return;
+        }
+      }
+      next();
+    });
+  }
+});
+
 function style3dBridgePlugin() {
   return {
     name: 'style3d-bridge-api',
@@ -233,13 +251,20 @@ export default defineConfig({
   resolve: {
     alias: dynamicAlias
   },
+  define: {
+    'process.env.SECURITY_CODE': '""',
+    'process.env': {}
+  },
+  optimizeDeps: {
+    exclude: ['@jitl/quickjs-wasmfile-release-sync']
+  },
   server: {
     fs: {
       allow: ['..']
     }
   },
   assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.hdr', '**/*.exr', '**/*.obj'],
-  plugins: [react(), style3dBridgePlugin()],
+  plugins: [react(), style3dBridgePlugin(), ...(useLocalSdk ? [serveSecurityTxtPlugin()] : [])],
   build: {
     rollupOptions: {
       input: {
