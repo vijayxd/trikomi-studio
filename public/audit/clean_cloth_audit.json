@@ -1,0 +1,7047 @@
+[
+  {
+    "id": "01jmm9pxnf0mysaf3yrpfabktn",
+    "name": "Grey V-neck shock proof sports bra",
+    "category": "TOPWEAR",
+    "panelsCount": 14,
+    "minRatio": 15.2,
+    "maxRatio": 17.6,
+    "avgRatio": 16.5,
+    "ratioSpread": 1.16,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern29_1",
+        "ratio": 17.2,
+        "tris": 1000
+      },
+      {
+        "name": "pattern39_2",
+        "ratio": 16.7,
+        "tris": 1000
+      },
+      {
+        "name": "pattern49_3",
+        "ratio": 15.2,
+        "tris": 4474
+      },
+      {
+        "name": "pattern1_4",
+        "ratio": 17.4,
+        "tris": 4486
+      },
+      {
+        "name": "pattern9_5",
+        "ratio": 17.6,
+        "tris": 1894
+      },
+      {
+        "name": "pattern15_6",
+        "ratio": 16.7,
+        "tris": 1894
+      },
+      {
+        "name": "pattern21_7",
+        "ratio": 16.1,
+        "tris": 3996
+      },
+      {
+        "name": "pattern81_8",
+        "ratio": 16.2,
+        "tris": 3954
+      },
+      {
+        "name": "pattern89_9",
+        "ratio": 15.6,
+        "tris": 4190
+      },
+      {
+        "name": "pattern95_10",
+        "ratio": 15.9,
+        "tris": 4476
+      },
+      {
+        "name": "pattern55_11",
+        "ratio": 15.3,
+        "tris": 4172
+      },
+      {
+        "name": "pattern61_12",
+        "ratio": 17.6,
+        "tris": 1871
+      },
+      {
+        "name": "pattern67_13",
+        "ratio": 16.4,
+        "tris": 4508
+      },
+      {
+        "name": "pattern75_14",
+        "ratio": 16.9,
+        "tris": 1871
+      }
+    ]
+  },
+  {
+    "id": "01jmv8ns4bj9y7w7x3mttjkcbv",
+    "name": "Light purple stand collar knitted long sleeved T-shirt",
+    "category": "TOPWEAR",
+    "panelsCount": 16,
+    "minRatio": 77.4,
+    "maxRatio": 362.4,
+    "avgRatio": 331.8,
+    "ratioSpread": 4.68,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern43_1",
+        "ratio": 351.4,
+        "tris": 9997
+      },
+      {
+        "name": "pattern52_2",
+        "ratio": 355.6,
+        "tris": 19820
+      },
+      {
+        "name": "pattern1_3",
+        "ratio": 362.4,
+        "tris": 2434
+      },
+      {
+        "name": "pattern10_4",
+        "ratio": 353.6,
+        "tris": 23622
+      },
+      {
+        "name": "piping72_5",
+        "ratio": 340.9,
+        "tris": 564
+      },
+      {
+        "name": "piping73_6",
+        "ratio": 349.4,
+        "tris": 564
+      },
+      {
+        "name": "piping74_7",
+        "ratio": 328.8,
+        "tris": 552
+      },
+      {
+        "name": "piping75_8",
+        "ratio": 349.4,
+        "tris": 552
+      },
+      {
+        "name": "piping76_9",
+        "ratio": 331.4,
+        "tris": 1316
+      },
+      {
+        "name": "piping77_10",
+        "ratio": 346.7,
+        "tris": 1288
+      },
+      {
+        "name": "piping78_11",
+        "ratio": 349.5,
+        "tris": 1288
+      },
+      {
+        "name": "piping79_12",
+        "ratio": 350.5,
+        "tris": 1316
+      },
+      {
+        "name": "图案2_13",
+        "ratio": 77.4,
+        "tris": 1637
+      },
+      {
+        "name": "pattern62_24",
+        "ratio": 355.4,
+        "tris": 19854
+      },
+      {
+        "name": "pattern22_25",
+        "ratio": 352.8,
+        "tris": 22310
+      },
+      {
+        "name": "pattern34_26",
+        "ratio": 352.9,
+        "tris": 10168
+      }
+    ]
+  },
+  {
+    "id": "01jmmm4a2060z9tygk241hfe74",
+    "name": "Athletic Wear",
+    "category": "TOPWEAR",
+    "panelsCount": 29,
+    "minRatio": 24.8,
+    "maxRatio": 284.7,
+    "avgRatio": 164.6,
+    "ratioSpread": 11.49,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "trim277_12",
+        "ratio": 24.8,
+        "tris": 6260
+      },
+      {
+        "name": "trim278_13",
+        "ratio": 24.9,
+        "tris": 704
+      },
+      {
+        "name": "pattern157_14",
+        "ratio": 276.3,
+        "tris": 16648
+      },
+      {
+        "name": "pattern164_15",
+        "ratio": 284.7,
+        "tris": 16648
+      },
+      {
+        "name": "pattern171_16",
+        "ratio": 204.1,
+        "tris": 7624
+      },
+      {
+        "name": "pattern178_17",
+        "ratio": 204.4,
+        "tris": 7624
+      },
+      {
+        "name": "pattern1_52",
+        "ratio": 247,
+        "tris": 1592
+      },
+      {
+        "name": "pattern11_53",
+        "ratio": 156.1,
+        "tris": 1790
+      },
+      {
+        "name": "pattern17_54",
+        "ratio": 150.2,
+        "tris": 11704
+      },
+      {
+        "name": "pattern24_55",
+        "ratio": 148.8,
+        "tris": 3080
+      },
+      {
+        "name": "pattern29_56",
+        "ratio": 149.6,
+        "tris": 11670
+      },
+      {
+        "name": "pattern36_57",
+        "ratio": 155.5,
+        "tris": 1790
+      },
+      {
+        "name": "pattern42_58",
+        "ratio": 149,
+        "tris": 2168
+      },
+      {
+        "name": "pattern48_59",
+        "ratio": 148,
+        "tris": 2168
+      },
+      {
+        "name": "pattern54_60",
+        "ratio": 281.6,
+        "tris": 3846
+      },
+      {
+        "name": "pattern61_61",
+        "ratio": 279.6,
+        "tris": 3846
+      },
+      {
+        "name": "pattern68_62",
+        "ratio": 148.7,
+        "tris": 9124
+      },
+      {
+        "name": "pattern77_63",
+        "ratio": 150.6,
+        "tris": 10726
+      },
+      {
+        "name": "pattern83_64",
+        "ratio": 149.3,
+        "tris": 10726
+      },
+      {
+        "name": "pattern89_65",
+        "ratio": 150.6,
+        "tris": 6123
+      },
+      {
+        "name": "trim279_66",
+        "ratio": 24.8,
+        "tris": 6260
+      },
+      {
+        "name": "trim280_67",
+        "ratio": 24.9,
+        "tris": 704
+      },
+      {
+        "name": "pattern95_68",
+        "ratio": 151.1,
+        "tris": 6123
+      },
+      {
+        "name": "pattern101_69",
+        "ratio": 150.2,
+        "tris": 14649
+      },
+      {
+        "name": "pattern107_70",
+        "ratio": 149.6,
+        "tris": 14643
+      },
+      {
+        "name": "pattern119_72",
+        "ratio": 149.9,
+        "tris": 1790
+      },
+      {
+        "name": "pattern125_73",
+        "ratio": 151.1,
+        "tris": 1790
+      },
+      {
+        "name": "pattern137_75",
+        "ratio": 205.8,
+        "tris": 18252
+      },
+      {
+        "name": "pattern147_76",
+        "ratio": 281.6,
+        "tris": 33750
+      }
+    ]
+  },
+  {
+    "id": "01jmmm3k9scajhejexa8ydnd8y",
+    "name": "Women's sportswear",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 24,
+    "minRatio": 15.2,
+    "maxRatio": 232.8,
+    "avgRatio": 173,
+    "ratioSpread": 15.28,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern25_1",
+        "ratio": 227.7,
+        "tris": 10076
+      },
+      {
+        "name": "pattern31_2",
+        "ratio": 230.3,
+        "tris": 10095
+      },
+      {
+        "name": "pattern37_3",
+        "ratio": 232.8,
+        "tris": 1786
+      },
+      {
+        "name": "pattern43_4",
+        "ratio": 229.8,
+        "tris": 13437
+      },
+      {
+        "name": "pattern50_5",
+        "ratio": 230,
+        "tris": 1786
+      },
+      {
+        "name": "pattern56_6",
+        "ratio": 230.3,
+        "tris": 13467
+      },
+      {
+        "name": "pattern63_7",
+        "ratio": 181.5,
+        "tris": 7696
+      },
+      {
+        "name": "pattern70_8",
+        "ratio": 165.2,
+        "tris": 1482
+      },
+      {
+        "name": "pattern92_9",
+        "ratio": 183.1,
+        "tris": 1482
+      },
+      {
+        "name": "pattern114_10",
+        "ratio": 181.2,
+        "tris": 7696
+      },
+      {
+        "name": "pattern121_11",
+        "ratio": 175.9,
+        "tris": 1556
+      },
+      {
+        "name": "pattern148_12",
+        "ratio": 188.4,
+        "tris": 7499
+      },
+      {
+        "name": "pattern168_13",
+        "ratio": 172.9,
+        "tris": 1556
+      },
+      {
+        "name": "pattern195_14",
+        "ratio": 185.2,
+        "tris": 7499
+      },
+      {
+        "name": "pattern215_15",
+        "ratio": 175.4,
+        "tris": 1682
+      },
+      {
+        "name": "pattern221_16",
+        "ratio": 172.7,
+        "tris": 1682
+      },
+      {
+        "name": "pattern227_17",
+        "ratio": 223.4,
+        "tris": 1782
+      },
+      {
+        "name": "pattern233_18",
+        "ratio": 230.3,
+        "tris": 1786
+      },
+      {
+        "name": "pattern1_39",
+        "ratio": 229.6,
+        "tris": 39861
+      },
+      {
+        "name": "pattern14_40",
+        "ratio": 228.3,
+        "tris": 41178
+      },
+      {
+        "name": "trim291_43",
+        "ratio": 23.4,
+        "tris": 792
+      },
+      {
+        "name": "trim292_44",
+        "ratio": 15.2,
+        "tris": 912
+      },
+      {
+        "name": "trim293_45",
+        "ratio": 15.2,
+        "tris": 912
+      },
+      {
+        "name": "trim294_46",
+        "ratio": 23.4,
+        "tris": 792
+      }
+    ]
+  },
+  {
+    "id": "01jmmh4kq1rzbyz1aacf69kgmj",
+    "name": "Yoga-skc-03",
+    "category": "TOPWEAR",
+    "panelsCount": 8,
+    "minRatio": 46.9,
+    "maxRatio": 85.7,
+    "avgRatio": 74.3,
+    "ratioSpread": 1.83,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern4_25",
+        "ratio": 46.9,
+        "tris": 4415
+      },
+      {
+        "name": "pattern7_28",
+        "ratio": 49.5,
+        "tris": 3759
+      },
+      {
+        "name": "pattern23_40",
+        "ratio": 82.2,
+        "tris": 559
+      },
+      {
+        "name": "pattern24_41",
+        "ratio": 85.7,
+        "tris": 650
+      },
+      {
+        "name": "pattern25_42",
+        "ratio": 82.3,
+        "tris": 559
+      },
+      {
+        "name": "pattern26_43",
+        "ratio": 80.6,
+        "tris": 3729
+      },
+      {
+        "name": "pattern27_44",
+        "ratio": 83.2,
+        "tris": 8625
+      },
+      {
+        "name": "pattern30_47",
+        "ratio": 83.8,
+        "tris": 8625
+      }
+    ]
+  },
+  {
+    "id": "01jmmh3a089xj40xgzz8ahd4me",
+    "name": "Yoga-skc-05",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 16,
+    "minRatio": 46.1,
+    "maxRatio": 95.1,
+    "avgRatio": 62.2,
+    "ratioSpread": 2.06,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern46_1",
+        "ratio": 46.8,
+        "tris": 9350
+      },
+      {
+        "name": "pattern52_2",
+        "ratio": 46.7,
+        "tris": 8062
+      },
+      {
+        "name": "pattern61_3",
+        "ratio": 46.6,
+        "tris": 1368
+      },
+      {
+        "name": "pattern67_4",
+        "ratio": 82.3,
+        "tris": 763
+      },
+      {
+        "name": "pattern73_5",
+        "ratio": 46.8,
+        "tris": 1363
+      },
+      {
+        "name": "pattern79_6",
+        "ratio": 46.7,
+        "tris": 1368
+      },
+      {
+        "name": "pattern85_7",
+        "ratio": 46.1,
+        "tris": 1363
+      },
+      {
+        "name": "pattern1_8",
+        "ratio": 82.8,
+        "tris": 763
+      },
+      {
+        "name": "pattern7_9",
+        "ratio": 46.9,
+        "tris": 8062
+      },
+      {
+        "name": "pattern16_10",
+        "ratio": 48,
+        "tris": 21261
+      },
+      {
+        "name": "pattern91_12",
+        "ratio": 89.1,
+        "tris": 2410
+      },
+      {
+        "name": "pattern100_13",
+        "ratio": 85.7,
+        "tris": 2424
+      },
+      {
+        "name": "pattern137_17",
+        "ratio": 91.1,
+        "tris": 3236
+      },
+      {
+        "name": "pattern144_18",
+        "ratio": 95.1,
+        "tris": 7620
+      },
+      {
+        "name": "pattern28_23",
+        "ratio": 46.8,
+        "tris": 9325
+      },
+      {
+        "name": "pattern34_24",
+        "ratio": 47.6,
+        "tris": 21234
+      }
+    ]
+  },
+  {
+    "id": "01jmmh371x32dy9kx3hzktkp7b",
+    "name": "Yoga-skc-02",
+    "category": "TOPWEAR",
+    "panelsCount": 10,
+    "minRatio": 61.4,
+    "maxRatio": 86.1,
+    "avgRatio": 72.9,
+    "ratioSpread": 1.4,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern7_1",
+        "ratio": 73.4,
+        "tris": 2719
+      },
+      {
+        "name": "pattern8_2",
+        "ratio": 61.4,
+        "tris": 685
+      },
+      {
+        "name": "pattern11_5",
+        "ratio": 71.6,
+        "tris": 570
+      },
+      {
+        "name": "pattern12_6",
+        "ratio": 72.2,
+        "tris": 570
+      },
+      {
+        "name": "pattern16_10",
+        "ratio": 73,
+        "tris": 24943
+      },
+      {
+        "name": "pattern1_12",
+        "ratio": 70.2,
+        "tris": 18831
+      },
+      {
+        "name": "pattern2_13",
+        "ratio": 72.7,
+        "tris": 18874
+      },
+      {
+        "name": "pattern3_14",
+        "ratio": 74,
+        "tris": 685
+      },
+      {
+        "name": "pattern5_16",
+        "ratio": 74.6,
+        "tris": 2719
+      },
+      {
+        "name": "pattern18_61",
+        "ratio": 86.1,
+        "tris": 23218
+      }
+    ]
+  },
+  {
+    "id": "01jmmh35htm6zejx1fmfdgb7h6",
+    "name": "Yoga-skc-01",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 15,
+    "minRatio": 44.5,
+    "maxRatio": 954.1,
+    "avgRatio": 169.4,
+    "ratioSpread": 21.44,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern65_1",
+        "ratio": 62.3,
+        "tris": 21191
+      },
+      {
+        "name": "pattern76_2",
+        "ratio": 48.4,
+        "tris": 9329
+      },
+      {
+        "name": "pattern88_3",
+        "ratio": 49.1,
+        "tris": 9338
+      },
+      {
+        "name": "pattern100_4",
+        "ratio": 48.2,
+        "tris": 11593
+      },
+      {
+        "name": "pattern111_5",
+        "ratio": 48.1,
+        "tris": 11606
+      },
+      {
+        "name": "pattern120_6",
+        "ratio": 954.1,
+        "tris": 7620
+      },
+      {
+        "name": "pattern130_7",
+        "ratio": 60.9,
+        "tris": 20235
+      },
+      {
+        "name": "pattern152_10",
+        "ratio": 62.4,
+        "tris": 20235
+      },
+      {
+        "name": "pattern160_11",
+        "ratio": 65.2,
+        "tris": 20870
+      },
+      {
+        "name": "pattern21_15",
+        "ratio": 898.4,
+        "tris": 3236
+      },
+      {
+        "name": "pattern28_16",
+        "ratio": 47.9,
+        "tris": 5868
+      },
+      {
+        "name": "pattern34_17",
+        "ratio": 47.4,
+        "tris": 5868
+      },
+      {
+        "name": "pattern40_18",
+        "ratio": 44.8,
+        "tris": 7576
+      },
+      {
+        "name": "pattern47_19",
+        "ratio": 44.5,
+        "tris": 7516
+      },
+      {
+        "name": "pattern54_20",
+        "ratio": 59.4,
+        "tris": 21191
+      }
+    ]
+  },
+  {
+    "id": "01jmmh33akan9vvz53ttaq4cce",
+    "name": "Yoga-Skc-03",
+    "category": "TOPWEAR",
+    "panelsCount": 42,
+    "minRatio": 12,
+    "maxRatio": 116.4,
+    "avgRatio": 47.4,
+    "ratioSpread": 9.71,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 12.3,
+        "tris": 3298
+      },
+      {
+        "name": "pattern7_2",
+        "ratio": 91.7,
+        "tris": 1153
+      },
+      {
+        "name": "pattern11_3",
+        "ratio": 84.5,
+        "tris": 1153
+      },
+      {
+        "name": "pattern15_4",
+        "ratio": 91.2,
+        "tris": 1277
+      },
+      {
+        "name": "pattern19_5",
+        "ratio": 88.1,
+        "tris": 1277
+      },
+      {
+        "name": "pattern23_6",
+        "ratio": 12.5,
+        "tris": 1646
+      },
+      {
+        "name": "pattern31_8",
+        "ratio": 13.4,
+        "tris": 1639
+      },
+      {
+        "name": "pattern39_10",
+        "ratio": 114.2,
+        "tris": 2390
+      },
+      {
+        "name": "pattern40_11",
+        "ratio": 90.4,
+        "tris": 1626
+      },
+      {
+        "name": "pattern47_12",
+        "ratio": 116.4,
+        "tris": 2390
+      },
+      {
+        "name": "pattern48_13",
+        "ratio": 88.1,
+        "tris": 1626
+      },
+      {
+        "name": "pattern55_14",
+        "ratio": 27.2,
+        "tris": 1740
+      },
+      {
+        "name": "pattern67_17",
+        "ratio": 27.9,
+        "tris": 1739
+      },
+      {
+        "name": "pattern80_21",
+        "ratio": 12.7,
+        "tris": 905
+      },
+      {
+        "name": "pattern219_27",
+        "ratio": 27,
+        "tris": 524
+      },
+      {
+        "name": "pattern220_28",
+        "ratio": 26.6,
+        "tris": 523
+      },
+      {
+        "name": "pattern221_29",
+        "ratio": 100.2,
+        "tris": 11416
+      },
+      {
+        "name": "pattern222_30",
+        "ratio": 26.7,
+        "tris": 1211
+      },
+      {
+        "name": "pattern223_31",
+        "ratio": 25.4,
+        "tris": 1228
+      },
+      {
+        "name": "pattern259_34",
+        "ratio": 25.2,
+        "tris": 3087
+      },
+      {
+        "name": "pattern260_35",
+        "ratio": 86,
+        "tris": 7207
+      },
+      {
+        "name": "pattern262_37",
+        "ratio": 26.5,
+        "tris": 584
+      },
+      {
+        "name": "pattern263_38",
+        "ratio": 83.4,
+        "tris": 1454
+      },
+      {
+        "name": "pattern89_43",
+        "ratio": 12.2,
+        "tris": 912
+      },
+      {
+        "name": "pattern97_44",
+        "ratio": 12.2,
+        "tris": 1697
+      },
+      {
+        "name": "pattern103_45",
+        "ratio": 12.3,
+        "tris": 1697
+      },
+      {
+        "name": "pattern109_46",
+        "ratio": 27,
+        "tris": 729
+      },
+      {
+        "name": "pattern117_47",
+        "ratio": 28.2,
+        "tris": 729
+      },
+      {
+        "name": "pattern126_49",
+        "ratio": 25.7,
+        "tris": 1952
+      },
+      {
+        "name": "pattern137_52",
+        "ratio": 27.2,
+        "tris": 1948
+      },
+      {
+        "name": "pattern147_54",
+        "ratio": 90.4,
+        "tris": 3180
+      },
+      {
+        "name": "pattern153_55",
+        "ratio": 91.8,
+        "tris": 3180
+      },
+      {
+        "name": "pattern159_56",
+        "ratio": 104.4,
+        "tris": 1891
+      },
+      {
+        "name": "pattern160_57",
+        "ratio": 12.1,
+        "tris": 2129
+      },
+      {
+        "name": "pattern166_58",
+        "ratio": 107.9,
+        "tris": 1869
+      },
+      {
+        "name": "pattern167_59",
+        "ratio": 12.8,
+        "tris": 2116
+      },
+      {
+        "name": "pattern173_60",
+        "ratio": 12,
+        "tris": 11759
+      },
+      {
+        "name": "pattern174_61",
+        "ratio": 25.3,
+        "tris": 3406
+      },
+      {
+        "name": "pattern190_62",
+        "ratio": 13.1,
+        "tris": 11759
+      },
+      {
+        "name": "pattern191_63",
+        "ratio": 25.3,
+        "tris": 3406
+      },
+      {
+        "name": "pattern207_64",
+        "ratio": 26.1,
+        "tris": 742
+      },
+      {
+        "name": "pattern213_65",
+        "ratio": 27.5,
+        "tris": 742
+      }
+    ]
+  },
+  {
+    "id": "01jmmh2nytvynddkg0anb99mg2",
+    "name": "Yoga-Skc-05",
+    "category": "TOPWEAR",
+    "panelsCount": 80,
+    "minRatio": 1,
+    "maxRatio": 463,
+    "avgRatio": 69.4,
+    "ratioSpread": 471.83,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern161_1",
+        "ratio": 86.7,
+        "tris": 1700
+      },
+      {
+        "name": "pattern169_2",
+        "ratio": 84.6,
+        "tris": 1805
+      },
+      {
+        "name": "pattern177_3",
+        "ratio": 80.7,
+        "tris": 1769
+      },
+      {
+        "name": "pattern198_5",
+        "ratio": 81.1,
+        "tris": 1406
+      },
+      {
+        "name": "pattern215_7",
+        "ratio": 79.9,
+        "tris": 910
+      },
+      {
+        "name": "pattern226_9",
+        "ratio": 79.8,
+        "tris": 1862
+      },
+      {
+        "name": "pattern238_11",
+        "ratio": 80.7,
+        "tris": 1745
+      },
+      {
+        "name": "pattern250_13",
+        "ratio": 80.5,
+        "tris": 1718
+      },
+      {
+        "name": "pattern262_15",
+        "ratio": 80.2,
+        "tris": 2542
+      },
+      {
+        "name": "pattern275_17",
+        "ratio": 80.3,
+        "tris": 1233
+      },
+      {
+        "name": "pattern282_18",
+        "ratio": 80.1,
+        "tris": 1027
+      },
+      {
+        "name": "pattern294_20",
+        "ratio": 79.8,
+        "tris": 2439
+      },
+      {
+        "name": "pattern315_22",
+        "ratio": 79.7,
+        "tris": 1719
+      },
+      {
+        "name": "pattern330_24",
+        "ratio": 79.1,
+        "tris": 844
+      },
+      {
+        "name": "pattern341_26",
+        "ratio": 79.9,
+        "tris": 1976
+      },
+      {
+        "name": "pattern353_28",
+        "ratio": 78.7,
+        "tris": 1521
+      },
+      {
+        "name": "pattern365_30",
+        "ratio": 78.5,
+        "tris": 2245
+      },
+      {
+        "name": "pattern377_32",
+        "ratio": 78.5,
+        "tris": 2702
+      },
+      {
+        "name": "pattern390_34",
+        "ratio": 80.2,
+        "tris": 1398
+      },
+      {
+        "name": "图案53_35",
+        "ratio": 1,
+        "tris": 1233
+      },
+      {
+        "name": "图案 2 拷贝 1 2_36",
+        "ratio": 59.7,
+        "tris": 1233
+      },
+      {
+        "name": "图案54_37",
+        "ratio": 1,
+        "tris": 1027
+      },
+      {
+        "name": "图案 2 拷贝 1 1_38",
+        "ratio": 60,
+        "tris": 1027
+      },
+      {
+        "name": "小网眼_40",
+        "ratio": 1,
+        "tris": 2439
+      },
+      {
+        "name": "条纹密 4_41",
+        "ratio": 59.3,
+        "tris": 2439
+      },
+      {
+        "name": "小网眼 1_42",
+        "ratio": 1,
+        "tris": 1719
+      },
+      {
+        "name": "条纹密 3_43",
+        "ratio": 59.3,
+        "tris": 1719
+      },
+      {
+        "name": "大网眼 5_44",
+        "ratio": 1,
+        "tris": 844
+      },
+      {
+        "name": "图案 2 4_45",
+        "ratio": 79.5,
+        "tris": 844
+      },
+      {
+        "name": "大网眼 2_46",
+        "ratio": 1,
+        "tris": 1976
+      },
+      {
+        "name": "图案 2 5_47",
+        "ratio": 76.8,
+        "tris": 1976
+      },
+      {
+        "name": "大网眼 4_48",
+        "ratio": 1,
+        "tris": 1521
+      },
+      {
+        "name": "图案 2 6_49",
+        "ratio": 83,
+        "tris": 1521
+      },
+      {
+        "name": "大网眼 3_50",
+        "ratio": 1,
+        "tris": 2245
+      },
+      {
+        "name": "图案 2 7_51",
+        "ratio": 84.6,
+        "tris": 2245
+      },
+      {
+        "name": "大网眼_52",
+        "ratio": 1,
+        "tris": 2702
+      },
+      {
+        "name": "条纹密_53",
+        "ratio": 72.5,
+        "tris": 2702
+      },
+      {
+        "name": "大网眼 1_54",
+        "ratio": 1,
+        "tris": 1398
+      },
+      {
+        "name": "条纹密 1_55",
+        "ratio": 59.8,
+        "tris": 1398
+      },
+      {
+        "name": "小网眼 2_56",
+        "ratio": 1,
+        "tris": 1582
+      },
+      {
+        "name": "条纹密 2_57",
+        "ratio": 59.1,
+        "tris": 1582
+      },
+      {
+        "name": "图案2_58",
+        "ratio": 463,
+        "tris": 9299
+      },
+      {
+        "name": "图案6_59",
+        "ratio": 432.1,
+        "tris": 10712
+      },
+      {
+        "name": "pattern7_78",
+        "ratio": 76.9,
+        "tris": 1112
+      },
+      {
+        "name": "pattern21_80",
+        "ratio": 81.9,
+        "tris": 3198
+      },
+      {
+        "name": "pattern28_81",
+        "ratio": 81.6,
+        "tris": 3230
+      },
+      {
+        "name": "pattern35_82",
+        "ratio": 86.2,
+        "tris": 1707
+      },
+      {
+        "name": "pattern41_83",
+        "ratio": 86.8,
+        "tris": 1707
+      },
+      {
+        "name": "pattern47_84",
+        "ratio": 83.3,
+        "tris": 1131
+      },
+      {
+        "name": "pattern55_85",
+        "ratio": 83.2,
+        "tris": 1131
+      },
+      {
+        "name": "pattern63_86",
+        "ratio": 91.3,
+        "tris": 1173
+      },
+      {
+        "name": "pattern71_87",
+        "ratio": 90.1,
+        "tris": 1173
+      },
+      {
+        "name": "pattern79_88",
+        "ratio": 78.2,
+        "tris": 511
+      },
+      {
+        "name": "pattern85_89",
+        "ratio": 78.7,
+        "tris": 511
+      },
+      {
+        "name": "pattern115_94",
+        "ratio": 73.1,
+        "tris": 15112
+      },
+      {
+        "name": "pattern129_95",
+        "ratio": 76.3,
+        "tris": 14447
+      },
+      {
+        "name": "pattern402_101",
+        "ratio": 79.4,
+        "tris": 1582
+      },
+      {
+        "name": "pattern409_102",
+        "ratio": 75.6,
+        "tris": 1217
+      },
+      {
+        "name": "pattern415_103",
+        "ratio": 76,
+        "tris": 1217
+      },
+      {
+        "name": "pattern421_104",
+        "ratio": 73.2,
+        "tris": 2107
+      },
+      {
+        "name": "pattern427_105",
+        "ratio": 76.2,
+        "tris": 2096
+      },
+      {
+        "name": "pattern433_106",
+        "ratio": 84.6,
+        "tris": 9298
+      },
+      {
+        "name": "pattern447_107",
+        "ratio": 80.3,
+        "tris": 508
+      },
+      {
+        "name": "pattern468_110",
+        "ratio": 71.9,
+        "tris": 1605
+      },
+      {
+        "name": "pattern473_111",
+        "ratio": 72.8,
+        "tris": 1605
+      },
+      {
+        "name": "pattern490_114",
+        "ratio": 74.3,
+        "tris": 10712
+      },
+      {
+        "name": "图案10_115",
+        "ratio": 1,
+        "tris": 1769
+      },
+      {
+        "name": "图案 2 拷贝 1 4_116",
+        "ratio": 60.1,
+        "tris": 1769
+      },
+      {
+        "name": "图案28_118",
+        "ratio": 1,
+        "tris": 1406
+      },
+      {
+        "name": "图案 2 拷贝 1 3_119",
+        "ratio": 60.5,
+        "tris": 1406
+      },
+      {
+        "name": "网眼 拷贝 1_121",
+        "ratio": 1,
+        "tris": 910
+      },
+      {
+        "name": "图案 2_122",
+        "ratio": 84.8,
+        "tris": 910
+      },
+      {
+        "name": "图案42_123",
+        "ratio": 1,
+        "tris": 1862
+      },
+      {
+        "name": "图案 2 1_124",
+        "ratio": 79.4,
+        "tris": 1862
+      },
+      {
+        "name": "图案45_126",
+        "ratio": 1,
+        "tris": 1745
+      },
+      {
+        "name": "图案 2 2_127",
+        "ratio": 80.7,
+        "tris": 1745
+      },
+      {
+        "name": "图案48_128",
+        "ratio": 1,
+        "tris": 1718
+      },
+      {
+        "name": "图案 2 3_129",
+        "ratio": 82.8,
+        "tris": 1718
+      },
+      {
+        "name": "图案51_131",
+        "ratio": 1,
+        "tris": 2542
+      },
+      {
+        "name": "图案 2 拷贝 1_132",
+        "ratio": 78,
+        "tris": 2542
+      }
+    ]
+  },
+  {
+    "id": "01jmmh0jgtcgjdyd8eshafzb33",
+    "name": "Yoga-skc-01",
+    "category": "TOPWEAR",
+    "panelsCount": 21,
+    "minRatio": 0.9,
+    "maxRatio": 616.6,
+    "avgRatio": 76.8,
+    "ratioSpread": 678.33,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "trim430_21",
+        "ratio": 0.9,
+        "tris": 2598
+      },
+      {
+        "name": "trim431_22",
+        "ratio": 0.9,
+        "tris": 2598
+      },
+      {
+        "name": "pattern1_23",
+        "ratio": 78.9,
+        "tris": 1104
+      },
+      {
+        "name": "pattern25_26",
+        "ratio": 78.6,
+        "tris": 6950
+      },
+      {
+        "name": "pattern93_34",
+        "ratio": 78.8,
+        "tris": 10800
+      },
+      {
+        "name": "pattern103_35",
+        "ratio": 29.7,
+        "tris": 996
+      },
+      {
+        "name": "pattern111_36",
+        "ratio": 78.6,
+        "tris": 5644
+      },
+      {
+        "name": "trim432_37",
+        "ratio": 616.6,
+        "tris": 22818
+      },
+      {
+        "name": "pattern157_42",
+        "ratio": 12.8,
+        "tris": 508
+      },
+      {
+        "name": "pattern197_47",
+        "ratio": 40.9,
+        "tris": 1950
+      },
+      {
+        "name": "pattern207_48",
+        "ratio": 40.3,
+        "tris": 1351
+      },
+      {
+        "name": "pattern214_49",
+        "ratio": 80.7,
+        "tris": 2494
+      },
+      {
+        "name": "pattern224_50",
+        "ratio": 81.4,
+        "tris": 707
+      },
+      {
+        "name": "pattern231_51",
+        "ratio": 81.9,
+        "tris": 707
+      },
+      {
+        "name": "pattern250_54",
+        "ratio": 30.1,
+        "tris": 1063
+      },
+      {
+        "name": "pattern258_55",
+        "ratio": 82.4,
+        "tris": 7730
+      },
+      {
+        "name": "pattern274_56",
+        "ratio": 81.4,
+        "tris": 1911
+      },
+      {
+        "name": "pattern289_57",
+        "ratio": 78.7,
+        "tris": 1914
+      },
+      {
+        "name": "pattern304_58",
+        "ratio": 12.9,
+        "tris": 2782
+      },
+      {
+        "name": "pattern312_59",
+        "ratio": 12.6,
+        "tris": 1282
+      },
+      {
+        "name": "pattern318_60",
+        "ratio": 12.9,
+        "tris": 1282
+      }
+    ]
+  },
+  {
+    "id": "01jmmh0bbewq923s6z4qttnm72",
+    "name": "Yoga-Skc-08",
+    "category": "TOPWEAR",
+    "panelsCount": 11,
+    "minRatio": 99.9,
+    "maxRatio": 239.6,
+    "avgRatio": 189.5,
+    "ratioSpread": 2.4,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 226,
+        "tris": 5486
+      },
+      {
+        "name": "pattern13_2",
+        "ratio": 213.5,
+        "tris": 1561
+      },
+      {
+        "name": "pattern19_3",
+        "ratio": 214.9,
+        "tris": 2995
+      },
+      {
+        "name": "pattern27_4",
+        "ratio": 209.5,
+        "tris": 1581
+      },
+      {
+        "name": "pattern33_5",
+        "ratio": 239.6,
+        "tris": 1879
+      },
+      {
+        "name": "pattern77_6",
+        "ratio": 101.8,
+        "tris": 42095
+      },
+      {
+        "name": "pattern38_7",
+        "ratio": 239.2,
+        "tris": 1877
+      },
+      {
+        "name": "pattern43_8",
+        "ratio": 217.9,
+        "tris": 974
+      },
+      {
+        "name": "pattern51_9",
+        "ratio": 217.2,
+        "tris": 974
+      },
+      {
+        "name": "pattern59_10",
+        "ratio": 99.9,
+        "tris": 1444
+      },
+      {
+        "name": "pattern65_11",
+        "ratio": 104.5,
+        "tris": 21930
+      }
+    ]
+  },
+  {
+    "id": "01jmmf0nmhzd7tdxae2rn133tp",
+    "name": "Mesh tights Leggings",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 12,
+    "minRatio": 18.4,
+    "maxRatio": 36.2,
+    "avgRatio": 25,
+    "ratioSpread": 1.97,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern4_1",
+        "ratio": 20.5,
+        "tris": 21645
+      },
+      {
+        "name": "pattern5_2",
+        "ratio": 36.2,
+        "tris": 2152
+      },
+      {
+        "name": "pattern1_3",
+        "ratio": 20.2,
+        "tris": 20626
+      },
+      {
+        "name": "pattern6_4",
+        "ratio": 18.9,
+        "tris": 2545
+      },
+      {
+        "name": "pattern7_5",
+        "ratio": 23.5,
+        "tris": 2677
+      },
+      {
+        "name": "pattern8_6",
+        "ratio": 23.5,
+        "tris": 2677
+      },
+      {
+        "name": "pattern9_7",
+        "ratio": 19.1,
+        "tris": 2545
+      },
+      {
+        "name": "pattern10_8",
+        "ratio": 36.2,
+        "tris": 2152
+      },
+      {
+        "name": "pattern11_9",
+        "ratio": 31.8,
+        "tris": 904
+      },
+      {
+        "name": "pattern12_10",
+        "ratio": 32,
+        "tris": 904
+      },
+      {
+        "name": "pattern3_11",
+        "ratio": 19.2,
+        "tris": 21645
+      },
+      {
+        "name": "pattern2_12",
+        "ratio": 18.4,
+        "tris": 20626
+      }
+    ]
+  },
+  {
+    "id": "01jmmd5sfgkkbw1kxhzwbjxaka",
+    "name": "Apricot printed hooded casual sweater",
+    "category": "TOPWEAR",
+    "panelsCount": 15,
+    "minRatio": 19.4,
+    "maxRatio": 267.1,
+    "avgRatio": 67.1,
+    "ratioSpread": 13.75,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern46_7",
+        "ratio": 38.2,
+        "tris": 11069
+      },
+      {
+        "name": "trim210_18",
+        "ratio": 19.4,
+        "tris": 864
+      },
+      {
+        "name": "trim211_19",
+        "ratio": 19.4,
+        "tris": 864
+      },
+      {
+        "name": "pattern82_20",
+        "ratio": 40.8,
+        "tris": 9154
+      },
+      {
+        "name": "pattern94_21",
+        "ratio": 40.7,
+        "tris": 3968
+      },
+      {
+        "name": "pattern106_22",
+        "ratio": 45,
+        "tris": 1528
+      },
+      {
+        "name": "pattern116_23",
+        "ratio": 51.5,
+        "tris": 1582
+      },
+      {
+        "name": "pattern126_24",
+        "ratio": 42.9,
+        "tris": 621
+      },
+      {
+        "name": "pattern136_25",
+        "ratio": 42.7,
+        "tris": 621
+      },
+      {
+        "name": "pattern146_26",
+        "ratio": 40.4,
+        "tris": 2387
+      },
+      {
+        "name": "后幅 1_27",
+        "ratio": 240.5,
+        "tris": 2404
+      },
+      {
+        "name": "前幅 1_28",
+        "ratio": 267.1,
+        "tris": 1293
+      },
+      {
+        "name": "pattern57_45",
+        "ratio": 38.9,
+        "tris": 11057
+      },
+      {
+        "name": "pattern68_46",
+        "ratio": 39.2,
+        "tris": 4901
+      },
+      {
+        "name": "pattern75_47",
+        "ratio": 39.1,
+        "tris": 4901
+      }
+    ]
+  },
+  {
+    "id": "01jmmcfxrx1fqpr2x5ggf0dhfd",
+    "name": "Dark gray laser strap decorative sports coat",
+    "category": "TOPWEAR",
+    "panelsCount": 41,
+    "minRatio": 14.6,
+    "maxRatio": 150.3,
+    "avgRatio": 37.7,
+    "ratioSpread": 10.28,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern174_1",
+        "ratio": 37.3,
+        "tris": 6523
+      },
+      {
+        "name": "pattern180_2",
+        "ratio": 14.6,
+        "tris": 4364
+      },
+      {
+        "name": "pattern247_3",
+        "ratio": 14.7,
+        "tris": 4364
+      },
+      {
+        "name": "pattern314_4",
+        "ratio": 17.4,
+        "tris": 963
+      },
+      {
+        "name": "pattern320_5",
+        "ratio": 17.3,
+        "tris": 963
+      },
+      {
+        "name": "pattern326_6",
+        "ratio": 17.5,
+        "tris": 969
+      },
+      {
+        "name": "pattern332_7",
+        "ratio": 17.4,
+        "tris": 969
+      },
+      {
+        "name": "pattern354_10",
+        "ratio": 17.4,
+        "tris": 7129
+      },
+      {
+        "name": "pattern360_11",
+        "ratio": 17.4,
+        "tris": 7129
+      },
+      {
+        "name": "pattern366_12",
+        "ratio": 36.8,
+        "tris": 1280
+      },
+      {
+        "name": "pattern374_13",
+        "ratio": 17.2,
+        "tris": 2562
+      },
+      {
+        "name": "pattern45_72",
+        "ratio": 35.7,
+        "tris": 1656
+      },
+      {
+        "name": "pattern51_73",
+        "ratio": 36.7,
+        "tris": 1658
+      },
+      {
+        "name": "pattern59_74",
+        "ratio": 37.4,
+        "tris": 8174
+      },
+      {
+        "name": "pattern66_75",
+        "ratio": 35.7,
+        "tris": 2091
+      },
+      {
+        "name": "pattern72_76",
+        "ratio": 35.8,
+        "tris": 5181
+      },
+      {
+        "name": "pattern80_77",
+        "ratio": 37.2,
+        "tris": 748
+      },
+      {
+        "name": "pattern100_80",
+        "ratio": 38.3,
+        "tris": 7129
+      },
+      {
+        "name": "pattern106_81",
+        "ratio": 38.1,
+        "tris": 7129
+      },
+      {
+        "name": "pattern112_82",
+        "ratio": 38.2,
+        "tris": 2562
+      },
+      {
+        "name": "pattern120_83",
+        "ratio": 38.3,
+        "tris": 1280
+      },
+      {
+        "name": "pattern128_84",
+        "ratio": 37.3,
+        "tris": 3396
+      },
+      {
+        "name": "pattern135_85",
+        "ratio": 37.4,
+        "tris": 3396
+      },
+      {
+        "name": "pattern142_86",
+        "ratio": 37.8,
+        "tris": 6436
+      },
+      {
+        "name": "pattern148_87",
+        "ratio": 37.8,
+        "tris": 6430
+      },
+      {
+        "name": "pattern154_88",
+        "ratio": 37.4,
+        "tris": 3645
+      },
+      {
+        "name": "pattern161_89",
+        "ratio": 38,
+        "tris": 3645
+      },
+      {
+        "name": "pattern168_90",
+        "ratio": 37,
+        "tris": 6509
+      },
+      {
+        "name": "pattern1_91",
+        "ratio": 37.1,
+        "tris": 1922
+      },
+      {
+        "name": "pattern8_92",
+        "ratio": 37.1,
+        "tris": 1926
+      },
+      {
+        "name": "pattern15_93",
+        "ratio": 37.3,
+        "tris": 47436
+      },
+      {
+        "name": "pattern27_94",
+        "ratio": 37.2,
+        "tris": 22066
+      },
+      {
+        "name": "pattern36_95",
+        "ratio": 37,
+        "tris": 22084
+      },
+      {
+        "name": "trim1139_96",
+        "ratio": 37.7,
+        "tris": 1752
+      },
+      {
+        "name": "trim1140_97",
+        "ratio": 37.4,
+        "tris": 740
+      },
+      {
+        "name": "pattern1022_128",
+        "ratio": 38.2,
+        "tris": 1926
+      },
+      {
+        "name": "pattern1029_129",
+        "ratio": 38.2,
+        "tris": 1922
+      },
+      {
+        "name": "图案 1_130",
+        "ratio": 122.9,
+        "tris": 2219
+      },
+      {
+        "name": "图案 1 1_131",
+        "ratio": 150.3,
+        "tris": 4188
+      },
+      {
+        "name": "trim1137_185",
+        "ratio": 37.7,
+        "tris": 1752
+      },
+      {
+        "name": "trim1138_186",
+        "ratio": 37.4,
+        "tris": 740
+      }
+    ]
+  },
+  {
+    "id": "01jmmcfbaxd6ph31jmw2w60ax8",
+    "name": "Khaki color patchwork sports long-sleeved bottom shirt",
+    "category": "TOPWEAR",
+    "panelsCount": 28,
+    "minRatio": 2.6,
+    "maxRatio": 75.8,
+    "avgRatio": 41.7,
+    "ratioSpread": 29.67,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern89_1",
+        "ratio": 49.5,
+        "tris": 2553
+      },
+      {
+        "name": "pattern96_2",
+        "ratio": 41,
+        "tris": 4114
+      },
+      {
+        "name": "pattern102_3",
+        "ratio": 41.1,
+        "tris": 4114
+      },
+      {
+        "name": "pattern108_4",
+        "ratio": 47.6,
+        "tris": 10485
+      },
+      {
+        "name": "pattern115_5",
+        "ratio": 48,
+        "tris": 10410
+      },
+      {
+        "name": "pattern122_6",
+        "ratio": 46.9,
+        "tris": 2411
+      },
+      {
+        "name": "pattern128_7",
+        "ratio": 45.6,
+        "tris": 2402
+      },
+      {
+        "name": "pattern134_8",
+        "ratio": 52.8,
+        "tris": 3432
+      },
+      {
+        "name": "pattern140_9",
+        "ratio": 45.4,
+        "tris": 1813
+      },
+      {
+        "name": "pattern146_10",
+        "ratio": 45.4,
+        "tris": 783
+      },
+      {
+        "name": "pattern152_11",
+        "ratio": 45.4,
+        "tris": 1808
+      },
+      {
+        "name": "图案1_12",
+        "ratio": 75.8,
+        "tris": 792
+      },
+      {
+        "name": "402 两针三线 0.3宽 1_14",
+        "ratio": 2.6,
+        "tris": 1009
+      },
+      {
+        "name": "402 两针三线 0.3宽 6_16",
+        "ratio": 2.9,
+        "tris": 944
+      },
+      {
+        "name": "pattern1_17",
+        "ratio": 44.5,
+        "tris": 1850
+      },
+      {
+        "name": "pattern7_18",
+        "ratio": 44,
+        "tris": 1882
+      },
+      {
+        "name": "pattern13_19",
+        "ratio": 43.7,
+        "tris": 1984
+      },
+      {
+        "name": "pattern19_20",
+        "ratio": 40.9,
+        "tris": 18745
+      },
+      {
+        "name": "pattern29_21",
+        "ratio": 45.3,
+        "tris": 1957
+      },
+      {
+        "name": "pattern35_22",
+        "ratio": 43.4,
+        "tris": 2245
+      },
+      {
+        "name": "pattern41_23",
+        "ratio": 39.1,
+        "tris": 6640
+      },
+      {
+        "name": "402 两针三线 0.3宽 4_28",
+        "ratio": 3.2,
+        "tris": 506
+      },
+      {
+        "name": "pattern47_32",
+        "ratio": 42.2,
+        "tris": 2319
+      },
+      {
+        "name": "pattern54_33",
+        "ratio": 44.6,
+        "tris": 10578
+      },
+      {
+        "name": "pattern60_34",
+        "ratio": 42.7,
+        "tris": 2407
+      },
+      {
+        "name": "pattern67_35",
+        "ratio": 42.6,
+        "tris": 2406
+      },
+      {
+        "name": "pattern74_36",
+        "ratio": 48.8,
+        "tris": 2550
+      },
+      {
+        "name": "pattern81_37",
+        "ratio": 51.5,
+        "tris": 12617
+      }
+    ]
+  },
+  {
+    "id": "01jmmcezrsm6jv3a1npbw7qa7m",
+    "name": "Black panel printed basketball tank top",
+    "category": "TOPWEAR",
+    "panelsCount": 17,
+    "minRatio": 54.3,
+    "maxRatio": 356.2,
+    "avgRatio": 125.4,
+    "ratioSpread": 6.57,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern227_1",
+        "ratio": 54.6,
+        "tris": 30988
+      },
+      {
+        "name": "pattern275_2",
+        "ratio": 54.3,
+        "tris": 1090
+      },
+      {
+        "name": "pattern283_3",
+        "ratio": 55,
+        "tris": 32708
+      },
+      {
+        "name": "pattern322_4",
+        "ratio": 114.2,
+        "tris": 715
+      },
+      {
+        "name": "pattern331_5",
+        "ratio": 114.3,
+        "tris": 806
+      },
+      {
+        "name": "pattern340_6",
+        "ratio": 114.2,
+        "tris": 695
+      },
+      {
+        "name": "pattern349_7",
+        "ratio": 114.4,
+        "tris": 826
+      },
+      {
+        "name": "图案20_8",
+        "ratio": 354.3,
+        "tris": 12837
+      },
+      {
+        "name": "图案24_9",
+        "ratio": 356.2,
+        "tris": 12808
+      },
+      {
+        "name": "pattern93_72",
+        "ratio": 115.8,
+        "tris": 1021
+      },
+      {
+        "name": "pattern107_73",
+        "ratio": 114.8,
+        "tris": 1019
+      },
+      {
+        "name": "pattern121_74",
+        "ratio": 54.6,
+        "tris": 1608
+      },
+      {
+        "name": "pattern141_75",
+        "ratio": 55.4,
+        "tris": 1614
+      },
+      {
+        "name": "pattern161_76",
+        "ratio": 114.9,
+        "tris": 574
+      },
+      {
+        "name": "pattern174_77",
+        "ratio": 115.6,
+        "tris": 568
+      },
+      {
+        "name": "pattern187_78",
+        "ratio": 115.3,
+        "tris": 678
+      },
+      {
+        "name": "pattern207_79",
+        "ratio": 114.3,
+        "tris": 680
+      }
+    ]
+  },
+  {
+    "id": "01jmmcecfx0vqpyw74xjxhnsw9",
+    "name": "Grass green webbing sports shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 28,
+    "minRatio": 1.1,
+    "maxRatio": 65.3,
+    "avgRatio": 31,
+    "ratioSpread": 62.01,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern13_1",
+        "ratio": 35.8,
+        "tris": 44195
+      },
+      {
+        "name": "pattern20_2",
+        "ratio": 35.9,
+        "tris": 44151
+      },
+      {
+        "name": "pattern1_3",
+        "ratio": 30.8,
+        "tris": 62625
+      },
+      {
+        "name": "pattern7_4",
+        "ratio": 33.2,
+        "tris": 63193
+      },
+      {
+        "name": "0 4_5",
+        "ratio": 1.1,
+        "tris": 6870
+      },
+      {
+        "name": "0 5_6",
+        "ratio": 1.1,
+        "tris": 6871
+      },
+      {
+        "name": "0 10_20",
+        "ratio": 1.2,
+        "tris": 609
+      },
+      {
+        "name": "0 12_25",
+        "ratio": 1.3,
+        "tris": 648
+      },
+      {
+        "name": "trim244_29",
+        "ratio": 65.3,
+        "tris": 1212
+      },
+      {
+        "name": "trim245_30",
+        "ratio": 65.3,
+        "tris": 1212
+      },
+      {
+        "name": "trim246_31",
+        "ratio": 65.3,
+        "tris": 1212
+      },
+      {
+        "name": "trim247_32",
+        "ratio": 65.3,
+        "tris": 1212
+      },
+      {
+        "name": "pattern27_33",
+        "ratio": 36,
+        "tris": 37314
+      },
+      {
+        "name": "pattern60_38",
+        "ratio": 5.8,
+        "tris": 1100
+      },
+      {
+        "name": "pattern78_41",
+        "ratio": 5.7,
+        "tris": 1100
+      },
+      {
+        "name": "pattern84_42",
+        "ratio": 5.8,
+        "tris": 1098
+      },
+      {
+        "name": "pattern96_44",
+        "ratio": 5.8,
+        "tris": 1098
+      },
+      {
+        "name": "pattern108_46",
+        "ratio": 35.7,
+        "tris": 928
+      },
+      {
+        "name": "pattern114_47",
+        "ratio": 35.7,
+        "tris": 926
+      },
+      {
+        "name": "pattern120_48",
+        "ratio": 35.6,
+        "tris": 1792
+      },
+      {
+        "name": "pattern126_49",
+        "ratio": 35.6,
+        "tris": 1764
+      },
+      {
+        "name": "pattern144_52",
+        "ratio": 35.7,
+        "tris": 1128
+      },
+      {
+        "name": "pattern150_53",
+        "ratio": 35.3,
+        "tris": 1130
+      },
+      {
+        "name": "pattern156_54",
+        "ratio": 35.6,
+        "tris": 1936
+      },
+      {
+        "name": "pattern162_55",
+        "ratio": 35.6,
+        "tris": 1936
+      },
+      {
+        "name": "pattern180_58",
+        "ratio": 33.3,
+        "tris": 63205
+      },
+      {
+        "name": "pattern186_59",
+        "ratio": 35.6,
+        "tris": 37431
+      },
+      {
+        "name": "默认图案_60",
+        "ratio": 52.7,
+        "tris": 804
+      }
+    ]
+  },
+  {
+    "id": "01jmmcbqyyzd96exkdts8nmsz2",
+    "name": "Brown brushed drawcord hoodie sweater",
+    "category": "TOPWEAR",
+    "panelsCount": 21,
+    "minRatio": 1,
+    "maxRatio": 63.7,
+    "avgRatio": 7,
+    "ratioSpread": 66.07,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern87_1",
+        "ratio": 1,
+        "tris": 619
+      },
+      {
+        "name": "pattern93_2",
+        "ratio": 1,
+        "tris": 567
+      },
+      {
+        "name": "pattern99_3",
+        "ratio": 1.1,
+        "tris": 567
+      },
+      {
+        "name": "pattern105_4",
+        "ratio": 1,
+        "tris": 52205
+      },
+      {
+        "name": "pattern121_5",
+        "ratio": 1,
+        "tris": 867
+      },
+      {
+        "name": "pattern129_6",
+        "ratio": 1,
+        "tris": 29442
+      },
+      {
+        "name": "pattern175_7",
+        "ratio": 1,
+        "tris": 56991
+      },
+      {
+        "name": "pattern141_25",
+        "ratio": 1,
+        "tris": 28448
+      },
+      {
+        "name": "pattern153_27",
+        "ratio": 1,
+        "tris": 11500
+      },
+      {
+        "name": "pattern161_28",
+        "ratio": 1,
+        "tris": 606
+      },
+      {
+        "name": "pattern167_29",
+        "ratio": 1,
+        "tris": 900
+      },
+      {
+        "name": "pattern1_30",
+        "ratio": 1,
+        "tris": 2418
+      },
+      {
+        "name": "pattern7_31",
+        "ratio": 1,
+        "tris": 9743
+      },
+      {
+        "name": "pattern15_32",
+        "ratio": 1,
+        "tris": 2418
+      },
+      {
+        "name": "pattern21_33",
+        "ratio": 1,
+        "tris": 14915
+      },
+      {
+        "name": "pattern27_34",
+        "ratio": 1,
+        "tris": 14915
+      },
+      {
+        "name": "pattern33_35",
+        "ratio": 63.7,
+        "tris": 4062
+      },
+      {
+        "name": "pattern39_36",
+        "ratio": 63.7,
+        "tris": 4062
+      },
+      {
+        "name": "pattern45_37",
+        "ratio": 1,
+        "tris": 1212
+      },
+      {
+        "name": "pattern51_38",
+        "ratio": 1,
+        "tris": 1212
+      },
+      {
+        "name": "pattern81_43",
+        "ratio": 1.1,
+        "tris": 619
+      }
+    ]
+  },
+  {
+    "id": "01jmmbt8r0gvwdd4vddwmfqfvb",
+    "name": "Grey hooded zippered European cardigan coat",
+    "category": "TOPWEAR",
+    "panelsCount": 27,
+    "minRatio": 0.8,
+    "maxRatio": 171.2,
+    "avgRatio": 131.7,
+    "ratioSpread": 226.36,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern153_1",
+        "ratio": 159.9,
+        "tris": 5613
+      },
+      {
+        "name": "pattern161_2",
+        "ratio": 164.9,
+        "tris": 16016
+      },
+      {
+        "name": "pattern178_3",
+        "ratio": 166.8,
+        "tris": 29687
+      },
+      {
+        "name": "pattern185_4",
+        "ratio": 158.6,
+        "tris": 12248
+      },
+      {
+        "name": "pattern191_5",
+        "ratio": 158.5,
+        "tris": 15233
+      },
+      {
+        "name": "pattern198_6",
+        "ratio": 163.3,
+        "tris": 16042
+      },
+      {
+        "name": "pattern215_7",
+        "ratio": 0.9,
+        "tris": 2342
+      },
+      {
+        "name": "pattern223_8",
+        "ratio": 161.7,
+        "tris": 5560
+      },
+      {
+        "name": "pattern1_38",
+        "ratio": 171.2,
+        "tris": 11510
+      },
+      {
+        "name": "pattern11_39",
+        "ratio": 162.2,
+        "tris": 31308
+      },
+      {
+        "name": "pattern21_40",
+        "ratio": 156.4,
+        "tris": 5900
+      },
+      {
+        "name": "pattern27_41",
+        "ratio": 158.8,
+        "tris": 5679
+      },
+      {
+        "name": "pattern33_42",
+        "ratio": 158.1,
+        "tris": 12248
+      },
+      {
+        "name": "pattern39_43",
+        "ratio": 158.8,
+        "tris": 15205
+      },
+      {
+        "name": "pattern46_44",
+        "ratio": 0.8,
+        "tris": 2342
+      },
+      {
+        "name": "pattern54_45",
+        "ratio": 1,
+        "tris": 1964
+      },
+      {
+        "name": "pattern62_46",
+        "ratio": 1,
+        "tris": 618
+      },
+      {
+        "name": "pattern76_60",
+        "ratio": 162.3,
+        "tris": 5560
+      },
+      {
+        "name": "pattern82_61",
+        "ratio": 158.5,
+        "tris": 3376
+      },
+      {
+        "name": "pattern88_62",
+        "ratio": 1.1,
+        "tris": 618
+      },
+      {
+        "name": "pattern102_63",
+        "ratio": 155.5,
+        "tris": 10787
+      },
+      {
+        "name": "pattern109_64",
+        "ratio": 165.5,
+        "tris": 10814
+      },
+      {
+        "name": "pattern116_65",
+        "ratio": 159.3,
+        "tris": 3376
+      },
+      {
+        "name": "pattern122_66",
+        "ratio": 162.1,
+        "tris": 2143
+      },
+      {
+        "name": "pattern130_67",
+        "ratio": 162.8,
+        "tris": 9045
+      },
+      {
+        "name": "pattern138_68",
+        "ratio": 163.8,
+        "tris": 29790
+      },
+      {
+        "name": "pattern145_69",
+        "ratio": 161.9,
+        "tris": 9045
+      }
+    ]
+  },
+  {
+    "id": "01jmmbd2bk9h9t13r8429kavmv",
+    "name": "Light blue long sleeve one-piece tights",
+    "category": "SUIT",
+    "panelsCount": 9,
+    "minRatio": 14.3,
+    "maxRatio": 70.3,
+    "avgRatio": 53.3,
+    "ratioSpread": 4.9,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern15_1",
+        "ratio": 67.5,
+        "tris": 18637
+      },
+      {
+        "name": "pattern23_2",
+        "ratio": 70.3,
+        "tris": 13061
+      },
+      {
+        "name": "pattern1_3",
+        "ratio": 14.3,
+        "tris": 7888
+      },
+      {
+        "name": "pattern7_4",
+        "ratio": 68.1,
+        "tris": 18613
+      },
+      {
+        "name": "trim162_9",
+        "ratio": 29.9,
+        "tris": 1060
+      },
+      {
+        "name": "trim163_10",
+        "ratio": 34.9,
+        "tris": 1840
+      },
+      {
+        "name": "pattern38_11",
+        "ratio": 68.7,
+        "tris": 13061
+      },
+      {
+        "name": "pattern73_14",
+        "ratio": 70,
+        "tris": 23200
+      },
+      {
+        "name": "image_17",
+        "ratio": 56.4,
+        "tris": 521
+      }
+    ]
+  },
+  {
+    "id": "01jmmbb7g0sfgz54ghqy16vdte",
+    "name": "Pink zip hooded European jacket",
+    "category": "TOPWEAR",
+    "panelsCount": 33,
+    "minRatio": 36.2,
+    "maxRatio": 56.1,
+    "avgRatio": 48.2,
+    "ratioSpread": 1.55,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 51.2,
+        "tris": 12830
+      },
+      {
+        "name": "pattern9_2",
+        "ratio": 46.1,
+        "tris": 48352
+      },
+      {
+        "name": "pattern21_3",
+        "ratio": 40.6,
+        "tris": 10953
+      },
+      {
+        "name": "pattern28_4",
+        "ratio": 52.2,
+        "tris": 3715
+      },
+      {
+        "name": "pattern35_5",
+        "ratio": 52.1,
+        "tris": 1986
+      },
+      {
+        "name": "pattern43_6",
+        "ratio": 40.9,
+        "tris": 10952
+      },
+      {
+        "name": "pattern50_7",
+        "ratio": 52.6,
+        "tris": 3715
+      },
+      {
+        "name": "pattern69_10",
+        "ratio": 56.1,
+        "tris": 8507
+      },
+      {
+        "name": "pattern78_11",
+        "ratio": 52,
+        "tris": 3402
+      },
+      {
+        "name": "pattern83_19",
+        "ratio": 52.5,
+        "tris": 12830
+      },
+      {
+        "name": "pattern91_20",
+        "ratio": 40.8,
+        "tris": 3687
+      },
+      {
+        "name": "pattern99_21",
+        "ratio": 41,
+        "tris": 3667
+      },
+      {
+        "name": "pattern107_22",
+        "ratio": 41,
+        "tris": 3667
+      },
+      {
+        "name": "pattern115_23",
+        "ratio": 40.9,
+        "tris": 3673
+      },
+      {
+        "name": "pattern123_24",
+        "ratio": 53,
+        "tris": 17727
+      },
+      {
+        "name": "pattern131_25",
+        "ratio": 52.8,
+        "tris": 17695
+      },
+      {
+        "name": "pattern139_26",
+        "ratio": 52.4,
+        "tris": 14130
+      },
+      {
+        "name": "pattern152_27",
+        "ratio": 52.3,
+        "tris": 14140
+      },
+      {
+        "name": "pattern165_28",
+        "ratio": 55.6,
+        "tris": 2330
+      },
+      {
+        "name": "pattern171_29",
+        "ratio": 56,
+        "tris": 2330
+      },
+      {
+        "name": "pattern177_30",
+        "ratio": 55.7,
+        "tris": 2306
+      },
+      {
+        "name": "pattern183_31",
+        "ratio": 55.5,
+        "tris": 2306
+      },
+      {
+        "name": "pattern189_32",
+        "ratio": 36.2,
+        "tris": 618
+      },
+      {
+        "name": "pattern267_33",
+        "ratio": 41.2,
+        "tris": 17328
+      },
+      {
+        "name": "pattern197_127",
+        "ratio": 36.4,
+        "tris": 650
+      },
+      {
+        "name": "pattern205_128",
+        "ratio": 36.3,
+        "tris": 650
+      },
+      {
+        "name": "pattern213_129",
+        "ratio": 53.7,
+        "tris": 17328
+      },
+      {
+        "name": "pattern220_130",
+        "ratio": 53.6,
+        "tris": 17308
+      },
+      {
+        "name": "pattern227_131",
+        "ratio": 41,
+        "tris": 33635
+      },
+      {
+        "name": "pattern238_132",
+        "ratio": 53,
+        "tris": 3402
+      },
+      {
+        "name": "pattern243_133",
+        "ratio": 52.7,
+        "tris": 3521
+      },
+      {
+        "name": "pattern251_134",
+        "ratio": 53.2,
+        "tris": 8519
+      },
+      {
+        "name": "pattern260_135",
+        "ratio": 41.2,
+        "tris": 17308
+      }
+    ]
+  },
+  {
+    "id": "01jmmb73n7a187gdbgznxdxe2y",
+    "name": "White shiny European shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 10,
+    "minRatio": 1.3,
+    "maxRatio": 73.6,
+    "avgRatio": 56.4,
+    "ratioSpread": 57.17,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern99_1",
+        "ratio": 66.8,
+        "tris": 9041
+      },
+      {
+        "name": "pattern113_2",
+        "ratio": 69.8,
+        "tris": 9234
+      },
+      {
+        "name": "2 6_6",
+        "ratio": 1.3,
+        "tris": 1872
+      },
+      {
+        "name": "2 7_7",
+        "ratio": 1.3,
+        "tris": 1872
+      },
+      {
+        "name": "pattern121_32",
+        "ratio": 70.4,
+        "tris": 9248
+      },
+      {
+        "name": "pattern1_48",
+        "ratio": 71.5,
+        "tris": 871
+      },
+      {
+        "name": "pattern13_50",
+        "ratio": 69.3,
+        "tris": 871
+      },
+      {
+        "name": "pattern19_51",
+        "ratio": 72.6,
+        "tris": 3231
+      },
+      {
+        "name": "pattern67_59",
+        "ratio": 73.6,
+        "tris": 3224
+      },
+      {
+        "name": "pattern85_62",
+        "ratio": 67.1,
+        "tris": 9047
+      }
+    ]
+  },
+  {
+    "id": "01jmmb6c8nx5tns3kq755v190p",
+    "name": "Sky blue nylon printed loose shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 7,
+    "minRatio": 1,
+    "maxRatio": 183.6,
+    "avgRatio": 73.7,
+    "ratioSpread": 186.48,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 67.5,
+        "tris": 13878
+      },
+      {
+        "name": "pattern8_2",
+        "ratio": 65.5,
+        "tris": 13877
+      },
+      {
+        "name": "图片3_3",
+        "ratio": 183.6,
+        "tris": 4932
+      },
+      {
+        "name": "pattern15_8",
+        "ratio": 64.9,
+        "tris": 11849
+      },
+      {
+        "name": "pattern23_9",
+        "ratio": 66.7,
+        "tris": 11850
+      },
+      {
+        "name": "pattern31_10",
+        "ratio": 67,
+        "tris": 37519
+      },
+      {
+        "name": "pattern39_11",
+        "ratio": 1,
+        "tris": 3066
+      }
+    ]
+  },
+  {
+    "id": "01jmmajjv5y600e48s4v07aj5z",
+    "name": "Black two piece casual sweatpants",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 15,
+    "minRatio": 1,
+    "maxRatio": 51.2,
+    "avgRatio": 10.7,
+    "ratioSpread": 51.26,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern41_1",
+        "ratio": 10.2,
+        "tris": 13520
+      },
+      {
+        "name": "pattern47_2",
+        "ratio": 10.1,
+        "tris": 14308
+      },
+      {
+        "name": "pattern58_3",
+        "ratio": 10.1,
+        "tris": 14308
+      },
+      {
+        "name": "pattern81_6",
+        "ratio": 1,
+        "tris": 1277
+      },
+      {
+        "name": "pattern89_7",
+        "ratio": 1,
+        "tris": 1277
+      },
+      {
+        "name": "pattern97_8",
+        "ratio": 1,
+        "tris": 598
+      },
+      {
+        "name": "pattern103_9",
+        "ratio": 10.2,
+        "tris": 7508
+      },
+      {
+        "name": "pattern117_10",
+        "ratio": 10.2,
+        "tris": 7406
+      },
+      {
+        "name": "pattern1_11",
+        "ratio": 11.6,
+        "tris": 11241
+      },
+      {
+        "name": "pattern21_13",
+        "ratio": 11.7,
+        "tris": 11241
+      },
+      {
+        "name": "pattern35_14",
+        "ratio": 10.6,
+        "tris": 3088
+      },
+      {
+        "name": "trim197_24",
+        "ratio": 1,
+        "tris": 1604
+      },
+      {
+        "name": "pattern131_26",
+        "ratio": 10.1,
+        "tris": 550
+      },
+      {
+        "name": "pattern139_27",
+        "ratio": 51.2,
+        "tris": 1835
+      },
+      {
+        "name": "pattern145_28",
+        "ratio": 10.2,
+        "tris": 750
+      }
+    ]
+  },
+  {
+    "id": "01jmmahrvh8rq7dzjrfxyst4zg",
+    "name": "Black drawstring waist shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 23,
+    "minRatio": 1,
+    "maxRatio": 122.1,
+    "avgRatio": 102.9,
+    "ratioSpread": 125.07,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 112.9,
+        "tris": 2607
+      },
+      {
+        "name": "pattern10_2",
+        "ratio": 115.1,
+        "tris": 2607
+      },
+      {
+        "name": "pattern19_3",
+        "ratio": 113.7,
+        "tris": 21311
+      },
+      {
+        "name": "pattern28_4",
+        "ratio": 122.1,
+        "tris": 2967
+      },
+      {
+        "name": "pattern37_5",
+        "ratio": 91.7,
+        "tris": 2776
+      },
+      {
+        "name": "pattern45_6",
+        "ratio": 84.1,
+        "tris": 2764
+      },
+      {
+        "name": "pattern53_7",
+        "ratio": 117.9,
+        "tris": 31651
+      },
+      {
+        "name": "pattern66_8",
+        "ratio": 114.7,
+        "tris": 4195
+      },
+      {
+        "name": "pattern72_9",
+        "ratio": 112.9,
+        "tris": 1424
+      },
+      {
+        "name": "pattern78_10",
+        "ratio": 116.3,
+        "tris": 4195
+      },
+      {
+        "name": "pattern84_11",
+        "ratio": 113.5,
+        "tris": 1424
+      },
+      {
+        "name": "pattern90_12",
+        "ratio": 115.4,
+        "tris": 1424
+      },
+      {
+        "name": "pattern96_13",
+        "ratio": 116,
+        "tris": 1424
+      },
+      {
+        "name": "pattern102_14",
+        "ratio": 112.7,
+        "tris": 31695
+      },
+      {
+        "name": "pattern128_17",
+        "ratio": 118.8,
+        "tris": 23944
+      },
+      {
+        "name": "trim311_26",
+        "ratio": 1,
+        "tris": 7188
+      },
+      {
+        "name": "trim312_27",
+        "ratio": 1,
+        "tris": 1100
+      },
+      {
+        "name": "pattern142_62",
+        "ratio": 115.9,
+        "tris": 23910
+      },
+      {
+        "name": "pattern168_65",
+        "ratio": 115.3,
+        "tris": 21311
+      },
+      {
+        "name": "pattern177_66",
+        "ratio": 113.4,
+        "tris": 1151
+      },
+      {
+        "name": "pattern184_67",
+        "ratio": 112.6,
+        "tris": 1131
+      },
+      {
+        "name": "pattern193_68",
+        "ratio": 116.6,
+        "tris": 916
+      },
+      {
+        "name": "pattern202_69",
+        "ratio": 114,
+        "tris": 916
+      }
+    ]
+  },
+  {
+    "id": "01jmmahaxrs17szejysk9kgxtq",
+    "name": "Green European American Sports Casual Pants",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 25,
+    "minRatio": 1,
+    "maxRatio": 90.6,
+    "avgRatio": 50.7,
+    "ratioSpread": 93.52,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern136_1",
+        "ratio": 54.1,
+        "tris": 31398
+      },
+      {
+        "name": "pattern143_2",
+        "ratio": 55.5,
+        "tris": 32132
+      },
+      {
+        "name": "pattern39_3",
+        "ratio": 55.8,
+        "tris": 3031
+      },
+      {
+        "name": "pattern51_4",
+        "ratio": 55.1,
+        "tris": 7558
+      },
+      {
+        "name": "pattern64_6",
+        "ratio": 90.6,
+        "tris": 1792
+      },
+      {
+        "name": "pattern70_7",
+        "ratio": 79.8,
+        "tris": 1372
+      },
+      {
+        "name": "pattern76_8",
+        "ratio": 71.2,
+        "tris": 3950
+      },
+      {
+        "name": "pattern82_9",
+        "ratio": 74.7,
+        "tris": 3008
+      },
+      {
+        "name": "pattern100_12",
+        "ratio": 86.9,
+        "tris": 3950
+      },
+      {
+        "name": "pattern106_13",
+        "ratio": 81.5,
+        "tris": 3008
+      },
+      {
+        "name": "pattern112_14",
+        "ratio": 72.4,
+        "tris": 3950
+      },
+      {
+        "name": "pattern1_15",
+        "ratio": 57.1,
+        "tris": 1282
+      },
+      {
+        "name": "pattern7_16",
+        "ratio": 58.2,
+        "tris": 968
+      },
+      {
+        "name": "pattern13_17",
+        "ratio": 65.2,
+        "tris": 42377
+      },
+      {
+        "name": "pattern26_19",
+        "ratio": 57.1,
+        "tris": 968
+      },
+      {
+        "name": "pattern32_20",
+        "ratio": 57.9,
+        "tris": 1282
+      },
+      {
+        "name": "trim150_22",
+        "ratio": 1,
+        "tris": 864
+      },
+      {
+        "name": "trim151_23",
+        "ratio": 1,
+        "tris": 864
+      },
+      {
+        "name": "trim152_24",
+        "ratio": 1,
+        "tris": 864
+      },
+      {
+        "name": "trim153_25",
+        "ratio": 1,
+        "tris": 864
+      },
+      {
+        "name": "trim154_26",
+        "ratio": 1,
+        "tris": 864
+      },
+      {
+        "name": "trim155_27",
+        "ratio": 1,
+        "tris": 864
+      },
+      {
+        "name": "pattern118_28",
+        "ratio": 76.5,
+        "tris": 3008
+      },
+      {
+        "name": "pattern124_29",
+        "ratio": 56.4,
+        "tris": 16932
+      },
+      {
+        "name": "pattern130_30",
+        "ratio": 56,
+        "tris": 16606
+      }
+    ]
+  },
+  {
+    "id": "01jmmab4r4x6tmyenjzfckrrzh",
+    "name": "Pink Hooded Loose Coat",
+    "category": "TOPWEAR",
+    "panelsCount": 20,
+    "minRatio": 69.8,
+    "maxRatio": 280.1,
+    "avgRatio": 83.8,
+    "ratioSpread": 4.01,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "默认图案_2",
+        "ratio": 280.1,
+        "tris": 12072
+      },
+      {
+        "name": "pattern1_11",
+        "ratio": 70.2,
+        "tris": 2512
+      },
+      {
+        "name": "pattern7_12",
+        "ratio": 70.4,
+        "tris": 2456
+      },
+      {
+        "name": "pattern13_13",
+        "ratio": 73,
+        "tris": 23642
+      },
+      {
+        "name": "pattern31_14",
+        "ratio": 70.2,
+        "tris": 5213
+      },
+      {
+        "name": "pattern39_15",
+        "ratio": 76.4,
+        "tris": 1107
+      },
+      {
+        "name": "pattern46_16",
+        "ratio": 78.2,
+        "tris": 1107
+      },
+      {
+        "name": "pattern52_17",
+        "ratio": 74.4,
+        "tris": 12221
+      },
+      {
+        "name": "pattern62_18",
+        "ratio": 73.2,
+        "tris": 12257
+      },
+      {
+        "name": "pattern72_19",
+        "ratio": 70.7,
+        "tris": 2601
+      },
+      {
+        "name": "pattern79_20",
+        "ratio": 69.8,
+        "tris": 2462
+      },
+      {
+        "name": "pattern85_21",
+        "ratio": 69.8,
+        "tris": 2464
+      },
+      {
+        "name": "pattern91_22",
+        "ratio": 70.3,
+        "tris": 5181
+      },
+      {
+        "name": "pattern99_23",
+        "ratio": 79,
+        "tris": 13761
+      },
+      {
+        "name": "pattern105_24",
+        "ratio": 78,
+        "tris": 13761
+      },
+      {
+        "name": "pattern111_25",
+        "ratio": 71,
+        "tris": 2593
+      },
+      {
+        "name": "pattern132_28",
+        "ratio": 74.2,
+        "tris": 17455
+      },
+      {
+        "name": "pattern143_29",
+        "ratio": 74.6,
+        "tris": 17381
+      },
+      {
+        "name": "pattern154_30",
+        "ratio": 75,
+        "tris": 1538
+      },
+      {
+        "name": "pattern160_31",
+        "ratio": 77,
+        "tris": 1538
+      }
+    ]
+  },
+  {
+    "id": "01jmm935y79zj24bt7jqhy7ymb",
+    "name": "Blue knitted tight shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 4,
+    "minRatio": 83,
+    "maxRatio": 89.3,
+    "avgRatio": 85.2,
+    "ratioSpread": 1.08,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern28_1",
+        "ratio": 84.7,
+        "tris": 8610
+      },
+      {
+        "name": "pattern1_2",
+        "ratio": 89.3,
+        "tris": 2908
+      },
+      {
+        "name": "pattern7_3",
+        "ratio": 83.7,
+        "tris": 8611
+      },
+      {
+        "name": "pattern35_12",
+        "ratio": 83,
+        "tris": 9945
+      }
+    ]
+  },
+  {
+    "id": "01jmm92whscpe7x9acdm2yt07h",
+    "name": "Purple Knitted Pleated Tank Top",
+    "category": "TOPWEAR",
+    "panelsCount": 5,
+    "minRatio": 26.5,
+    "maxRatio": 27.5,
+    "avgRatio": 26.9,
+    "ratioSpread": 1.04,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern55_1",
+        "ratio": 27.5,
+        "tris": 11903
+      },
+      {
+        "name": "pattern77_4",
+        "ratio": 26.8,
+        "tris": 536
+      },
+      {
+        "name": "pattern85_5",
+        "ratio": 26.5,
+        "tris": 4698
+      },
+      {
+        "name": "pattern45_10",
+        "ratio": 27,
+        "tris": 11903
+      },
+      {
+        "name": "pattern1_11",
+        "ratio": 26.6,
+        "tris": 658
+      }
+    ]
+  },
+  {
+    "id": "01jmm92mgxc1xq0jyysgh298zb",
+    "name": "Yellow green heteromorphic knitting yoga shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 12,
+    "minRatio": 16.6,
+    "maxRatio": 17.9,
+    "avgRatio": 17.3,
+    "ratioSpread": 1.08,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern43_1",
+        "ratio": 17.9,
+        "tris": 41997
+      },
+      {
+        "name": "pattern55_2",
+        "ratio": 17.8,
+        "tris": 6967
+      },
+      {
+        "name": "pattern28_3",
+        "ratio": 17.7,
+        "tris": 7641
+      },
+      {
+        "name": "pattern36_4",
+        "ratio": 17,
+        "tris": 10341
+      },
+      {
+        "name": "pattern1_5",
+        "ratio": 16.8,
+        "tris": 7641
+      },
+      {
+        "name": "pattern9_6",
+        "ratio": 17,
+        "tris": 10341
+      },
+      {
+        "name": "pattern16_7",
+        "ratio": 17.8,
+        "tris": 41997
+      },
+      {
+        "name": "pattern102_8",
+        "ratio": 16.6,
+        "tris": 10341
+      },
+      {
+        "name": "pattern67_9",
+        "ratio": 17.8,
+        "tris": 6967
+      },
+      {
+        "name": "pattern79_10",
+        "ratio": 16.6,
+        "tris": 7641
+      },
+      {
+        "name": "pattern87_11",
+        "ratio": 17.3,
+        "tris": 7641
+      },
+      {
+        "name": "pattern95_12",
+        "ratio": 16.8,
+        "tris": 10341
+      }
+    ]
+  },
+  {
+    "id": "01jmm924d64bfy1x8hjnjqejdd",
+    "name": "Yellow green knitting yoga vest",
+    "category": "TOPWEAR",
+    "panelsCount": 5,
+    "minRatio": 16.5,
+    "maxRatio": 19.7,
+    "avgRatio": 17.4,
+    "ratioSpread": 1.19,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern27_2",
+        "ratio": 19.7,
+        "tris": 4961
+      },
+      {
+        "name": "pattern37_3",
+        "ratio": 17.4,
+        "tris": 36566
+      },
+      {
+        "name": "pattern1_4",
+        "ratio": 16.5,
+        "tris": 5908
+      },
+      {
+        "name": "pattern14_6",
+        "ratio": 17,
+        "tris": 6056
+      },
+      {
+        "name": "pattern44_7",
+        "ratio": 16.5,
+        "tris": 5908
+      }
+    ]
+  },
+  {
+    "id": "01jmm8nvv5ghhh2mvjpr45efry",
+    "name": "Light brown knitted hooded short sweater",
+    "category": "TOPWEAR",
+    "panelsCount": 20,
+    "minRatio": 66.2,
+    "maxRatio": 377.8,
+    "avgRatio": 140.3,
+    "ratioSpread": 5.7,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern18_1",
+        "ratio": 68.6,
+        "tris": 121414
+      },
+      {
+        "name": "pattern27_2",
+        "ratio": 131.6,
+        "tris": 1168
+      },
+      {
+        "name": "pattern35_3",
+        "ratio": 70.3,
+        "tris": 31366
+      },
+      {
+        "name": "pattern43_4",
+        "ratio": 70.7,
+        "tris": 36359
+      },
+      {
+        "name": "pattern53_5",
+        "ratio": 72.7,
+        "tris": 36703
+      },
+      {
+        "name": "pattern63_6",
+        "ratio": 370.5,
+        "tris": 2456
+      },
+      {
+        "name": "pattern69_7",
+        "ratio": 371.4,
+        "tris": 2456
+      },
+      {
+        "name": "pattern75_8",
+        "ratio": 371.8,
+        "tris": 2456
+      },
+      {
+        "name": "pattern81_9",
+        "ratio": 377.8,
+        "tris": 2456
+      },
+      {
+        "name": "pattern87_10",
+        "ratio": 72.1,
+        "tris": 5956
+      },
+      {
+        "name": "pattern93_11",
+        "ratio": 71.7,
+        "tris": 7784
+      },
+      {
+        "name": "pattern99_12",
+        "ratio": 69.7,
+        "tris": 1032
+      },
+      {
+        "name": "pattern105_13",
+        "ratio": 71.5,
+        "tris": 6204
+      },
+      {
+        "name": "pattern111_14",
+        "ratio": 73.2,
+        "tris": 27836
+      },
+      {
+        "name": "pattern119_15",
+        "ratio": 70.3,
+        "tris": 31354
+      },
+      {
+        "name": "pattern127_16",
+        "ratio": 134.1,
+        "tris": 1168
+      },
+      {
+        "name": "pattern159_21",
+        "ratio": 69.1,
+        "tris": 1064
+      },
+      {
+        "name": "pattern165_22",
+        "ratio": 66.2,
+        "tris": 1076
+      },
+      {
+        "name": "pattern1_31",
+        "ratio": 70.8,
+        "tris": 126469
+      },
+      {
+        "name": "pattern10_32",
+        "ratio": 131.7,
+        "tris": 5484
+      }
+    ]
+  },
+  {
+    "id": "01jmm8ms8vrb1wcnm18rnr564n",
+    "name": "Light blue low neck tight yoga suit",
+    "category": "SUIT",
+    "panelsCount": 13,
+    "minRatio": 15.9,
+    "maxRatio": 17.4,
+    "avgRatio": 16.4,
+    "ratioSpread": 1.09,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern51_1",
+        "ratio": 16.1,
+        "tris": 2995
+      },
+      {
+        "name": "pattern57_2",
+        "ratio": 16,
+        "tris": 3098
+      },
+      {
+        "name": "pattern63_3",
+        "ratio": 17.4,
+        "tris": 7984
+      },
+      {
+        "name": "pattern77_4",
+        "ratio": 15.9,
+        "tris": 842
+      },
+      {
+        "name": "pattern1_7",
+        "ratio": 16.4,
+        "tris": 1178
+      },
+      {
+        "name": "pattern7_8",
+        "ratio": 16.3,
+        "tris": 16927
+      },
+      {
+        "name": "pattern14_9",
+        "ratio": 16.3,
+        "tris": 1178
+      },
+      {
+        "name": "pattern97_10",
+        "ratio": 16.5,
+        "tris": 3065
+      },
+      {
+        "name": "pattern103_11",
+        "ratio": 16.5,
+        "tris": 3065
+      },
+      {
+        "name": "pattern20_13",
+        "ratio": 16.3,
+        "tris": 16927
+      },
+      {
+        "name": "pattern27_14",
+        "ratio": 16.8,
+        "tris": 12678
+      },
+      {
+        "name": "pattern39_15",
+        "ratio": 16.1,
+        "tris": 2995
+      },
+      {
+        "name": "pattern45_16",
+        "ratio": 16.2,
+        "tris": 3098
+      }
+    ]
+  },
+  {
+    "id": "01jmm8jksz96m4b8h9pjztbvf1",
+    "name": "Blue printing sling tight yoga suit",
+    "category": "SUIT",
+    "panelsCount": 6,
+    "minRatio": 49.6,
+    "maxRatio": 638.8,
+    "avgRatio": 367.8,
+    "ratioSpread": 12.87,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern35_1",
+        "ratio": 49.6,
+        "tris": 1538
+      },
+      {
+        "name": "pattern63_5",
+        "ratio": 133.8,
+        "tris": 3830
+      },
+      {
+        "name": "pattern93_9",
+        "ratio": 134.5,
+        "tris": 4604
+      },
+      {
+        "name": "pattern1_12",
+        "ratio": 638.8,
+        "tris": 8075
+      },
+      {
+        "name": "pattern13_13",
+        "ratio": 633.5,
+        "tris": 936
+      },
+      {
+        "name": "pattern21_14",
+        "ratio": 616.3,
+        "tris": 6570
+      }
+    ]
+  },
+  {
+    "id": "01jmm8hx335djmtcz6dp11x5cf",
+    "name": "Military green sling tight yoga suit",
+    "category": "SUIT",
+    "panelsCount": 8,
+    "minRatio": 52.1,
+    "maxRatio": 99,
+    "avgRatio": 82.1,
+    "ratioSpread": 1.9,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern21_13",
+        "ratio": 52.1,
+        "tris": 4390
+      },
+      {
+        "name": "pattern43_16",
+        "ratio": 53.7,
+        "tris": 3778
+      },
+      {
+        "name": "pattern149_28",
+        "ratio": 98.7,
+        "tris": 533
+      },
+      {
+        "name": "pattern155_29",
+        "ratio": 89.7,
+        "tris": 1152
+      },
+      {
+        "name": "pattern161_30",
+        "ratio": 99,
+        "tris": 533
+      },
+      {
+        "name": "pattern167_51",
+        "ratio": 85.3,
+        "tris": 3695
+      },
+      {
+        "name": "pattern177_52",
+        "ratio": 89.1,
+        "tris": 8590
+      },
+      {
+        "name": "pattern207_55",
+        "ratio": 89.4,
+        "tris": 8590
+      }
+    ]
+  },
+  {
+    "id": "01jmm8hw83x3s0ph48xt8kjbe8",
+    "name": "Blue skinny one-piece yoga suit",
+    "category": "SUIT",
+    "panelsCount": 9,
+    "minRatio": 23.7,
+    "maxRatio": 95.9,
+    "avgRatio": 75.6,
+    "ratioSpread": 4.05,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern49_8",
+        "ratio": 83.9,
+        "tris": 16502
+      },
+      {
+        "name": "pattern81_12",
+        "ratio": 84.4,
+        "tris": 8209
+      },
+      {
+        "name": "pattern213_23",
+        "ratio": 23.7,
+        "tris": 2542
+      },
+      {
+        "name": "pattern219_24",
+        "ratio": 24.4,
+        "tris": 2542
+      },
+      {
+        "name": "pattern225_25",
+        "ratio": 95.2,
+        "tris": 18009
+      },
+      {
+        "name": "pattern233_26",
+        "ratio": 93.7,
+        "tris": 18009
+      },
+      {
+        "name": "pattern165_42",
+        "ratio": 85.4,
+        "tris": 792
+      },
+      {
+        "name": "pattern195_47",
+        "ratio": 93.8,
+        "tris": 15868
+      },
+      {
+        "name": "pattern204_48",
+        "ratio": 95.9,
+        "tris": 15868
+      }
+    ]
+  },
+  {
+    "id": "01jmm8a98j2dfq7n7zkmgbs7nt",
+    "name": "Pink Design Fit Long Sleeve T-Shirt",
+    "category": "TOPWEAR",
+    "panelsCount": 4,
+    "minRatio": 101.2,
+    "maxRatio": 104.1,
+    "avgRatio": 102.8,
+    "ratioSpread": 1.03,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 101.2,
+        "tris": 25882
+      },
+      {
+        "name": "pattern8_2",
+        "ratio": 103,
+        "tris": 25870
+      },
+      {
+        "name": "pattern15_5",
+        "ratio": 103.1,
+        "tris": 35502
+      },
+      {
+        "name": "pattern42_12",
+        "ratio": 104.1,
+        "tris": 89327
+      }
+    ]
+  },
+  {
+    "id": "01jmm7jwn0yj7jtgp9ab9n8avz",
+    "name": "Brown Twill Split Fit Shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 17,
+    "minRatio": 0.8,
+    "maxRatio": 306,
+    "avgRatio": 220.7,
+    "ratioSpread": 386.19,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern88_1",
+        "ratio": 291,
+        "tris": 19982
+      },
+      {
+        "name": "pattern96_2",
+        "ratio": 295.5,
+        "tris": 7457
+      },
+      {
+        "name": "pattern103_3",
+        "ratio": 228.8,
+        "tris": 2739
+      },
+      {
+        "name": "pattern119_5",
+        "ratio": 290.8,
+        "tris": 8207
+      },
+      {
+        "name": "pattern1_47",
+        "ratio": 287.3,
+        "tris": 634
+      },
+      {
+        "name": "pattern15_48",
+        "ratio": 230.2,
+        "tris": 2266
+      },
+      {
+        "name": "pattern23_49",
+        "ratio": 232.7,
+        "tris": 2266
+      },
+      {
+        "name": "pattern31_50",
+        "ratio": 226.6,
+        "tris": 3051
+      },
+      {
+        "name": "pattern39_51",
+        "ratio": 230.3,
+        "tris": 5726
+      },
+      {
+        "name": "pattern47_52",
+        "ratio": 233.8,
+        "tris": 5728
+      },
+      {
+        "name": "pattern55_53",
+        "ratio": 224.8,
+        "tris": 1609
+      },
+      {
+        "name": "pattern62_54",
+        "ratio": 233.6,
+        "tris": 1609
+      },
+      {
+        "name": "pattern81_57",
+        "ratio": 306,
+        "tris": 7505
+      },
+      {
+        "name": "trim347_59",
+        "ratio": 0.8,
+        "tris": 5248
+      },
+      {
+        "name": "trim348_60",
+        "ratio": 0.8,
+        "tris": 5248
+      },
+      {
+        "name": "pattern133_61",
+        "ratio": 211.8,
+        "tris": 9044
+      },
+      {
+        "name": "pattern143_62",
+        "ratio": 228,
+        "tris": 9130
+      }
+    ]
+  },
+  {
+    "id": "01jmm7j8aha6vrw0e3evd3h70c",
+    "name": "Beige twill panel loose shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 13,
+    "minRatio": 98.3,
+    "maxRatio": 108.3,
+    "avgRatio": 100.8,
+    "ratioSpread": 1.1,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern26_1",
+        "ratio": 98.3,
+        "tris": 1313
+      },
+      {
+        "name": "pattern42_3",
+        "ratio": 99.6,
+        "tris": 735
+      },
+      {
+        "name": "pattern50_4",
+        "ratio": 99,
+        "tris": 24122
+      },
+      {
+        "name": "pattern9_6",
+        "ratio": 101.1,
+        "tris": 24165
+      },
+      {
+        "name": "pattern16_7",
+        "ratio": 104.3,
+        "tris": 20286
+      },
+      {
+        "name": "pattern214_8",
+        "ratio": 99.9,
+        "tris": 635
+      },
+      {
+        "name": "pattern145_37",
+        "ratio": 99.6,
+        "tris": 518
+      },
+      {
+        "name": "pattern151_38",
+        "ratio": 99.5,
+        "tris": 20353
+      },
+      {
+        "name": "pattern202_46",
+        "ratio": 101.1,
+        "tris": 647
+      },
+      {
+        "name": "pattern57_48",
+        "ratio": 100.2,
+        "tris": 8188
+      },
+      {
+        "name": "pattern65_49",
+        "ratio": 108.3,
+        "tris": 8188
+      },
+      {
+        "name": "pattern79_51",
+        "ratio": 100,
+        "tris": 1313
+      },
+      {
+        "name": "pattern89_52",
+        "ratio": 99.9,
+        "tris": 735
+      }
+    ]
+  },
+  {
+    "id": "01jmm7bg9msc25ve6hb83523zj",
+    "name": "Red Knitted Panel Loose Shorts",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 8,
+    "minRatio": 61,
+    "maxRatio": 63.6,
+    "avgRatio": 62.1,
+    "ratioSpread": 1.04,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern21_1",
+        "ratio": 61.3,
+        "tris": 11382
+      },
+      {
+        "name": "pattern36_2",
+        "ratio": 61.3,
+        "tris": 11382
+      },
+      {
+        "name": "pattern51_3",
+        "ratio": 61.6,
+        "tris": 1243
+      },
+      {
+        "name": "pattern58_4",
+        "ratio": 61.8,
+        "tris": 1241
+      },
+      {
+        "name": "pattern65_5",
+        "ratio": 62.7,
+        "tris": 15822
+      },
+      {
+        "name": "pattern75_6",
+        "ratio": 61,
+        "tris": 1336
+      },
+      {
+        "name": "pattern1_24",
+        "ratio": 63.6,
+        "tris": 11628
+      },
+      {
+        "name": "pattern8_25",
+        "ratio": 63.2,
+        "tris": 11612
+      }
+    ]
+  },
+  {
+    "id": "01jmm78bvtz5yq9v011wvq0tap",
+    "name": "Blue woven panel tight yoga suit",
+    "category": "SUIT",
+    "panelsCount": 10,
+    "minRatio": 19.2,
+    "maxRatio": 21,
+    "avgRatio": 19.9,
+    "ratioSpread": 1.1,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern14_1",
+        "ratio": 20.4,
+        "tris": 2528
+      },
+      {
+        "name": "pattern21_2",
+        "ratio": 19.8,
+        "tris": 536
+      },
+      {
+        "name": "pattern26_3",
+        "ratio": 19.8,
+        "tris": 536
+      },
+      {
+        "name": "pattern31_4",
+        "ratio": 20,
+        "tris": 12079
+      },
+      {
+        "name": "pattern1_5",
+        "ratio": 20.2,
+        "tris": 668
+      },
+      {
+        "name": "pattern7_6",
+        "ratio": 19.9,
+        "tris": 12079
+      },
+      {
+        "name": "pattern67_9",
+        "ratio": 19.2,
+        "tris": 3382
+      },
+      {
+        "name": "pattern38_18",
+        "ratio": 19.8,
+        "tris": 668
+      },
+      {
+        "name": "pattern44_19",
+        "ratio": 21,
+        "tris": 2528
+      },
+      {
+        "name": "pattern51_20",
+        "ratio": 19.3,
+        "tris": 3077
+      }
+    ]
+  },
+  {
+    "id": "01jmm77r83yq83d4hfbrrxw7hb",
+    "name": "Black woven leggings slacks",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 12,
+    "minRatio": 22.7,
+    "maxRatio": 24.6,
+    "avgRatio": 23.9,
+    "ratioSpread": 1.08,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern40_1",
+        "ratio": 24.3,
+        "tris": 15924
+      },
+      {
+        "name": "pattern52_2",
+        "ratio": 22.7,
+        "tris": 15924
+      },
+      {
+        "name": "pattern64_3",
+        "ratio": 23.8,
+        "tris": 2768
+      },
+      {
+        "name": "pattern70_4",
+        "ratio": 23.4,
+        "tris": 2768
+      },
+      {
+        "name": "pattern76_5",
+        "ratio": 23.7,
+        "tris": 11936
+      },
+      {
+        "name": "pattern1_6",
+        "ratio": 24.6,
+        "tris": 13956
+      },
+      {
+        "name": "pattern8_7",
+        "ratio": 24.6,
+        "tris": 1904
+      },
+      {
+        "name": "pattern14_8",
+        "ratio": 24.4,
+        "tris": 591
+      },
+      {
+        "name": "pattern20_9",
+        "ratio": 24.5,
+        "tris": 591
+      },
+      {
+        "name": "pattern89_32",
+        "ratio": 22.9,
+        "tris": 11936
+      },
+      {
+        "name": "pattern102_33",
+        "ratio": 24.2,
+        "tris": 1901
+      },
+      {
+        "name": "pattern108_34",
+        "ratio": 24.1,
+        "tris": 1901
+      }
+    ]
+  },
+  {
+    "id": "01jmm71wr9vjgf97j02r245y3g",
+    "name": "Women/coat W-Sport-gyq-006",
+    "category": "TOPWEAR",
+    "panelsCount": 21,
+    "minRatio": 1,
+    "maxRatio": 126.2,
+    "avgRatio": 68,
+    "ratioSpread": 126.01,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern144_1",
+        "ratio": 67.9,
+        "tris": 10562
+      },
+      {
+        "name": "pattern173_4",
+        "ratio": 51.3,
+        "tris": 2466
+      },
+      {
+        "name": "pattern231_11",
+        "ratio": 123,
+        "tris": 4127
+      },
+      {
+        "name": "pattern260_13",
+        "ratio": 1,
+        "tris": 5837
+      },
+      {
+        "name": "pattern268_14",
+        "ratio": 1,
+        "tris": 5851
+      },
+      {
+        "name": "pattern276_15",
+        "ratio": 114,
+        "tris": 2206
+      },
+      {
+        "name": "pattern287_16",
+        "ratio": 126.2,
+        "tris": 1368
+      },
+      {
+        "name": "trim334_38",
+        "ratio": 1,
+        "tris": 2528
+      },
+      {
+        "name": "pattern1_40",
+        "ratio": 46.6,
+        "tris": 5817
+      },
+      {
+        "name": "pattern9_41",
+        "ratio": 50.1,
+        "tris": 5843
+      },
+      {
+        "name": "pattern29_44",
+        "ratio": 75.3,
+        "tris": 1367
+      },
+      {
+        "name": "pattern38_45",
+        "ratio": 76.9,
+        "tris": 1367
+      },
+      {
+        "name": "pattern47_46",
+        "ratio": 74.8,
+        "tris": 5179
+      },
+      {
+        "name": "pattern59_47",
+        "ratio": 83,
+        "tris": 1670
+      },
+      {
+        "name": "pattern67_48",
+        "ratio": 81,
+        "tris": 1670
+      },
+      {
+        "name": "trim336_49",
+        "ratio": 1,
+        "tris": 2528
+      },
+      {
+        "name": "pattern95_53",
+        "ratio": 71.1,
+        "tris": 8701
+      },
+      {
+        "name": "pattern106_54",
+        "ratio": 71.9,
+        "tris": 8722
+      },
+      {
+        "name": "pattern117_55",
+        "ratio": 119.6,
+        "tris": 609
+      },
+      {
+        "name": "pattern125_56",
+        "ratio": 119.6,
+        "tris": 609
+      },
+      {
+        "name": "pattern133_57",
+        "ratio": 71,
+        "tris": 10562
+      }
+    ]
+  },
+  {
+    "id": "01jmm6zjj03mk2svjn8dpa0xcf",
+    "name": "Men's/hoodie top-gyq-004",
+    "category": "TOPWEAR",
+    "panelsCount": 54,
+    "minRatio": 0.8,
+    "maxRatio": 80.7,
+    "avgRatio": 15.4,
+    "ratioSpread": 102.77,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 1,
+        "tris": 1765
+      },
+      {
+        "name": "pattern8_2",
+        "ratio": 1,
+        "tris": 1115
+      },
+      {
+        "name": "pattern15_3",
+        "ratio": 1,
+        "tris": 1115
+      },
+      {
+        "name": "pattern22_4",
+        "ratio": 1,
+        "tris": 1765
+      },
+      {
+        "name": "pattern29_5",
+        "ratio": 1,
+        "tris": 4462
+      },
+      {
+        "name": "pattern37_6",
+        "ratio": 1,
+        "tris": 4462
+      },
+      {
+        "name": "pattern45_7",
+        "ratio": 1,
+        "tris": 4482
+      },
+      {
+        "name": "pattern53_8",
+        "ratio": 1,
+        "tris": 4482
+      },
+      {
+        "name": "pattern61_9",
+        "ratio": 1,
+        "tris": 10426
+      },
+      {
+        "name": "pattern69_10",
+        "ratio": 1,
+        "tris": 10442
+      },
+      {
+        "name": "pattern77_11",
+        "ratio": 1,
+        "tris": 10498
+      },
+      {
+        "name": "pattern85_12",
+        "ratio": 1,
+        "tris": 10512
+      },
+      {
+        "name": "pattern93_13",
+        "ratio": 0.9,
+        "tris": 806
+      },
+      {
+        "name": "pattern94_14",
+        "ratio": 0.9,
+        "tris": 806
+      },
+      {
+        "name": "pattern95_15",
+        "ratio": 0.9,
+        "tris": 1446
+      },
+      {
+        "name": "pattern96_16",
+        "ratio": 1,
+        "tris": 13062
+      },
+      {
+        "name": "trim346_26",
+        "ratio": 0.9,
+        "tris": 1604
+      },
+      {
+        "name": "trim348_28",
+        "ratio": 0.9,
+        "tris": 864
+      },
+      {
+        "name": "trim349_29",
+        "ratio": 0.9,
+        "tris": 864
+      },
+      {
+        "name": "trim350_30",
+        "ratio": 0.9,
+        "tris": 864
+      },
+      {
+        "name": "trim351_31",
+        "ratio": 0.9,
+        "tris": 864
+      },
+      {
+        "name": "trim352_32",
+        "ratio": 0.9,
+        "tris": 864
+      },
+      {
+        "name": "trim353_33",
+        "ratio": 0.9,
+        "tris": 864
+      },
+      {
+        "name": "trim354_34",
+        "ratio": 0.9,
+        "tris": 1604
+      },
+      {
+        "name": "trim356_36",
+        "ratio": 0.9,
+        "tris": 1604
+      },
+      {
+        "name": "pattern102_38",
+        "ratio": 1,
+        "tris": 13062
+      },
+      {
+        "name": "pattern108_39",
+        "ratio": 1,
+        "tris": 23482
+      },
+      {
+        "name": "pattern116_40",
+        "ratio": 0.9,
+        "tris": 901
+      },
+      {
+        "name": "pattern122_41",
+        "ratio": 1,
+        "tris": 17074
+      },
+      {
+        "name": "pattern130_42",
+        "ratio": 1,
+        "tris": 17038
+      },
+      {
+        "name": "pattern138_43",
+        "ratio": 0.8,
+        "tris": 927
+      },
+      {
+        "name": "pattern144_44",
+        "ratio": 1,
+        "tris": 14557
+      },
+      {
+        "name": "pattern252_45",
+        "ratio": 76.2,
+        "tris": 17074
+      },
+      {
+        "name": "pattern260_46",
+        "ratio": 76.6,
+        "tris": 17038
+      },
+      {
+        "name": "pattern268_47",
+        "ratio": 79.9,
+        "tris": 27544
+      },
+      {
+        "name": "pattern280_48",
+        "ratio": 80.1,
+        "tris": 1640
+      },
+      {
+        "name": "pattern292_49",
+        "ratio": 78.1,
+        "tris": 1144
+      },
+      {
+        "name": "pattern298_50",
+        "ratio": 78.5,
+        "tris": 8562
+      },
+      {
+        "name": "pattern305_51",
+        "ratio": 79.6,
+        "tris": 1144
+      },
+      {
+        "name": "pattern311_52",
+        "ratio": 80.1,
+        "tris": 8562
+      },
+      {
+        "name": "piping318_53",
+        "ratio": 1.2,
+        "tris": 924
+      },
+      {
+        "name": "piping319_54",
+        "ratio": 1.7,
+        "tris": 728
+      },
+      {
+        "name": "pattern150_62",
+        "ratio": 1,
+        "tris": 14685
+      },
+      {
+        "name": "pattern156_63",
+        "ratio": 1,
+        "tris": 2366
+      },
+      {
+        "name": "pattern170_64",
+        "ratio": 1,
+        "tris": 27544
+      },
+      {
+        "name": "pattern182_65",
+        "ratio": 1,
+        "tris": 1640
+      },
+      {
+        "name": "pattern194_66",
+        "ratio": 1,
+        "tris": 2098
+      },
+      {
+        "name": "pattern200_67",
+        "ratio": 1,
+        "tris": 2098
+      },
+      {
+        "name": "pattern206_68",
+        "ratio": 1,
+        "tris": 1144
+      },
+      {
+        "name": "pattern212_69",
+        "ratio": 1,
+        "tris": 1144
+      },
+      {
+        "name": "pattern218_70",
+        "ratio": 1,
+        "tris": 8562
+      },
+      {
+        "name": "pattern225_71",
+        "ratio": 1,
+        "tris": 8562
+      },
+      {
+        "name": "pattern232_72",
+        "ratio": 80.7,
+        "tris": 1115
+      },
+      {
+        "name": "pattern233_73",
+        "ratio": 78.6,
+        "tris": 1115
+      }
+    ]
+  },
+  {
+    "id": "01jmm64kyxp9gqj08085sq86ks",
+    "name": "LL Girls/Shorts G-Shorts 41",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 13,
+    "minRatio": 47.8,
+    "maxRatio": 55.2,
+    "avgRatio": 51.5,
+    "ratioSpread": 1.16,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 51.7,
+        "tris": 2256
+      },
+      {
+        "name": "pattern10_2",
+        "ratio": 49.9,
+        "tris": 2256
+      },
+      {
+        "name": "pattern24_4",
+        "ratio": 50.1,
+        "tris": 3889
+      },
+      {
+        "name": "pattern32_5",
+        "ratio": 50,
+        "tris": 14416
+      },
+      {
+        "name": "pattern94_7",
+        "ratio": 51.5,
+        "tris": 991
+      },
+      {
+        "name": "pattern100_8",
+        "ratio": 51.2,
+        "tris": 7189
+      },
+      {
+        "name": "pattern44_16",
+        "ratio": 53.8,
+        "tris": 500
+      },
+      {
+        "name": "pattern50_17",
+        "ratio": 47.8,
+        "tris": 1411
+      },
+      {
+        "name": "pattern56_18",
+        "ratio": 51.8,
+        "tris": 1411
+      },
+      {
+        "name": "pattern62_19",
+        "ratio": 53.4,
+        "tris": 9059
+      },
+      {
+        "name": "pattern70_20",
+        "ratio": 53.8,
+        "tris": 9059
+      },
+      {
+        "name": "pattern78_21",
+        "ratio": 49.5,
+        "tris": 983
+      },
+      {
+        "name": "pattern84_22",
+        "ratio": 55.2,
+        "tris": 6785
+      }
+    ]
+  },
+  {
+    "id": "01jmm5tca9ebm47npvbk3f90fw",
+    "name": "LL Men's/Shorts M-Shorts 2",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 11,
+    "minRatio": 190.6,
+    "maxRatio": 251.8,
+    "avgRatio": 202.4,
+    "ratioSpread": 1.32,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern114_1",
+        "ratio": 197.8,
+        "tris": 25258
+      },
+      {
+        "name": "pattern138_4",
+        "ratio": 197.1,
+        "tris": 2193
+      },
+      {
+        "name": "pattern144_5",
+        "ratio": 197.5,
+        "tris": 2246
+      },
+      {
+        "name": "pattern104_9",
+        "ratio": 193.3,
+        "tris": 25210
+      },
+      {
+        "name": "pattern50_11",
+        "ratio": 196.2,
+        "tris": 712
+      },
+      {
+        "name": "pattern15_21",
+        "ratio": 225.1,
+        "tris": 19122
+      },
+      {
+        "name": "pattern28_22",
+        "ratio": 251.8,
+        "tris": 29714
+      },
+      {
+        "name": "pattern168_23",
+        "ratio": 192,
+        "tris": 1267
+      },
+      {
+        "name": "pattern174_24",
+        "ratio": 194,
+        "tris": 1865
+      },
+      {
+        "name": "pattern180_25",
+        "ratio": 190.6,
+        "tris": 1278
+      },
+      {
+        "name": "pattern186_26",
+        "ratio": 191.5,
+        "tris": 1885
+      }
+    ]
+  },
+  {
+    "id": "01jmm5qzpmxej61vz5d92n98t2",
+    "name": "SK/Women's yoga suit W-suite 9",
+    "category": "SUIT",
+    "panelsCount": 19,
+    "minRatio": 79.4,
+    "maxRatio": 88.7,
+    "avgRatio": 83.1,
+    "ratioSpread": 1.12,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 86.8,
+        "tris": 7941
+      },
+      {
+        "name": "pattern8_2",
+        "ratio": 81.9,
+        "tris": 7678
+      },
+      {
+        "name": "pattern15_3",
+        "ratio": 82.4,
+        "tris": 5092
+      },
+      {
+        "name": "pattern20_4",
+        "ratio": 87.1,
+        "tris": 2777
+      },
+      {
+        "name": "pattern28_5",
+        "ratio": 88.7,
+        "tris": 2622
+      },
+      {
+        "name": "pattern36_6",
+        "ratio": 88.5,
+        "tris": 2442
+      },
+      {
+        "name": "pattern44_7",
+        "ratio": 83.3,
+        "tris": 7941
+      },
+      {
+        "name": "pattern199_10",
+        "ratio": 81.3,
+        "tris": 1518
+      },
+      {
+        "name": "pattern206_11",
+        "ratio": 80.9,
+        "tris": 2946
+      },
+      {
+        "name": "pattern212_12",
+        "ratio": 80.3,
+        "tris": 2946
+      },
+      {
+        "name": "pattern218_13",
+        "ratio": 82.1,
+        "tris": 1506
+      },
+      {
+        "name": "pattern225_14",
+        "ratio": 81.7,
+        "tris": 2948
+      },
+      {
+        "name": "pattern234_15",
+        "ratio": 79.4,
+        "tris": 5930
+      },
+      {
+        "name": "pattern277_16",
+        "ratio": 79.5,
+        "tris": 5928
+      },
+      {
+        "name": "pattern51_17",
+        "ratio": 84.6,
+        "tris": 5092
+      },
+      {
+        "name": "pattern56_18",
+        "ratio": 80.9,
+        "tris": 7678
+      },
+      {
+        "name": "pattern63_19",
+        "ratio": 87.6,
+        "tris": 2777
+      },
+      {
+        "name": "pattern71_20",
+        "ratio": 81.9,
+        "tris": 6769
+      },
+      {
+        "name": "pattern82_21",
+        "ratio": 79.8,
+        "tris": 3551
+      }
+    ]
+  },
+  {
+    "id": "01jmm5mk0z93yxcry762ap9dkt",
+    "name": "LL Men's/Shorts M-Shorts 1",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 11,
+    "minRatio": 286.5,
+    "maxRatio": 293.8,
+    "avgRatio": 290.6,
+    "ratioSpread": 1.03,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern194_2",
+        "ratio": 287,
+        "tris": 15925
+      },
+      {
+        "name": "pattern139_3",
+        "ratio": 291.6,
+        "tris": 1153
+      },
+      {
+        "name": "pattern157_6",
+        "ratio": 291.3,
+        "tris": 5143
+      },
+      {
+        "name": "pattern174_8",
+        "ratio": 286.5,
+        "tris": 15794
+      },
+      {
+        "name": "pattern214_10",
+        "ratio": 293.8,
+        "tris": 1451
+      },
+      {
+        "name": "pattern1_23",
+        "ratio": 291.5,
+        "tris": 1238
+      },
+      {
+        "name": "pattern16_25",
+        "ratio": 292.8,
+        "tris": 1727
+      },
+      {
+        "name": "pattern22_26",
+        "ratio": 290.5,
+        "tris": 511
+      },
+      {
+        "name": "pattern29_27",
+        "ratio": 287.7,
+        "tris": 4127
+      },
+      {
+        "name": "pattern120_40",
+        "ratio": 291.9,
+        "tris": 511
+      },
+      {
+        "name": "pattern133_42",
+        "ratio": 292.1,
+        "tris": 1115
+      }
+    ]
+  },
+  {
+    "id": "01jmm5mbgfg54c1p7hs78cdfwk",
+    "name": "Men's shorts M-shorts 104",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 18,
+    "minRatio": 0.9,
+    "maxRatio": 114.3,
+    "avgRatio": 63.3,
+    "ratioSpread": 120.52,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 68.3,
+        "tris": 23036
+      },
+      {
+        "name": "pattern10_2",
+        "ratio": 65.2,
+        "tris": 3842
+      },
+      {
+        "name": "pattern121_3",
+        "ratio": 74.7,
+        "tris": 1256
+      },
+      {
+        "name": "pattern127_4",
+        "ratio": 74.6,
+        "tris": 1256
+      },
+      {
+        "name": "pattern47_5",
+        "ratio": 66.4,
+        "tris": 10297
+      },
+      {
+        "name": "pattern54_6",
+        "ratio": 65.5,
+        "tris": 10297
+      },
+      {
+        "name": "pattern61_7",
+        "ratio": 113.1,
+        "tris": 2725
+      },
+      {
+        "name": "pattern68_8",
+        "ratio": 114.3,
+        "tris": 2725
+      },
+      {
+        "name": "pattern17_9",
+        "ratio": 67.1,
+        "tris": 3842
+      },
+      {
+        "name": "pattern24_10",
+        "ratio": 73.7,
+        "tris": 13726
+      },
+      {
+        "name": "pattern33_11",
+        "ratio": 113,
+        "tris": 3233
+      },
+      {
+        "name": "pattern40_12",
+        "ratio": 110.6,
+        "tris": 3233
+      },
+      {
+        "name": "pattern75_13",
+        "ratio": 65.1,
+        "tris": 8401
+      },
+      {
+        "name": "pattern84_14",
+        "ratio": 64.6,
+        "tris": 8401
+      },
+      {
+        "name": "pattern93_15",
+        "ratio": 1,
+        "tris": 2725
+      },
+      {
+        "name": "pattern100_16",
+        "ratio": 1,
+        "tris": 2725
+      },
+      {
+        "name": "pattern107_17",
+        "ratio": 1,
+        "tris": 3233
+      },
+      {
+        "name": "pattern114_18",
+        "ratio": 0.9,
+        "tris": 3233
+      }
+    ]
+  },
+  {
+    "id": "01jmm5kr4agr0nvxv7r1qk7fb3",
+    "name": "Men's/shorts M-shorts 103",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 14,
+    "minRatio": 86.2,
+    "maxRatio": 105.1,
+    "avgRatio": 100.8,
+    "ratioSpread": 1.22,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern27_1",
+        "ratio": 101,
+        "tris": 21154
+      },
+      {
+        "name": "pattern34_2",
+        "ratio": 103.7,
+        "tris": 21154
+      },
+      {
+        "name": "pattern119_3",
+        "ratio": 103.5,
+        "tris": 2890
+      },
+      {
+        "name": "pattern137_6",
+        "ratio": 100.4,
+        "tris": 4111
+      },
+      {
+        "name": "pattern143_7",
+        "ratio": 101,
+        "tris": 4101
+      },
+      {
+        "name": "pattern149_8",
+        "ratio": 101.9,
+        "tris": 1531
+      },
+      {
+        "name": "pattern158_9",
+        "ratio": 100.9,
+        "tris": 1529
+      },
+      {
+        "name": "pattern167_10",
+        "ratio": 104.3,
+        "tris": 1529
+      },
+      {
+        "name": "pattern13_13",
+        "ratio": 100.9,
+        "tris": 17441
+      },
+      {
+        "name": "pattern20_14",
+        "ratio": 100.7,
+        "tris": 17441
+      },
+      {
+        "name": "pattern176_15",
+        "ratio": 105.1,
+        "tris": 1531
+      },
+      {
+        "name": "pattern59_28",
+        "ratio": 100.9,
+        "tris": 3113
+      },
+      {
+        "name": "pattern65_29",
+        "ratio": 100.9,
+        "tris": 3113
+      },
+      {
+        "name": "pattern113_36",
+        "ratio": 86.2,
+        "tris": 20478
+      }
+    ]
+  },
+  {
+    "id": "01jmm5fmrzs7y4vsqjxkt1zqy6",
+    "name": "Women/Tank Top W-Singlet 36",
+    "category": "TOPWEAR",
+    "panelsCount": 6,
+    "minRatio": 1,
+    "maxRatio": 71.6,
+    "avgRatio": 47,
+    "ratioSpread": 70.95,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 69.7,
+        "tris": 4380
+      },
+      {
+        "name": "pattern63_2",
+        "ratio": 1,
+        "tris": 1851
+      },
+      {
+        "name": "pattern69_3",
+        "ratio": 1,
+        "tris": 1851
+      },
+      {
+        "name": "pattern41_10",
+        "ratio": 70.2,
+        "tris": 5571
+      },
+      {
+        "name": "pattern52_11",
+        "ratio": 71.6,
+        "tris": 5595
+      },
+      {
+        "name": "pattern9_12",
+        "ratio": 68.4,
+        "tris": 10950
+      }
+    ]
+  },
+  {
+    "id": "01jmm5f94hyzwb1fpfktb9y0gd",
+    "name": "Women/shorts W-shorts 111",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 13,
+    "minRatio": 1,
+    "maxRatio": 59.7,
+    "avgRatio": 31.9,
+    "ratioSpread": 62.36,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern80_1",
+        "ratio": 1,
+        "tris": 4285
+      },
+      {
+        "name": "pattern88_2",
+        "ratio": 1,
+        "tris": 5084
+      },
+      {
+        "name": "pattern94_3",
+        "ratio": 1,
+        "tris": 5084
+      },
+      {
+        "name": "pattern1_4",
+        "ratio": 59.7,
+        "tris": 3321
+      },
+      {
+        "name": "pattern10_5",
+        "ratio": 59.6,
+        "tris": 2389
+      },
+      {
+        "name": "pattern16_6",
+        "ratio": 59.6,
+        "tris": 2374
+      },
+      {
+        "name": "pattern22_7",
+        "ratio": 56,
+        "tris": 8851
+      },
+      {
+        "name": "pattern51_13",
+        "ratio": 59.3,
+        "tris": 6339
+      },
+      {
+        "name": "pattern60_14",
+        "ratio": 1,
+        "tris": 3622
+      },
+      {
+        "name": "pattern66_15",
+        "ratio": 1,
+        "tris": 3622
+      },
+      {
+        "name": "pattern72_16",
+        "ratio": 1,
+        "tris": 4285
+      },
+      {
+        "name": "pattern32_17",
+        "ratio": 55.7,
+        "tris": 8874
+      },
+      {
+        "name": "pattern42_18",
+        "ratio": 59.3,
+        "tris": 6392
+      }
+    ]
+  },
+  {
+    "id": "01jmm5dcszf4k3k1hvpdkgszsj",
+    "name": "Boys/Shorts B-shorts 103",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 10,
+    "minRatio": 1,
+    "maxRatio": 1.1,
+    "avgRatio": 1,
+    "ratioSpread": 1.05,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern9_2",
+        "ratio": 1,
+        "tris": 567
+      },
+      {
+        "name": "pattern16_3",
+        "ratio": 1,
+        "tris": 4745
+      },
+      {
+        "name": "pattern31_5",
+        "ratio": 1,
+        "tris": 561
+      },
+      {
+        "name": "pattern39_6",
+        "ratio": 1,
+        "tris": 4795
+      },
+      {
+        "name": "pattern47_7",
+        "ratio": 1.1,
+        "tris": 900
+      },
+      {
+        "name": "pattern67_30",
+        "ratio": 1,
+        "tris": 936
+      },
+      {
+        "name": "pattern80_32",
+        "ratio": 1,
+        "tris": 936
+      },
+      {
+        "name": "pattern53_34",
+        "ratio": 1,
+        "tris": 7950
+      },
+      {
+        "name": "pattern59_35",
+        "ratio": 1,
+        "tris": 22207
+      },
+      {
+        "name": "pattern93_36",
+        "ratio": 1,
+        "tris": 22207
+      }
+    ]
+  },
+  {
+    "id": "01jmm581e1re6zrrk91bh6te0w",
+    "name": "Women/Tank Top W-Singlet 27",
+    "category": "TOPWEAR",
+    "panelsCount": 9,
+    "minRatio": 1,
+    "maxRatio": 203.9,
+    "avgRatio": 93.9,
+    "ratioSpread": 212.25,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern53_1",
+        "ratio": 1,
+        "tris": 1540
+      },
+      {
+        "name": "pattern64_2",
+        "ratio": 1,
+        "tris": 1569
+      },
+      {
+        "name": "pattern75_3",
+        "ratio": 39.3,
+        "tris": 1552
+      },
+      {
+        "name": "pattern1_13",
+        "ratio": 194.6,
+        "tris": 731
+      },
+      {
+        "name": "pattern9_14",
+        "ratio": 1,
+        "tris": 730
+      },
+      {
+        "name": "pattern41_19",
+        "ratio": 1,
+        "tris": 3458
+      },
+      {
+        "name": "pattern103_22",
+        "ratio": 203.8,
+        "tris": 1444
+      },
+      {
+        "name": "pattern114_23",
+        "ratio": 203.9,
+        "tris": 1444
+      },
+      {
+        "name": "pattern125_24",
+        "ratio": 199.2,
+        "tris": 3170
+      }
+    ]
+  },
+  {
+    "id": "01jmm57mvs6rvjdp6qad9ynfdn",
+    "name": "Women/shorts W-shorts 104",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 15,
+    "minRatio": 98.3,
+    "maxRatio": 102.4,
+    "avgRatio": 100.2,
+    "ratioSpread": 1.04,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern13_3",
+        "ratio": 100.3,
+        "tris": 9829
+      },
+      {
+        "name": "pattern20_4",
+        "ratio": 99.3,
+        "tris": 9829
+      },
+      {
+        "name": "pattern113_5",
+        "ratio": 100.5,
+        "tris": 1191
+      },
+      {
+        "name": "pattern119_6",
+        "ratio": 99.5,
+        "tris": 1191
+      },
+      {
+        "name": "pattern125_7",
+        "ratio": 99.5,
+        "tris": 912
+      },
+      {
+        "name": "pattern34_8",
+        "ratio": 100.1,
+        "tris": 11456
+      },
+      {
+        "name": "pattern41_9",
+        "ratio": 102.4,
+        "tris": 4409
+      },
+      {
+        "name": "pattern47_10",
+        "ratio": 98.3,
+        "tris": 1404
+      },
+      {
+        "name": "pattern53_11",
+        "ratio": 98.8,
+        "tris": 1404
+      },
+      {
+        "name": "pattern27_12",
+        "ratio": 100.3,
+        "tris": 11456
+      },
+      {
+        "name": "pattern59_13",
+        "ratio": 100.3,
+        "tris": 4878
+      },
+      {
+        "name": "pattern65_14",
+        "ratio": 99.8,
+        "tris": 4878
+      },
+      {
+        "name": "pattern95_19",
+        "ratio": 101.8,
+        "tris": 1404
+      },
+      {
+        "name": "pattern101_20",
+        "ratio": 102,
+        "tris": 1404
+      },
+      {
+        "name": "pattern107_21",
+        "ratio": 99.6,
+        "tris": 912
+      }
+    ]
+  },
+  {
+    "id": "01jmm538b1av1c17hhwc4nn2sq",
+    "name": "G Women's T-shirt W-T-shirt 002",
+    "category": "TOPWEAR",
+    "panelsCount": 37,
+    "minRatio": 0.2,
+    "maxRatio": 47,
+    "avgRatio": 11.2,
+    "ratioSpread": 277.98,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern255_1",
+        "ratio": 27.8,
+        "tris": 41866
+      },
+      {
+        "name": "pattern269_2",
+        "ratio": 27.4,
+        "tris": 1594
+      },
+      {
+        "name": "pattern277_3",
+        "ratio": 27.9,
+        "tris": 1696
+      },
+      {
+        "name": "pattern235_4",
+        "ratio": 27.5,
+        "tris": 1187
+      },
+      {
+        "name": "pattern241_5",
+        "ratio": 28,
+        "tris": 44386
+      },
+      {
+        "name": "pattern1_6",
+        "ratio": 28.4,
+        "tris": 6832
+      },
+      {
+        "name": "pattern7_7",
+        "ratio": 1,
+        "tris": 2174
+      },
+      {
+        "name": "pattern20_8",
+        "ratio": 1,
+        "tris": 2168
+      },
+      {
+        "name": "pattern33_9",
+        "ratio": 46.3,
+        "tris": 7241
+      },
+      {
+        "name": "pattern42_10",
+        "ratio": 45.7,
+        "tris": 7245
+      },
+      {
+        "name": "pattern51_11",
+        "ratio": 1,
+        "tris": 1103
+      },
+      {
+        "name": "pattern57_12",
+        "ratio": 1,
+        "tris": 1103
+      },
+      {
+        "name": "pattern63_13",
+        "ratio": 1,
+        "tris": 1037
+      },
+      {
+        "name": "pattern69_14",
+        "ratio": 1,
+        "tris": 1037
+      },
+      {
+        "name": "pattern75_15",
+        "ratio": 1,
+        "tris": 1103
+      },
+      {
+        "name": "pattern81_16",
+        "ratio": 1,
+        "tris": 1103
+      },
+      {
+        "name": "pattern87_17",
+        "ratio": 1,
+        "tris": 2168
+      },
+      {
+        "name": "pattern100_18",
+        "ratio": 1,
+        "tris": 2174
+      },
+      {
+        "name": "pattern113_19",
+        "ratio": 1,
+        "tris": 1037
+      },
+      {
+        "name": "pattern119_20",
+        "ratio": 1,
+        "tris": 1037
+      },
+      {
+        "name": "pattern125_21",
+        "ratio": 30,
+        "tris": 1293
+      },
+      {
+        "name": "trim285_22",
+        "ratio": 0.2,
+        "tris": 42752
+      },
+      {
+        "name": "pattern131_23",
+        "ratio": 47,
+        "tris": 23017
+      },
+      {
+        "name": "pattern143_24",
+        "ratio": 1,
+        "tris": 1758
+      },
+      {
+        "name": "pattern151_25",
+        "ratio": 1,
+        "tris": 865
+      },
+      {
+        "name": "pattern159_26",
+        "ratio": 1,
+        "tris": 865
+      },
+      {
+        "name": "pattern167_27",
+        "ratio": 1,
+        "tris": 1758
+      },
+      {
+        "name": "pattern175_28",
+        "ratio": 1,
+        "tris": 1884
+      },
+      {
+        "name": "pattern181_29",
+        "ratio": 1,
+        "tris": 703
+      },
+      {
+        "name": "pattern187_30",
+        "ratio": 1,
+        "tris": 703
+      },
+      {
+        "name": "pattern193_31",
+        "ratio": 1,
+        "tris": 1884
+      },
+      {
+        "name": "pattern199_32",
+        "ratio": 1,
+        "tris": 703
+      },
+      {
+        "name": "pattern205_33",
+        "ratio": 1,
+        "tris": 703
+      },
+      {
+        "name": "pattern211_34",
+        "ratio": 1,
+        "tris": 510
+      },
+      {
+        "name": "pattern217_35",
+        "ratio": 1,
+        "tris": 3856
+      },
+      {
+        "name": "pattern223_36",
+        "ratio": 27.4,
+        "tris": 1187
+      },
+      {
+        "name": "pattern229_37",
+        "ratio": 27.6,
+        "tris": 6832
+      }
+    ]
+  },
+  {
+    "id": "01jmm51av1qxmx80ccghbnyy49",
+    "name": "Women/T-shirt W-T shirt 155",
+    "category": "TOPWEAR",
+    "panelsCount": 3,
+    "minRatio": 345.1,
+    "maxRatio": 361.9,
+    "avgRatio": 356.2,
+    "ratioSpread": 1.05,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 345.1,
+        "tris": 560
+      },
+      {
+        "name": "pattern42_12",
+        "ratio": 361.5,
+        "tris": 16883
+      },
+      {
+        "name": "pattern13_13",
+        "ratio": 361.9,
+        "tris": 31349
+      }
+    ]
+  },
+  {
+    "id": "01jmm50hb2y2n0qx7en5wgdfqv",
+    "name": "Women/T-shirt W-T shirt 153",
+    "category": "TOPWEAR",
+    "panelsCount": 8,
+    "minRatio": 111.7,
+    "maxRatio": 116.5,
+    "avgRatio": 114.3,
+    "ratioSpread": 1.04,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern35_1",
+        "ratio": 116.1,
+        "tris": 7508
+      },
+      {
+        "name": "pattern7_3",
+        "ratio": 114.5,
+        "tris": 7634
+      },
+      {
+        "name": "pattern23_4",
+        "ratio": 116.5,
+        "tris": 3463
+      },
+      {
+        "name": "pattern51_5",
+        "ratio": 113.4,
+        "tris": 4368
+      },
+      {
+        "name": "pattern63_6",
+        "ratio": 111.7,
+        "tris": 4533
+      },
+      {
+        "name": "pattern71_7",
+        "ratio": 115.2,
+        "tris": 3129
+      },
+      {
+        "name": "pattern79_8",
+        "ratio": 114.7,
+        "tris": 4739
+      },
+      {
+        "name": "pattern91_9",
+        "ratio": 112.5,
+        "tris": 2920
+      }
+    ]
+  },
+  {
+    "id": "01jmm4z6tyv42p6kkdxx82swh3",
+    "name": "Women/Tank Top W-Singlet 23",
+    "category": "TOPWEAR",
+    "panelsCount": 4,
+    "minRatio": 189.3,
+    "maxRatio": 192.1,
+    "avgRatio": 190.9,
+    "ratioSpread": 1.01,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 192.1,
+        "tris": 25499
+      },
+      {
+        "name": "pattern50_3",
+        "ratio": 189.3,
+        "tris": 1008
+      },
+      {
+        "name": "pattern58_4",
+        "ratio": 190.2,
+        "tris": 1032
+      },
+      {
+        "name": "pattern10_11",
+        "ratio": 192,
+        "tris": 21752
+      }
+    ]
+  },
+  {
+    "id": "01jmm4yygevw7c1az7ngdadv0z",
+    "name": "Women/T-shirt W-T shirt 144",
+    "category": "TOPWEAR",
+    "panelsCount": 4,
+    "minRatio": 144.3,
+    "maxRatio": 146.7,
+    "avgRatio": 145.8,
+    "ratioSpread": 1.02,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern81_6",
+        "ratio": 146,
+        "tris": 2323
+      },
+      {
+        "name": "pattern87_7",
+        "ratio": 146.7,
+        "tris": 2323
+      },
+      {
+        "name": "pattern29_8",
+        "ratio": 146.2,
+        "tris": 8750
+      },
+      {
+        "name": "pattern49_11",
+        "ratio": 144.3,
+        "tris": 7630
+      }
+    ]
+  },
+  {
+    "id": "01jmm4yahnya4rdn9zwqdg5h7q",
+    "name": "Women/T-shirt W-T shirt 141",
+    "category": "TOPWEAR",
+    "panelsCount": 9,
+    "minRatio": 13,
+    "maxRatio": 42.7,
+    "avgRatio": 17.1,
+    "ratioSpread": 3.28,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern64_1",
+        "ratio": 13.4,
+        "tris": 1101
+      },
+      {
+        "name": "pattern1_2",
+        "ratio": 13.3,
+        "tris": 4216
+      },
+      {
+        "name": "pattern7_3",
+        "ratio": 13.6,
+        "tris": 4209
+      },
+      {
+        "name": "pattern13_4",
+        "ratio": 13.4,
+        "tris": 2305
+      },
+      {
+        "name": "pattern23_5",
+        "ratio": 13,
+        "tris": 2287
+      },
+      {
+        "name": "pattern89_6",
+        "ratio": 13.8,
+        "tris": 1094
+      },
+      {
+        "name": "pattern125_11",
+        "ratio": 42.7,
+        "tris": 1264
+      },
+      {
+        "name": "pattern71_16",
+        "ratio": 15.5,
+        "tris": 15323
+      },
+      {
+        "name": "pattern47_19",
+        "ratio": 14.7,
+        "tris": 16032
+      }
+    ]
+  },
+  {
+    "id": "01jmm4rhc2hpp29cy7pm9qwn1c",
+    "name": "Men's/T-shirt M-T shirt 117",
+    "category": "TOPWEAR",
+    "panelsCount": 10,
+    "minRatio": 40.8,
+    "maxRatio": 56.4,
+    "avgRatio": 50.6,
+    "ratioSpread": 1.38,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern15_3",
+        "ratio": 50.3,
+        "tris": 7147
+      },
+      {
+        "name": "pattern23_4",
+        "ratio": 48.8,
+        "tris": 7147
+      },
+      {
+        "name": "pattern31_12",
+        "ratio": 55,
+        "tris": 793
+      },
+      {
+        "name": "pattern37_13",
+        "ratio": 50.8,
+        "tris": 797
+      },
+      {
+        "name": "pattern43_14",
+        "ratio": 45.8,
+        "tris": 681
+      },
+      {
+        "name": "pattern50_15",
+        "ratio": 40.8,
+        "tris": 681
+      },
+      {
+        "name": "pattern57_16",
+        "ratio": 56.4,
+        "tris": 19475
+      },
+      {
+        "name": "pattern74_17",
+        "ratio": 52,
+        "tris": 1108
+      },
+      {
+        "name": "pattern80_18",
+        "ratio": 52,
+        "tris": 8125
+      },
+      {
+        "name": "pattern91_19",
+        "ratio": 54,
+        "tris": 8198
+      }
+    ]
+  },
+  {
+    "id": "01jmm4nqbb7tmjmr316src86f6",
+    "name": "Men's/shorts M-Shorts 80",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 8,
+    "minRatio": 10,
+    "maxRatio": 11.3,
+    "avgRatio": 10.4,
+    "ratioSpread": 1.13,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern43_1",
+        "ratio": 10,
+        "tris": 3783
+      },
+      {
+        "name": "pattern51_2",
+        "ratio": 10,
+        "tris": 3783
+      },
+      {
+        "name": "pattern91_7",
+        "ratio": 10.1,
+        "tris": 4946
+      },
+      {
+        "name": "pattern99_8",
+        "ratio": 10.2,
+        "tris": 4946
+      },
+      {
+        "name": "pattern1_9",
+        "ratio": 11,
+        "tris": 8087
+      },
+      {
+        "name": "pattern19_11",
+        "ratio": 11.3,
+        "tris": 8087
+      },
+      {
+        "name": "pattern31_18",
+        "ratio": 10.6,
+        "tris": 2536
+      },
+      {
+        "name": "pattern37_19",
+        "ratio": 10.1,
+        "tris": 13896
+      }
+    ]
+  },
+  {
+    "id": "01jmm4g94ej7tnddhrndt9nr2y",
+    "name": "Men's/T-shirt M-T shirt 113",
+    "category": "TOPWEAR",
+    "panelsCount": 15,
+    "minRatio": 11.8,
+    "maxRatio": 86.6,
+    "avgRatio": 46.6,
+    "ratioSpread": 7.37,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern55_1",
+        "ratio": 36.9,
+        "tris": 837
+      },
+      {
+        "name": "pattern56_2",
+        "ratio": 41.3,
+        "tris": 736
+      },
+      {
+        "name": "pattern57_3",
+        "ratio": 37.9,
+        "tris": 3441
+      },
+      {
+        "name": "pattern89_8",
+        "ratio": 28.7,
+        "tris": 554
+      },
+      {
+        "name": "pattern101_10",
+        "ratio": 29,
+        "tris": 554
+      },
+      {
+        "name": "pattern113_12",
+        "ratio": 11.8,
+        "tris": 2160
+      },
+      {
+        "name": "pattern11_13",
+        "ratio": 37.2,
+        "tris": 3441
+      },
+      {
+        "name": "pattern17_14",
+        "ratio": 83.1,
+        "tris": 6799
+      },
+      {
+        "name": "pattern25_15",
+        "ratio": 42,
+        "tris": 837
+      },
+      {
+        "name": "pattern26_16",
+        "ratio": 36.2,
+        "tris": 736
+      },
+      {
+        "name": "pattern27_17",
+        "ratio": 29.5,
+        "tris": 1413
+      },
+      {
+        "name": "pattern33_18",
+        "ratio": 29.4,
+        "tris": 1399
+      },
+      {
+        "name": "pattern47_20",
+        "ratio": 82.6,
+        "tris": 6823
+      },
+      {
+        "name": "pattern121_21",
+        "ratio": 86.6,
+        "tris": 22605
+      },
+      {
+        "name": "pattern1_22",
+        "ratio": 86.6,
+        "tris": 21763
+      }
+    ]
+  },
+  {
+    "id": "01jmm4adb6yvwhcqrvajdpskck",
+    "name": "Women/T-shirt W-T shirt 130",
+    "category": "TOPWEAR",
+    "panelsCount": 4,
+    "minRatio": 14.8,
+    "maxRatio": 15.1,
+    "avgRatio": 14.9,
+    "ratioSpread": 1.02,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern29_1",
+        "ratio": 15.1,
+        "tris": 12318
+      },
+      {
+        "name": "pattern13_6",
+        "ratio": 14.8,
+        "tris": 3007
+      },
+      {
+        "name": "pattern21_7",
+        "ratio": 14.8,
+        "tris": 3007
+      },
+      {
+        "name": "pattern43_12",
+        "ratio": 14.9,
+        "tris": 12854
+      }
+    ]
+  },
+  {
+    "id": "01jmm49z8rfwyykcxp2cfv289f",
+    "name": "Men's/T-shirt M-T shirt 96",
+    "category": "TOPWEAR",
+    "panelsCount": 5,
+    "minRatio": 0.9,
+    "maxRatio": 323.9,
+    "avgRatio": 130.1,
+    "ratioSpread": 365.67,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern13_1",
+        "ratio": 323.9,
+        "tris": 36224
+      },
+      {
+        "name": "pattern1_2",
+        "ratio": 323.8,
+        "tris": 38299
+      },
+      {
+        "name": "pattern37_3",
+        "ratio": 0.9,
+        "tris": 2905
+      },
+      {
+        "name": "pattern46_4",
+        "ratio": 0.9,
+        "tris": 2880
+      },
+      {
+        "name": "pattern25_9",
+        "ratio": 1,
+        "tris": 729
+      }
+    ]
+  },
+  {
+    "id": "01jmm49tkqzrfha29t0vqx8q3p",
+    "name": "Men's/T-shirt M-T shirt 95",
+    "category": "TOPWEAR",
+    "panelsCount": 9,
+    "minRatio": 20.2,
+    "maxRatio": 20.6,
+    "avgRatio": 20.4,
+    "ratioSpread": 1.02,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern27_2",
+        "ratio": 20.3,
+        "tris": 1428
+      },
+      {
+        "name": "pattern33_3",
+        "ratio": 20.2,
+        "tris": 1316
+      },
+      {
+        "name": "pattern40_4",
+        "ratio": 20.5,
+        "tris": 3235
+      },
+      {
+        "name": "pattern88_5",
+        "ratio": 20.4,
+        "tris": 27244
+      },
+      {
+        "name": "pattern60_8",
+        "ratio": 20.4,
+        "tris": 1316
+      },
+      {
+        "name": "pattern67_9",
+        "ratio": 20.3,
+        "tris": 1428
+      },
+      {
+        "name": "pattern73_10",
+        "ratio": 20.6,
+        "tris": 3235
+      },
+      {
+        "name": "pattern81_11",
+        "ratio": 20.2,
+        "tris": 6019
+      },
+      {
+        "name": "pattern7_13",
+        "ratio": 20.4,
+        "tris": 29030
+      }
+    ]
+  },
+  {
+    "id": "01jmm49qg63z1a65aqjzed6mmk",
+    "name": "Men's/T-shirt M-T shirt 86",
+    "category": "TOPWEAR",
+    "panelsCount": 5,
+    "minRatio": 440.5,
+    "maxRatio": 456.3,
+    "avgRatio": 449.2,
+    "ratioSpread": 1.04,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 446,
+        "tris": 22115
+      },
+      {
+        "name": "pattern212_2",
+        "ratio": 456.3,
+        "tris": 898
+      },
+      {
+        "name": "pattern105_25",
+        "ratio": 452.4,
+        "tris": 10298
+      },
+      {
+        "name": "pattern169_26",
+        "ratio": 440.5,
+        "tris": 22057
+      },
+      {
+        "name": "pattern44_27",
+        "ratio": 450.7,
+        "tris": 11217
+      }
+    ]
+  },
+  {
+    "id": "01jmm47sa3dx873cc7eaqcabn6",
+    "name": "Women/T-shirt W-T shirt 64",
+    "category": "TOPWEAR",
+    "panelsCount": 11,
+    "minRatio": 1,
+    "maxRatio": 1.1,
+    "avgRatio": 1,
+    "ratioSpread": 1.1,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern53_1",
+        "ratio": 1,
+        "tris": 9093
+      },
+      {
+        "name": "pattern61_2",
+        "ratio": 1.1,
+        "tris": 9096
+      },
+      {
+        "name": "pattern1_3",
+        "ratio": 1,
+        "tris": 8338
+      },
+      {
+        "name": "pattern8_4",
+        "ratio": 1,
+        "tris": 10112
+      },
+      {
+        "name": "pattern16_5",
+        "ratio": 1,
+        "tris": 11526
+      },
+      {
+        "name": "pattern105_6",
+        "ratio": 1.1,
+        "tris": 1552
+      },
+      {
+        "name": "pattern34_7",
+        "ratio": 1,
+        "tris": 8737
+      },
+      {
+        "name": "pattern45_8",
+        "ratio": 1,
+        "tris": 15923
+      },
+      {
+        "name": "pattern69_9",
+        "ratio": 1,
+        "tris": 8745
+      },
+      {
+        "name": "pattern80_10",
+        "ratio": 1,
+        "tris": 8338
+      },
+      {
+        "name": "pattern87_11",
+        "ratio": 1.1,
+        "tris": 4043
+      }
+    ]
+  },
+  {
+    "id": "01jmm47b69afbq4fp25ymjr1fz",
+    "name": "Women/Tank Top W-Singlet 14",
+    "category": "TOPWEAR",
+    "panelsCount": 5,
+    "minRatio": 1,
+    "maxRatio": 1.1,
+    "avgRatio": 1,
+    "ratioSpread": 1.02,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 1,
+        "tris": 14168
+      },
+      {
+        "name": "pattern52_2",
+        "ratio": 1,
+        "tris": 8100
+      },
+      {
+        "name": "pattern27_3",
+        "ratio": 1.1,
+        "tris": 8064
+      },
+      {
+        "name": "pattern41_4",
+        "ratio": 1,
+        "tris": 6944
+      },
+      {
+        "name": "pattern13_5",
+        "ratio": 1,
+        "tris": 13680
+      }
+    ]
+  },
+  {
+    "id": "01jmm3yg7ppdkpemhxjd9q59h0",
+    "name": "Men's/Shorts M-Shorts 58",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 37,
+    "minRatio": 0.8,
+    "maxRatio": 1,
+    "avgRatio": 1,
+    "ratioSpread": 1.36,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern3_1",
+        "ratio": 1,
+        "tris": 24127
+      },
+      {
+        "name": "pattern4_2",
+        "ratio": 1,
+        "tris": 1555
+      },
+      {
+        "name": "pattern5_3",
+        "ratio": 0.9,
+        "tris": 1212
+      },
+      {
+        "name": "pattern6_4",
+        "ratio": 1,
+        "tris": 1555
+      },
+      {
+        "name": "pattern7_5",
+        "ratio": 1,
+        "tris": 1590
+      },
+      {
+        "name": "pattern8_6",
+        "ratio": 1,
+        "tris": 1728
+      },
+      {
+        "name": "pattern9_7",
+        "ratio": 1,
+        "tris": 1590
+      },
+      {
+        "name": "pattern11_9",
+        "ratio": 1,
+        "tris": 588
+      },
+      {
+        "name": "pattern13_11",
+        "ratio": 1,
+        "tris": 740
+      },
+      {
+        "name": "pattern14_12",
+        "ratio": 1,
+        "tris": 1008
+      },
+      {
+        "name": "pattern15_13",
+        "ratio": 1,
+        "tris": 740
+      },
+      {
+        "name": "pattern16_14",
+        "ratio": 1,
+        "tris": 1555
+      },
+      {
+        "name": "pattern17_15",
+        "ratio": 1,
+        "tris": 1212
+      },
+      {
+        "name": "pattern18_16",
+        "ratio": 1,
+        "tris": 1555
+      },
+      {
+        "name": "pattern19_17",
+        "ratio": 1,
+        "tris": 1598
+      },
+      {
+        "name": "pattern20_18",
+        "ratio": 0.8,
+        "tris": 1728
+      },
+      {
+        "name": "pattern21_19",
+        "ratio": 1,
+        "tris": 1598
+      },
+      {
+        "name": "pattern36_20",
+        "ratio": 1,
+        "tris": 6256
+      },
+      {
+        "name": "pattern37_21",
+        "ratio": 1,
+        "tris": 1244
+      },
+      {
+        "name": "pattern38_22",
+        "ratio": 1,
+        "tris": 1968
+      },
+      {
+        "name": "pattern39_23",
+        "ratio": 1,
+        "tris": 1244
+      },
+      {
+        "name": "pattern22_42",
+        "ratio": 1,
+        "tris": 1238
+      },
+      {
+        "name": "pattern23_43",
+        "ratio": 0.8,
+        "tris": 1968
+      },
+      {
+        "name": "pattern24_44",
+        "ratio": 1,
+        "tris": 1238
+      },
+      {
+        "name": "pattern25_45",
+        "ratio": 1,
+        "tris": 6238
+      },
+      {
+        "name": "pattern26_46",
+        "ratio": 1,
+        "tris": 2208
+      },
+      {
+        "name": "pattern27_47",
+        "ratio": 1,
+        "tris": 6238
+      },
+      {
+        "name": "pattern28_48",
+        "ratio": 1,
+        "tris": 4164
+      },
+      {
+        "name": "pattern29_49",
+        "ratio": 1,
+        "tris": 1728
+      },
+      {
+        "name": "pattern30_50",
+        "ratio": 1,
+        "tris": 4164
+      },
+      {
+        "name": "pattern31_51",
+        "ratio": 1,
+        "tris": 4184
+      },
+      {
+        "name": "pattern32_52",
+        "ratio": 1,
+        "tris": 1728
+      },
+      {
+        "name": "pattern33_53",
+        "ratio": 1,
+        "tris": 4184
+      },
+      {
+        "name": "pattern34_54",
+        "ratio": 1,
+        "tris": 6256
+      },
+      {
+        "name": "pattern35_55",
+        "ratio": 1,
+        "tris": 2208
+      },
+      {
+        "name": "pattern1_56",
+        "ratio": 1,
+        "tris": 24127
+      },
+      {
+        "name": "pattern2_57",
+        "ratio": 0.8,
+        "tris": 9468
+      }
+    ]
+  },
+  {
+    "id": "01jmm3xtvkv40zp92yda5z7183",
+    "name": "Women/Tank Top W-Singlet 2",
+    "category": "TOPWEAR",
+    "panelsCount": 18,
+    "minRatio": 1,
+    "maxRatio": 1.1,
+    "avgRatio": 1,
+    "ratioSpread": 1.06,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern7_1",
+        "ratio": 1,
+        "tris": 4681
+      },
+      {
+        "name": "pattern8_2",
+        "ratio": 1,
+        "tris": 4681
+      },
+      {
+        "name": "pattern9_3",
+        "ratio": 1,
+        "tris": 4380
+      },
+      {
+        "name": "pattern10_4",
+        "ratio": 1.1,
+        "tris": 2520
+      },
+      {
+        "name": "pattern11_5",
+        "ratio": 1,
+        "tris": 2520
+      },
+      {
+        "name": "pattern12_6",
+        "ratio": 1.1,
+        "tris": 2600
+      },
+      {
+        "name": "pattern18_7",
+        "ratio": 1,
+        "tris": 3520
+      },
+      {
+        "name": "pattern1_19",
+        "ratio": 1,
+        "tris": 2520
+      },
+      {
+        "name": "pattern2_20",
+        "ratio": 1,
+        "tris": 2520
+      },
+      {
+        "name": "pattern3_21",
+        "ratio": 1,
+        "tris": 2600
+      },
+      {
+        "name": "pattern4_22",
+        "ratio": 1,
+        "tris": 4681
+      },
+      {
+        "name": "pattern5_23",
+        "ratio": 1,
+        "tris": 4681
+      },
+      {
+        "name": "pattern6_24",
+        "ratio": 1,
+        "tris": 4380
+      },
+      {
+        "name": "pattern13_34",
+        "ratio": 1.1,
+        "tris": 5140
+      },
+      {
+        "name": "pattern14_35",
+        "ratio": 1,
+        "tris": 5140
+      },
+      {
+        "name": "pattern15_36",
+        "ratio": 1.1,
+        "tris": 3520
+      },
+      {
+        "name": "pattern16_37",
+        "ratio": 1,
+        "tris": 5140
+      },
+      {
+        "name": "pattern17_38",
+        "ratio": 1,
+        "tris": 5140
+      }
+    ]
+  },
+  {
+    "id": "01jmm3sw4cwxj0nya6bysjzs2q",
+    "name": "LGS080725 leggings",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 29,
+    "minRatio": 1,
+    "maxRatio": 259.7,
+    "avgRatio": 233.3,
+    "ratioSpread": 258.91,
+    "isMismatch": true,
+    "panels": [
+      {
+        "name": "pattern126_1",
+        "ratio": 249.2,
+        "tris": 3375
+      },
+      {
+        "name": "pattern138_2",
+        "ratio": 245.4,
+        "tris": 9270
+      },
+      {
+        "name": "pattern151_3",
+        "ratio": 254.6,
+        "tris": 729
+      },
+      {
+        "name": "pattern159_4",
+        "ratio": 236.1,
+        "tris": 2629
+      },
+      {
+        "name": "pattern173_5",
+        "ratio": 249.2,
+        "tris": 6832
+      },
+      {
+        "name": "pattern179_6",
+        "ratio": 253.5,
+        "tris": 6141
+      },
+      {
+        "name": "pattern185_7",
+        "ratio": 247.9,
+        "tris": 6832
+      },
+      {
+        "name": "pattern191_8",
+        "ratio": 252.7,
+        "tris": 1773
+      },
+      {
+        "name": "pattern203_9",
+        "ratio": 251.5,
+        "tris": 531
+      },
+      {
+        "name": "pattern211_10",
+        "ratio": 254.3,
+        "tris": 6141
+      },
+      {
+        "name": "pattern217_11",
+        "ratio": 253.9,
+        "tris": 5373
+      },
+      {
+        "name": "pattern236_13",
+        "ratio": 248.9,
+        "tris": 1554
+      },
+      {
+        "name": "pattern242_14",
+        "ratio": 255.7,
+        "tris": 1554
+      },
+      {
+        "name": "pattern268_17",
+        "ratio": 1,
+        "tris": 1010
+      },
+      {
+        "name": "pattern1_19",
+        "ratio": 248.2,
+        "tris": 729
+      },
+      {
+        "name": "pattern9_20",
+        "ratio": 234.2,
+        "tris": 2629
+      },
+      {
+        "name": "pattern23_21",
+        "ratio": 251.4,
+        "tris": 1773
+      },
+      {
+        "name": "pattern35_22",
+        "ratio": 258.5,
+        "tris": 8138
+      },
+      {
+        "name": "pattern43_23",
+        "ratio": 253.7,
+        "tris": 5303
+      },
+      {
+        "name": "pattern49_24",
+        "ratio": 247.8,
+        "tris": 2096
+      },
+      {
+        "name": "pattern58_25",
+        "ratio": 253.1,
+        "tris": 3375
+      },
+      {
+        "name": "pattern70_26",
+        "ratio": 259.7,
+        "tris": 9273
+      },
+      {
+        "name": "pattern83_27",
+        "ratio": 254.1,
+        "tris": 531
+      },
+      {
+        "name": "pattern91_28",
+        "ratio": 242.1,
+        "tris": 2518
+      },
+      {
+        "name": "pattern97_29",
+        "ratio": 253,
+        "tris": 5303
+      },
+      {
+        "name": "pattern103_30",
+        "ratio": 251.3,
+        "tris": 8138
+      },
+      {
+        "name": "pattern111_31",
+        "ratio": 250.3,
+        "tris": 2518
+      },
+      {
+        "name": "pattern117_32",
+        "ratio": 252.7,
+        "tris": 5291
+      },
+      {
+        "name": "pattern311_43",
+        "ratio": 1,
+        "tris": 1010
+      }
+    ]
+  },
+  {
+    "id": "01jmm2nfcb8yntzvcgt2hvtd40",
+    "name": "LL Men's/Shorts M-Shorts 33",
+    "category": "BOTTOMWEAR",
+    "panelsCount": 16,
+    "minRatio": 118.6,
+    "maxRatio": 138.4,
+    "avgRatio": 129,
+    "ratioSpread": 1.17,
+    "isMismatch": false,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "ratio": 135,
+        "tris": 892
+      },
+      {
+        "name": "pattern2_2",
+        "ratio": 134.4,
+        "tris": 892
+      },
+      {
+        "name": "pattern3_3",
+        "ratio": 118.6,
+        "tris": 602
+      },
+      {
+        "name": "pattern4_4",
+        "ratio": 130.9,
+        "tris": 1937
+      },
+      {
+        "name": "pattern5_5",
+        "ratio": 129.1,
+        "tris": 8643
+      },
+      {
+        "name": "pattern6_20",
+        "ratio": 127.6,
+        "tris": 6728
+      },
+      {
+        "name": "pattern7_21",
+        "ratio": 122,
+        "tris": 6728
+      },
+      {
+        "name": "pattern8_22",
+        "ratio": 130.2,
+        "tris": 602
+      },
+      {
+        "name": "pattern9_80",
+        "ratio": 138.4,
+        "tris": 8643
+      },
+      {
+        "name": "pattern10_81",
+        "ratio": 126.2,
+        "tris": 1937
+      },
+      {
+        "name": "pattern11_82",
+        "ratio": 133.5,
+        "tris": 892
+      },
+      {
+        "name": "pattern12_83",
+        "ratio": 133.2,
+        "tris": 892
+      },
+      {
+        "name": "pattern13_84",
+        "ratio": 128.1,
+        "tris": 602
+      },
+      {
+        "name": "pattern14_85",
+        "ratio": 118.6,
+        "tris": 602
+      },
+      {
+        "name": "pattern17_88",
+        "ratio": 129.6,
+        "tris": 558
+      },
+      {
+        "name": "pattern18_89",
+        "ratio": 127.9,
+        "tris": 558
+      }
+    ]
+  }
+]

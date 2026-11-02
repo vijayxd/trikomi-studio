@@ -1,0 +1,346 @@
+[
+  {
+    "id": "01jmm49z8rfwyykcxp2cfv289f",
+    "name": "Men's/T-shirt M-T shirt 96",
+    "cat": "TOPWEAR",
+    "spread": 359.9,
+    "minRatio": 0.9,
+    "maxRatio": 323.9
+  },
+  {
+    "id": "01jmm3sw4cwxj0nya6bysjzs2q",
+    "name": "LGS080725 leggings",
+    "cat": "BOTTOMWEAR",
+    "spread": 259.7,
+    "minRatio": 1,
+    "maxRatio": 259.7
+  },
+  {
+    "id": "01jmmbt8r0gvwdd4vddwmfqfvb",
+    "name": "Grey hooded zippered European cardigan coat",
+    "cat": "TOPWEAR",
+    "spread": 214,
+    "minRatio": 0.8,
+    "maxRatio": 171.2
+  },
+  {
+    "id": "01jmm581e1re6zrrk91bh6te0w",
+    "name": "Women/Tank Top W-Singlet 27",
+    "cat": "TOPWEAR",
+    "spread": 203.9,
+    "minRatio": 1,
+    "maxRatio": 203.9
+  },
+  {
+    "id": "01jmmb6c8nx5tns3kq755v190p",
+    "name": "Sky blue nylon printed loose shorts",
+    "cat": "BOTTOMWEAR",
+    "spread": 183.6,
+    "minRatio": 1,
+    "maxRatio": 183.6
+  },
+  {
+    "id": "01jmm5mbgfg54c1p7hs78cdfwk",
+    "name": "Men's shorts M-shorts 104",
+    "cat": "BOTTOMWEAR",
+    "spread": 127,
+    "minRatio": 0.9,
+    "maxRatio": 114.3
+  },
+  {
+    "id": "01jmm71wr9vjgf97j02r245y3g",
+    "name": "Women/coat W-Sport-gyq-006",
+    "cat": "TOPWEAR",
+    "spread": 126.2,
+    "minRatio": 1,
+    "maxRatio": 126.2
+  },
+  {
+    "id": "01jmm6zjj03mk2svjn8dpa0xcf",
+    "name": "Men's/hoodie top-gyq-004",
+    "cat": "TOPWEAR",
+    "spread": 100.9,
+    "minRatio": 0.8,
+    "maxRatio": 80.7
+  },
+  {
+    "id": "01jmmh2nytvynddkg0anb99mg2",
+    "name": "Yoga-Skc-05",
+    "cat": "TOPWEAR",
+    "spread": 91.3,
+    "minRatio": 1,
+    "maxRatio": 91.3
+  },
+  {
+    "id": "01jmm5fmrzs7y4vsqjxkt1zqy6",
+    "name": "Women/Tank Top W-Singlet 36",
+    "cat": "TOPWEAR",
+    "spread": 71.6,
+    "minRatio": 1,
+    "maxRatio": 71.6
+  },
+  {
+    "id": "01jmmcbqyyzd96exkdts8nmsz2",
+    "name": "Brown brushed drawcord hoodie sweater",
+    "cat": "TOPWEAR",
+    "spread": 63.7,
+    "minRatio": 1,
+    "maxRatio": 63.7
+  },
+  {
+    "id": "01jmm5f94hyzwb1fpfktb9y0gd",
+    "name": "Women/shorts W-shorts 111",
+    "cat": "BOTTOMWEAR",
+    "spread": 59.7,
+    "minRatio": 1,
+    "maxRatio": 59.7
+  },
+  {
+    "id": "01jmmb73n7a187gdbgznxdxe2y",
+    "name": "White shiny European shorts",
+    "cat": "BOTTOMWEAR",
+    "spread": 56.6,
+    "minRatio": 1.3,
+    "maxRatio": 73.6
+  },
+  {
+    "id": "01jmmajjv5y600e48s4v07aj5z",
+    "name": "Black two piece casual sweatpants",
+    "cat": "BOTTOMWEAR",
+    "spread": 51.2,
+    "minRatio": 1,
+    "maxRatio": 51.2
+  },
+  {
+    "id": "01jmm538b1av1c17hhwc4nn2sq",
+    "name": "G Women's T-shirt W-T-shirt 002",
+    "cat": "TOPWEAR",
+    "spread": 47,
+    "minRatio": 1,
+    "maxRatio": 47
+  },
+  {
+    "id": "01jmmcecfx0vqpyw74xjxhnsw9",
+    "name": "Grass green webbing sports shorts",
+    "cat": "BOTTOMWEAR",
+    "spread": 32.7,
+    "minRatio": 1.1,
+    "maxRatio": 36
+  },
+  {
+    "id": "01jmmh35htm6zejx1fmfdgb7h6",
+    "name": "Yoga-skc-01",
+    "cat": "BOTTOMWEAR",
+    "spread": 21.4,
+    "minRatio": 44.5,
+    "maxRatio": 954.1
+  },
+  {
+    "id": "01jmmcfbaxd6ph31jmw2w60ax8",
+    "name": "Khaki color patchwork sports long-sleeved bottom shirt",
+    "cat": "TOPWEAR",
+    "spread": 20.3,
+    "minRatio": 2.6,
+    "maxRatio": 52.8
+  },
+  {
+    "id": "01jmm8jksz96m4b8h9pjztbvf1",
+    "name": "Blue printing sling tight yoga suit",
+    "cat": "SUIT",
+    "spread": 12.9,
+    "minRatio": 49.6,
+    "maxRatio": 638.8
+  },
+  {
+    "id": "01jmmh33akan9vvz53ttaq4cce",
+    "name": "Yoga-Skc-03",
+    "cat": "TOPWEAR",
+    "spread": 9.7,
+    "minRatio": 12,
+    "maxRatio": 116.4
+  },
+  {
+    "id": "01jmm4g94ej7tnddhrndt9nr2y",
+    "name": "Men's/T-shirt M-T shirt 113",
+    "cat": "TOPWEAR",
+    "spread": 7.3,
+    "minRatio": 11.8,
+    "maxRatio": 86.6
+  },
+  {
+    "id": "01jmmd5sfgkkbw1kxhzwbjxaka",
+    "name": "Apricot printed hooded casual sweater",
+    "cat": "TOPWEAR",
+    "spread": 7,
+    "minRatio": 38.2,
+    "maxRatio": 267.1
+  },
+  {
+    "id": "01jmmh0jgtcgjdyd8eshafzb33",
+    "name": "Yoga-skc-01",
+    "cat": "TOPWEAR",
+    "spread": 6.5,
+    "minRatio": 12.6,
+    "maxRatio": 82.4
+  },
+  {
+    "id": "01jmm8nvv5ghhh2mvjpr45efry",
+    "name": "Light brown knitted hooded short sweater",
+    "cat": "TOPWEAR",
+    "spread": 5.7,
+    "minRatio": 66.2,
+    "maxRatio": 377.8
+  },
+  {
+    "id": "01jmmbd2bk9h9t13r8429kavmv",
+    "name": "Light blue long sleeve one-piece tights",
+    "cat": "SUIT",
+    "spread": 4.9,
+    "minRatio": 14.3,
+    "maxRatio": 70.3
+  },
+  {
+    "id": "01jmm8hw83x3s0ph48xt8kjbe8",
+    "name": "Blue skinny one-piece yoga suit",
+    "cat": "SUIT",
+    "spread": 4,
+    "minRatio": 23.7,
+    "maxRatio": 95.9
+  },
+  {
+    "id": "01jmm4yahnya4rdn9zwqdg5h7q",
+    "name": "Women/T-shirt W-T shirt 141",
+    "cat": "TOPWEAR",
+    "spread": 3.3,
+    "minRatio": 13,
+    "maxRatio": 42.7
+  },
+  {
+    "id": "01jmmcfxrx1fqpr2x5ggf0dhfd",
+    "name": "Dark gray laser strap decorative sports coat",
+    "cat": "TOPWEAR",
+    "spread": 2.6,
+    "minRatio": 14.6,
+    "maxRatio": 38.3
+  },
+  {
+    "id": "01jmmh0bbewq923s6z4qttnm72",
+    "name": "Yoga-Skc-08",
+    "cat": "TOPWEAR",
+    "spread": 2.4,
+    "minRatio": 99.9,
+    "maxRatio": 239.6
+  },
+  {
+    "id": "01jmmh3a089xj40xgzz8ahd4me",
+    "name": "Yoga-skc-05",
+    "cat": "BOTTOMWEAR",
+    "spread": 2.1,
+    "minRatio": 46.1,
+    "maxRatio": 95.1
+  },
+  {
+    "id": "01jmmcezrsm6jv3a1npbw7qa7m",
+    "name": "Black panel printed basketball tank top",
+    "cat": "TOPWEAR",
+    "spread": 2.1,
+    "minRatio": 54.3,
+    "maxRatio": 115.8
+  },
+  {
+    "id": "01jmmf0nmhzd7tdxae2rn133tp",
+    "name": "Mesh tights Leggings",
+    "cat": "BOTTOMWEAR",
+    "spread": 2,
+    "minRatio": 18.4,
+    "maxRatio": 36.2
+  },
+  {
+    "id": "01jmmm4a2060z9tygk241hfe74",
+    "name": "Athletic Wear",
+    "cat": "TOPWEAR",
+    "spread": 1.9,
+    "minRatio": 148,
+    "maxRatio": 284.7
+  },
+  {
+    "id": "01jmm8hx335djmtcz6dp11x5cf",
+    "name": "Military green sling tight yoga suit",
+    "cat": "SUIT",
+    "spread": 1.9,
+    "minRatio": 52.1,
+    "maxRatio": 99
+  },
+  {
+    "id": "01jmmh4kq1rzbyz1aacf69kgmj",
+    "name": "Yoga-skc-03",
+    "cat": "TOPWEAR",
+    "spread": 1.8,
+    "minRatio": 46.9,
+    "maxRatio": 85.7
+  },
+  {
+    "id": "01jmmahaxrs17szejysk9kgxtq",
+    "name": "Green European American Sports Casual Pants",
+    "cat": "BOTTOMWEAR",
+    "spread": 1.7,
+    "minRatio": 54.1,
+    "maxRatio": 90.6
+  },
+  {
+    "id": "01jmmbb7g0sfgz54ghqy16vdte",
+    "name": "Pink zip hooded European jacket",
+    "cat": "TOPWEAR",
+    "spread": 1.5,
+    "minRatio": 36.2,
+    "maxRatio": 56.1
+  },
+  {
+    "id": "01jmmahrvh8rq7dzjrfxyst4zg",
+    "name": "Black drawstring waist shorts",
+    "cat": "BOTTOMWEAR",
+    "spread": 1.5,
+    "minRatio": 84.1,
+    "maxRatio": 122.1
+  },
+  {
+    "id": "01jmmm3k9scajhejexa8ydnd8y",
+    "name": "Women's sportswear",
+    "cat": "BOTTOMWEAR",
+    "spread": 1.4,
+    "minRatio": 165.2,
+    "maxRatio": 232.8
+  },
+  {
+    "id": "01jmmh371x32dy9kx3hzktkp7b",
+    "name": "Yoga-skc-02",
+    "cat": "TOPWEAR",
+    "spread": 1.4,
+    "minRatio": 61.4,
+    "maxRatio": 86.1
+  },
+  {
+    "id": "01jmm7jwn0yj7jtgp9ab9n8avz",
+    "name": "Brown Twill Split Fit Shorts",
+    "cat": "BOTTOMWEAR",
+    "spread": 1.4,
+    "minRatio": 211.8,
+    "maxRatio": 306
+  },
+  {
+    "id": "01jmm4rhc2hpp29cy7pm9qwn1c",
+    "name": "Men's/T-shirt M-T shirt 117",
+    "cat": "TOPWEAR",
+    "spread": 1.4,
+    "minRatio": 40.8,
+    "maxRatio": 56.4
+  },
+  {
+    "id": "01jmm5tca9ebm47npvbk3f90fw",
+    "name": "LL Men's/Shorts M-Shorts 2",
+    "cat": "BOTTOMWEAR",
+    "spread": 1.3,
+    "minRatio": 190.6,
+    "maxRatio": 251.8
+  }
+]

@@ -19,6 +19,7 @@ last_transfer_debug.json
 public/fabric_library
 public/thumbnails
 public/models
+public/models_storage
 public/contact_sheets*
 public/litmus_test_grid
 public/uv_blueprints

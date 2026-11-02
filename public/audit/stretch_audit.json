@@ -1,0 +1,3496 @@
+[
+  {
+    "id": "01jmm49z8rfwyykcxp2cfv289f",
+    "name": "Men's/T-shirt M-T shirt 96",
+    "cat": "TOPWEAR",
+    "stretchedCount": 5,
+    "panels": [
+      {
+        "name": "pattern13_1",
+        "uScale": 776.6,
+        "vScale": 604.3,
+        "aspect": 1.28
+      },
+      {
+        "name": "pattern37_3",
+        "uScale": 0.7,
+        "vScale": 1.3,
+        "aspect": 0.52
+      },
+      {
+        "name": "pattern46_4",
+        "uScale": 0.8,
+        "vScale": 1.1,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern25_9",
+        "uScale": 3.6,
+        "vScale": 9.5,
+        "aspect": 0.38
+      },
+      {
+        "name": "pattern31_10",
+        "uScale": 4.1,
+        "vScale": 5.2,
+        "aspect": 0.79
+      }
+    ]
+  },
+  {
+    "id": "01jmm3sw4cwxj0nya6bysjzs2q",
+    "name": "LGS080725 leggings",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 20,
+    "panels": [
+      {
+        "name": "pattern126_1",
+        "uScale": 769.8,
+        "vScale": 483.8,
+        "aspect": 1.59
+      },
+      {
+        "name": "pattern138_2",
+        "uScale": 812.8,
+        "vScale": 613.4,
+        "aspect": 1.33
+      },
+      {
+        "name": "pattern159_4",
+        "uScale": 206.3,
+        "vScale": 265.5,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern173_5",
+        "uScale": 539.3,
+        "vScale": 408.7,
+        "aspect": 1.32
+      },
+      {
+        "name": "pattern179_6",
+        "uScale": 529.9,
+        "vScale": 364.7,
+        "aspect": 1.45
+      },
+      {
+        "name": "pattern185_7",
+        "uScale": 566.7,
+        "vScale": 416.6,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern191_8",
+        "uScale": 782,
+        "vScale": 533.7,
+        "aspect": 1.47
+      },
+      {
+        "name": "pattern211_10",
+        "uScale": 564.5,
+        "vScale": 314.4,
+        "aspect": 1.8
+      },
+      {
+        "name": "pattern217_11",
+        "uScale": 1518.1,
+        "vScale": 187.8,
+        "aspect": 8.08
+      },
+      {
+        "name": "pattern228_12",
+        "uScale": 705.8,
+        "vScale": 369,
+        "aspect": 1.91
+      },
+      {
+        "name": "pattern236_13",
+        "uScale": 700.2,
+        "vScale": 551.2,
+        "aspect": 1.27
+      },
+      {
+        "name": "pattern268_17",
+        "uScale": 4.6,
+        "vScale": 3.3,
+        "aspect": 1.39
+      },
+      {
+        "name": "pattern1_19",
+        "uScale": 694.5,
+        "vScale": 196.8,
+        "aspect": 3.53
+      },
+      {
+        "name": "pattern9_20",
+        "uScale": 209.3,
+        "vScale": 266.7,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern23_21",
+        "uScale": 798,
+        "vScale": 590.2,
+        "aspect": 1.35
+      },
+      {
+        "name": "pattern35_22",
+        "uScale": 636.5,
+        "vScale": 811.6,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern70_26",
+        "uScale": 729,
+        "vScale": 552.9,
+        "aspect": 1.32
+      },
+      {
+        "name": "pattern91_28",
+        "uScale": 895.7,
+        "vScale": 597.2,
+        "aspect": 1.5
+      },
+      {
+        "name": "pattern111_31",
+        "uScale": 892.5,
+        "vScale": 372.7,
+        "aspect": 2.39
+      },
+      {
+        "name": "pattern117_32",
+        "uScale": 827.3,
+        "vScale": 364.7,
+        "aspect": 2.27
+      }
+    ]
+  },
+  {
+    "id": "01jmmbt8r0gvwdd4vddwmfqfvb",
+    "name": "Grey hooded zippered European cardigan coat",
+    "cat": "TOPWEAR",
+    "stretchedCount": 13,
+    "panels": [
+      {
+        "name": "pattern191_5",
+        "uScale": 286.4,
+        "vScale": 383.9,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern198_6",
+        "uScale": 407.3,
+        "vScale": 308.6,
+        "aspect": 1.32
+      },
+      {
+        "name": "pattern215_7",
+        "uScale": 0.9,
+        "vScale": 0.3,
+        "aspect": 3.55
+      },
+      {
+        "name": "pattern223_8",
+        "uScale": 413.4,
+        "vScale": 327.5,
+        "aspect": 1.26
+      },
+      {
+        "name": "pattern11_39",
+        "uScale": 458.3,
+        "vScale": 335.1,
+        "aspect": 1.37
+      },
+      {
+        "name": "pattern54_45",
+        "uScale": 1,
+        "vScale": 0.3,
+        "aspect": 2.94
+      },
+      {
+        "name": "pattern62_46",
+        "uScale": 6.6,
+        "vScale": 2.4,
+        "aspect": 2.7
+      },
+      {
+        "name": "pattern88_62",
+        "uScale": 7.3,
+        "vScale": 4.4,
+        "aspect": 1.66
+      },
+      {
+        "name": "pattern102_63",
+        "uScale": 387,
+        "vScale": 298.1,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern109_64",
+        "uScale": 515.6,
+        "vScale": 312.4,
+        "aspect": 1.65
+      },
+      {
+        "name": "pattern122_66",
+        "uScale": 338,
+        "vScale": 476.7,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern130_67",
+        "uScale": 508.3,
+        "vScale": 326.7,
+        "aspect": 1.56
+      },
+      {
+        "name": "pattern145_69",
+        "uScale": 505.1,
+        "vScale": 324.4,
+        "aspect": 1.56
+      }
+    ]
+  },
+  {
+    "id": "01jmm581e1re6zrrk91bh6te0w",
+    "name": "Women/Tank Top W-Singlet 27",
+    "cat": "TOPWEAR",
+    "stretchedCount": 8,
+    "panels": [
+      {
+        "name": "pattern53_1",
+        "uScale": 7.2,
+        "vScale": 5,
+        "aspect": 1.43
+      },
+      {
+        "name": "pattern64_2",
+        "uScale": 2.3,
+        "vScale": 3.6,
+        "aspect": 0.65
+      },
+      {
+        "name": "pattern75_3",
+        "uScale": 109.7,
+        "vScale": 84.5,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern1_13",
+        "uScale": 443.9,
+        "vScale": 608,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern9_14",
+        "uScale": 2.4,
+        "vScale": 3.7,
+        "aspect": 0.65
+      },
+      {
+        "name": "pattern29_17",
+        "uScale": 2.8,
+        "vScale": 3.9,
+        "aspect": 0.72
+      },
+      {
+        "name": "pattern41_19",
+        "uScale": 4.6,
+        "vScale": 3.4,
+        "aspect": 1.35
+      },
+      {
+        "name": "pattern114_23",
+        "uScale": 631.8,
+        "vScale": 414.2,
+        "aspect": 1.53
+      }
+    ]
+  },
+  {
+    "id": "01jmmb6c8nx5tns3kq755v190p",
+    "name": "Sky blue nylon printed loose shorts",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 6,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "uScale": 184.5,
+        "vScale": 125.2,
+        "aspect": 1.47
+      },
+      {
+        "name": "pattern8_2",
+        "uScale": 290.7,
+        "vScale": 122.4,
+        "aspect": 2.38
+      },
+      {
+        "name": "pattern15_8",
+        "uScale": 256.6,
+        "vScale": 168.1,
+        "aspect": 1.53
+      },
+      {
+        "name": "pattern23_9",
+        "uScale": 220.9,
+        "vScale": 170.3,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern31_10",
+        "uScale": 138.6,
+        "vScale": 181.8,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern39_11",
+        "uScale": 2.1,
+        "vScale": 7.4,
+        "aspect": 0.28
+      }
+    ]
+  },
+  {
+    "id": "01jmm5mbgfg54c1p7hs78cdfwk",
+    "name": "Men's shorts M-shorts 104",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 12,
+    "panels": [
+      {
+        "name": "pattern121_3",
+        "uScale": 90.9,
+        "vScale": 37.3,
+        "aspect": 2.44
+      },
+      {
+        "name": "pattern127_4",
+        "uScale": 90.8,
+        "vScale": 37.2,
+        "aspect": 2.44
+      },
+      {
+        "name": "pattern61_7",
+        "uScale": 312,
+        "vScale": 410.2,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern17_9",
+        "uScale": 299.6,
+        "vScale": 177.2,
+        "aspect": 1.69
+      },
+      {
+        "name": "pattern24_10",
+        "uScale": 108.7,
+        "vScale": 463.7,
+        "aspect": 0.23
+      },
+      {
+        "name": "pattern33_11",
+        "uScale": 311.3,
+        "vScale": 405.1,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern40_12",
+        "uScale": 274.4,
+        "vScale": 457.8,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern75_13",
+        "uScale": 268.9,
+        "vScale": 154.5,
+        "aspect": 1.74
+      },
+      {
+        "name": "pattern93_15",
+        "uScale": 4.1,
+        "vScale": 15.4,
+        "aspect": 0.26
+      },
+      {
+        "name": "pattern100_16",
+        "uScale": 4.3,
+        "vScale": 16,
+        "aspect": 0.27
+      },
+      {
+        "name": "pattern107_17",
+        "uScale": 3.2,
+        "vScale": 4.3,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern114_18",
+        "uScale": 5.6,
+        "vScale": 12.9,
+        "aspect": 0.43
+      }
+    ]
+  },
+  {
+    "id": "01jmm71wr9vjgf97j02r245y3g",
+    "name": "Women/coat W-Sport-gyq-006",
+    "cat": "TOPWEAR",
+    "stretchedCount": 12,
+    "panels": [
+      {
+        "name": "pattern144_1",
+        "uScale": 211.3,
+        "vScale": 150.5,
+        "aspect": 1.4
+      },
+      {
+        "name": "pattern231_11",
+        "uScale": 228,
+        "vScale": 148,
+        "aspect": 1.54
+      },
+      {
+        "name": "pattern260_13",
+        "uScale": 3.1,
+        "vScale": 2.4,
+        "aspect": 1.32
+      },
+      {
+        "name": "pattern268_14",
+        "uScale": 5,
+        "vScale": 3.9,
+        "aspect": 1.28
+      },
+      {
+        "name": "pattern276_15",
+        "uScale": 215.7,
+        "vScale": 315.8,
+        "aspect": 0.68
+      },
+      {
+        "name": "pattern287_16",
+        "uScale": 296.6,
+        "vScale": 568.9,
+        "aspect": 0.52
+      },
+      {
+        "name": "pattern1_40",
+        "uScale": 222.4,
+        "vScale": 101.1,
+        "aspect": 2.2
+      },
+      {
+        "name": "pattern9_41",
+        "uScale": 207.4,
+        "vScale": 99,
+        "aspect": 2.09
+      },
+      {
+        "name": "pattern95_53",
+        "uScale": 249.3,
+        "vScale": 153.7,
+        "aspect": 1.62
+      },
+      {
+        "name": "pattern106_54",
+        "uScale": 334.3,
+        "vScale": 187.6,
+        "aspect": 1.78
+      },
+      {
+        "name": "pattern117_55",
+        "uScale": 426.9,
+        "vScale": 280.9,
+        "aspect": 1.52
+      },
+      {
+        "name": "pattern133_57",
+        "uScale": 240.8,
+        "vScale": 141.8,
+        "aspect": 1.7
+      }
+    ]
+  },
+  {
+    "id": "01jmm6zjj03mk2svjn8dpa0xcf",
+    "name": "Men's/hoodie top-gyq-004",
+    "cat": "TOPWEAR",
+    "stretchedCount": 28,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "uScale": 2.3,
+        "vScale": 3.4,
+        "aspect": 0.66
+      },
+      {
+        "name": "pattern29_5",
+        "uScale": 9.6,
+        "vScale": 16,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern37_6",
+        "uScale": 10.4,
+        "vScale": 7.2,
+        "aspect": 1.44
+      },
+      {
+        "name": "pattern61_9",
+        "uScale": 4.5,
+        "vScale": 3.2,
+        "aspect": 1.4
+      },
+      {
+        "name": "pattern77_11",
+        "uScale": 4,
+        "vScale": 14.1,
+        "aspect": 0.28
+      },
+      {
+        "name": "pattern85_12",
+        "uScale": 3.8,
+        "vScale": 5,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern93_13",
+        "uScale": 2.3,
+        "vScale": 3.5,
+        "aspect": 0.66
+      },
+      {
+        "name": "pattern94_14",
+        "uScale": 2.2,
+        "vScale": 9.1,
+        "aspect": 0.25
+      },
+      {
+        "name": "pattern95_15",
+        "uScale": 2.5,
+        "vScale": 10,
+        "aspect": 0.25
+      },
+      {
+        "name": "pattern96_16",
+        "uScale": 7.2,
+        "vScale": 4.9,
+        "aspect": 1.48
+      },
+      {
+        "name": "pattern102_38",
+        "uScale": 2.6,
+        "vScale": 6.4,
+        "aspect": 0.41
+      },
+      {
+        "name": "pattern108_39",
+        "uScale": 2.5,
+        "vScale": 7.5,
+        "aspect": 0.34
+      },
+      {
+        "name": "pattern116_40",
+        "uScale": 3.7,
+        "vScale": 45.2,
+        "aspect": 0.08
+      },
+      {
+        "name": "pattern138_43",
+        "uScale": 3.7,
+        "vScale": 5,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern252_45",
+        "uScale": 210.1,
+        "vScale": 275.3,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern268_47",
+        "uScale": 177.1,
+        "vScale": 344,
+        "aspect": 0.51
+      },
+      {
+        "name": "pattern280_48",
+        "uScale": 181,
+        "vScale": 424.6,
+        "aspect": 0.43
+      },
+      {
+        "name": "pattern292_49",
+        "uScale": 192.4,
+        "vScale": 306,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern298_50",
+        "uScale": 195.1,
+        "vScale": 346.9,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern311_52",
+        "uScale": 210.9,
+        "vScale": 428.3,
+        "aspect": 0.49
+      },
+      {
+        "name": "pattern150_62",
+        "uScale": 3.5,
+        "vScale": 6.8,
+        "aspect": 0.51
+      },
+      {
+        "name": "pattern156_63",
+        "uScale": 3.3,
+        "vScale": 11.1,
+        "aspect": 0.3
+      },
+      {
+        "name": "pattern170_64",
+        "uScale": 3.2,
+        "vScale": 6.5,
+        "aspect": 0.49
+      },
+      {
+        "name": "pattern182_65",
+        "uScale": 2.6,
+        "vScale": 53.6,
+        "aspect": 0.05
+      },
+      {
+        "name": "pattern200_67",
+        "uScale": 3.7,
+        "vScale": 24,
+        "aspect": 0.15
+      },
+      {
+        "name": "pattern206_68",
+        "uScale": 6.3,
+        "vScale": 4.2,
+        "aspect": 1.51
+      },
+      {
+        "name": "pattern218_70",
+        "uScale": 6.6,
+        "vScale": 20.2,
+        "aspect": 0.33
+      },
+      {
+        "name": "pattern232_72",
+        "uScale": 171.6,
+        "vScale": 347.8,
+        "aspect": 0.49
+      }
+    ]
+  },
+  {
+    "id": "01jmmh2nytvynddkg0anb99mg2",
+    "name": "Yoga-Skc-05",
+    "cat": "TOPWEAR",
+    "stretchedCount": 24,
+    "panels": [
+      {
+        "name": "pattern161_1",
+        "uScale": 271.6,
+        "vScale": 399.7,
+        "aspect": 0.68
+      },
+      {
+        "name": "pattern177_3",
+        "uScale": 252.9,
+        "vScale": 350.8,
+        "aspect": 0.72
+      },
+      {
+        "name": "pattern215_7",
+        "uScale": 177.2,
+        "vScale": 295.4,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern226_9",
+        "uScale": 162.8,
+        "vScale": 259.9,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern262_15",
+        "uScale": 195.8,
+        "vScale": 309.7,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern282_18",
+        "uScale": 197.2,
+        "vScale": 343.8,
+        "aspect": 0.57
+      },
+      {
+        "name": "pattern294_20",
+        "uScale": 219.9,
+        "vScale": 337.6,
+        "aspect": 0.65
+      },
+      {
+        "name": "pattern322_23",
+        "uScale": 107.6,
+        "vScale": 444.2,
+        "aspect": 0.24
+      },
+      {
+        "name": "pattern330_24",
+        "uScale": 231.5,
+        "vScale": 339.6,
+        "aspect": 0.68
+      },
+      {
+        "name": "pattern365_30",
+        "uScale": 170.4,
+        "vScale": 252.3,
+        "aspect": 0.68
+      },
+      {
+        "name": "pattern377_32",
+        "uScale": 218.6,
+        "vScale": 314.4,
+        "aspect": 0.7
+      },
+      {
+        "name": "pattern21_80",
+        "uScale": 232.4,
+        "vScale": 311.2,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern35_82",
+        "uScale": 251.3,
+        "vScale": 341.7,
+        "aspect": 0.74
+      },
+      {
+        "name": "pattern55_85",
+        "uScale": 361.8,
+        "vScale": 235,
+        "aspect": 1.54
+      },
+      {
+        "name": "pattern85_89",
+        "uScale": 229.6,
+        "vScale": 299.7,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern129_95",
+        "uScale": 268.7,
+        "vScale": 169.1,
+        "aspect": 1.59
+      },
+      {
+        "name": "pattern141_96",
+        "uScale": 191.8,
+        "vScale": 337.9,
+        "aspect": 0.57
+      },
+      {
+        "name": "pattern415_103",
+        "uScale": 184.1,
+        "vScale": 118,
+        "aspect": 1.56
+      },
+      {
+        "name": "pattern421_104",
+        "uScale": 297.3,
+        "vScale": 159.1,
+        "aspect": 1.87
+      },
+      {
+        "name": "pattern427_105",
+        "uScale": 322.9,
+        "vScale": 206.7,
+        "aspect": 1.56
+      },
+      {
+        "name": "pattern447_107",
+        "uScale": 285.9,
+        "vScale": 164,
+        "aspect": 1.74
+      },
+      {
+        "name": "pattern468_110",
+        "uScale": 192.6,
+        "vScale": 151.1,
+        "aspect": 1.28
+      },
+      {
+        "name": "pattern473_111",
+        "uScale": 246.3,
+        "vScale": 139.9,
+        "aspect": 1.76
+      },
+      {
+        "name": "pattern490_114",
+        "uScale": 272,
+        "vScale": 192.2,
+        "aspect": 1.42
+      }
+    ]
+  },
+  {
+    "id": "01jmm5fmrzs7y4vsqjxkt1zqy6",
+    "name": "Women/Tank Top W-Singlet 36",
+    "cat": "TOPWEAR",
+    "stretchedCount": 7,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "uScale": 173.3,
+        "vScale": 74.3,
+        "aspect": 2.33
+      },
+      {
+        "name": "pattern17_6",
+        "uScale": 258,
+        "vScale": 157.8,
+        "aspect": 1.63
+      },
+      {
+        "name": "pattern23_7",
+        "uScale": 317.3,
+        "vScale": 106.1,
+        "aspect": 2.99
+      },
+      {
+        "name": "pattern29_8",
+        "uScale": 243.8,
+        "vScale": 96.3,
+        "aspect": 2.53
+      },
+      {
+        "name": "pattern41_10",
+        "uScale": 93.4,
+        "vScale": 462.3,
+        "aspect": 0.2
+      },
+      {
+        "name": "pattern52_11",
+        "uScale": 111.1,
+        "vScale": 552.2,
+        "aspect": 0.2
+      },
+      {
+        "name": "pattern9_12",
+        "uScale": 66.4,
+        "vScale": 191.4,
+        "aspect": 0.35
+      }
+    ]
+  },
+  {
+    "id": "01jmmcbqyyzd96exkdts8nmsz2",
+    "name": "Brown brushed drawcord hoodie sweater",
+    "cat": "TOPWEAR",
+    "stretchedCount": 23,
+    "panels": [
+      {
+        "name": "pattern87_1",
+        "uScale": 6.1,
+        "vScale": 1.5,
+        "aspect": 4.04
+      },
+      {
+        "name": "pattern93_2",
+        "uScale": 4.5,
+        "vScale": 1.2,
+        "aspect": 3.59
+      },
+      {
+        "name": "pattern99_3",
+        "uScale": 7.4,
+        "vScale": 3.3,
+        "aspect": 2.24
+      },
+      {
+        "name": "pattern105_4",
+        "uScale": 4.6,
+        "vScale": 8.8,
+        "aspect": 0.53
+      },
+      {
+        "name": "pattern121_5",
+        "uScale": 11.4,
+        "vScale": 8.4,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern175_7",
+        "uScale": 6.4,
+        "vScale": 3.7,
+        "aspect": 1.72
+      },
+      {
+        "name": "pattern135_24",
+        "uScale": 30,
+        "vScale": 11.9,
+        "aspect": 2.53
+      },
+      {
+        "name": "pattern141_25",
+        "uScale": 6.4,
+        "vScale": 4.1,
+        "aspect": 1.55
+      },
+      {
+        "name": "pattern153_27",
+        "uScale": 3.4,
+        "vScale": 5,
+        "aspect": 0.67
+      },
+      {
+        "name": "pattern161_28",
+        "uScale": 30.3,
+        "vScale": 7.6,
+        "aspect": 3.97
+      },
+      {
+        "name": "pattern167_29",
+        "uScale": 35.6,
+        "vScale": 12,
+        "aspect": 2.96
+      },
+      {
+        "name": "pattern1_30",
+        "uScale": 6.5,
+        "vScale": 3.6,
+        "aspect": 1.81
+      },
+      {
+        "name": "pattern15_32",
+        "uScale": 3.4,
+        "vScale": 19.5,
+        "aspect": 0.18
+      },
+      {
+        "name": "pattern21_33",
+        "uScale": 2.9,
+        "vScale": 2,
+        "aspect": 1.4
+      },
+      {
+        "name": "pattern33_35",
+        "uScale": 121.2,
+        "vScale": 217.4,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern39_36",
+        "uScale": 106.8,
+        "vScale": 236.8,
+        "aspect": 0.45
+      },
+      {
+        "name": "pattern45_37",
+        "uScale": 3.1,
+        "vScale": 1.9,
+        "aspect": 1.62
+      },
+      {
+        "name": "pattern51_38",
+        "uScale": 8.8,
+        "vScale": 1.9,
+        "aspect": 4.55
+      },
+      {
+        "name": "pattern57_39",
+        "uScale": 14.1,
+        "vScale": 6.7,
+        "aspect": 2.11
+      },
+      {
+        "name": "pattern63_40",
+        "uScale": 4.2,
+        "vScale": 1.1,
+        "aspect": 3.8
+      },
+      {
+        "name": "pattern69_41",
+        "uScale": 1.8,
+        "vScale": 0.6,
+        "aspect": 3.05
+      },
+      {
+        "name": "pattern75_42",
+        "uScale": 0.7,
+        "vScale": 4.6,
+        "aspect": 0.15
+      },
+      {
+        "name": "pattern81_43",
+        "uScale": 8.6,
+        "vScale": 5.4,
+        "aspect": 1.6
+      }
+    ]
+  },
+  {
+    "id": "01jmm5f94hyzwb1fpfktb9y0gd",
+    "name": "Women/shorts W-shorts 111",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 8,
+    "panels": [
+      {
+        "name": "pattern80_1",
+        "uScale": 2.7,
+        "vScale": 7.9,
+        "aspect": 0.34
+      },
+      {
+        "name": "pattern88_2",
+        "uScale": 10.3,
+        "vScale": 4.4,
+        "aspect": 2.37
+      },
+      {
+        "name": "pattern94_3",
+        "uScale": 7.7,
+        "vScale": 2.7,
+        "aspect": 2.86
+      },
+      {
+        "name": "pattern22_7",
+        "uScale": 118.8,
+        "vScale": 321.6,
+        "aspect": 0.37
+      },
+      {
+        "name": "pattern51_13",
+        "uScale": 131.1,
+        "vScale": 179.7,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern60_14",
+        "uScale": 2.2,
+        "vScale": 5.7,
+        "aspect": 0.39
+      },
+      {
+        "name": "pattern72_16",
+        "uScale": 3.3,
+        "vScale": 6.2,
+        "aspect": 0.54
+      },
+      {
+        "name": "pattern32_17",
+        "uScale": 174.7,
+        "vScale": 365.8,
+        "aspect": 0.48
+      }
+    ]
+  },
+  {
+    "id": "01jmmb73n7a187gdbgznxdxe2y",
+    "name": "White shiny European shorts",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 8,
+    "panels": [
+      {
+        "name": "pattern99_1",
+        "uScale": 322.7,
+        "vScale": 151.4,
+        "aspect": 2.13
+      },
+      {
+        "name": "pattern113_2",
+        "uScale": 278.6,
+        "vScale": 161.2,
+        "aspect": 1.73
+      },
+      {
+        "name": "pattern121_32",
+        "uScale": 253.1,
+        "vScale": 147.1,
+        "aspect": 1.72
+      },
+      {
+        "name": "pattern177_41",
+        "uScale": 216.3,
+        "vScale": 104,
+        "aspect": 2.08
+      },
+      {
+        "name": "pattern1_48",
+        "uScale": 250.7,
+        "vScale": 149.5,
+        "aspect": 1.68
+      },
+      {
+        "name": "pattern19_51",
+        "uScale": 290.6,
+        "vScale": 157.8,
+        "aspect": 1.84
+      },
+      {
+        "name": "pattern67_59",
+        "uScale": 253.1,
+        "vScale": 173.5,
+        "aspect": 1.46
+      },
+      {
+        "name": "pattern85_62",
+        "uScale": 310.3,
+        "vScale": 107.8,
+        "aspect": 2.88
+      }
+    ]
+  },
+  {
+    "id": "01jmmajjv5y600e48s4v07aj5z",
+    "name": "Black two piece casual sweatpants",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 10,
+    "panels": [
+      {
+        "name": "pattern58_3",
+        "uScale": 47.5,
+        "vScale": 31.1,
+        "aspect": 1.53
+      },
+      {
+        "name": "pattern69_4",
+        "uScale": 7.8,
+        "vScale": 1.2,
+        "aspect": 6.4
+      },
+      {
+        "name": "pattern75_5",
+        "uScale": 4.1,
+        "vScale": 11.7,
+        "aspect": 0.35
+      },
+      {
+        "name": "pattern81_6",
+        "uScale": 13,
+        "vScale": 1.5,
+        "aspect": 8.48
+      },
+      {
+        "name": "pattern89_7",
+        "uScale": 11.9,
+        "vScale": 3.2,
+        "aspect": 3.73
+      },
+      {
+        "name": "pattern1_11",
+        "uScale": 47.9,
+        "vScale": 31,
+        "aspect": 1.54
+      },
+      {
+        "name": "pattern35_14",
+        "uScale": 6.4,
+        "vScale": 5,
+        "aspect": 1.28
+      },
+      {
+        "name": "pattern131_26",
+        "uScale": 20,
+        "vScale": 47.9,
+        "aspect": 0.42
+      },
+      {
+        "name": "pattern139_27",
+        "uScale": 77,
+        "vScale": 251.9,
+        "aspect": 0.31
+      },
+      {
+        "name": "pattern145_28",
+        "uScale": 31.6,
+        "vScale": 60.1,
+        "aspect": 0.53
+      }
+    ]
+  },
+  {
+    "id": "01jmm538b1av1c17hhwc4nn2sq",
+    "name": "G Women's T-shirt W-T-shirt 002",
+    "cat": "TOPWEAR",
+    "stretchedCount": 28,
+    "panels": [
+      {
+        "name": "pattern269_2",
+        "uScale": 76,
+        "vScale": 177.1,
+        "aspect": 0.43
+      },
+      {
+        "name": "pattern277_3",
+        "uScale": 65,
+        "vScale": 105.4,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern235_4",
+        "uScale": 165,
+        "vScale": 98.3,
+        "aspect": 1.68
+      },
+      {
+        "name": "pattern241_5",
+        "uScale": 91.3,
+        "vScale": 147,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern1_6",
+        "uScale": 75.7,
+        "vScale": 104.4,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern7_7",
+        "uScale": 4.2,
+        "vScale": 5.6,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern20_8",
+        "uScale": 4,
+        "vScale": 22.7,
+        "aspect": 0.18
+      },
+      {
+        "name": "pattern42_10",
+        "uScale": 169.3,
+        "vScale": 125.6,
+        "aspect": 1.35
+      },
+      {
+        "name": "pattern51_11",
+        "uScale": 3.3,
+        "vScale": 4.6,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern57_12",
+        "uScale": 36.2,
+        "vScale": 3.4,
+        "aspect": 10.81
+      },
+      {
+        "name": "pattern69_14",
+        "uScale": 4.4,
+        "vScale": 17.4,
+        "aspect": 0.25
+      },
+      {
+        "name": "pattern75_15",
+        "uScale": 3.3,
+        "vScale": 4.6,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern81_16",
+        "uScale": 36.1,
+        "vScale": 3.4,
+        "aspect": 10.73
+      },
+      {
+        "name": "pattern87_17",
+        "uScale": 4.1,
+        "vScale": 22.9,
+        "aspect": 0.18
+      },
+      {
+        "name": "pattern100_18",
+        "uScale": 4.2,
+        "vScale": 5.6,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern119_20",
+        "uScale": 4.4,
+        "vScale": 17.1,
+        "aspect": 0.26
+      },
+      {
+        "name": "pattern125_21",
+        "uScale": 54.2,
+        "vScale": 146.5,
+        "aspect": 0.37
+      },
+      {
+        "name": "pattern131_23",
+        "uScale": 138.2,
+        "vScale": 105.1,
+        "aspect": 1.31
+      },
+      {
+        "name": "pattern143_24",
+        "uScale": 4.1,
+        "vScale": 6.7,
+        "aspect": 0.61
+      },
+      {
+        "name": "pattern151_25",
+        "uScale": 6.1,
+        "vScale": 8,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern159_26",
+        "uScale": 6.3,
+        "vScale": 8.2,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern167_27",
+        "uScale": 4.1,
+        "vScale": 6.6,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern181_29",
+        "uScale": 1.2,
+        "vScale": 0.7,
+        "aspect": 1.71
+      },
+      {
+        "name": "pattern187_30",
+        "uScale": 1.3,
+        "vScale": 0.8,
+        "aspect": 1.7
+      },
+      {
+        "name": "pattern199_32",
+        "uScale": 1.3,
+        "vScale": 0.7,
+        "aspect": 1.71
+      },
+      {
+        "name": "pattern205_33",
+        "uScale": 1.2,
+        "vScale": 0.7,
+        "aspect": 1.76
+      },
+      {
+        "name": "pattern211_34",
+        "uScale": 17.8,
+        "vScale": 8.5,
+        "aspect": 2.08
+      },
+      {
+        "name": "pattern217_35",
+        "uScale": 3.6,
+        "vScale": 2.3,
+        "aspect": 1.57
+      }
+    ]
+  },
+  {
+    "id": "01jmmcecfx0vqpyw74xjxhnsw9",
+    "name": "Grass green webbing sports shorts",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 9,
+    "panels": [
+      {
+        "name": "pattern7_4",
+        "uScale": 118.6,
+        "vScale": 81.3,
+        "aspect": 1.46
+      },
+      {
+        "name": "pattern60_38",
+        "uScale": 17,
+        "vScale": 11.8,
+        "aspect": 1.44
+      },
+      {
+        "name": "pattern78_41",
+        "uScale": 13.5,
+        "vScale": 21.6,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern84_42",
+        "uScale": 17.6,
+        "vScale": 10.8,
+        "aspect": 1.63
+      },
+      {
+        "name": "pattern96_44",
+        "uScale": 13.2,
+        "vScale": 21.3,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern114_47",
+        "uScale": 82.2,
+        "vScale": 139.6,
+        "aspect": 0.59
+      },
+      {
+        "name": "pattern120_48",
+        "uScale": 83.6,
+        "vScale": 125.6,
+        "aspect": 0.67
+      },
+      {
+        "name": "pattern150_53",
+        "uScale": 74,
+        "vScale": 160,
+        "aspect": 0.46
+      },
+      {
+        "name": "pattern186_59",
+        "uScale": 178,
+        "vScale": 77.2,
+        "aspect": 2.31
+      }
+    ]
+  },
+  {
+    "id": "01jmmh35htm6zejx1fmfdgb7h6",
+    "name": "Yoga-skc-01",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 9,
+    "panels": [
+      {
+        "name": "pattern88_3",
+        "uScale": 116.9,
+        "vScale": 152.1,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern120_6",
+        "uScale": 1570.6,
+        "vScale": 1138.9,
+        "aspect": 1.38
+      },
+      {
+        "name": "pattern130_7",
+        "uScale": 173,
+        "vScale": 133.2,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern152_10",
+        "uScale": 154.3,
+        "vScale": 113.2,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern160_11",
+        "uScale": 195.6,
+        "vScale": 251.2,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern1_12",
+        "uScale": 1388.2,
+        "vScale": 931,
+        "aspect": 1.49
+      },
+      {
+        "name": "pattern7_13",
+        "uScale": 1587.9,
+        "vScale": 986.4,
+        "aspect": 1.61
+      },
+      {
+        "name": "pattern13_14",
+        "uScale": 1396.7,
+        "vScale": 593.8,
+        "aspect": 2.35
+      },
+      {
+        "name": "pattern21_15",
+        "uScale": 1540.3,
+        "vScale": 1032.2,
+        "aspect": 1.49
+      }
+    ]
+  },
+  {
+    "id": "01jmmcfbaxd6ph31jmw2w60ax8",
+    "name": "Khaki color patchwork sports long-sleeved bottom shirt",
+    "cat": "TOPWEAR",
+    "stretchedCount": 10,
+    "panels": [
+      {
+        "name": "pattern96_2",
+        "uScale": 133.5,
+        "vScale": 89.5,
+        "aspect": 1.49
+      },
+      {
+        "name": "pattern102_3",
+        "uScale": 153.9,
+        "vScale": 95.1,
+        "aspect": 1.62
+      },
+      {
+        "name": "pattern128_7",
+        "uScale": 118.1,
+        "vScale": 83.9,
+        "aspect": 1.41
+      },
+      {
+        "name": "pattern134_8",
+        "uScale": 97.5,
+        "vScale": 190.6,
+        "aspect": 0.51
+      },
+      {
+        "name": "pattern1_17",
+        "uScale": 135.5,
+        "vScale": 90.2,
+        "aspect": 1.5
+      },
+      {
+        "name": "pattern13_19",
+        "uScale": 176.9,
+        "vScale": 120,
+        "aspect": 1.47
+      },
+      {
+        "name": "pattern29_21",
+        "uScale": 177.2,
+        "vScale": 137.4,
+        "aspect": 1.29
+      },
+      {
+        "name": "pattern41_23",
+        "uScale": 84.2,
+        "vScale": 137.4,
+        "aspect": 0.61
+      },
+      {
+        "name": "pattern67_35",
+        "uScale": 154.7,
+        "vScale": 199.7,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern81_37",
+        "uScale": 183.3,
+        "vScale": 122.5,
+        "aspect": 1.5
+      }
+    ]
+  },
+  {
+    "id": "01jmm8jksz96m4b8h9pjztbvf1",
+    "name": "Blue printing sling tight yoga suit",
+    "cat": "SUIT",
+    "stretchedCount": 5,
+    "panels": [
+      {
+        "name": "pattern35_1",
+        "uScale": 180,
+        "vScale": 89.6,
+        "aspect": 2.01
+      },
+      {
+        "name": "pattern93_9",
+        "uScale": 238.4,
+        "vScale": 398.4,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern1_12",
+        "uScale": 1427.3,
+        "vScale": 1077.1,
+        "aspect": 1.33
+      },
+      {
+        "name": "pattern13_13",
+        "uScale": 1441.9,
+        "vScale": 973.6,
+        "aspect": 1.48
+      },
+      {
+        "name": "pattern21_14",
+        "uScale": 1480.9,
+        "vScale": 1109,
+        "aspect": 1.34
+      }
+    ]
+  },
+  {
+    "id": "01jmmh33akan9vvz53ttaq4cce",
+    "name": "Yoga-Skc-03",
+    "cat": "TOPWEAR",
+    "stretchedCount": 34,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "uScale": 55,
+        "vScale": 38.4,
+        "aspect": 1.43
+      },
+      {
+        "name": "pattern23_6",
+        "uScale": 127.6,
+        "vScale": 79.9,
+        "aspect": 1.6
+      },
+      {
+        "name": "pattern24_7",
+        "uScale": 55.9,
+        "vScale": 145.9,
+        "aspect": 0.38
+      },
+      {
+        "name": "pattern31_8",
+        "uScale": 85,
+        "vScale": 30.5,
+        "aspect": 2.79
+      },
+      {
+        "name": "pattern32_9",
+        "uScale": 50.3,
+        "vScale": 95.3,
+        "aspect": 0.53
+      },
+      {
+        "name": "pattern39_10",
+        "uScale": 312.9,
+        "vScale": 406,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern40_11",
+        "uScale": 232.5,
+        "vScale": 364.1,
+        "aspect": 0.64
+      },
+      {
+        "name": "pattern48_13",
+        "uScale": 224.4,
+        "vScale": 364.1,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern55_14",
+        "uScale": 92.3,
+        "vScale": 127.5,
+        "aspect": 0.72
+      },
+      {
+        "name": "pattern67_17",
+        "uScale": 161.8,
+        "vScale": 88.1,
+        "aspect": 1.84
+      },
+      {
+        "name": "pattern79_20",
+        "uScale": 73.2,
+        "vScale": 170.4,
+        "aspect": 0.43
+      },
+      {
+        "name": "pattern80_21",
+        "uScale": 73.2,
+        "vScale": 28.8,
+        "aspect": 2.54
+      },
+      {
+        "name": "pattern88_22",
+        "uScale": 50.3,
+        "vScale": 66.1,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern219_27",
+        "uScale": 141.1,
+        "vScale": 80,
+        "aspect": 1.76
+      },
+      {
+        "name": "pattern220_28",
+        "uScale": 52.6,
+        "vScale": 240.6,
+        "aspect": 0.22
+      },
+      {
+        "name": "pattern222_30",
+        "uScale": 80.1,
+        "vScale": 128.9,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern262_37",
+        "uScale": 48.8,
+        "vScale": 67.3,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern263_38",
+        "uScale": 229.5,
+        "vScale": 302.3,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern287_40",
+        "uScale": 43.9,
+        "vScale": 77,
+        "aspect": 0.57
+      },
+      {
+        "name": "pattern89_43",
+        "uScale": 53.8,
+        "vScale": 24.9,
+        "aspect": 2.16
+      },
+      {
+        "name": "pattern97_44",
+        "uScale": 44,
+        "vScale": 28,
+        "aspect": 1.57
+      },
+      {
+        "name": "pattern109_46",
+        "uScale": 127,
+        "vScale": 61.7,
+        "aspect": 2.06
+      },
+      {
+        "name": "pattern117_47",
+        "uScale": 74.5,
+        "vScale": 57.7,
+        "aspect": 1.29
+      },
+      {
+        "name": "pattern137_52",
+        "uScale": 82.1,
+        "vScale": 108.1,
+        "aspect": 0.76
+      },
+      {
+        "name": "pattern153_55",
+        "uScale": 201.5,
+        "vScale": 270.1,
+        "aspect": 0.75
+      },
+      {
+        "name": "pattern159_56",
+        "uScale": 249.3,
+        "vScale": 397.6,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern160_57",
+        "uScale": 89.9,
+        "vScale": 24.2,
+        "aspect": 3.72
+      },
+      {
+        "name": "pattern166_58",
+        "uScale": 247,
+        "vScale": 517.1,
+        "aspect": 0.48
+      },
+      {
+        "name": "pattern167_59",
+        "uScale": 54.3,
+        "vScale": 26.6,
+        "aspect": 2.04
+      },
+      {
+        "name": "pattern173_60",
+        "uScale": 54.6,
+        "vScale": 68.8,
+        "aspect": 0.79
+      },
+      {
+        "name": "pattern174_61",
+        "uScale": 57,
+        "vScale": 140.6,
+        "aspect": 0.41
+      },
+      {
+        "name": "pattern191_63",
+        "uScale": 67.7,
+        "vScale": 94.8,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern207_64",
+        "uScale": 151.2,
+        "vScale": 31.8,
+        "aspect": 4.75
+      },
+      {
+        "name": "pattern213_65",
+        "uScale": 151.9,
+        "vScale": 32.8,
+        "aspect": 4.64
+      }
+    ]
+  },
+  {
+    "id": "01jmm4g94ej7tnddhrndt9nr2y",
+    "name": "Men's/T-shirt M-T shirt 113",
+    "cat": "TOPWEAR",
+    "stretchedCount": 17,
+    "panels": [
+      {
+        "name": "pattern55_1",
+        "uScale": 251.8,
+        "vScale": 144.1,
+        "aspect": 1.75
+      },
+      {
+        "name": "pattern56_2",
+        "uScale": 147,
+        "vScale": 63.6,
+        "aspect": 2.31
+      },
+      {
+        "name": "pattern57_3",
+        "uScale": 168.6,
+        "vScale": 74.8,
+        "aspect": 2.25
+      },
+      {
+        "name": "pattern69_5",
+        "uScale": 46.7,
+        "vScale": 227.4,
+        "aspect": 0.21
+      },
+      {
+        "name": "pattern76_6",
+        "uScale": 69.4,
+        "vScale": 102.9,
+        "aspect": 0.67
+      },
+      {
+        "name": "pattern89_8",
+        "uScale": 19.5,
+        "vScale": 153.1,
+        "aspect": 0.13
+      },
+      {
+        "name": "pattern101_10",
+        "uScale": 17.9,
+        "vScale": 141.3,
+        "aspect": 0.13
+      },
+      {
+        "name": "pattern113_12",
+        "uScale": 32.5,
+        "vScale": 3.6,
+        "aspect": 9.1
+      },
+      {
+        "name": "pattern11_13",
+        "uScale": 224.8,
+        "vScale": 70.3,
+        "aspect": 3.2
+      },
+      {
+        "name": "pattern17_14",
+        "uScale": 487.5,
+        "vScale": 164.3,
+        "aspect": 2.97
+      },
+      {
+        "name": "pattern25_15",
+        "uScale": 104.9,
+        "vScale": 75,
+        "aspect": 1.4
+      },
+      {
+        "name": "pattern26_16",
+        "uScale": 233.3,
+        "vScale": 108.5,
+        "aspect": 2.15
+      },
+      {
+        "name": "pattern27_17",
+        "uScale": 81.6,
+        "vScale": 104.3,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern39_19",
+        "uScale": 121.6,
+        "vScale": 76.4,
+        "aspect": 1.59
+      },
+      {
+        "name": "pattern47_20",
+        "uScale": 354.9,
+        "vScale": 129.9,
+        "aspect": 2.73
+      },
+      {
+        "name": "pattern121_21",
+        "uScale": 329.8,
+        "vScale": 155.5,
+        "aspect": 2.12
+      },
+      {
+        "name": "pattern1_22",
+        "uScale": 434.8,
+        "vScale": 229.5,
+        "aspect": 1.89
+      }
+    ]
+  },
+  {
+    "id": "01jmmd5sfgkkbw1kxhzwbjxaka",
+    "name": "Apricot printed hooded casual sweater",
+    "cat": "TOPWEAR",
+    "stretchedCount": 9,
+    "panels": [
+      {
+        "name": "pattern15_3",
+        "uScale": 134.3,
+        "vScale": 95.8,
+        "aspect": 1.4
+      },
+      {
+        "name": "pattern23_4",
+        "uScale": 131.9,
+        "vScale": 88.6,
+        "aspect": 1.49
+      },
+      {
+        "name": "pattern46_7",
+        "uScale": 245.3,
+        "vScale": 82.2,
+        "aspect": 2.99
+      },
+      {
+        "name": "pattern82_20",
+        "uScale": 243.5,
+        "vScale": 157.3,
+        "aspect": 1.55
+      },
+      {
+        "name": "pattern94_21",
+        "uScale": 71.1,
+        "vScale": 128.4,
+        "aspect": 0.55
+      },
+      {
+        "name": "pattern106_22",
+        "uScale": 70.7,
+        "vScale": 1104.7,
+        "aspect": 0.06
+      },
+      {
+        "name": "pattern116_23",
+        "uScale": 135,
+        "vScale": 3149.2,
+        "aspect": 0.04
+      },
+      {
+        "name": "pattern126_24",
+        "uScale": 432.3,
+        "vScale": 560.2,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern136_25",
+        "uScale": 185.5,
+        "vScale": 569.9,
+        "aspect": 0.33
+      }
+    ]
+  },
+  {
+    "id": "01jmmh0jgtcgjdyd8eshafzb33",
+    "name": "Yoga-skc-01",
+    "cat": "TOPWEAR",
+    "stretchedCount": 11,
+    "panels": [
+      {
+        "name": "pattern1_23",
+        "uScale": 154,
+        "vScale": 242.9,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern25_26",
+        "uScale": 287.2,
+        "vScale": 189.3,
+        "aspect": 1.52
+      },
+      {
+        "name": "pattern61_30",
+        "uScale": 18.9,
+        "vScale": 87.9,
+        "aspect": 0.22
+      },
+      {
+        "name": "pattern103_35",
+        "uScale": 83.9,
+        "vScale": 109.4,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern197_47",
+        "uScale": 95.8,
+        "vScale": 145.8,
+        "aspect": 0.66
+      },
+      {
+        "name": "pattern207_48",
+        "uScale": 117.5,
+        "vScale": 90.8,
+        "aspect": 1.29
+      },
+      {
+        "name": "pattern214_49",
+        "uScale": 389.8,
+        "vScale": 196.8,
+        "aspect": 1.98
+      },
+      {
+        "name": "pattern258_55",
+        "uScale": 197,
+        "vScale": 286.4,
+        "aspect": 0.69
+      },
+      {
+        "name": "pattern274_56",
+        "uScale": 238,
+        "vScale": 176.3,
+        "aspect": 1.35
+      },
+      {
+        "name": "pattern312_59",
+        "uScale": 34.7,
+        "vScale": 20.4,
+        "aspect": 1.7
+      },
+      {
+        "name": "pattern318_60",
+        "uScale": 48.5,
+        "vScale": 31.7,
+        "aspect": 1.53
+      }
+    ]
+  },
+  {
+    "id": "01jmm8nvv5ghhh2mvjpr45efry",
+    "name": "Light brown knitted hooded short sweater",
+    "cat": "TOPWEAR",
+    "stretchedCount": 11,
+    "panels": [
+      {
+        "name": "pattern18_1",
+        "uScale": 340.5,
+        "vScale": 111.4,
+        "aspect": 3.06
+      },
+      {
+        "name": "pattern27_2",
+        "uScale": 97.2,
+        "vScale": 272.8,
+        "aspect": 0.36
+      },
+      {
+        "name": "pattern53_5",
+        "uScale": 228,
+        "vScale": 132.9,
+        "aspect": 1.72
+      },
+      {
+        "name": "pattern93_11",
+        "uScale": 160.5,
+        "vScale": 118.2,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern99_12",
+        "uScale": 298.6,
+        "vScale": 73.1,
+        "aspect": 4.09
+      },
+      {
+        "name": "pattern105_13",
+        "uScale": 165.4,
+        "vScale": 116.1,
+        "aspect": 1.42
+      },
+      {
+        "name": "pattern127_16",
+        "uScale": 115.1,
+        "vScale": 242,
+        "aspect": 0.48
+      },
+      {
+        "name": "pattern141_18",
+        "uScale": 164.7,
+        "vScale": 232.3,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern153_20",
+        "uScale": 142.2,
+        "vScale": 318.9,
+        "aspect": 0.45
+      },
+      {
+        "name": "pattern159_21",
+        "uScale": 211.1,
+        "vScale": 89.7,
+        "aspect": 2.35
+      },
+      {
+        "name": "pattern10_32",
+        "uScale": 75.7,
+        "vScale": 233.7,
+        "aspect": 0.32
+      }
+    ]
+  },
+  {
+    "id": "01jmmbd2bk9h9t13r8429kavmv",
+    "name": "Light blue long sleeve one-piece tights",
+    "cat": "SUIT",
+    "stretchedCount": 3,
+    "panels": [
+      {
+        "name": "pattern15_1",
+        "uScale": 237.3,
+        "vScale": 182.2,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern1_3",
+        "uScale": 43.6,
+        "vScale": 62.5,
+        "aspect": 0.7
+      },
+      {
+        "name": "pattern73_14",
+        "uScale": 153.8,
+        "vScale": 205.5,
+        "aspect": 0.75
+      }
+    ]
+  },
+  {
+    "id": "01jmm8hw83x3s0ph48xt8kjbe8",
+    "name": "Blue skinny one-piece yoga suit",
+    "cat": "SUIT",
+    "stretchedCount": 10,
+    "panels": [
+      {
+        "name": "pattern17_3",
+        "uScale": 916.6,
+        "vScale": 113.3,
+        "aspect": 8.09
+      },
+      {
+        "name": "pattern23_4",
+        "uScale": 123.7,
+        "vScale": 199,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern29_5",
+        "uScale": 320.4,
+        "vScale": 95.8,
+        "aspect": 3.34
+      },
+      {
+        "name": "pattern213_23",
+        "uScale": 169,
+        "vScale": 42.7,
+        "aspect": 3.96
+      },
+      {
+        "name": "pattern219_24",
+        "uScale": 138.7,
+        "vScale": 43.7,
+        "aspect": 3.17
+      },
+      {
+        "name": "pattern225_25",
+        "uScale": 268.3,
+        "vScale": 208.2,
+        "aspect": 1.29
+      },
+      {
+        "name": "pattern171_43",
+        "uScale": 328.1,
+        "vScale": 96.6,
+        "aspect": 3.4
+      },
+      {
+        "name": "pattern183_45",
+        "uScale": 124.7,
+        "vScale": 199.6,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern189_46",
+        "uScale": 940.9,
+        "vScale": 114.1,
+        "aspect": 8.25
+      },
+      {
+        "name": "pattern195_47",
+        "uScale": 306.8,
+        "vScale": 215.4,
+        "aspect": 1.42
+      }
+    ]
+  },
+  {
+    "id": "01jmm4yahnya4rdn9zwqdg5h7q",
+    "name": "Women/T-shirt W-T shirt 141",
+    "cat": "TOPWEAR",
+    "stretchedCount": 9,
+    "panels": [
+      {
+        "name": "pattern64_1",
+        "uScale": 91.8,
+        "vScale": 38.5,
+        "aspect": 2.38
+      },
+      {
+        "name": "pattern1_2",
+        "uScale": 57.5,
+        "vScale": 34.2,
+        "aspect": 1.68
+      },
+      {
+        "name": "pattern7_3",
+        "uScale": 65,
+        "vScale": 32.3,
+        "aspect": 2.01
+      },
+      {
+        "name": "pattern23_5",
+        "uScale": 62.6,
+        "vScale": 33.6,
+        "aspect": 1.86
+      },
+      {
+        "name": "pattern89_6",
+        "uScale": 58.5,
+        "vScale": 39.2,
+        "aspect": 1.49
+      },
+      {
+        "name": "pattern71_16",
+        "uScale": 53.3,
+        "vScale": 127.9,
+        "aspect": 0.42
+      },
+      {
+        "name": "pattern33_17",
+        "uScale": 68.4,
+        "vScale": 95.9,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern40_18",
+        "uScale": 149.8,
+        "vScale": 39.7,
+        "aspect": 3.77
+      },
+      {
+        "name": "pattern47_19",
+        "uScale": 94,
+        "vScale": 15.3,
+        "aspect": 6.16
+      }
+    ]
+  },
+  {
+    "id": "01jmmcfxrx1fqpr2x5ggf0dhfd",
+    "name": "Dark gray laser strap decorative sports coat",
+    "cat": "TOPWEAR",
+    "stretchedCount": 26,
+    "panels": [
+      {
+        "name": "pattern174_1",
+        "uScale": 108.1,
+        "vScale": 168.4,
+        "aspect": 0.64
+      },
+      {
+        "name": "pattern180_2",
+        "uScale": 36,
+        "vScale": 84.1,
+        "aspect": 0.43
+      },
+      {
+        "name": "pattern247_3",
+        "uScale": 51.7,
+        "vScale": 122.4,
+        "aspect": 0.42
+      },
+      {
+        "name": "pattern314_4",
+        "uScale": 362,
+        "vScale": 118.8,
+        "aspect": 3.05
+      },
+      {
+        "name": "pattern320_5",
+        "uScale": 237.6,
+        "vScale": 126.6,
+        "aspect": 1.88
+      },
+      {
+        "name": "pattern326_6",
+        "uScale": 589.1,
+        "vScale": 163,
+        "aspect": 3.62
+      },
+      {
+        "name": "pattern366_12",
+        "uScale": 128.6,
+        "vScale": 70.9,
+        "aspect": 1.81
+      },
+      {
+        "name": "pattern374_13",
+        "uScale": 56.5,
+        "vScale": 72.9,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern66_75",
+        "uScale": 166.4,
+        "vScale": 79.8,
+        "aspect": 2.09
+      },
+      {
+        "name": "pattern72_76",
+        "uScale": 155.7,
+        "vScale": 59.5,
+        "aspect": 2.62
+      },
+      {
+        "name": "pattern80_77",
+        "uScale": 96.7,
+        "vScale": 59.3,
+        "aspect": 1.63
+      },
+      {
+        "name": "pattern88_78",
+        "uScale": 126.3,
+        "vScale": 75.5,
+        "aspect": 1.67
+      },
+      {
+        "name": "pattern94_79",
+        "uScale": 79.9,
+        "vScale": 58.6,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern100_80",
+        "uScale": 163.3,
+        "vScale": 120.9,
+        "aspect": 1.35
+      },
+      {
+        "name": "pattern112_82",
+        "uScale": 124.4,
+        "vScale": 162.2,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern120_83",
+        "uScale": 141.8,
+        "vScale": 88.7,
+        "aspect": 1.6
+      },
+      {
+        "name": "pattern128_84",
+        "uScale": 98.5,
+        "vScale": 176.1,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern135_85",
+        "uScale": 105.8,
+        "vScale": 181,
+        "aspect": 0.58
+      },
+      {
+        "name": "pattern142_86",
+        "uScale": 111.7,
+        "vScale": 170.4,
+        "aspect": 0.66
+      },
+      {
+        "name": "pattern1_91",
+        "uScale": 206.3,
+        "vScale": 162.5,
+        "aspect": 1.27
+      },
+      {
+        "name": "pattern8_92",
+        "uScale": 80.9,
+        "vScale": 61.9,
+        "aspect": 1.31
+      },
+      {
+        "name": "pattern15_93",
+        "uScale": 74,
+        "vScale": 118,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern27_94",
+        "uScale": 253.3,
+        "vScale": 328.6,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern36_95",
+        "uScale": 217,
+        "vScale": 293,
+        "aspect": 0.74
+      },
+      {
+        "name": "pattern1022_128",
+        "uScale": 83.7,
+        "vScale": 63.9,
+        "aspect": 1.31
+      },
+      {
+        "name": "pattern1029_129",
+        "uScale": 213.8,
+        "vScale": 167.3,
+        "aspect": 1.28
+      }
+    ]
+  },
+  {
+    "id": "01jmmh0bbewq923s6z4qttnm72",
+    "name": "Yoga-Skc-08",
+    "cat": "TOPWEAR",
+    "stretchedCount": 3,
+    "panels": [
+      {
+        "name": "pattern27_4",
+        "uScale": 284.9,
+        "vScale": 363,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern33_5",
+        "uScale": 479.5,
+        "vScale": 619,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern59_10",
+        "uScale": 175.2,
+        "vScale": 230.7,
+        "aspect": 0.76
+      }
+    ]
+  },
+  {
+    "id": "01jmmh3a089xj40xgzz8ahd4me",
+    "name": "Yoga-skc-05",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 14,
+    "panels": [
+      {
+        "name": "pattern61_3",
+        "uScale": 508.4,
+        "vScale": 191.2,
+        "aspect": 2.66
+      },
+      {
+        "name": "pattern67_4",
+        "uScale": 220,
+        "vScale": 300.8,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern73_5",
+        "uScale": 727.7,
+        "vScale": 77.7,
+        "aspect": 9.36
+      },
+      {
+        "name": "pattern79_6",
+        "uScale": 558.7,
+        "vScale": 238.1,
+        "aspect": 2.35
+      },
+      {
+        "name": "pattern85_7",
+        "uScale": 737.4,
+        "vScale": 67.2,
+        "aspect": 10.98
+      },
+      {
+        "name": "pattern16_10",
+        "uScale": 135.7,
+        "vScale": 175.2,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern91_12",
+        "uScale": 116,
+        "vScale": 207.7,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern100_13",
+        "uScale": 163.8,
+        "vScale": 469.3,
+        "aspect": 0.35
+      },
+      {
+        "name": "pattern117_14",
+        "uScale": 1385.6,
+        "vScale": 903.3,
+        "aspect": 1.53
+      },
+      {
+        "name": "pattern123_15",
+        "uScale": 1577.6,
+        "vScale": 965.2,
+        "aspect": 1.63
+      },
+      {
+        "name": "pattern129_16",
+        "uScale": 1510.1,
+        "vScale": 607.4,
+        "aspect": 2.49
+      },
+      {
+        "name": "pattern137_17",
+        "uScale": 236.5,
+        "vScale": 443.3,
+        "aspect": 0.53
+      },
+      {
+        "name": "pattern144_18",
+        "uScale": 199.2,
+        "vScale": 313.7,
+        "aspect": 0.64
+      },
+      {
+        "name": "pattern34_24",
+        "uScale": 207.1,
+        "vScale": 161.9,
+        "aspect": 1.28
+      }
+    ]
+  },
+  {
+    "id": "01jmmcezrsm6jv3a1npbw7qa7m",
+    "name": "Black panel printed basketball tank top",
+    "cat": "TOPWEAR",
+    "stretchedCount": 7,
+    "panels": [
+      {
+        "name": "pattern275_2",
+        "uScale": 96.2,
+        "vScale": 642.2,
+        "aspect": 0.15
+      },
+      {
+        "name": "pattern322_4",
+        "uScale": 253.8,
+        "vScale": 773.1,
+        "aspect": 0.33
+      },
+      {
+        "name": "pattern331_5",
+        "uScale": 352.6,
+        "vScale": 747,
+        "aspect": 0.47
+      },
+      {
+        "name": "pattern340_6",
+        "uScale": 315.6,
+        "vScale": 596.9,
+        "aspect": 0.53
+      },
+      {
+        "name": "pattern349_7",
+        "uScale": 214,
+        "vScale": 606.5,
+        "aspect": 0.35
+      },
+      {
+        "name": "pattern121_74",
+        "uScale": 69.6,
+        "vScale": 161.1,
+        "aspect": 0.43
+      },
+      {
+        "name": "pattern141_75",
+        "uScale": 79.8,
+        "vScale": 159.7,
+        "aspect": 0.5
+      }
+    ]
+  },
+  {
+    "id": "01jmmf0nmhzd7tdxae2rn133tp",
+    "name": "Mesh tights Leggings",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 12,
+    "panels": [
+      {
+        "name": "pattern4_1",
+        "uScale": 84.4,
+        "vScale": 67,
+        "aspect": 1.26
+      },
+      {
+        "name": "pattern5_2",
+        "uScale": 83.6,
+        "vScale": 113.7,
+        "aspect": 0.74
+      },
+      {
+        "name": "pattern1_3",
+        "uScale": 48,
+        "vScale": 84,
+        "aspect": 0.57
+      },
+      {
+        "name": "pattern6_4",
+        "uScale": 72.1,
+        "vScale": 129.7,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern7_5",
+        "uScale": 51.4,
+        "vScale": 88.8,
+        "aspect": 0.58
+      },
+      {
+        "name": "pattern8_6",
+        "uScale": 87.7,
+        "vScale": 157,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern9_7",
+        "uScale": 44.4,
+        "vScale": 86.1,
+        "aspect": 0.52
+      },
+      {
+        "name": "pattern10_8",
+        "uScale": 89.1,
+        "vScale": 147.1,
+        "aspect": 0.61
+      },
+      {
+        "name": "pattern11_9",
+        "uScale": 206.1,
+        "vScale": 72.2,
+        "aspect": 2.85
+      },
+      {
+        "name": "pattern12_10",
+        "uScale": 208.2,
+        "vScale": 72.7,
+        "aspect": 2.87
+      },
+      {
+        "name": "pattern3_11",
+        "uScale": 36.1,
+        "vScale": 94.2,
+        "aspect": 0.38
+      },
+      {
+        "name": "pattern2_12",
+        "uScale": 48.7,
+        "vScale": 106.5,
+        "aspect": 0.46
+      }
+    ]
+  },
+  {
+    "id": "01jmmm4a2060z9tygk241hfe74",
+    "name": "Athletic Wear",
+    "cat": "TOPWEAR",
+    "stretchedCount": 11,
+    "panels": [
+      {
+        "name": "pattern171_16",
+        "uScale": 583.8,
+        "vScale": 450.3,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern178_17",
+        "uScale": 579.6,
+        "vScale": 374.8,
+        "aspect": 1.55
+      },
+      {
+        "name": "pattern1_52",
+        "uScale": 105.1,
+        "vScale": 319.9,
+        "aspect": 0.33
+      },
+      {
+        "name": "pattern29_56",
+        "uScale": 312.2,
+        "vScale": 406.9,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern36_57",
+        "uScale": 370.2,
+        "vScale": 472.2,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern48_59",
+        "uScale": 321.1,
+        "vScale": 504.2,
+        "aspect": 0.64
+      },
+      {
+        "name": "pattern68_62",
+        "uScale": 391.5,
+        "vScale": 538.1,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern113_71",
+        "uScale": 287.4,
+        "vScale": 461.7,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern119_72",
+        "uScale": 358.8,
+        "vScale": 460.2,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern131_74",
+        "uScale": 284,
+        "vScale": 445.7,
+        "aspect": 0.64
+      },
+      {
+        "name": "pattern137_75",
+        "uScale": 629,
+        "vScale": 355.5,
+        "aspect": 1.77
+      }
+    ]
+  },
+  {
+    "id": "01jmm8hx335djmtcz6dp11x5cf",
+    "name": "Military green sling tight yoga suit",
+    "cat": "SUIT",
+    "stretchedCount": 8,
+    "panels": [
+      {
+        "name": "pattern21_13",
+        "uScale": 630.5,
+        "vScale": 200.5,
+        "aspect": 3.15
+      },
+      {
+        "name": "pattern43_16",
+        "uScale": 481.4,
+        "vScale": 232.9,
+        "aspect": 2.07
+      },
+      {
+        "name": "pattern149_28",
+        "uScale": 159.5,
+        "vScale": 490.5,
+        "aspect": 0.33
+      },
+      {
+        "name": "pattern155_29",
+        "uScale": 187.3,
+        "vScale": 264.7,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern161_30",
+        "uScale": 156.7,
+        "vScale": 406,
+        "aspect": 0.39
+      },
+      {
+        "name": "pattern167_51",
+        "uScale": 243,
+        "vScale": 317.2,
+        "aspect": 0.77
+      },
+      {
+        "name": "pattern177_52",
+        "uScale": 224.4,
+        "vScale": 449.8,
+        "aspect": 0.5
+      },
+      {
+        "name": "pattern207_55",
+        "uScale": 196.4,
+        "vScale": 305.1,
+        "aspect": 0.64
+      }
+    ]
+  },
+  {
+    "id": "01jmmh4kq1rzbyz1aacf69kgmj",
+    "name": "Yoga-skc-03",
+    "cat": "TOPWEAR",
+    "stretchedCount": 5,
+    "panels": [
+      {
+        "name": "pattern4_25",
+        "uScale": 505.1,
+        "vScale": 175,
+        "aspect": 2.89
+      },
+      {
+        "name": "pattern7_28",
+        "uScale": 440.6,
+        "vScale": 170.8,
+        "aspect": 2.58
+      },
+      {
+        "name": "pattern23_40",
+        "uScale": 238.1,
+        "vScale": 343.8,
+        "aspect": 0.69
+      },
+      {
+        "name": "pattern25_42",
+        "uScale": 188.2,
+        "vScale": 407.4,
+        "aspect": 0.46
+      },
+      {
+        "name": "pattern26_43",
+        "uScale": 301.6,
+        "vScale": 221.4,
+        "aspect": 1.36
+      }
+    ]
+  },
+  {
+    "id": "01jmmahaxrs17szejysk9kgxtq",
+    "name": "Green European American Sports Casual Pants",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 15,
+    "panels": [
+      {
+        "name": "pattern64_6",
+        "uScale": 229.3,
+        "vScale": 363,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern70_7",
+        "uScale": 177.1,
+        "vScale": 322.4,
+        "aspect": 0.55
+      },
+      {
+        "name": "pattern76_8",
+        "uScale": 179.5,
+        "vScale": 395.5,
+        "aspect": 0.45
+      },
+      {
+        "name": "pattern82_9",
+        "uScale": 132.5,
+        "vScale": 370.2,
+        "aspect": 0.36
+      },
+      {
+        "name": "pattern100_12",
+        "uScale": 180.4,
+        "vScale": 503.2,
+        "aspect": 0.36
+      },
+      {
+        "name": "pattern106_13",
+        "uScale": 181.9,
+        "vScale": 436.8,
+        "aspect": 0.42
+      },
+      {
+        "name": "pattern112_14",
+        "uScale": 154.2,
+        "vScale": 429.6,
+        "aspect": 0.36
+      },
+      {
+        "name": "pattern1_15",
+        "uScale": 179.5,
+        "vScale": 433,
+        "aspect": 0.41
+      },
+      {
+        "name": "pattern7_16",
+        "uScale": 152.6,
+        "vScale": 340.8,
+        "aspect": 0.45
+      },
+      {
+        "name": "pattern13_17",
+        "uScale": 71.6,
+        "vScale": 216.3,
+        "aspect": 0.33
+      },
+      {
+        "name": "pattern26_19",
+        "uScale": 141.7,
+        "vScale": 234.6,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern32_20",
+        "uScale": 121,
+        "vScale": 286.4,
+        "aspect": 0.42
+      },
+      {
+        "name": "pattern118_28",
+        "uScale": 193.4,
+        "vScale": 378.8,
+        "aspect": 0.51
+      },
+      {
+        "name": "pattern124_29",
+        "uScale": 221,
+        "vScale": 146.8,
+        "aspect": 1.51
+      },
+      {
+        "name": "pattern130_30",
+        "uScale": 141,
+        "vScale": 181.2,
+        "aspect": 0.78
+      }
+    ]
+  },
+  {
+    "id": "01jmmbb7g0sfgz54ghqy16vdte",
+    "name": "Pink zip hooded European jacket",
+    "cat": "TOPWEAR",
+    "stretchedCount": 19,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "uScale": 83.1,
+        "vScale": 133.1,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern9_2",
+        "uScale": 61.5,
+        "vScale": 156.2,
+        "aspect": 0.39
+      },
+      {
+        "name": "pattern21_3",
+        "uScale": 208.5,
+        "vScale": 158.5,
+        "aspect": 1.32
+      },
+      {
+        "name": "pattern50_7",
+        "uScale": 186.2,
+        "vScale": 122,
+        "aspect": 1.53
+      },
+      {
+        "name": "pattern78_11",
+        "uScale": 166.6,
+        "vScale": 99.8,
+        "aspect": 1.67
+      },
+      {
+        "name": "pattern83_19",
+        "uScale": 77.4,
+        "vScale": 178.4,
+        "aspect": 0.43
+      },
+      {
+        "name": "pattern107_22",
+        "uScale": 93.3,
+        "vScale": 126.4,
+        "aspect": 0.74
+      },
+      {
+        "name": "pattern123_24",
+        "uScale": 184.1,
+        "vScale": 133.5,
+        "aspect": 1.38
+      },
+      {
+        "name": "pattern131_25",
+        "uScale": 218.8,
+        "vScale": 157.8,
+        "aspect": 1.39
+      },
+      {
+        "name": "pattern152_27",
+        "uScale": 145,
+        "vScale": 111.5,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern165_28",
+        "uScale": 127.3,
+        "vScale": 100.8,
+        "aspect": 1.26
+      },
+      {
+        "name": "pattern171_29",
+        "uScale": 159.6,
+        "vScale": 103,
+        "aspect": 1.55
+      },
+      {
+        "name": "pattern189_32",
+        "uScale": 109.8,
+        "vScale": 81.6,
+        "aspect": 1.35
+      },
+      {
+        "name": "pattern267_33",
+        "uScale": 210.6,
+        "vScale": 138.1,
+        "aspect": 1.53
+      },
+      {
+        "name": "pattern197_127",
+        "uScale": 112.9,
+        "vScale": 88.6,
+        "aspect": 1.27
+      },
+      {
+        "name": "pattern213_129",
+        "uScale": 258.9,
+        "vScale": 135.1,
+        "aspect": 1.92
+      },
+      {
+        "name": "pattern220_130",
+        "uScale": 236.8,
+        "vScale": 109.8,
+        "aspect": 2.16
+      },
+      {
+        "name": "pattern243_133",
+        "uScale": 147.5,
+        "vScale": 116.9,
+        "aspect": 1.26
+      },
+      {
+        "name": "pattern260_135",
+        "uScale": 268.1,
+        "vScale": 80.3,
+        "aspect": 3.34
+      }
+    ]
+  },
+  {
+    "id": "01jmmahrvh8rq7dzjrfxyst4zg",
+    "name": "Black drawstring waist shorts",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 16,
+    "panels": [
+      {
+        "name": "pattern10_2",
+        "uScale": 295.2,
+        "vScale": 402.4,
+        "aspect": 0.73
+      },
+      {
+        "name": "pattern19_3",
+        "uScale": 236.6,
+        "vScale": 387.4,
+        "aspect": 0.61
+      },
+      {
+        "name": "pattern28_4",
+        "uScale": 65,
+        "vScale": 234.4,
+        "aspect": 0.28
+      },
+      {
+        "name": "pattern37_5",
+        "uScale": 136.8,
+        "vScale": 183.7,
+        "aspect": 0.74
+      },
+      {
+        "name": "pattern45_6",
+        "uScale": 112.4,
+        "vScale": 192.6,
+        "aspect": 0.58
+      },
+      {
+        "name": "pattern66_8",
+        "uScale": 222.4,
+        "vScale": 315.4,
+        "aspect": 0.71
+      },
+      {
+        "name": "pattern72_9",
+        "uScale": 208.7,
+        "vScale": 395.7,
+        "aspect": 0.53
+      },
+      {
+        "name": "pattern84_11",
+        "uScale": 210.5,
+        "vScale": 397.4,
+        "aspect": 0.53
+      },
+      {
+        "name": "pattern90_12",
+        "uScale": 244.9,
+        "vScale": 406.8,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern96_13",
+        "uScale": 246.7,
+        "vScale": 408.7,
+        "aspect": 0.6
+      },
+      {
+        "name": "pattern102_14",
+        "uScale": 224.6,
+        "vScale": 289.6,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern168_65",
+        "uScale": 241.4,
+        "vScale": 380.5,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern177_66",
+        "uScale": 291.1,
+        "vScale": 371.5,
+        "aspect": 0.78
+      },
+      {
+        "name": "pattern184_67",
+        "uScale": 261.8,
+        "vScale": 419,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern193_68",
+        "uScale": 327.5,
+        "vScale": 414,
+        "aspect": 0.79
+      },
+      {
+        "name": "pattern202_69",
+        "uScale": 287.6,
+        "vScale": 431.6,
+        "aspect": 0.67
+      }
+    ]
+  },
+  {
+    "id": "01jmmm3k9scajhejexa8ydnd8y",
+    "name": "Women's sportswear",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 6,
+    "panels": [
+      {
+        "name": "pattern25_1",
+        "uScale": 405.4,
+        "vScale": 666.4,
+        "aspect": 0.61
+      },
+      {
+        "name": "pattern70_8",
+        "uScale": 345.6,
+        "vScale": 699.4,
+        "aspect": 0.49
+      },
+      {
+        "name": "pattern215_15",
+        "uScale": 351.6,
+        "vScale": 556.4,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern239_19",
+        "uScale": 121.3,
+        "vScale": 253.5,
+        "aspect": 0.48
+      },
+      {
+        "name": "pattern245_20",
+        "uScale": 128.6,
+        "vScale": 237.6,
+        "aspect": 0.54
+      },
+      {
+        "name": "pattern1_39",
+        "uScale": 675,
+        "vScale": 475.9,
+        "aspect": 1.42
+      }
+    ]
+  },
+  {
+    "id": "01jmmh371x32dy9kx3hzktkp7b",
+    "name": "Yoga-skc-02",
+    "cat": "TOPWEAR",
+    "stretchedCount": 4,
+    "panels": [
+      {
+        "name": "pattern11_5",
+        "uScale": 1286.3,
+        "vScale": 109.1,
+        "aspect": 11.79
+      },
+      {
+        "name": "pattern12_6",
+        "uScale": 953.1,
+        "vScale": 124.7,
+        "aspect": 7.64
+      },
+      {
+        "name": "pattern13_7",
+        "uScale": 161.8,
+        "vScale": 260.9,
+        "aspect": 0.62
+      },
+      {
+        "name": "pattern3_14",
+        "uScale": 191.4,
+        "vScale": 139.1,
+        "aspect": 1.38
+      }
+    ]
+  },
+  {
+    "id": "01jmm7jwn0yj7jtgp9ab9n8avz",
+    "name": "Brown Twill Split Fit Shorts",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 7,
+    "panels": [
+      {
+        "name": "pattern88_1",
+        "uScale": 490.1,
+        "vScale": 377.6,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern96_2",
+        "uScale": 515.8,
+        "vScale": 397,
+        "aspect": 1.3
+      },
+      {
+        "name": "pattern1_47",
+        "uScale": 207,
+        "vScale": 599.9,
+        "aspect": 0.35
+      },
+      {
+        "name": "pattern31_50",
+        "uScale": 645.6,
+        "vScale": 473.8,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern55_53",
+        "uScale": 666.8,
+        "vScale": 1004.4,
+        "aspect": 0.66
+      },
+      {
+        "name": "pattern62_54",
+        "uScale": 596.9,
+        "vScale": 1019.6,
+        "aspect": 0.59
+      },
+      {
+        "name": "pattern143_62",
+        "uScale": 637.4,
+        "vScale": 320.3,
+        "aspect": 1.99
+      }
+    ]
+  },
+  {
+    "id": "01jmm4rhc2hpp29cy7pm9qwn1c",
+    "name": "Men's/T-shirt M-T shirt 117",
+    "cat": "TOPWEAR",
+    "stretchedCount": 12,
+    "panels": [
+      {
+        "name": "pattern1_1",
+        "uScale": 129.9,
+        "vScale": 26.7,
+        "aspect": 4.87
+      },
+      {
+        "name": "pattern15_3",
+        "uScale": 200.7,
+        "vScale": 110.5,
+        "aspect": 1.82
+      },
+      {
+        "name": "pattern23_4",
+        "uScale": 199.6,
+        "vScale": 119.4,
+        "aspect": 1.67
+      },
+      {
+        "name": "pattern31_12",
+        "uScale": 205.6,
+        "vScale": 106.8,
+        "aspect": 1.92
+      },
+      {
+        "name": "pattern37_13",
+        "uScale": 216.8,
+        "vScale": 161.9,
+        "aspect": 1.34
+      },
+      {
+        "name": "pattern43_14",
+        "uScale": 229,
+        "vScale": 121,
+        "aspect": 1.89
+      },
+      {
+        "name": "pattern50_15",
+        "uScale": 263,
+        "vScale": 111.9,
+        "aspect": 2.35
+      },
+      {
+        "name": "pattern57_16",
+        "uScale": 96.6,
+        "vScale": 21.7,
+        "aspect": 4.45
+      },
+      {
+        "name": "pattern74_17",
+        "uScale": 171.6,
+        "vScale": 93.2,
+        "aspect": 1.84
+      },
+      {
+        "name": "pattern80_18",
+        "uScale": 154.9,
+        "vScale": 112.1,
+        "aspect": 1.38
+      },
+      {
+        "name": "pattern102_20",
+        "uScale": 204,
+        "vScale": 44.7,
+        "aspect": 4.57
+      },
+      {
+        "name": "pattern108_21",
+        "uScale": 163.4,
+        "vScale": 54.4,
+        "aspect": 3
+      }
+    ]
+  },
+  {
+    "id": "01jmm5tca9ebm47npvbk3f90fw",
+    "name": "LL Men's/Shorts M-Shorts 2",
+    "cat": "BOTTOMWEAR",
+    "stretchedCount": 11,
+    "panels": [
+      {
+        "name": "pattern114_1",
+        "uScale": 404.7,
+        "vScale": 710.4,
+        "aspect": 0.57
+      },
+      {
+        "name": "pattern104_9",
+        "uScale": 412.8,
+        "vScale": 604.1,
+        "aspect": 0.68
+      },
+      {
+        "name": "pattern50_11",
+        "uScale": 654.2,
+        "vScale": 394.6,
+        "aspect": 1.66
+      },
+      {
+        "name": "pattern78_15",
+        "uScale": 325.3,
+        "vScale": 574.4,
+        "aspect": 0.57
+      },
+      {
+        "name": "pattern92_17",
+        "uScale": 606.5,
+        "vScale": 453.4,
+        "aspect": 1.34
+      },
+      {
+        "name": "pattern15_21",
+        "uScale": 138.7,
+        "vScale": 221.4,
+        "aspect": 0.63
+      },
+      {
+        "name": "pattern28_22",
+        "uScale": 247.6,
+        "vScale": 181.5,
+        "aspect": 1.36
+      },
+      {
+        "name": "pattern168_23",
+        "uScale": 354.8,
+        "vScale": 629.8,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern174_24",
+        "uScale": 414.8,
+        "vScale": 633.2,
+        "aspect": 0.66
+      },
+      {
+        "name": "pattern180_25",
+        "uScale": 309,
+        "vScale": 549.6,
+        "aspect": 0.56
+      },
+      {
+        "name": "pattern186_26",
+        "uScale": 410.6,
+        "vScale": 564.9,
+        "aspect": 0.73
+      }
+    ]
+  }
+]
