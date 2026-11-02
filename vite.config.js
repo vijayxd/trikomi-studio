@@ -8,19 +8,21 @@ const localSdkRoot = path.resolve(__dirname, '../trikomi/packages');
 const localCoreEntry = path.resolve(localSdkRoot, 'core/src/index.ts');
 const useLocalSdk = fs.existsSync(localCoreEntry) || process.env.USE_LOCAL_SDK === 'true';
 
-const dynamicAlias = useLocalSdk ? {
-  '@trikomi/core/8thwall': path.resolve(localSdkRoot, '8thwall/src/index.ts'),
-  '@trikomi/core/sportswear': path.resolve(localSdkRoot, 'sportswear/src/index.ts'),
-  '@trikomi/core/face-mocap': path.resolve(localSdkRoot, 'face-mocap/src/index.ts'),
-  '@trikomi/core/eyewear': path.resolve(localSdkRoot, 'eyewear/src/index.ts'),
-  '@trikomi/core/tour': path.resolve(localSdkRoot, 'tour/src/index.ts'),
-  '@trikomi/core/viewer': path.resolve(localSdkRoot, 'viewer/src/index.ts'),
-  '@trikomi/core/box': path.resolve(localSdkRoot, 'box/src/index.ts'),
-  '@trikomi/core/studio': path.resolve(localSdkRoot, 'core/src/studio/index.ts'),
-  '@trikomi/core': localCoreEntry,
-  '@trikomi/sportswear': path.resolve(localSdkRoot, 'sportswear/src/index.ts'),
-  'mobx': path.resolve(__dirname, 'node_modules/mobx')
-} : {};
+const dynamicAlias = useLocalSdk ? [
+  { find: '@trikomi/core/8thwall', replacement: path.resolve(localSdkRoot, '8thwall/src/index.ts') },
+  { find: '@trikomi/core/sportswear', replacement: path.resolve(localSdkRoot, 'sportswear/src/index.ts') },
+  { find: '@trikomi/core/face-mocap', replacement: path.resolve(localSdkRoot, 'face-mocap/src/index.ts') },
+  { find: '@trikomi/core/eyewear', replacement: path.resolve(localSdkRoot, 'eyewear/src/index.ts') },
+  { find: '@trikomi/core/tour', replacement: path.resolve(localSdkRoot, 'tour/src/index.ts') },
+  { find: '@trikomi/core/viewer', replacement: path.resolve(localSdkRoot, 'viewer/src/index.ts') },
+  { find: '@trikomi/core/box', replacement: path.resolve(localSdkRoot, 'box/src/index.ts') },
+  { find: '@trikomi/core/studio', replacement: path.resolve(localSdkRoot, 'core/src/studio/index.ts') },
+  { find: '@trikomi/core', replacement: localCoreEntry },
+  { find: '@trikomi/sportswear', replacement: path.resolve(localSdkRoot, 'sportswear/src/index.ts') },
+  { find: /^three$/, replacement: path.resolve(localSdkRoot, 'core/node_modules/three/build/three.module.js') },
+  { find: 'three/addons', replacement: path.resolve(localSdkRoot, 'core/node_modules/three/examples/jsm') },
+  { find: 'mobx', replacement: path.resolve(__dirname, 'node_modules/mobx') }
+] : [];
 
 let activeTransfer = null;
 let sseClients = [];

@@ -530,6 +530,32 @@ export const UVCanvasView = observer(() => {
 
     updateCameraBounds();
 
+    // Non-passive native wheel listener to reliably preventDefault without browser console warnings
+    const onWheelNative = (e: WheelEvent) => {
+      e.preventDefault();
+      const coords = getUVFromClient(e.clientX, e.clientY);
+      if (!coords) return;
+
+      const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+      const curZoom = viewStateRef.current.zoom;
+      const nextZoom = Math.max(0.4, Math.min(10.0, curZoom * zoomFactor));
+
+      const { u, v } = coords;
+      const curCenterU = viewStateRef.current.centerU;
+      const curCenterV = viewStateRef.current.centerV;
+
+      viewStateRef.current = {
+        zoom: nextZoom,
+        centerU: u + (curCenterU - u) * (curZoom / nextZoom),
+        centerV: v + (curCenterV - v) * (curZoom / nextZoom)
+      };
+
+      updateCameraBounds();
+      updateGizmoMesh();
+    };
+
+    container.addEventListener("wheel", onWheelNative, { passive: false });
+
     const resizeObserver = new ResizeObserver(() => {
       if (rendererRef.current && containerRef.current) {
         rendererRef.current.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
@@ -540,6 +566,7 @@ export const UVCanvasView = observer(() => {
     resizeObserver.observe(container);
 
     return () => {
+      container.removeEventListener("wheel", onWheelNative);
       resizeObserver.disconnect();
       renderer.dispose();
       container.innerHTML = "";
@@ -931,7 +958,6 @@ export const UVCanvasView = observer(() => {
         overflow: "hidden",
         cursor: getCursor()
       }}
-      onWheel={handleWheel}
       onContextMenu={(e) => e.preventDefault()}
     >
       <div
