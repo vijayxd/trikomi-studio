@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "../../store/modelStore";
-import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 import { StudioCard } from "./StudioCard";
 
 interface StudioLeftPanelProps {
@@ -10,7 +9,6 @@ interface StudioLeftPanelProps {
 
 export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ collapsed = false }) => {
   const [searchFilter, setSearchFilter] = useState("");
-  const [transformTool, setTransformTool] = useState<"select" | "move" | "rotate" | "scale">("select");
 
   const filteredPieces = modelStore.pieces.filter((p) =>
     searchFilter ? p.name.toLowerCase().includes(searchFilter.toLowerCase()) : true
@@ -165,7 +163,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
         </div>
       </StudioCard>
 
-      {/* 2. Transforms Collapsible Card */}
+      {/* 2. Transforms Collapsible Card with Integrated 3D Transform Gizmo Controls */}
       <StudioCard
         title="Transforms"
         defaultCollapsed={false}
@@ -173,6 +171,58 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
         headerRight={<span style={{ fontSize: "8.5px", color: "var(--text-muted)" }}>LOCAL</span>}
       >
         <div className="transforms-form-content">
+          {/* Active Gizmo Tool Mode: Move / Rotate / Scale */}
+          <div style={{ display: "flex", gap: "4px", marginBottom: "8px" }}>
+            <button
+              className={`btn-uv-reset ${modelStore.transformMode === "translate" ? "active" : ""}`}
+              style={{
+                flex: 1,
+                padding: "4px 2px",
+                fontSize: "9.5px",
+                background: modelStore.transformMode === "translate" ? "rgba(37,99,235,0.35)" : undefined,
+                borderColor: modelStore.transformMode === "translate" ? "var(--neon-cyan)" : undefined,
+                color: modelStore.transformMode === "translate" ? "#fff" : undefined
+              }}
+              onClick={() => modelStore.setTransformMode("translate")}
+              title="Move (Translate) 3D Piece"
+            >
+              Move
+            </button>
+            <button
+              className={`btn-uv-reset ${modelStore.transformMode === "rotate" ? "active" : ""}`}
+              style={{
+                flex: 1,
+                padding: "4px 2px",
+                fontSize: "9.5px",
+                background: modelStore.transformMode === "rotate" ? "rgba(37,99,235,0.35)" : undefined,
+                borderColor: modelStore.transformMode === "rotate" ? "var(--neon-cyan)" : undefined,
+                color: modelStore.transformMode === "rotate" ? "#fff" : undefined
+              }}
+              onClick={() => modelStore.setTransformMode("rotate")}
+              title="Rotate 3D Piece"
+            >
+              Rotate
+            </button>
+            <button
+              className={`btn-uv-reset ${modelStore.transformMode === "scale" ? "active" : ""}`}
+              style={{
+                flex: 1,
+                padding: "4px 2px",
+                fontSize: "9.5px",
+                background: modelStore.transformMode === "scale" ? "rgba(37,99,235,0.35)" : undefined,
+                borderColor: modelStore.transformMode === "scale" ? "var(--neon-cyan)" : undefined,
+                color: modelStore.transformMode === "scale" ? "#fff" : undefined
+              }}
+              onClick={() => modelStore.setTransformMode("scale")}
+              title="Scale 3D Piece"
+            >
+              Scale
+            </button>
+          </div>
+
+          {/* Hidden reference to subscribe MobX to transformVersion */}
+          <span style={{ display: "none" }}>{modelStore.transformVersion}</span>
+
           <div className="transform-axis-row">
             <span>Position</span>
             <div className="triplet-inputs">
@@ -204,71 +254,16 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ colla
                 modelStore.selectedPiece.mesh.position.set(0, 0, 0);
                 modelStore.selectedPiece.mesh.rotation.set(0, 0, 0);
                 modelStore.selectedPiece.mesh.scale.set(1, 1, 1);
+                modelStore.updateTransformGizmo();
               } else if (modelStore.currentModel) {
                 modelStore.currentModel.position.set(0, 0, 0);
                 modelStore.currentModel.rotation.set(0, 0, 0);
                 modelStore.currentModel.scale.set(1, 1, 1);
+                modelStore.updateTransformGizmo();
               }
             }}
           >
             Reset
-          </button>
-        </div>
-      </StudioCard>
-
-      {/* 3. Quick Tools Collapsible Card */}
-      <StudioCard
-        title="Quick Tools"
-        defaultCollapsed={false}
-        flex="0 0 auto"
-      >
-        <div className="quick-tools-grid-box">
-          <button
-            className={`btn-tool-square ${transformTool === "select" ? "active" : ""}`}
-            onClick={() => setTransformTool("select")}
-            title="Selection Tool"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-            </svg>
-            <span>Select</span>
-          </button>
-          <button
-            className={`btn-tool-square ${transformTool === "move" ? "active" : ""}`}
-            onClick={() => setTransformTool("move")}
-            title="Move Tool"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="5 9 2 12 5 15" />
-              <polyline points="9 5 12 2 15 5" />
-              <polyline points="15 19 12 22 9 19" />
-              <polyline points="19 9 22 12 19 15" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <line x1="12" y1="2" x2="12" y2="22" />
-            </svg>
-            <span>Move</span>
-          </button>
-          <button
-            className={`btn-tool-square ${transformTool === "rotate" ? "active" : ""}`}
-            onClick={() => setTransformTool("rotate")}
-            title="Rotate Tool"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67" />
-            </svg>
-            <span>Rotate</span>
-          </button>
-          <button
-            className={`btn-tool-square ${transformTool === "scale" ? "active" : ""}`}
-            onClick={() => setTransformTool("scale")}
-            title="Scale Tool"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <path d="M15 3h6v6" />
-              <path d="M9 21H3v-6" />
-            </svg>
-            <span>Scale</span>
           </button>
         </div>
       </StudioCard>

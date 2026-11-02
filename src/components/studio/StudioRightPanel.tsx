@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "../../store/modelStore";
-import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { RotateCw, RotateCcw, FlipHorizontal, FlipVertical, Crosshair, Undo2 } from "lucide-react";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 import { UVCanvasView } from "../UVCanvasView";
 import { StudioCard } from "./StudioCard";
 
@@ -11,6 +11,18 @@ interface StudioRightPanelProps {
 
 export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ collapsed = false }) => {
   const [isUVMaximized, setIsUVMaximized] = useState(false);
+
+  const getTargetPieceIds = (): string[] => {
+    if (modelStore.selectedPieceIds.length > 0) return [...modelStore.selectedPieceIds];
+    if (modelStore.selectedPiece) return [modelStore.selectedPiece.id];
+    return [];
+  };
+
+  const targetIds = getTargetPieceIds();
+  const selectedCount = targetIds.length;
+  const primaryPiece = selectedCount > 0 
+    ? modelStore.pieces.find(p => p.id === targetIds[0]) 
+    : null;
 
   return (
     <section
@@ -48,7 +60,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
           </div>
         </div>
 
-        {/* Right Topbar Actions: Auto Pack, Auto Detect & Fullscreen Viewport */}
+        {/* Right Topbar Actions: Auto Pack, Auto Detect, Focus Island, Reset Viewport & Fullscreen Viewport */}
         <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <button
             className="btn-uv-sub-tab"
@@ -65,8 +77,24 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
             Arrange
           </button>
           <button
+            className="control-toggle-btn"
+            style={{ width: "24px", height: "24px" }}
+            onClick={() => uvOrganizerStore.focusSelectedIsland()}
+            title="Focus & Frame Selected Island (F key)"
+          >
+            <Crosshair size={12} />
+          </button>
+          <button
+            className="control-toggle-btn"
+            style={{ width: "24px", height: "24px" }}
+            onClick={() => uvOrganizerStore.resetUVViewport()}
+            title="Reset UV Viewport View (100% Centered)"
+          >
+            <RotateCcw size={12} />
+          </button>
+          <button
             className={`control-toggle-btn ${isUVMaximized ? "active" : ""}`}
-            style={{ width: "24px", height: "24px", marginLeft: "4px" }}
+            style={{ width: "24px", height: "24px", marginLeft: "2px" }}
             onClick={() => setIsUVMaximized(!isUVMaximized)}
             title={isUVMaximized ? "Exit Fullscreen UV Viewport" : "Fullscreen UV Viewport"}
           >
@@ -81,104 +109,13 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
       </div>
 
       <div className="uv-split-container">
-        {/* Left Vertical Strip: Clean Tool Toggles (Matching Mockup) */}
-        <div className="uv-vertical-strip">
-          <button className="btn-uv-strip-icon active" title="Select & Transform Island (Move / Scale)">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" strokeDasharray="3 3" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Rotate 90° Clockwise"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, 90);
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Rotate 90° Counter-Clockwise"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, -90);
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M2.5 2v6h6M2.66 15.57a10 10 0 00.57-8.38l-5.67-5.67" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Flip Horizontal (Mirror U)"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "horizontal");
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Flip Vertical (Mirror V)"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "vertical");
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="17 14 12 9 7 14" />
-              <line x1="12" y1="9" x2="12" y2="21" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Center Island in Assigned Zone"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.centerPieceInZone(modelStore.selectedPiece.id);
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="9" />
-              <circle cx="12" cy="12" r="2" fill="currentColor" />
-            </svg>
-          </button>
-          <button
-            className="btn-uv-strip-icon"
-            title="Reset Island UV"
-            onClick={() => {
-              if (modelStore.selectedPiece) {
-                uvOrganizerStore.resetPieceUV(modelStore.selectedPiece.id);
-              }
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-              <path d="M3 3v5h5" />
-            </svg>
-          </button>
-        </div>
-
         {/* 2D Canvas Stage: Clean Hardware-Accelerated WebGL UV Viewport with 2D Move & Scale Gizmo */}
-        <div className="uv-2d-canvas-box" style={{ position: "relative", minHeight: "340px", flex: 1, overflow: "hidden" }}>
+        <div className="uv-2d-canvas-box" style={{ position: "relative", minWidth: 0, height: "100%", overflow: "hidden" }}>
           <UVCanvasView />
         </div>
 
         {/* UV Inspector Column with Collapsible StudioCards */}
-        <aside className="uv-inspector-panel">
+        <aside className="uv-inspector-panel" style={{ minWidth: 0, height: "100%", overflowY: "auto" }}>
           {/* Card 1: Essential Layout & Pipeline Tools */}
           <StudioCard title="UV Tools" flex="0 0 auto">
             <div className="uv-actions-tile-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
@@ -224,81 +161,127 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
             </div>
           </StudioCard>
 
-          {/* Card 2: Transform Subcard */}
+          {/* Card 2: Transform Subcard (Dedicated Rotate, Mirror, Alignment & Reset) */}
           <StudioCard title="Transform" flex="0 0 auto">
             <div className="uv-transform-form">
+              {/* Selected Target Island Indicator */}
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "4px 6px",
+                background: "rgba(0,0,0,0.3)",
+                borderRadius: "5px",
+                border: "1px solid rgba(255,255,255,0.06)",
+                marginBottom: "4px"
+              }}>
+                <span style={{ fontSize: "9px", color: "var(--text-muted)" }}>Target:</span>
+                <span style={{
+                  fontSize: "9.5px",
+                  fontWeight: "600",
+                  color: selectedCount > 0 ? "var(--neon-cyan)" : "var(--text-secondary)",
+                  maxWidth: "130px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap"
+                }}>
+                  {primaryPiece ? (selectedCount > 1 ? `${selectedCount} Islands Selected` : primaryPiece.name) : "No Island Selected"}
+                </span>
+              </div>
+
+              {/* Angle Row: Rotate CCW & CW */}
               <div className="transform-axis-row">
                 <span>Angle</span>
-                <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
+                <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
                   <button
                     className="btn-uv-reset"
-                    style={{ flex: 1, padding: "3px" }}
+                    style={{ flex: 1, padding: "4px 3px", display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
                     onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, -90);
+                      if (targetIds.length > 0) {
+                        uvOrganizerStore.rotatePiecesGroupUV(targetIds, -90);
                       }
                     }}
+                    title="Rotate 90° Counter-Clockwise"
                   >
-                    -90°
+                    <RotateCcw size={11} />
+                    <span>-90°</span>
                   </button>
                   <button
                     className="btn-uv-reset"
-                    style={{ flex: 1, padding: "3px" }}
+                    style={{ flex: 1, padding: "4px 3px", display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
                     onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.rotatePieceUV(modelStore.selectedPiece.id, 90);
+                      if (targetIds.length > 0) {
+                        uvOrganizerStore.rotatePiecesGroupUV(targetIds, 90);
                       }
                     }}
+                    title="Rotate 90° Clockwise"
                   >
-                    +90°
+                    <RotateCw size={11} />
+                    <span>+90°</span>
                   </button>
                 </div>
               </div>
 
+              {/* Mirror Row: Flip Horizontal (U) & Vertical (V) */}
               <div className="transform-axis-row">
                 <span>Mirror</span>
-                <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
+                <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
                   <button
                     className="btn-uv-reset"
-                    style={{ flex: 1, padding: "3px" }}
+                    style={{ flex: 1, padding: "4px 3px", display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
                     onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "horizontal");
+                      if (targetIds.length > 0) {
+                        uvOrganizerStore.flipPiecesGroupUV(targetIds, "horizontal");
                       }
                     }}
+                    title="Flip Horizontal (Mirror U axis)"
                   >
-                    Flip U
+                    <FlipHorizontal size={11} />
+                    <span>Flip U</span>
                   </button>
                   <button
                     className="btn-uv-reset"
-                    style={{ flex: 1, padding: "3px" }}
+                    style={{ flex: 1, padding: "4px 3px", display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
                     onClick={() => {
-                      if (modelStore.selectedPiece) {
-                        uvOrganizerStore.flipPieceUV(modelStore.selectedPiece.id, "vertical");
+                      if (targetIds.length > 0) {
+                        uvOrganizerStore.flipPiecesGroupUV(targetIds, "vertical");
                       }
                     }}
+                    title="Flip Vertical (Mirror V axis)"
                   >
-                    Flip V
+                    <FlipVertical size={11} />
+                    <span>Flip V</span>
                   </button>
                 </div>
               </div>
 
-              <div className="uv-dual-buttons">
+              {/* Action Buttons: Center in Zone & Reset Island */}
+              <div className="uv-dual-buttons" style={{ marginTop: "4px" }}>
                 <button
                   className="btn-uv-reset"
+                  style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
                   onClick={() => {
-                    if (modelStore.selectedPiece) {
-                      uvOrganizerStore.resetPieceUV(modelStore.selectedPiece.id);
+                    if (targetIds.length > 0) {
+                      uvOrganizerStore.centerPiecesGroupInZone(targetIds);
                     }
                   }}
+                  title="Center Island in Assigned Zone"
                 >
-                  Reset
+                  <Crosshair size={11} />
+                  <span>Center</span>
                 </button>
                 <button
                   className="btn-uv-apply"
-                  onClick={() => uvOrganizerStore.arrangeAssignedUVs()}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}
+                  onClick={() => {
+                    if (targetIds.length > 0) {
+                      uvOrganizerStore.resetPiecesGroupUV(targetIds);
+                    }
+                  }}
+                  title="Reset Island UV to Canonical Zone Layout"
                 >
-                  Apply
+                  <Undo2 size={11} />
+                  <span>Reset Island</span>
                 </button>
               </div>
             </div>

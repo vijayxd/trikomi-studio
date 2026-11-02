@@ -24,7 +24,7 @@
     --topbar-height: 44px;
     --bottom-dock-height: clamp(120px, 18.5vh, 155px);
     --sidebar-width: clamp(230px, 17.5vw, 275px);
-    --uv-inspector-width: clamp(210px, 16vw, 245px);
+    --uv-inspector-width: clamp(230px, 18vw, 265px);
     
     --radius-chassis: 20px;
     --radius-subcard: 12px;
@@ -35,7 +35,7 @@
       --topbar-height: 38px;
       --bottom-dock-height: 115px;
       --sidebar-width: 215px;
-      --uv-inspector-width: 195px;
+      --uv-inspector-width: 220px;
       --radius-chassis: 16px;
       --radius-subcard: 10px;
     }
@@ -789,8 +789,8 @@
     flex: 1;
     min-height: 0;
     display: grid;
-    grid-template-columns: 32px 1fr var(--uv-inspector-width);
-    gap: 6px;
+    grid-template-columns: 1fr var(--uv-inspector-width);
+    gap: 8px;
     padding: 8px;
     overflow: hidden;
   }

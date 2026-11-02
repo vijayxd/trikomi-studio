@@ -1,4 +1,12 @@
 /// <reference types="vite/client" />
+/// <reference types="node" />
+
+declare global {
+  interface Window {
+    __THREE_VIEWER_INSTANCE__?: any;
+    trikomi_config?: { apiKey?: string; fallbackJwt?: string } | null;
+  }
+}
 
 declare module "*.css" {
   const content: Record<string, string>;
@@ -33,5 +41,9 @@ declare module "three/examples/jsm/libs/meshopt_simplifier.module.js" {
   }
 
   export const MeshoptSimplifier: MeshoptSimplifierInstance;
+}
+
+declare module "three/addons/libs/meshopt_simplifier.module.js" {
+  export * from "three/examples/jsm/libs/meshopt_simplifier.module.js";
 }
 

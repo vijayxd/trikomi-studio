@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "./store/modelStore";
-import { uvOrganizerStore } from "./store/uvOrganizerStore";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 import { StudioTopBar, StudioMode } from "./components/studio/StudioTopBar";
 import { StudioLeftPanel } from "./components/studio/StudioLeftPanel";
 import { StudioCenterViewport } from "./components/studio/StudioCenterViewport";

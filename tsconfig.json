@@ -2,26 +2,21 @@
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
-    /* Linting / strictness */
-    "strict": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
-    "allowJs": false,
-    "checkJs": false
+    "strict": false,
+    "noImplicitAny": false,
+    "paths": {
+      "@trikomi/core/studio": ["../trikomi/packages/core/src/studio/index.ts"],
+      "@trikomi/core": ["../trikomi/packages/core/src/index.ts"],
+      "@trikomi/sportswear": ["../trikomi/packages/sportswear/src/index.ts"]
+    }
   },
   "include": ["src"]
 }

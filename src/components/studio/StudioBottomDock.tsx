@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "../../store/modelStore";
-import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 
 interface StudioBottomDockProps {
   collapsed?: boolean;
@@ -283,17 +282,6 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             <span>GLB Export Ready</span>
           </div>
         </div>
-      </div>
-
-      {/* 5. Card 5: Export Action CTA Card */}
-      <div className="cyber-chassis export-cta-card-box" style={{ flex: "0.8 1 0", minWidth: "120px" }}>
-        <button className="btn-export-pill-glow" onClick={onExportGLB}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M8 12l3 3 5-5" />
-          </svg>
-          <span>Export Ready</span>
-        </button>
       </div>
     </footer>
   );

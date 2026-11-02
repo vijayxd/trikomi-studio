@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "../../store/modelStore";
-import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { modelStore, uvOrganizerStore, studioViewerManager } from "@trikomi/core/studio";
 
 interface StudioCenterViewportProps {
   onToggleMaximize?: () => void;
@@ -13,20 +12,32 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
   isMaximized = false
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [activeViewportTool, setActiveViewportTool] = useState<"select" | "measure">("select");
 
   useEffect(() => {
-    if (containerRef.current) {
-      modelStore.initThree(containerRef.current);
-      const tryLoad = () => {
-        if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
-          modelStore.loadCuratedModelByIndex(0, uvOrganizerStore);
-        } else if (!modelStore.currentModel) {
-          setTimeout(tryLoad, 250);
-        }
-      };
-      setTimeout(tryLoad, 100);
-    }
+    if (!containerRef.current) return;
+
+    // 1. Mandatory instantiation of Trikomi Core ThreeViewer with core plugins
+    const viewer = studioViewerManager.init({
+      container: containerRef.current,
+      backgroundColor: modelStore.backgroundColor
+    });
+
+    // 2. Bind modelStore to Trikomi ThreeViewer scene, camera & plugins
+    modelStore.attachViewer(viewer);
+
+    // 3. Load curated model into Trikomi ThreeViewer scene
+    const tryLoad = () => {
+      if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
+        modelStore.loadCuratedModelByIndex(0, uvOrganizerStore);
+      } else if (!modelStore.currentModel) {
+        setTimeout(tryLoad, 250);
+      }
+    };
+    setTimeout(tryLoad, 100);
+
+    return () => {
+      studioViewerManager.dispose();
+    };
   }, []);
 
   return (
@@ -42,71 +53,45 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
         <div className="viewport-action-strip">
           <button
-            className={`control-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
-            title="Toggle Wireframe Shading"
-            onClick={() => modelStore.toggleWireframe()}
+            className="control-toggle-btn"
+            title="Reset Camera View to Frame Garment"
+            onClick={() => modelStore.resetCamera()}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 2a10 10 0 000 20z" />
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
             </svg>
           </button>
           <button
-            className="control-toggle-btn"
-            title="Focus Framing (F key)"
-            onClick={() => modelStore.resetCamera()}
+            className={`control-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
+            title="Toggle Wireframe Mode"
+            onClick={() => modelStore.toggleWireframe()}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2" />
+              <polyline points="2 17 12 22 22 17" />
+              <polyline points="2 12 12 17 22 12" />
+            </svg>
+          </button>
+          <div className="vertical-divider-bar" />
+          <button
+            className={`control-toggle-btn ${isMaximized ? "active" : ""}`}
+            title="Fullscreen 3D Viewport"
+            onClick={onToggleMaximize || (() => modelStore.resetCamera())}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" />
             </svg>
           </button>
-          {onToggleMaximize && (
-            <button
-              className={`control-toggle-btn ${isMaximized ? "active" : ""}`}
-              title="Fullscreen Viewport"
-              onClick={onToggleMaximize}
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="15 3 21 3 21 9" />
-                <polyline points="9 21 3 21 3 15" />
-                <line x1="21" y1="3" x2="14" y2="10" />
-                <line x1="3" y1="21" x2="10" y2="14" />
-              </svg>
-            </button>
-          )}
         </div>
       </div>
 
-      {/* 3D WebGL Canvas Stage */}
+      {/* 3D WebGL / WebGPU Canvas Stage */}
       <div className="viewport-3d-stage" style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-        {/* Floating Tool Strip on Left: Select & Measure */}
-        <div className="viewport-floating-strip" style={{ zIndex: 10 }}>
-          <button
-            className={`btn-viewport-tool ${activeViewportTool === "select" ? "active" : ""}`}
-            onClick={() => setActiveViewportTool("select")}
-            title="Select & Inspect Mesh Panels"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" strokeDasharray="3 3" />
-            </svg>
-          </button>
-          <button
-            className={`btn-viewport-tool ${activeViewportTool === "measure" ? "active" : ""}`}
-            onClick={() => setActiveViewportTool("measure")}
-            title="Measure Garment Seam & Dimensions"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="4" y1="20" x2="20" y2="4" />
-              <line x1="8" y1="16" x2="10" y2="18" />
-              <line x1="14" y1="10" x2="16" y2="12" />
-            </svg>
-          </button>
-        </div>
-
         {/* Ambient Pedestal Ring */}
         <div className="stage-pedestal-disk" style={{ pointerEvents: "none" }} />
 
-        {/* Real Three.js Canvas Container */}
+        {/* Real Trikomi ThreeViewer Canvas Mount */}
         <div
           ref={containerRef}
           style={{

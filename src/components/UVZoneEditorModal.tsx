@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { uvOrganizerStore, GARMENT_TYPES } from "../store/uvOrganizerStore";
+import { uvOrganizerStore, GARMENT_TYPES } from "@trikomi/core/studio";
 import { LayoutGrid, Plus, Trash2, RotateCcw, Check, Move, X, Download, Upload } from "lucide-react";
 
 interface ZoneDragState {

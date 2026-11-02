@@ -1,7 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "../../store/modelStore";
-import { uvOrganizerStore } from "../../store/uvOrganizerStore";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 
 export type StudioMode = "model" | "uv" | "material" | "validation";
 
@@ -106,44 +105,6 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
             <path d="M3 15h18" />
           </svg>
         </button>
-        <div className="vertical-divider-bar" />
-        <button
-          className="control-toggle-btn"
-          title="Reset Camera View"
-          onClick={() => modelStore.resetCamera?.()}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-            <path d="M3 3v5h5" />
-          </svg>
-        </button>
-        <button
-          className={`control-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
-          title="Toggle Wireframe Mode"
-          onClick={() => modelStore.toggleWireframe?.()}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polygon points="12 2 2 7 12 12 22 7 12 2" />
-            <polyline points="2 17 12 22 22 17" />
-            <polyline points="2 12 12 17 22 12" />
-          </svg>
-        </button>
-        <div className="vertical-divider-bar" />
-        <a
-          href="/catalog.html"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="control-toggle-btn"
-          title="Open Dedicated Style3D Asset Catalog Page"
-          style={{ textDecoration: "none" }}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-          </svg>
-        </a>
         <button className="btn-export-grand" onClick={onExportGLB}>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />

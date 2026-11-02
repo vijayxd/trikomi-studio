@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
-import { uvOrganizerStore } from "../store/uvOrganizerStore";
-import { modelStore } from "../store/modelStore";
+import { uvOrganizerStore, modelStore } from "@trikomi/core/studio";
 import * as THREE from "three";
 
 interface PieceBounds2D {
@@ -393,6 +392,84 @@ export const UVCanvasView = observer(() => {
 
     requestRender();
   }, [requestRender]);
+
+  // Focus on Selected Island
+  const focusSelectedIsland = useCallback(() => {
+    const activeSelectedIds = modelStore.selectedPieceIds.length > 0
+      ? modelStore.selectedPieceIds
+      : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
+    
+    if (activeSelectedIds.length === 0) return;
+
+    const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
+    if (selectedBounds.length === 0) return;
+
+    let minU = Infinity, maxU = -Infinity, minV = Infinity, maxV = -Infinity;
+    for (const b of selectedBounds) {
+      minU = Math.min(minU, b.minU);
+      maxU = Math.max(maxU, b.maxU);
+      minV = Math.min(minV, b.minV);
+      maxV = Math.max(maxV, b.maxV);
+    }
+
+    const cU = (minU + maxU) / 2;
+    const cV = (minV + maxV) / 2;
+    const w = Math.max(0.04, maxU - minU);
+    const h = Math.max(0.04, maxV - minV);
+    const maxDim = Math.max(w, h);
+
+    // Frame zoom level with margins
+    const targetZoom = Math.max(0.6, Math.min(8.0, 0.75 / maxDim));
+
+    viewStateRef.current = {
+      centerU: cU,
+      centerV: cV,
+      zoom: targetZoom
+    };
+
+    updateCameraBounds();
+    updateGizmoMesh();
+  }, [updateCameraBounds, updateGizmoMesh]);
+
+  // Reset UV Viewport View (Pan & Zoom to 1.0)
+  const resetViewportView = useCallback(() => {
+    viewStateRef.current = { centerU: 0.5, centerV: 0.5, zoom: 1.0 };
+    updateCameraBounds();
+    updateGizmoMesh();
+  }, [updateCameraBounds, updateGizmoMesh]);
+
+  // Listen to external reset & focus triggers from uvOrganizerStore
+  useEffect(() => {
+    if (uvOrganizerStore.uvViewportResetTrigger > 0) {
+      resetViewportView();
+    }
+  }, [uvOrganizerStore.uvViewportResetTrigger, resetViewportView]);
+
+  useEffect(() => {
+    if (uvOrganizerStore.uvViewportFocusTrigger > 0) {
+      focusSelectedIsland();
+    }
+  }, [uvOrganizerStore.uvViewportFocusTrigger, focusSelectedIsland]);
+
+  // Keyboard shortcut: Press 'F' to focus selected island when UV Canvas has focus or mouse is over it
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't intercept when user is typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      if (e.key === "f" || e.key === "F") {
+        const hasSelection = modelStore.selectedPiece || modelStore.selectedPieceIds.length > 0;
+        if (hasSelection) {
+          e.preventDefault();
+          focusSelectedIsland();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [focusSelectedIsland]);
 
   // Initialize Three.js WebGL viewport for the UV Editor
   useEffect(() => {

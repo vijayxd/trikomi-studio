@@ -6,19 +6,30 @@
 ---
 
 ## 📌 Context & Scope
-`trikomi-studio` is the dedicated **3D Garment Asset & UV Canonical Studio** within the Trikomi platform. It bridges 3D garment ingestion (Style3D, CLO3D, OBJ/GLTF) with real-time WebGL/WebGPU canonical UV organization, PBR fabric simulation, mesh decimation, and print-ready GLB export.
+`trikomi-studio` is the public-facing **Workstation Shell / UI Wrapper ONLY** within the Trikomi platform.
+**CRITICAL ARCHITECTURAL CONTRACT**:
+- **`trikomi-studio` is STRICTLY a wrapper application**: It contains UI presentation, shell layout, dock containers, toolbars, and reactive view bindings.
+- **ALL DOMAIN AND BUSINESS LOGIC BELONGS TO `@trikomi/core` (specifically `@trikomi/core/studio`)**:
+  - Every piece of domain logic (geometry processing, decimation topology engines, canonical UV unwrap algorithms, UV zone fitting, magnetic snapping, transform math, PBR shader synthesis, and validation) **MUST be authored in `@trikomi/core/studio` (`packages/core/src/studio/`)**.
+  - `trikomi-studio` imports and binds to these core engine classes via `@trikomi/core/studio`.
+  - Under no circumstances should non-UI business logic be written directly in the `trikomi-studio` public repository. This guarantees that `trikomi-studio` remains a lightweight, public, reusable UI wrapper, while the proprietary 3D engine capabilities stay unified in the core Trikomi SDK.
 
 ---
 
 ## 🛡️ Trikomi Core Operational Rules & Safeguards
 
-### 1. Trikomi Plugin / Addon Architecture Protocol:
-- All 3D viewer and studio capabilities must be encapsulated as modular **Trikomi Viewer Plugins** implementing `ITrikomiStudioPlugin` / `TrikomiStudioPlugin` (conforming to `@trikomi/core`'s `ViewerPlugin` lifecycle: `onAttach`, `onDetach`, `onUpdate`, `onRender`).
-- **NEVER** write ad-hoc monolithic 3D logic inside React components. React components serve purely as reactive headless views connected to MobX stores (`useViewerStore`, `modelStore`, `uvOrganizerStore`).
+### 1. Studio-As-A-Wrapper & Core Studio Package Protocol:
+- **MANDATORY USE OF TRIKOMI `ThreeViewer`**:
+  - The 3D viewport in `trikomi-studio` MUST instantiate and use Trikomi's core `ThreeViewer` (`new ThreeViewer(container, store, { ... })`) from `@trikomi/core` — exactly like `trikomi-demo/apps/viewer` and `trikomi-demo/apps/sportswear-configurator`.
+  - **STRICT PROHIBITION**: NEVER create raw `new THREE.WebGLRenderer()`, `new THREE.PerspectiveCamera()`, or custom `requestAnimationFrame` render loops inside Studio or Studio stores.
+  - Reusable capabilities (orbit controls, gizmo transforms, environment IBL, GLTF export, materials) MUST attach as Trikomi Core plugins (`OrbitControlsPlugin`, `TransformGizmoPlugin`, `EnvironmentPlugin`, `ExportPlugin`, `CenterModelPlugin`).
+- All 3D viewer, geometry, UV manipulation, and pipeline capabilities must be authored in `@trikomi/core/studio` (`packages/core/src/studio/`) implementing Trikomi plugin architectures or standalone headless engine classes (`GarmentAuditModule`, `DecimationEngine`, `UVCanonicalEngine`, `PBRMaterialSynthesizer`).
+- **NEVER** write ad-hoc monolithic 3D or math logic inside React components. React components serve purely as reactive headless views connected to MobX stores (`useViewerStore`, `modelStore`, `uvOrganizerStore`).
+- **All non-UI business logic is headless and portable**: Any transformation, UV algorithm, island packing calculation, or decimation algorithm must be isolated in `@trikomi/core/studio`, completely decoupled from React DOM and browser-specific chrome.
 
 ### 2. Zero-NPM Local Source Development Rule:
 - In `vite.config.js`, `@trikomi/core` and its subpackages (`@trikomi/core/sportswear`, `@trikomi/core/viewer`, etc.) are aliased directly to the local SDK source at `/media/vijaykc/projects/trikomi/packages/core/src/index.ts`.
-- Changes in the core engine must reflect immediately in Studio without local npm packing.
+- Changes in the core engine must reflect immediately in Studio without local npm packing. Always verify changes cleanly compile against core contracts.
 
 ### 3. Absolute Transparency & Intent Communication (Trikomi Demo Rule):
 - Before performing any action (reading files, executing commands, creating files, or editing code), state explicitly:
