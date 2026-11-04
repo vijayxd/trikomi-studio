@@ -6,6 +6,7 @@ import { StudioLeftPanel } from "./components/studio/StudioLeftPanel";
 import { StudioCenterViewport } from "./components/studio/StudioCenterViewport";
 import { StudioRightPanel } from "./components/studio/StudioRightPanel";
 import { StudioBottomDock } from "./components/studio/StudioBottomDock";
+import { StudioMaterialLibraryView } from "./components/studio/StudioMaterialLibraryView";
 import { UVZoneEditorModal } from "./components/UVZoneEditorModal";
 
 export const App = observer(() => {
@@ -102,25 +103,33 @@ export const App = observer(() => {
       />
 
       {/* 2. MIDDLE WORKSPACE ROW (Fluid Flex Real-Estate) */}
-      <main className="workspace-row">
-        {/* Left Panel: Scene Explorer, Transforms, Quick Tools */}
-        <StudioLeftPanel collapsed={!showLeftSidebar} />
+      {studioMode === "material" ? (
+        <main className="workspace-row" style={{ padding: 0 }}>
+          <StudioMaterialLibraryView />
+        </main>
+      ) : (
+        <main className="workspace-row">
+          {/* Left Panel: Scene Explorer, Transforms, Quick Tools */}
+          <StudioLeftPanel collapsed={!showLeftSidebar} />
 
-        {/* Center 3D Viewport: Real Three.js Canvas, Pedestal, Viewport Toolbar */}
-        <StudioCenterViewport
-          isMaximized={isViewportMaximized}
-          onToggleMaximize={handleToggleMaximize}
-        />
+          {/* Center 3D Viewport: Real Three.js Canvas, Pedestal, Viewport Toolbar */}
+          <StudioCenterViewport
+            isMaximized={isViewportMaximized}
+            onToggleMaximize={handleToggleMaximize}
+          />
 
-        {/* Right Panel: UV Studio & 2D Inspector (Active in UV Mode, collapsible) */}
-        <StudioRightPanel collapsed={!showRightPanel} />
-      </main>
+          {/* Right Panel: UV Studio & 2D Inspector (Active in UV Mode, collapsible) */}
+          <StudioRightPanel collapsed={!showRightPanel} />
+        </main>
+      )}
 
       {/* 3. BOTTOM DOCK TRAY: 5 Dedicated Cards (Material, Geometry, Preview, Validation, Export) */}
-      <StudioBottomDock
-        collapsed={!showBottomDock}
-        onExportGLB={() => modelStore.exportGLB()}
-      />
+      {studioMode !== "material" && (
+        <StudioBottomDock
+          collapsed={!showBottomDock}
+          onExportGLB={() => modelStore.exportGLB()}
+        />
+      )}
 
       {/* Canonical UV Blueprint Designer Modal */}
       {uvOrganizerStore.showZoneEditorModal && <UVZoneEditorModal />}

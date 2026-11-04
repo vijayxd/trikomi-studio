@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trikomi 3D Fabric Material Library | 3D Sphere Scene</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #070b12;
+        color: #f1f5f9;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        -webkit-font-smoothing: antialiased;
+      }
+      #materials-root {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #090d16;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.trikomi_config = {
+        apiKey: 'vk_live_5ebtdzpw7zradamp',
+        apiSecret: 'sk_live_h93f7k1k1822g6r5a',
+        baseUrl: 'https://trikomi.com'
+      };
+    </script>
+    <div id="materials-root"></div>
+    <script type="module" src="/src/materialsMain.tsx"></script>
+  </body>
+</html>

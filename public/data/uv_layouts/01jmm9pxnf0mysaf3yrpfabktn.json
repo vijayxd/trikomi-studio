@@ -1,0 +1,219 @@
+{
+  "version": "1.0",
+  "garmentId": "01jmm9pxnf0mysaf3yrpfabktn",
+  "garmentTitle": "Grey V-neck shock proof sports bra",
+  "garmentCategory": "TOPWEAR",
+  "updatedAt": "2026-11-04T13:13:47.611Z",
+  "islands": {
+    "pattern29_1": {
+      "zone": "SLEEVE_LEFT",
+      "center": {
+        "u": 0.69817,
+        "v": 0.24454
+      },
+      "bounds": {
+        "minU": 0.57379,
+        "maxU": 0.82255,
+        "minV": 0.07317,
+        "maxV": 0.4159,
+        "width": 0.24877,
+        "height": 0.34273
+      }
+    },
+    "pattern39_2": {
+      "zone": "SLEEVE_RIGHT",
+      "center": {
+        "u": 0.81681,
+        "v": 0.24845
+      },
+      "bounds": {
+        "minU": 0.69466,
+        "maxU": 0.93896,
+        "minV": 0.07796,
+        "maxV": 0.41893,
+        "width": 0.2443,
+        "height": 0.34097
+      }
+    },
+    "pattern49_3": {
+      "zone": "WAISTBAND",
+      "center": {
+        "u": 0.45136,
+        "v": 0.51821
+      },
+      "bounds": {
+        "minU": 0.32333,
+        "maxU": 0.57938,
+        "minV": 0.48487,
+        "maxV": 0.55156,
+        "width": 0.25605,
+        "height": 0.06669
+      }
+    },
+    "pattern1_4": {
+      "zone": "BACK_TORSO",
+      "center": {
+        "u": 0.66158,
+        "v": 0.94019
+      },
+      "bounds": {
+        "minU": 0.50078,
+        "maxU": 0.82237,
+        "minV": 0.89428,
+        "maxV": 0.98609,
+        "width": 0.32158,
+        "height": 0.09181
+      }
+    },
+    "pattern9_5": {
+      "zone": "SLEEVE_LEFT",
+      "center": {
+        "u": 0.204,
+        "v": 0.3853
+      },
+      "bounds": {
+        "minU": 0.14981,
+        "maxU": 0.25819,
+        "minV": 0.32469,
+        "maxV": 0.44591,
+        "width": 0.10838,
+        "height": 0.12122
+      }
+    },
+    "pattern15_6": {
+      "zone": "SLEEVE_RIGHT",
+      "center": {
+        "u": 0.34236,
+        "v": 0.38768
+      },
+      "bounds": {
+        "minU": 0.29002,
+        "maxU": 0.3947,
+        "minV": 0.3297,
+        "maxV": 0.44565,
+        "width": 0.10468,
+        "height": 0.11595
+      }
+    },
+    "pattern21_7": {
+      "zone": "FRONT_TORSO",
+      "center": {
+        "u": 0.22641,
+        "v": 0.92295
+      },
+      "bounds": {
+        "minU": 0.15077,
+        "maxU": 0.30206,
+        "minV": 0.8598,
+        "maxV": 0.98609,
+        "width": 0.15128,
+        "height": 0.12629
+      }
+    },
+    "pattern81_8": {
+      "zone": "FRONT_TORSO",
+      "center": {
+        "u": 0.22388,
+        "v": 0.92229
+      },
+      "bounds": {
+        "minU": 0.14794,
+        "maxU": 0.29982,
+        "minV": 0.85856,
+        "maxV": 0.98602,
+        "width": 0.15188,
+        "height": 0.12745
+      }
+    },
+    "pattern89_9": {
+      "zone": "WAISTBAND",
+      "center": {
+        "u": 0.71862,
+        "v": 0.51176
+      },
+      "bounds": {
+        "minU": 0.58975,
+        "maxU": 0.84748,
+        "minV": 0.47717,
+        "maxV": 0.54635,
+        "width": 0.25774,
+        "height": 0.06918
+      }
+    },
+    "pattern95_10": {
+      "zone": "WAISTBAND",
+      "center": {
+        "u": 0.44423,
+        "v": 0.51513
+      },
+      "bounds": {
+        "minU": 0.31371,
+        "maxU": 0.57475,
+        "minV": 0.47942,
+        "maxV": 0.55084,
+        "width": 0.26104,
+        "height": 0.07141
+      }
+    },
+    "pattern55_11": {
+      "zone": "WAISTBAND",
+      "center": {
+        "u": 0.17303,
+        "v": 0.51222
+      },
+      "bounds": {
+        "minU": 0.04735,
+        "maxU": 0.29871,
+        "minV": 0.47896,
+        "maxV": 0.54548,
+        "width": 0.25137,
+        "height": 0.06652
+      }
+    },
+    "pattern61_12": {
+      "zone": "SLEEVE_LEFT",
+      "center": {
+        "u": 0.1954,
+        "v": 0.38753
+      },
+      "bounds": {
+        "minU": 0.14038,
+        "maxU": 0.25041,
+        "minV": 0.32862,
+        "maxV": 0.44643,
+        "width": 0.11003,
+        "height": 0.11781
+      }
+    },
+    "pattern67_13": {
+      "zone": "BACK_TORSO",
+      "center": {
+        "u": 0.67531,
+        "v": 0.9384
+      },
+      "bounds": {
+        "minU": 0.5214,
+        "maxU": 0.82922,
+        "minV": 0.89095,
+        "maxV": 0.98585,
+        "width": 0.30782,
+        "height": 0.0949
+      }
+    },
+    "pattern75_14": {
+      "zone": "SLEEVE_RIGHT",
+      "center": {
+        "u": 0.34233,
+        "v": 0.38655
+      },
+      "bounds": {
+        "minU": 0.28999,
+        "maxU": 0.39468,
+        "minV": 0.32771,
+        "maxV": 0.44538,
+        "width": 0.10468,
+        "height": 0.11767
+      }
+    }
+  }
+}

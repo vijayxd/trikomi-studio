@@ -233,6 +233,49 @@ function style3dBridgePlugin() {
           return;
         }
 
+        // Lightweight UV Layout Delta Persistence API
+        if (req.url === '/api/save-uv-layout' && req.method === 'POST') {
+          let body = '';
+          req.on('data', chunk => { body += chunk; });
+          req.on('end', () => {
+            try {
+              const delta = JSON.parse(body);
+              if (!delta.garmentId) throw new Error('Missing garmentId');
+              const layoutDir = path.resolve(__dirname, 'public/data/uv_layouts');
+              if (!fs.existsSync(layoutDir)) fs.mkdirSync(layoutDir, { recursive: true });
+
+              const targetPath = path.join(layoutDir, `${delta.garmentId}.json`);
+              fs.writeFileSync(targetPath, JSON.stringify(delta, null, 2), 'utf8');
+
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 200;
+              res.end(JSON.stringify({ status: 'ok', savedAt: delta.updatedAt, path: targetPath }));
+              console.log(`[UV Layout API] Saved layout delta for ${delta.garmentId} (${Object.keys(delta.islands || {}).length} islands)`);
+            } catch (err) {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: err.message }));
+            }
+          });
+          return;
+        }
+
+        if (req.url?.startsWith('/api/get-uv-layout') && req.method === 'GET') {
+          const urlObj = new URL(req.url, 'http://localhost:5173');
+          const garmentId = urlObj.searchParams.get('id');
+          const layoutPath = path.resolve(__dirname, `public/data/uv_layouts/${garmentId}.json`);
+          if (garmentId && fs.existsSync(layoutPath)) {
+            const data = fs.readFileSync(layoutPath, 'utf8');
+            res.setHeader('Content-Type', 'application/json');
+            res.statusCode = 200;
+            res.end(data);
+          } else {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: 'Layout delta not found' }));
+          }
+          return;
+        }
+
         if (req.url === '/api/transfer' && req.method === 'GET') {
           res.setHeader('Content-Type', 'application/json');
           res.statusCode = 200;
@@ -275,6 +318,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         catalog: path.resolve(__dirname, 'catalog.html'),
+        materials: path.resolve(__dirname, 'materials.html'),
       },
     },
   },

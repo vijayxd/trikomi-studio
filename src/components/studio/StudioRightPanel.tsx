@@ -98,6 +98,19 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
             Auto Align
           </button>
           <button
+            className="btn-uv-sub-tab"
+            style={{ color: "var(--neon-cyan)", borderColor: "rgba(20, 217, 255, 0.4)", fontWeight: "600" }}
+            onClick={async () => {
+              const res = await uvOrganizerStore.saveUVLayoutToDisk();
+              if (res.success) {
+                alert("UV layout saved successfully!");
+              }
+            }}
+            title="Save lightweight UV layout delta JSON (entities & positions only)"
+          >
+            Save UV
+          </button>
+          <button
             className="control-toggle-btn"
             style={{ width: "24px", height: "24px" }}
             onClick={() => uvOrganizerStore.focusSelectedIsland()}
@@ -185,15 +198,23 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
               </div>
             </div>
 
-            {/* UV Blueprint Export Button */}
-            <div style={{ padding: "0 6px 6px" }}>
+            {/* UV Blueprint & JSON Layout Export */}
+            <div style={{ padding: "0 6px 6px", display: "flex", gap: "4px" }}>
               <button
                 className="btn-uv-reset"
-                style={{ width: "100%", padding: "4px", fontSize: "9px" }}
+                style={{ flex: 1, padding: "4px", fontSize: "9px" }}
+                onClick={() => uvOrganizerStore.saveUVLayoutToDisk()}
+                title="Save entity-based UV layout JSON to disk"
+              >
+                Save Layout JSON
+              </button>
+              <button
+                className="btn-uv-reset"
+                style={{ flex: 1, padding: "4px", fontSize: "9px" }}
                 onClick={() => uvOrganizerStore.exportProductionBlueprint(2048, "png")}
                 title="Export 2048x2048 high-resolution transparent blueprint PNG"
               >
-                Export Blueprint (2K)
+                Blueprint (2K)
               </button>
             </div>
           </StudioCard>
@@ -202,7 +223,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
           <StudioCard title="Fabric Normal Audit" flex="0 0 auto">
             <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontSize: "10px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Jersey Normal:</span>
+                <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Fabric Normal:</span>
                 <button
                   className="btn-uv-sub-tab"
                   style={{
@@ -231,7 +252,129 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
               </div>
 
               {modelStore.universalFabricNormalEnabled && (
-                <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                  {/* Curated Fabric Material Selector */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9px", color: "var(--text-muted)" }}>
+                        Fabric Library ({modelStore.curatedMaterialsList.length} Curated):
+                      </span>
+                      {modelStore.curatedMaterialsList.find(m => m.id === modelStore.selectedMaterialId)?.category && (
+                        <span style={{ fontSize: "8.5px", color: "var(--neon-cyan)", background: "rgba(56, 189, 248, 0.1)", padding: "1px 5px", borderRadius: "3px" }}>
+                          {modelStore.curatedMaterialsList.find(m => m.id === modelStore.selectedMaterialId)?.category}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {/* Material Dropdown with Category and Name */}
+                    <select
+                      value={modelStore.selectedMaterialId}
+                      onChange={(e) => modelStore.switchCuratedMaterial(e.target.value)}
+                      style={{
+                        background: "rgba(0,0,0,0.6)",
+                        color: "var(--text-primary)",
+                        border: "1px solid rgba(56, 189, 248, 0.3)",
+                        borderRadius: "4px",
+                        padding: "4px 6px",
+                        fontSize: "9.5px",
+                        outline: "none",
+                        cursor: "pointer"
+                      }}
+                    >
+                      {modelStore.curatedMaterialsList.map(m => (
+                        <option key={m.id} value={m.id} style={{ background: "#0d131f" }}>
+                          {m.name} ({m.category})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Visual Preview Swatch & PBR Specs */}
+                  {(() => {
+                    const activeMat = modelStore.curatedMaterialsList.find(m => m.id === modelStore.selectedMaterialId);
+                    if (!activeMat) return null;
+                    const availableMaps = activeMat.maps ? Object.keys(activeMat.maps) : [];
+                    return (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "5px",
+                          background: "rgba(0,0,0,0.35)",
+                          padding: "5px",
+                          borderRadius: "4px",
+                          border: "1px solid rgba(255,255,255,0.06)"
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                          <img
+                            src={activeMat.thumbnailUrl}
+                            alt={activeMat.name}
+                            style={{
+                              width: "36px",
+                              height: "36px",
+                              borderRadius: "3px",
+                              objectFit: "cover",
+                              border: "1px solid rgba(56, 189, 248, 0.4)"
+                            }}
+                          />
+                          <div style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, minWidth: 0 }}>
+                            <span style={{ fontSize: "9.5px", fontWeight: "600", color: "#fff", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                              {activeMat.name}
+                            </span>
+                            <div style={{ display: "flex", gap: "6px", fontSize: "8.5px", color: "var(--text-muted)" }}>
+                              <span>Rough: <strong style={{ color: "var(--neon-cyan)" }}>{activeMat.roughness ?? 0.6}</strong></span>
+                              <span>Scale: <strong style={{ color: "var(--neon-cyan)" }}>{activeMat.normalStrength ?? 1.0}</strong></span>
+                              {activeMat.physical?.weight && (
+                                <span>{activeMat.physical.weight} g/m²</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Available Map Badges & Diffuse Toggle */}
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "3px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+                          <div style={{ display: "flex", gap: "3px", flexWrap: "wrap" }}>
+                            {availableMaps.map(mKey => (
+                              <span
+                                key={mKey}
+                                style={{
+                                  fontSize: "7.5px",
+                                  padding: "1px 4px",
+                                  borderRadius: "2px",
+                                  background: mKey === "baseColor" ? "rgba(16, 185, 129, 0.2)" : mKey === "specular" ? "rgba(245, 158, 11, 0.2)" : "rgba(56, 189, 248, 0.15)",
+                                  color: mKey === "baseColor" ? "#34d399" : mKey === "specular" ? "#fbbf24" : "var(--neon-cyan)",
+                                  border: "1px solid rgba(255,255,255,0.08)",
+                                  textTransform: "capitalize"
+                                }}
+                              >
+                                {mKey === "baseColor" ? "Diffuse" : mKey}
+                              </span>
+                            ))}
+                          </div>
+
+                          {activeMat.diffuseMapUrl && (
+                            <button
+                              className="btn-uv-sub-tab"
+                              style={{
+                                padding: "1px 6px",
+                                fontSize: "8px",
+                                background: modelStore.applyDiffuseMapEnabled ? "rgba(16, 185, 129, 0.25)" : "rgba(255,255,255,0.05)",
+                                color: modelStore.applyDiffuseMapEnabled ? "#34d399" : "var(--text-muted)",
+                                borderColor: modelStore.applyDiffuseMapEnabled ? "#34d399" : "transparent"
+                              }}
+                              onClick={() => modelStore.toggleDiffuseMap()}
+                              title="Toggle between real fabric diffuse texture and clean 3D garment base color"
+                            >
+                              {modelStore.applyDiffuseMapEnabled ? "Diffuse: ON" : "Diffuse: OFF"}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  {/* Tiling Repeat Slider */}
                   <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-muted)", fontSize: "9px" }}>
                     <span>Tiling Repeat (Trims excluded)</span>
                     <span style={{ color: "var(--neon-cyan)", fontWeight: "600" }}>{modelStore.universalNormalRepeat}x</span>
