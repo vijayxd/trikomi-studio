@@ -30,12 +30,21 @@ interface PanState {
   startCamCenterV: number;
 }
 
+interface MarqueeBoxState {
+  startX: number;
+  startY: number;
+  currentX: number;
+  currentY: number;
+  isMultiKey: boolean;
+}
+
 export const UVCanvasView = observer(() => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   
   // Drag transform & pan states
   const [transformState, setTransformState] = useState<DragTransformState | null>(null);
   const [panState, setPanState] = useState<PanState | null>(null);
+  const [marqueeState, setMarqueeState] = useState<MarqueeBoxState | null>(null);
   const [activeGizmoHandle, setActiveGizmoHandle] = useState<string | null>(null);
 
   // Synchronized hovered piece ID across 2D UV canvas and 3D viewport
@@ -779,14 +788,35 @@ export const UVCanvasView = observer(() => {
         centerV: (gMinV + gMaxV) * 0.5
       });
     } else {
+      // Empty space pointerdown: initiate Marquee Box Selection
       if (!isMultiKey) {
-        modelStore.deselectPiece();
+        modelStore.deselectPiece(true);
+        setTransformState(null);
+        updateGizmoMesh();
+        requestRender();
       }
+      setMarqueeState({
+        startX: e.clientX,
+        startY: e.clientY,
+        currentX: e.clientX,
+        currentY: e.clientY,
+        isMultiKey
+      });
     }
   };
 
   const handlePointerMove = (e: PointerEvent) => {
-    // 1. Pan Viewport Movement
+    // 1. Marquee Box Selection Drag
+    if (marqueeState) {
+      setMarqueeState({
+        ...marqueeState,
+        currentX: e.clientX,
+        currentY: e.clientY
+      });
+      return;
+    }
+
+    // 2. Pan Viewport Movement
     if (panState) {
       const container = containerRef.current;
       if (!container || !cameraRef.current) return;
@@ -880,7 +910,49 @@ export const UVCanvasView = observer(() => {
     }
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e?: PointerEvent) => {
+    // 1. Finalize Marquee Box Selection
+    if (marqueeState) {
+      const startUv = getUVFromClient(marqueeState.startX, marqueeState.startY);
+      const endClientX = e ? e.clientX : marqueeState.currentX;
+      const endClientY = e ? e.clientY : marqueeState.currentY;
+      const endUv = getUVFromClient(endClientX, endClientY);
+
+      const pixelDist = Math.hypot(endClientX - marqueeState.startX, endClientY - marqueeState.startY);
+
+      if (startUv && endUv && pixelDist > 6) {
+        const boxMinU = Math.min(startUv.u, endUv.u);
+        const boxMaxU = Math.max(startUv.u, endUv.u);
+        const boxMinV = Math.min(startUv.v, endUv.v);
+        const boxMaxV = Math.max(startUv.v, endUv.v);
+
+        // Find all pieces whose 2D UV bounding box overlaps with the marquee box
+        const hitPieceIds = cachedBoundsRef.current.filter(b => {
+          const overlaps = (
+            b.minU <= boxMaxU &&
+            b.maxU >= boxMinU &&
+            b.minV <= boxMaxV &&
+            b.maxV >= boxMinV
+          );
+          return overlaps;
+        }).map(b => b.id);
+
+        if (hitPieceIds.length > 0) {
+          modelStore.selectPiecesByIds(hitPieceIds, marqueeState.isMultiKey);
+        } else if (!marqueeState.isMultiKey) {
+          modelStore.deselectPiece(true);
+        }
+      } else if (!marqueeState.isMultiKey) {
+        // Just a simple click on empty space with no drag
+        modelStore.deselectPiece(true);
+      }
+
+      setMarqueeState(null);
+      updateGizmoMesh();
+      requestRender();
+      return;
+    }
+
     if (panState) {
       setPanState(null);
     }
@@ -924,7 +996,7 @@ export const UVCanvasView = observer(() => {
   };
 
   useEffect(() => {
-    if (transformState || panState) {
+    if (transformState || panState || marqueeState) {
       window.addEventListener("pointermove", handlePointerMove);
       window.addEventListener("pointerup", handlePointerUp);
       return () => {
@@ -932,11 +1004,12 @@ export const UVCanvasView = observer(() => {
         window.removeEventListener("pointerup", handlePointerUp);
       };
     }
-  }, [transformState, panState]);
+  }, [transformState, panState, marqueeState]);
 
   // Cursor styling based on hover
   const getCursor = () => {
     if (panState) return "grabbing";
+    if (marqueeState) return "crosshair";
     if (transformState) {
       if (transformState.mode === "translate") return "move";
       return "nwse-resize";
@@ -979,6 +1052,28 @@ export const UVCanvasView = observer(() => {
         }}
         style={{ width: "100%", height: "100%" }}
       />
+
+      {/* Visual Marquee Selection Box */}
+      {marqueeState && (() => {
+        const left = Math.min(marqueeState.startX, marqueeState.currentX);
+        const top = Math.min(marqueeState.startY, marqueeState.currentY);
+        const width = Math.abs(marqueeState.currentX - marqueeState.startX);
+        const height = Math.abs(marqueeState.currentY - marqueeState.startY);
+
+        if (width < 3 && height < 3) return null;
+
+        return (
+          <div
+            className="uv-marquee-box"
+            style={{
+              left: `${left}px`,
+              top: `${top}px`,
+              width: `${width}px`,
+              height: `${height}px`
+            }}
+          />
+        );
+      })()}
 
       {/* Floating Hover Badge */}
       {activeHoveredPieceId && (

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trikomi Studio - Semi-Auto UV Align (Y-Paint & X-Deoverlap)</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/node_modules/three/build/three.module.js",
+        "three/addons/": "/node_modules/three/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #070a12;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      padding: 12px 20px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    h1 { font-size: 16px; font-weight: 700; color: #38bdf8; }
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    select, button {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.btn-align {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+    button.btn-align:hover {
+      background: #0369a1;
+    }
+    button.btn-reset {
+      background: #334155;
+    }
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 16px;
+      height: calc(100vh - 65px);
+    }
+    .panel-view {
+      background: #0c1322;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .view-title {
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #94a3b8;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+    }
+    .canvas-box {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    #three-container, #uv-container {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    #uv-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .legend {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #334155;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .paint-line-badge {
+      display: inline-block;
+      width: 14px;
+      height: 3px;
+      background: #ef4444;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>SEMI-AUTO UV ALIGN: Y-PAINT LINE & X-DEOVERLAP (STACKING RULE)</h1>
+      <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
+        Y-Leveling + ≥50% Double Cloth/Pocket Stacking Retention + Non-Overlapping X Margin Spacing
+      </div>
+    </div>
+    <div class="controls">
+      <label style="font-size: 13px; color: #94a3b8;">Sample Model:</label>
+      <select id="sample-select">
+        <option value="0">Demo 1: T-Shirt (Anchor + Collar Seam + Side Ribs X-Separated) - [01jmv8ns4bj9y7w7x3mttjkcbv]</option>
+        <option value="1">Demo 2: Yoga Vest (Double Cloth Layer 100% Retained + Collar) - [01jmm924d64bfy1x8hjnjqejdd]</option>
+        <option value="2">Demo 3: Tank Top (Singlet Left/Right Baseline Spaced) - [01jmm5fmrzs7y4vsqjxkt1zqy6]</option>
+      </select>
+      <button class="btn-align" id="btn-align">⚡ Auto Align (Y-Paint & X-Deoverlap)</button>
+      <button class="btn-reset" id="btn-reset">↺ Reset</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 3D Viewport -->
+    <div class="panel-view">
+      <div class="view-title">
+        <span>3D VIEWPORT WITH PAINTED REFERENCE LINE</span>
+        <span id="three-info" style="color:#38bdf8;">Loading 3D Model...</span>
+      </div>
+      <div class="canvas-box">
+        <div id="three-container"></div>
+        <div class="legend">
+          <div><span class="dot" style="background:#22c55e;"></span><b>Anchor Panel (Frozen 🔒)</b></div>
+          <div><span class="dot" style="background:#38bdf8;"></span><b>Separate Sibling (Non-Overlapping X Margin)</b></div>
+          <div><span class="dot" style="background:#eab308;"></span><b>Double-Cloth / Pocket (≥50% Stack Retained)</b></div>
+          <div><span class="paint-line-badge"></span><b>3D Horizontal Paint-Line Slice Plane</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2D UV Editor View -->
+    <div class="panel-view">
+      <div class="view-title">
+        <span>2D UV CANVAS [0, 1]</span>
+        <span id="uv-status" style="color:#f59e0b;">State: Original Arrangement</span>
+      </div>
+      <div class="canvas-box" id="uv-container">
+        <canvas id="uv-canvas"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+
+    const SAMPLES = [
+      {
+        id: "01jmv8ns4bj9y7w7x3mttjkcbv",
+        name: "Stand Collar Long Sleeve T-Shirt",
+        anchorPanel: "pattern22_25",
+        sliceY: 1250,
+        sideSiblings: ["pattern43_1", "pattern34_26"],
+        seamSiblings: [{ name: "pattern1_3", type: "collar" }]
+      },
+      {
+        id: "01jmm924d64bfy1x8hjnjqejdd",
+        name: "Yoga Vest (Double-Cloth Layering)",
+        anchorPanel: "pattern37_3",
+        sliceY: 1165,
+        sideSiblings: ["pattern27_2"],
+        seamSiblings: []
+      },
+      {
+        id: "01jmm5fmrzs7y4vsqjxkt1zqy6",
+        name: "Tank Top Singlet",
+        anchorPanel: "pattern41_10",
+        sliceY: 1240,
+        sideSiblings: ["pattern52_11"],
+        seamSiblings: [{ name: "pattern23_7", type: "strap" }, { name: "pattern29_8", type: "strap" }]
+      }
+    ];
+
+    let currentSampleIndex = 0;
+    let currentModel = null;
+    let zoneMeshes = [];
+    let sliceHelperLine = null;
+    let isAligned = false;
+
+    // 1. Three.js Setup
+    const container = document.getElementById('three-container');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#070a12');
+
+    const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 10, 5000);
+    camera.position.set(0, 1250, 1350);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 1250, 0);
+    controls.enableDamping = true;
+
+    const ambLight = new THREE.AmbientLight(0xffffff, 0.95);
+    scene.add(ambLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    dirLight.position.set(400, 1000, 700);
+    scene.add(dirLight);
+
+    // 2. 2D Canvas Setup
+    const uvCanvas = document.getElementById('uv-canvas');
+    const uvCtx = uvCanvas.getContext('2d');
+
+    const loader = new OBJLoader();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      drawUVEditor();
+    });
+
+    // 3. Plane Slice Intersection Geometry (Calculates where 3D painted line lands on UVs)
+    function computeSurfacePlaneSlice(mesh, planeY) {
+      const pos = mesh.geometry.attributes.position;
+      const uv = mesh.geometry.attributes.uv;
+      const triCount = pos.count / 3;
+      const points = [];
+      const pA = new THREE.Vector3(), pB = new THREE.Vector3(), pC = new THREE.Vector3();
+      const uvA = new THREE.Vector2(), uvB = new THREE.Vector2(), uvC = new THREE.Vector2();
+
+      for (let i = 0; i < triCount; i++) {
+        pA.fromBufferAttribute(pos, i * 3);
+        pB.fromBufferAttribute(pos, i * 3 + 1);
+        pC.fromBufferAttribute(pos, i * 3 + 2);
+
+        const minY = Math.min(pA.y, pB.y, pC.y);
+        const maxY = Math.max(pA.y, pB.y, pC.y);
+        if (planeY >= minY && planeY <= maxY) {
+          uvA.set(uv.getX(i * 3), uv.getY(i * 3));
+          uvB.set(uv.getX(i * 3 + 1), uv.getY(i * 3 + 1));
+          uvC.set(uv.getX(i * 3 + 2), uv.getY(i * 3 + 2));
+
+          const edges = [[pA, pB, uvA, uvB], [pB, pC, uvB, uvC], [pC, pA, uvC, uvA]];
+          for (const [v0, v1, u0, u1] of edges) {
+            if ((v0.y <= planeY && v1.y >= planeY) || (v0.y >= planeY && v1.y <= planeY)) {
+              const dy = v1.y - v0.y;
+              if (Math.abs(dy) > 0.0001) {
+                const t = (planeY - v0.y) / dy;
+                points.push({
+                  u: u0.x + t * (u1.x - u0.x),
+                  v: u0.y + t * (u1.y - u0.y),
+                  x3D: v0.x + t * (v1.x - v0.x),
+                  z3D: v0.z + t * (v1.z - v0.z)
+                });
+              }
+            }
+          }
+        }
+      }
+      return points;
+    }
+
+    // 4. Seam Border Contact Calculation
+    function computeSeamContactDelta(anchorMesh, targetMesh) {
+      const aPos = anchorMesh.geometry.attributes.position;
+      const aUV = anchorMesh.geometry.userData.origUv;
+      const tPos = targetMesh.geometry.attributes.position;
+      const tUV = targetMesh.geometry.userData.origUv;
+
+      const pairs = [];
+      const stepA = Math.max(1, Math.floor(aPos.count / 800));
+      const stepT = Math.max(1, Math.floor(tPos.count / 800));
+
+      for (let i = 0; i < aPos.count; i += stepA) {
+        const ax = aPos.getX(i), ay = aPos.getY(i), az = aPos.getZ(i);
+        for (let j = 0; j < tPos.count; j += stepT) {
+          const tx = tPos.getX(j), ty = tPos.getY(j), tz = tPos.getZ(j);
+          const distSq = (ax-tx)**2 + (ay-ty)**2 + (az-tz)**2;
+          if (distSq < 16.0) { // < 4mm in 3D
+            pairs.push({
+              aU: aUV[i * 2], aV: aUV[i * 2 + 1],
+              tU: tUV[j * 2], tV: tUV[j * 2 + 1]
+            });
+          }
+        }
+      }
+
+      if (pairs.length === 0) return { deltaU: 0, deltaV: 0, pairsCount: 0 };
+
+      const avgAU = pairs.reduce((s, p) => s + p.aU, 0) / pairs.length;
+      const avgAV = pairs.reduce((s, p) => s + p.aV, 0) / pairs.length;
+      const avgTU = pairs.reduce((s, p) => s + p.tU, 0) / pairs.length;
+      const avgTV = pairs.reduce((s, p) => s + p.tV, 0) / pairs.length;
+
+      const seamMarginV = 0.008; // 10mm gap
+
+      return {
+        deltaU: avgAU - avgTU,
+        deltaV: (avgAV - avgTV) + seamMarginV,
+        pairsCount: pairs.length
+      };
+    }
+
+    // Helper: Compute UV Bounding Box
+    function getUVBox(uvArray) {
+      let minU = Infinity, maxU = -Infinity, minV = Infinity, maxV = -Infinity;
+      for (let i = 0; i < uvArray.length; i += 2) {
+        const u = uvArray[i], v = uvArray[i + 1];
+        if (u < minU) minU = u; if (u > maxU) maxU = u;
+        if (v < minV) minV = v; if (v > maxV) maxV = v;
+      }
+      return { minU, maxU, minV, maxV, w: maxU - minU, h: maxV - minV, area: (maxU - minU) * (maxV - minV) };
+    }
+
+    // Helper: Overlap Ratio between 2 boxes
+    function calculateOverlapRatio(b1, b2) {
+      const interMinU = Math.max(b1.minU, b2.minU);
+      const interMaxU = Math.min(b1.maxU, b2.maxU);
+      const interMinV = Math.max(b1.minV, b2.minV);
+      const interMaxV = Math.min(b1.maxV, b2.maxV);
+      if (interMaxU > interMinU && interMaxV > interMinV) {
+        const interArea = (interMaxU - interMinU) * (interMaxV - interMinV);
+        const minArea = Math.min(b1.area, b2.area);
+        return minArea > 0 ? interArea / minArea : 0;
+      }
+      return 0;
+    }
+
+    // 5. Load Garment Sample
+    function loadSample(idx) {
+      currentSampleIndex = idx;
+      isAligned = false;
+      document.getElementById('uv-status').textContent = 'State: Original Arrangement';
+      document.getElementById('uv-status').style.color = '#f59e0b';
+
+      const sample = SAMPLES[idx];
+      document.getElementById('three-info').textContent = `Loading ${sample.name}...`;
+
+      if (currentModel) {
+        scene.remove(currentModel);
+        currentModel.traverse(c => {
+          if (c.geometry) c.geometry.dispose();
+          if (c.material) c.material.dispose();
+        });
+      }
+      if (sliceHelperLine) {
+        scene.remove(sliceHelperLine);
+        sliceHelperLine = null;
+      }
+
+      zoneMeshes = [];
+      const objPath = `/models_storage/${sample.id}/${sample.id}_thin.obj`;
+
+      loader.load(objPath, (obj) => {
+        currentModel = obj;
+        scene.add(obj);
+
+        const bbox = new THREE.Box3().setFromObject(obj);
+        const center = new THREE.Vector3();
+        bbox.getCenter(center);
+        controls.target.copy(center);
+        camera.position.set(center.x, center.y, center.z + 1300);
+
+        // 3D Visual Painted Line at SliceY
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(bbox.min.x - 50, sample.sliceY, center.z + 100),
+          new THREE.Vector3(bbox.max.x + 50, sample.sliceY, center.z + 100)
+        ]);
+        sliceHelperLine = new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: 0xef4444, linewidth: 3 }));
+        scene.add(sliceHelperLine);
+
+        // Collect all panels
+        const allTargetNames = [sample.anchorPanel, ...sample.sideSiblings, ...sample.seamSiblings.map(s => s.name)];
+
+        // Also check if any panel in the model has ≥50% default overlap with the anchor (Double Cloth / Pocket)
+        let anchorMeshChild = null;
+        obj.traverse(child => {
+          if (child.isMesh && child.name === sample.anchorPanel) anchorMeshChild = child;
+        });
+
+        const anchorOrigBox = anchorMeshChild ? getUVBox(anchorMeshChild.geometry.attributes.uv.array) : null;
+        const autoDetectedStacked = [];
+
+        if (anchorOrigBox) {
+          obj.traverse(child => {
+            if (child.isMesh && child.name !== sample.anchorPanel && child.name.startsWith("pattern")) {
+              const b = getUVBox(child.geometry.attributes.uv.array);
+              const overlap = calculateOverlapRatio(anchorOrigBox, b);
+              if (overlap >= 0.5) {
+                autoDetectedStacked.push(child.name);
+                if (!allTargetNames.includes(child.name)) allTargetNames.push(child.name);
+              }
+            }
+          });
+        }
+
+        obj.traverse(child => {
+          if (child.isMesh && child.geometry) {
+            const isAnchor = child.name === sample.anchorPanel;
+            const isSibling = allTargetNames.includes(child.name) && !isAnchor;
+            const isStacked = autoDetectedStacked.includes(child.name);
+
+            // Cache original unaligned UVs
+            if (!child.geometry.userData.origUv) {
+              child.geometry.userData.origUv = new Float32Array(child.geometry.attributes.uv.array);
+            }
+            if (!child.geometry.userData.currentUv) {
+              child.geometry.userData.currentUv = new Float32Array(child.geometry.attributes.uv.array);
+            }
+
+            // 3D Bounding & Center X
+            const pos = child.geometry.attributes.position;
+            let minX = Infinity, maxX = -Infinity;
+            for (let i = 0; i < pos.count; i++) {
+              const x = pos.getX(i);
+              if (x < minX) minX = x; if (x > maxX) maxX = x;
+            }
+
+            const item = {
+              name: child.name,
+              mesh: child,
+              isAnchor,
+              isSibling,
+              isStacked,
+              minX,
+              maxX,
+              centerX3D: (minX + maxX) * 0.5
+            };
+
+            if (isAnchor) {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0x22c55e,
+                roughness: 0.4,
+                metalness: 0.1,
+                side: THREE.DoubleSide
+              });
+              zoneMeshes.push(item);
+            } else if (isStacked) {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0xeab308, // Gold for double-cloth / pocket
+                roughness: 0.4,
+                metalness: 0.1,
+                side: THREE.DoubleSide
+              });
+              zoneMeshes.push(item);
+            } else if (isSibling) {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0x38bdf8,
+                roughness: 0.4,
+                metalness: 0.1,
+                side: THREE.DoubleSide
+              });
+              zoneMeshes.push(item);
+            } else {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0x334155,
+                roughness: 0.8,
+                metalness: 0.05,
+                transparent: true,
+                opacity: 0.25,
+                side: THREE.DoubleSide
+              });
+            }
+          }
+        });
+
+        document.getElementById('three-info').textContent = `Ready: Anchor [${sample.anchorPanel}] + ${zoneMeshes.length - 1} Siblings (${autoDetectedStacked.length} Stacked 🔒)`;
+        drawUVEditor();
+      });
+    }
+
+    // 6. Complete Semi-Auto Alignment: Y-Paint Line + Stacking Retention + X-Deoverlap
+    function autoAlignZone() {
+      if (zoneMeshes.length === 0) return;
+      const sample = SAMPLES[currentSampleIndex];
+      const anchor = zoneMeshes.find(m => m.isAnchor);
+      if (!anchor) return;
+
+      const HORIZONTAL_GAP = 0.015; // 15mm clean spacing gap between sibling islands
+
+      // Step 1: Compute Anchor's Reference Paint Line V
+      const anchorSlicePts = computeSurfacePlaneSlice(anchor.mesh, sample.sliceY);
+      const anchorLineV = anchorSlicePts.length > 0
+        ? (anchorSlicePts.reduce((s, p) => s + p.v, 0) / anchorSlicePts.length)
+        : 0.22;
+      const anchorBox = getUVBox(anchor.mesh.geometry.userData.origUv);
+
+      // Track occupied X intervals relative to the Anchor [minU, maxU]
+      let occupiedLeftU = anchorBox.minU;
+      let occupiedRightU = anchorBox.maxU;
+
+      // Step 2: Process Stacked (Double Cloth / Pocket) panels first (Overlap ≥ 50%)
+      // RULE: KEEP THEM EXACTLY AT ANCHOR's POSITION (DO NOT DE-OVERLAP)
+      zoneMeshes.forEach(item => {
+        if (!item.isStacked) return;
+        const orig = item.mesh.geometry.userData.origUv;
+        const cur = item.mesh.geometry.userData.currentUv;
+        // Keep exactly original stacked coordinates
+        for (let i = 0; i < cur.length; i++) {
+          cur[i] = orig[i];
+        }
+      });
+
+      // Step 3: Align Side Siblings via Y Paint-Line + Non-Overlapping X Margin Spacing
+      // Sort side siblings by 3D X position relative to anchor
+      const sideItems = sample.sideSiblings.map(name => zoneMeshes.find(m => m.name === name)).filter(Boolean);
+
+      sideItems.forEach(item => {
+        if (item.isStacked) return; // Skip stacked panels
+
+        // 3a. Y-Alignment via Paint-Line
+        const sibSlicePts = computeSurfacePlaneSlice(item.mesh, sample.sliceY);
+        let deltaV = 0;
+        if (sibSlicePts.length > 0) {
+          const sibLineV = sibSlicePts.reduce((s, p) => s + p.v, 0) / sibSlicePts.length;
+          deltaV = anchorLineV - sibLineV;
+        }
+
+        // 3b. X-Alignment (De-overlap with clean horizontal margin)
+        const orig = item.mesh.geometry.userData.origUv;
+        const itemBox = getUVBox(orig);
+
+        let deltaU = 0;
+        if (item.centerX3D < anchor.centerX3D) {
+          // Panel is on the LEFT of the anchor in 3D
+          const targetMaxU = occupiedLeftU - HORIZONTAL_GAP;
+          deltaU = targetMaxU - itemBox.maxU;
+          occupiedLeftU = itemBox.minU + deltaU; // update leftmost occupied boundary
+        } else {
+          // Panel is on the RIGHT of the anchor in 3D
+          const targetMinU = occupiedRightU + HORIZONTAL_GAP;
+          deltaU = targetMinU - itemBox.minU;
+          occupiedRightU = itemBox.maxU + deltaU; // update rightmost occupied boundary
+        }
+
+        const cur = item.mesh.geometry.userData.currentUv;
+        for (let i = 0; i < cur.length; i += 2) {
+          cur[i] = orig[i] + deltaU;
+          cur[i + 1] = orig[i + 1] + deltaV;
+        }
+      });
+
+      // Step 4: Align Seam Siblings (Collar / Straps) via 3D Seam Contact Math
+      sample.seamSiblings.forEach(entry => {
+        const item = zoneMeshes.find(m => m.name === entry.name);
+        if (!item) return;
+
+        const seam = computeSeamContactDelta(anchor.mesh, item.mesh);
+        if (seam.pairsCount > 0) {
+          const orig = item.mesh.geometry.userData.origUv;
+          const cur = item.mesh.geometry.userData.currentUv;
+          for (let i = 0; i < cur.length; i += 2) {
+            cur[i] = orig[i] + seam.deltaU;
+            cur[i + 1] = orig[i + 1] + seam.deltaV;
+          }
+        }
+      });
+
+      isAligned = true;
+      document.getElementById('uv-status').textContent = 'State: ⚡ Aligned (Y-Paint Leveled + ≥50% Stacking Preserved + X-Spaced)';
+      document.getElementById('uv-status').style.color = '#38bdf8';
+      drawUVEditor();
+    }
+
+    function resetArrangement() {
+      zoneMeshes.forEach(item => {
+        const orig = item.mesh.geometry.userData.origUv;
+        const cur = item.mesh.geometry.userData.currentUv;
+        for (let i = 0; i < orig.length; i++) {
+          cur[i] = orig[i];
+        }
+      });
+      isAligned = false;
+      document.getElementById('uv-status').textContent = 'State: Original Arrangement';
+      document.getElementById('uv-status').style.color = '#f59e0b';
+      drawUVEditor();
+    }
+
+    // 7. Render 2D UV Layout Canvas
+    function drawUVEditor() {
+      const parent = document.getElementById('uv-container');
+      const rect = parent.getBoundingClientRect();
+      const size = Math.min(rect.width, rect.height) - 20;
+
+      uvCanvas.width = size * window.devicePixelRatio;
+      uvCanvas.height = size * window.devicePixelRatio;
+      uvCanvas.style.width = size + 'px';
+      uvCanvas.style.height = size + 'px';
+      uvCanvas.style.margin = `${(rect.height - size) / 2}px ${(rect.width - size) / 2}px`;
+
+      uvCtx.save();
+      uvCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      uvCtx.fillStyle = '#050811';
+      uvCtx.fillRect(0, 0, size, size);
+
+      // Grid
+      uvCtx.strokeStyle = '#1e293b';
+      uvCtx.lineWidth = 1;
+      const divs = 10;
+      for (let i = 0; i <= divs; i++) {
+        const p = (i / divs) * size;
+        uvCtx.beginPath();
+        uvCtx.moveTo(p, 0); uvCtx.lineTo(p, size);
+        uvCtx.stroke();
+        uvCtx.beginPath();
+        uvCtx.moveTo(0, p); uvCtx.lineTo(size, p);
+        uvCtx.stroke();
+      }
+
+      // [0, 1] Zone boundary
+      uvCtx.strokeStyle = '#f59e0b';
+      uvCtx.lineWidth = 2;
+      uvCtx.strokeRect(0, 0, size, size);
+
+      const sample = SAMPLES[currentSampleIndex];
+      const anchor = zoneMeshes.find(m => m.isAnchor);
+      let anchorLineV = null;
+      if (anchor) {
+        const pts = computeSurfacePlaneSlice(anchor.mesh, sample.sliceY);
+        if (pts.length > 0) anchorLineV = pts.reduce((s, p) => s + p.v, 0) / pts.length;
+      }
+
+      // Draw Panels
+      zoneMeshes.forEach(item => {
+        const uvArr = item.mesh.geometry.userData.currentUv;
+        if (!uvArr) return;
+
+        let fillColor = 'rgba(56, 189, 248, 0.25)';
+        let strokeColor = '#38bdf8';
+        if (item.isAnchor) {
+          fillColor = 'rgba(34, 197, 94, 0.25)';
+          strokeColor = '#22c55e';
+        } else if (item.isStacked) {
+          fillColor = 'rgba(234, 179, 8, 0.25)';
+          strokeColor = '#eab308';
+        }
+
+        uvCtx.fillStyle = fillColor;
+        uvCtx.strokeStyle = strokeColor;
+        uvCtx.lineWidth = item.isAnchor ? 2 : 1.5;
+
+        const triCount = uvArr.length / 6;
+        for (let t = 0; t < triCount; t++) {
+          const u1 = uvArr[t * 6] * size, v1 = (1.0 - uvArr[t * 6 + 1]) * size;
+          const u2 = uvArr[t * 6 + 2] * size, v2 = (1.0 - uvArr[t * 6 + 3]) * size;
+          const u3 = uvArr[t * 6 + 4] * size, v3 = (1.0 - uvArr[t * 6 + 5]) * size;
+
+          uvCtx.beginPath();
+          uvCtx.moveTo(u1, v1);
+          uvCtx.lineTo(u2, v2);
+          uvCtx.lineTo(u3, v3);
+          uvCtx.closePath();
+          uvCtx.fill();
+          if (t % 5 === 0) uvCtx.stroke();
+        }
+
+        // Panel Label
+        let minU = Infinity, maxU = -Infinity, minV = Infinity, maxV = -Infinity;
+        for (let i = 0; i < uvArr.length; i += 2) {
+          const u = uvArr[i], v = uvArr[i + 1];
+          if (u < minU) minU = u; if (u > maxU) maxU = u;
+          if (v < minV) minV = v; if (v > maxV) maxV = v;
+        }
+        const cX = ((minU + maxU) * 0.5) * size;
+        const cY = (1.0 - ((minV + maxV) * 0.5)) * size;
+
+        uvCtx.fillStyle = '#f8fafc';
+        uvCtx.font = '10px monospace';
+        let label = item.name;
+        if (item.isAnchor) label += ' [ANCHOR 🔒]';
+        else if (item.isStacked) label += ' [STACKED 🥞]';
+        uvCtx.fillText(label, cX - 35, cY);
+      });
+
+      // Draw Painted Reference Line Across UV Space
+      if (anchorLineV !== null) {
+        const lineY = (1.0 - anchorLineV) * size;
+        uvCtx.strokeStyle = '#ef4444';
+        uvCtx.lineWidth = 2;
+        uvCtx.setLineDash([6, 4]);
+        uvCtx.beginPath();
+        uvCtx.moveTo(0, lineY);
+        uvCtx.lineTo(size, lineY);
+        uvCtx.stroke();
+        uvCtx.setLineDash([]);
+
+        uvCtx.fillStyle = '#ef4444';
+        uvCtx.font = '11px sans-serif';
+        uvCtx.fillText(`Painted Reference Line V = ${anchorLineV.toFixed(3)} (Chest Y = ${sample.sliceY}mm)`, 10, lineY - 6);
+      }
+
+      uvCtx.restore();
+    }
+
+    // Controls
+    document.getElementById('sample-select').onchange = (e) => loadSample(parseInt(e.target.value));
+    document.getElementById('btn-align').onclick = () => autoAlignZone();
+    document.getElementById('btn-reset').onclick = () => resetArrangement();
+
+    loadSample(0);
+  </script>
+</body>
+</html>

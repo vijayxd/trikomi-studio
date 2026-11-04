@@ -1280,3 +1280,14 @@
     transform: translateY(-1px);
     box-shadow: 0 0 32px rgba(37, 99, 235, 0.95);
   }
+
+  /* 2D UV Editor Marquee Box Selection */
+  .uv-marquee-box {
+    position: absolute;
+    pointer-events: none;
+    border: 1px solid var(--neon-cyan);
+    background: rgba(20, 217, 255, 0.12);
+    box-shadow: 0 0 10px rgba(20, 217, 255, 0.35), inset 0 0 8px rgba(20, 217, 255, 0.15);
+    border-radius: 2px;
+    z-index: 50;
+  }

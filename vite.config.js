@@ -263,6 +263,9 @@ export default defineConfig({
   server: {
     fs: {
       allow: ['..']
+    },
+    watch: {
+      ignored: ['**/models_storage/**', '**/public/models_storage/**']
     }
   },
   assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.hdr', '**/*.exr', '**/*.obj'],

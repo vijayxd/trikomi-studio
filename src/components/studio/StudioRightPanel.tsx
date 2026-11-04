@@ -77,6 +77,14 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
             Arrange
           </button>
           <button
+            className="btn-uv-sub-tab"
+            style={{ color: "#38bdf8", borderColor: "rgba(56, 189, 248, 0.4)" }}
+            onClick={() => uvOrganizerStore.autoAlignZonePanels(undefined, targetIds.length > 1 ? targetIds : undefined)}
+            title="Auto-Align Multi-Panels in Selected Zone or Multi-Selection (Y Paint-Line Leveling & X De-overlap)"
+          >
+            Auto Align
+          </button>
+          <button
             className="control-toggle-btn"
             style={{ width: "24px", height: "24px" }}
             onClick={() => uvOrganizerStore.focusSelectedIsland()}
@@ -118,7 +126,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
         <aside className="uv-inspector-panel" style={{ minWidth: 0, height: "100%", overflowY: "auto" }}>
           {/* Card 1: Essential Layout & Pipeline Tools */}
           <StudioCard title="UV Tools" flex="0 0 auto">
-            <div className="uv-actions-tile-grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+            <div className="uv-actions-tile-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
               <div
                 className="tile-action-item"
                 onClick={() => uvOrganizerStore.arrangeAssignedUVs()}
@@ -135,6 +143,22 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
 
               <div
                 className="tile-action-item"
+                onClick={() => uvOrganizerStore.autoAlignZonePanels(undefined, targetIds.length > 1 ? targetIds : undefined)}
+                style={{ cursor: "pointer" }}
+                title="Auto-align multi-piece panels in selected zone or selection (Y-Paint Line leveling + ≥50% Stacking retention + X-Margin spacing)"
+              >
+                <div className="tile-icon-square" style={{ color: "#38bdf8" }}>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="18" x2="20" y2="18" />
+                  </svg>
+                </div>
+                <span>Auto Align</span>
+              </div>
+
+              <div
+                className="tile-action-item"
                 onClick={() => uvOrganizerStore.equalizeTexelDensity()}
                 style={{ cursor: "pointer" }}
                 title="Scale islands uniformly so fabric texture pixel density is 100% equal across all garment panels"
@@ -144,7 +168,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                     <path d="M3 6h18M7 12h10M10 18h4" />
                   </svg>
                 </div>
-                <span>Equalize Density</span>
+                <span>Equalize</span>
               </div>
             </div>
 
