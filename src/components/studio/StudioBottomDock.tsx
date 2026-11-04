@@ -24,50 +24,17 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const curTriangles = modelStore.modelMeta.triangles || 0;
   const originalTris = modelStore.pieces.reduce((sum, p) => sum + (p.originalTriangles || p.triangles), 0) || curTriangles;
 
-  // Real Fabric Preset Swatches mapped to PBR colors & styles
-  const fabricPresets = [
-    { id: "mat-blue", label: "Jersey Blue", className: "orb-mat-blue", color: "#2563eb", metal: 0.1, rough: 0.7 },
-    { id: "mat-black", label: "Jersey Black", className: "orb-mat-black", color: "#1e293b", metal: 0.05, rough: 0.8 },
-    { id: "mat-white", label: "Mesh White", className: "orb-mat-white", color: "#f8fafc", metal: 0.0, rough: 0.9 },
-    { id: "mat-metal", label: "Metallic", className: "orb-mat-metal", color: "#94a3b8", metal: 0.85, rough: 0.25 },
-    { id: "mat-neon", label: "Fabric Neon", className: "orb-mat-neon", color: "#10b981", metal: 0.2, rough: 0.5 },
-    { id: "mat-pattern", label: "Pattern", className: "orb-mat-pattern", color: "#8b5cf6", metal: 0.1, rough: 0.6 }
-  ];
+  // Extract unique categories from curated materials
+  const materialCategories = ["All", ...Array.from(new Set(modelStore.curatedMaterialsList.map(m => m.category || "Other")))];
 
-  const handleApplyPreset = (index: number) => {
-    setSelectedOrbIndex(index);
-    const preset = fabricPresets[index];
-    if (preset) {
-      if (modelStore.selectedPiece && modelStore.selectedPiece.material) {
-        // Guarantee isolated cloned material instance per Trikomi Rule #5
-        if (!(modelStore.selectedPiece.material.userData && modelStore.selectedPiece.material.userData.isClonedInstance)) {
-          modelStore.selectedPiece.material = modelStore.selectedPiece.material.clone();
-          modelStore.selectedPiece.material.userData = { isClonedInstance: true };
-          if (modelStore.selectedPiece.mesh) {
-            modelStore.selectedPiece.mesh.material = modelStore.selectedPiece.material;
-          }
-        }
-        modelStore.selectedPiece.material.color.set(preset.color);
-        modelStore.selectedPiece.material.metalness = preset.metal;
-        modelStore.selectedPiece.material.roughness = preset.rough;
-        modelStore.selectedPiece.material.needsUpdate = true;
-      } else if (modelStore.currentModel) {
-        // Apply to all pieces with individual cloned materials
-        modelStore.pieces.forEach(p => {
-          if (p.mesh && p.material) {
-            if (!(p.material.userData && p.material.userData.isClonedInstance)) {
-              p.material = p.material.clone();
-              p.material.userData = { isClonedInstance: true };
-              p.mesh.material = p.material;
-            }
-            p.material.color.set(preset.color);
-            p.material.metalness = preset.metal;
-            p.material.roughness = preset.rough;
-            p.material.needsUpdate = true;
-          }
-        });
-      }
-    }
+  // Filter curated materials
+  const displayMaterials = modelStore.curatedMaterialsList.filter(m => {
+    if (activeMaterialFilter === "All") return true;
+    return m.category === activeMaterialFilter;
+  });
+
+  const handleApplyCurated = (mat: any) => {
+    modelStore.switchCuratedMaterial(mat.id);
   };
 
   return (
@@ -107,30 +74,87 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
         </div>
 
         <div className="dock-card-content material-palette-body">
-          <div className="filter-pills-row">
-            {["All", "Fabric", "Sports", "Custom", "+"].map((pill) => (
+          <div className="filter-pills-row" style={{ overflowX: "auto", flexWrap: "nowrap", paddingBottom: "2px" }}>
+            {materialCategories.map((cat) => (
               <span
-                key={pill}
-                className={`chip-pill-filter ${activeMaterialFilter === pill ? "active" : ""}`}
-                onClick={() => setActiveMaterialFilter(pill)}
+                key={cat}
+                className={`chip-pill-filter ${activeMaterialFilter === cat ? "active" : ""}`}
+                onClick={() => setActiveMaterialFilter(cat)}
+                style={{ whiteSpace: "nowrap", cursor: "pointer" }}
               >
-                {pill}
+                {cat}
               </span>
             ))}
           </div>
 
-          <div className="swatches-flex-cluster">
-            {fabricPresets.map((preset, idx) => (
-              <div
-                key={preset.id}
-                className={`swatch-orb-item ${selectedOrbIndex === idx ? "active" : ""}`}
-                onClick={() => handleApplyPreset(idx)}
-                title={`Apply ${preset.label} to selected piece`}
-              >
-                <div className={`pbr-sphere-mesh ${preset.className}`} />
-                <span>{preset.label}</span>
-              </div>
-            ))}
+          {/* 3D Sphere Swatches Flex Cluster with Horizontal Scrolling */}
+          <div
+            className="swatches-flex-cluster"
+            style={{
+              overflowX: "auto",
+              flexWrap: "nowrap",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              gap: "4px",
+              padding: "4px 2px"
+            }}
+          >
+            {displayMaterials.map((mat) => {
+              const isSelected = modelStore.selectedMaterialId === mat.id;
+              const sphereThumb = mat.sphereThumbnailUrl || mat.thumbnailUrl;
+              return (
+                <div
+                  key={mat.id}
+                  className={`swatch-orb-item ${isSelected ? "active" : ""}`}
+                  onClick={() => handleApplyCurated(mat)}
+                  title={`${mat.name} (${mat.category}) - Click to apply to garment`}
+                  style={{ minWidth: "40px", cursor: "pointer", flexShrink: 0 }}
+                >
+                  <div
+                    style={{
+                      width: "clamp(30px, 4.5vh, 38px)",
+                      height: "clamp(30px, 4.5vh, 38px)",
+                      borderRadius: "50%",
+                      position: "relative",
+                      background: "radial-gradient(circle at 35% 28%, rgba(255,255,255,0.1), rgba(0,0,0,0.6) 80%)",
+                      border: isSelected ? "2px solid var(--neon-cyan)" : "1.5px solid rgba(255, 255, 255, 0.15)",
+                      boxShadow: isSelected ? "0 0 14px rgba(20, 217, 255, 0.85)" : "inset -2px -4px 6px rgba(0,0,0,0.8)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      overflow: "hidden",
+                      transition: "all 0.15s ease"
+                    }}
+                  >
+                    <img
+                      src={sphereThumb}
+                      alt={mat.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        transform: "scale(1.05)"
+                      }}
+                    />
+                  </div>
+                  <span
+                    style={{
+                      fontSize: "7.5px",
+                      color: isSelected ? "var(--neon-cyan)" : "#cbd5e1",
+                      maxWidth: "40px",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      textAlign: "center",
+                      marginTop: "2px",
+                      fontWeight: isSelected ? "700" : "500"
+                    }}
+                  >
+                    {mat.name}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

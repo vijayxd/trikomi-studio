@@ -1083,9 +1083,9 @@
 
   .swatches-flex-cluster {
     display: flex;
-    gap: 6px;
+    gap: 4px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .swatch-orb-item {

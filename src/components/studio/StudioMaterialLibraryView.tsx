@@ -110,13 +110,14 @@ export const StudioMaterialLibraryView: React.FC = observer(() => {
                 }}
               >
                 <img
-                  src={mat.thumbnailUrl}
+                  src={(mat as any).sphereThumbnailUrl || mat.thumbnailUrl}
                   alt={mat.name}
                   style={{
-                    width: "32px",
-                    height: "32px",
+                    width: "36px",
+                    height: "36px",
                     borderRadius: "4px",
-                    objectFit: "cover",
+                    objectFit: "contain",
+                    background: "rgba(0,0,0,0.4)",
                     border: isSelected ? "1px solid var(--neon-cyan)" : "1px solid rgba(255, 255, 255, 0.1)"
                   }}
                 />

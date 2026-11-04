@@ -276,6 +276,66 @@ function style3dBridgePlugin() {
           return;
         }
 
+        // Save Sphere Thumbnail Image (300x300 transparent PNG)
+        if (req.url === '/api/save-sphere-thumb' && req.method === 'POST') {
+          let body = '';
+          req.on('data', chunk => { body += chunk; });
+          req.on('end', () => {
+            try {
+              const { id, index, name, dataUrl } = JSON.parse(body);
+              if (!dataUrl || !id) throw new Error('Missing dataUrl or id');
+
+              const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '');
+              const buffer = Buffer.from(base64Data, 'base64');
+              const thumbDir = path.resolve(__dirname, 'public/fabric_library/sphere_thumbnails');
+              if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
+
+              const prefix = String(index || 0).padStart(2, '0');
+              const cleanName = (name || id).replace(/[^a-zA-Z0-9_-]/g, '_');
+              const fileName = `${prefix}_${cleanName}_sphere.png`;
+              const filePath = path.join(thumbDir, fileName);
+
+              fs.writeFileSync(filePath, buffer);
+
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 200;
+              res.end(JSON.stringify({
+                status: 'ok',
+                fileName,
+                url: `/fabric_library/sphere_thumbnails/${fileName}`
+              }));
+              console.log(`[Thumb API] 📸 Saved sphere thumbnail: ${fileName}`);
+            } catch (err) {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: err.message }));
+            }
+          });
+          return;
+        }
+
+        // Update curated_materials.json
+        if (req.url === '/api/update-curated-catalog' && req.method === 'POST') {
+          let body = '';
+          req.on('data', chunk => { body += chunk; });
+          req.on('end', () => {
+            try {
+              const data = JSON.parse(body);
+              const targetPath = path.resolve(__dirname, 'public/fabric_library/curated_materials.json');
+              fs.writeFileSync(targetPath, JSON.stringify(data, null, 2), 'utf8');
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 200;
+              res.end(JSON.stringify({ status: 'ok', count: data.length }));
+              console.log(`[Catalog API] 💾 Updated curated_materials.json with sphere thumbnail URLs.`);
+            } catch (err) {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: err.message }));
+            }
+          });
+          return;
+        }
+
         if (req.url === '/api/transfer' && req.method === 'GET') {
           res.setHeader('Content-Type', 'application/json');
           res.statusCode = 200;

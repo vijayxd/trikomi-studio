@@ -265,6 +265,71 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                         </span>
                       )}
                     </div>
+
+                    {/* 3D Sphere Swatch Grid (Visual Selection) */}
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(5, 1fr)",
+                        gap: "4px",
+                        maxHeight: "135px",
+                        overflowY: "auto",
+                        background: "rgba(0, 0, 0, 0.35)",
+                        padding: "5px",
+                        borderRadius: "5px",
+                        border: "1px solid rgba(255, 255, 255, 0.08)"
+                      }}
+                    >
+                      {modelStore.curatedMaterialsList.map(m => {
+                        const isSelected = modelStore.selectedMaterialId === m.id;
+                        const thumbSrc = m.sphereThumbnailUrl || m.thumbnailUrl;
+                        return (
+                          <div
+                            key={m.id}
+                            onClick={() => modelStore.switchCuratedMaterial(m.id)}
+                            title={`${m.name} (${m.category})`}
+                            style={{
+                              position: "relative",
+                              cursor: "pointer",
+                              borderRadius: "4px",
+                              padding: "2px",
+                              background: isSelected ? "rgba(56, 189, 248, 0.25)" : "rgba(255, 255, 255, 0.03)",
+                              border: isSelected ? "1.5px solid var(--neon-cyan)" : "1px solid rgba(255, 255, 255, 0.08)",
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              transition: "all 0.15s ease"
+                            }}
+                          >
+                            <img
+                              src={thumbSrc}
+                              alt={m.name}
+                              style={{
+                                width: "100%",
+                                aspectRatio: "1 / 1",
+                                objectFit: "contain",
+                                borderRadius: "3px"
+                              }}
+                            />
+                            <span
+                              style={{
+                                fontSize: "7.5px",
+                                color: isSelected ? "var(--neon-cyan)" : "var(--text-muted)",
+                                width: "100%",
+                                textAlign: "center",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                                marginTop: "1px",
+                                fontWeight: isSelected ? "600" : "normal"
+                              }}
+                            >
+                              {m.name}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                     
                     {/* Material Dropdown with Category and Name */}
                     <select
@@ -275,8 +340,8 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                         color: "var(--text-primary)",
                         border: "1px solid rgba(56, 189, 248, 0.3)",
                         borderRadius: "4px",
-                        padding: "4px 6px",
-                        fontSize: "9.5px",
+                        padding: "3px 6px",
+                        fontSize: "9px",
                         outline: "none",
                         cursor: "pointer"
                       }}
@@ -294,6 +359,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                     const activeMat = modelStore.curatedMaterialsList.find(m => m.id === modelStore.selectedMaterialId);
                     if (!activeMat) return null;
                     const availableMaps = activeMat.maps ? Object.keys(activeMat.maps) : [];
+                    const activeThumb = activeMat.sphereThumbnailUrl || activeMat.thumbnailUrl;
                     return (
                       <div
                         style={{
@@ -308,13 +374,14 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                           <img
-                            src={activeMat.thumbnailUrl}
+                            src={activeThumb}
                             alt={activeMat.name}
                             style={{
-                              width: "36px",
-                              height: "36px",
-                              borderRadius: "3px",
-                              objectFit: "cover",
+                              width: "42px",
+                              height: "42px",
+                              borderRadius: "4px",
+                              objectFit: "contain",
+                              background: "rgba(0,0,0,0.4)",
                               border: "1px solid rgba(56, 189, 248, 0.4)"
                             }}
                           />
