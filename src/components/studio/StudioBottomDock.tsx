@@ -106,9 +106,15 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                 <div
                   key={mat.id}
                   className={`swatch-orb-item ${isSelected ? "active" : ""}`}
+                  draggable={true}
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData("application/json", JSON.stringify(mat));
+                    e.dataTransfer.setData("text/plain", JSON.stringify(mat));
+                    e.dataTransfer.effectAllowed = "copy";
+                  }}
                   onClick={() => handleApplyCurated(mat)}
-                  title={`${mat.name} (${mat.category}) - Click to apply to garment`}
-                  style={{ minWidth: "40px", cursor: "pointer", flexShrink: 0 }}
+                  title={`${mat.name} (${mat.category}) - Drag onto garment panel or click to apply`}
+                  style={{ minWidth: "40px", cursor: "grab", flexShrink: 0 }}
                 >
                   <div
                     style={{

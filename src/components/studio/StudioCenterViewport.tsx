@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { modelStore, uvOrganizerStore, studioViewerManager } from "@trikomi/core/studio";
 
@@ -12,6 +12,8 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
   isMaximized = false
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [draggedMeshName, setDraggedMeshName] = useState<string | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -39,6 +41,56 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
       studioViewerManager.dispose();
     };
   }, []);
+
+  // Drag & Drop Handlers on 3D Viewport Stage
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+    if (!isDragOver) setIsDragOver(true);
+
+    const hitMesh = modelStore.getMeshAtScreenCoords(e.clientX, e.clientY);
+    if (hitMesh) {
+      const piece = modelStore.pieces.find(p => p.mesh === hitMesh);
+      const name = piece?.name || hitMesh.name || "Mesh Panel";
+      if (name !== draggedMeshName) setDraggedMeshName(name);
+      modelStore.setHoveredPieceId(piece ? piece.id : null);
+    } else {
+      if (draggedMeshName) setDraggedMeshName(null);
+      modelStore.setHoveredPieceId(null);
+    }
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    setDraggedMeshName(null);
+    modelStore.setHoveredPieceId(null);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    setDraggedMeshName(null);
+    modelStore.setHoveredPieceId(null);
+
+    const materialDataRaw = e.dataTransfer.getData("application/json") || e.dataTransfer.getData("text/plain");
+    if (!materialDataRaw) return;
+
+    try {
+      const materialData = JSON.parse(materialDataRaw);
+      const hitMesh = modelStore.getMeshAtScreenCoords(e.clientX, e.clientY);
+
+      if (hitMesh) {
+        // Drop on specific mesh piece
+        modelStore.applyCuratedMaterialToPiece(hitMesh, materialData);
+      } else {
+        // Drop on background: apply across entire garment
+        modelStore.applyCuratedMaterial(materialData);
+      }
+    } catch (err) {
+      console.warn("Could not parse dropped material payload:", err);
+    }
+  };
 
   return (
     <section className="panel-viewport-center cyber-chassis">
@@ -87,7 +139,50 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
       </div>
 
       {/* 3D WebGL / WebGPU Canvas Stage */}
-      <div className="viewport-3d-stage" style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+      <div
+        className="viewport-3d-stage"
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          border: isDragOver ? "2px dashed var(--neon-cyan)" : "none",
+          transition: "border 0.15s ease"
+        }}
+      >
+        {/* Drag Overlay Hint */}
+        {isDragOver && (
+          <div
+            style={{
+              position: "absolute",
+              top: "12px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              background: "rgba(11, 15, 23, 0.9)",
+              border: "1px solid var(--neon-cyan)",
+              boxShadow: "0 0 15px rgba(20, 217, 255, 0.4)",
+              borderRadius: "6px",
+              padding: "6px 14px",
+              fontSize: "11px",
+              fontWeight: "600",
+              color: "#fff",
+              zIndex: 20,
+              pointerEvents: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px"
+            }}
+          >
+            <span style={{ color: "var(--neon-cyan)" }}>✨</span>
+            <span>
+              {draggedMeshName ? `Drop to apply on panel: "${draggedMeshName}"` : "Drop to apply across garment"}
+            </span>
+          </div>
+        )}
+
         {/* Ambient Pedestal Ring */}
         <div className="stage-pedestal-disk" style={{ pointerEvents: "none" }} />
 

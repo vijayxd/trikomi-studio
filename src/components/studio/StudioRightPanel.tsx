@@ -286,11 +286,17 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
                         return (
                           <div
                             key={m.id}
+                            draggable={true}
+                            onDragStart={(e) => {
+                              e.dataTransfer.setData("application/json", JSON.stringify(m));
+                              e.dataTransfer.setData("text/plain", JSON.stringify(m));
+                              e.dataTransfer.effectAllowed = "copy";
+                            }}
                             onClick={() => modelStore.switchCuratedMaterial(m.id)}
-                            title={`${m.name} (${m.category})`}
+                            title={`${m.name} (${m.category}) - Drag onto any garment mesh panel or click to apply`}
                             style={{
                               position: "relative",
-                              cursor: "pointer",
+                              cursor: "grab",
                               borderRadius: "4px",
                               padding: "2px",
                               background: isSelected ? "rgba(56, 189, 248, 0.25)" : "rgba(255, 255, 255, 0.03)",
