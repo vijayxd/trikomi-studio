@@ -163,12 +163,17 @@ export const UVCanvasView = observer(() => {
       const assignedCount = modelStore.pieces.filter(p => p.assignedZoneId === zone.id).length;
       const isEmpty = assignedCount === 0;
 
+      // If user chose "Identified Zones Only", hide empty zones completely
+      if (isEmpty && uvOrganizerStore.zoneDisplayMode === "identified") {
+        return;
+      }
+
       const planeGeom = new THREE.PlaneGeometry(zW, zH);
       const colorVal = new THREE.Color(zone.color);
       const planeMat = new THREE.MeshBasicMaterial({
-        color: isEmpty ? 0xffffff : colorVal,
+        color: colorVal,
         transparent: true,
-        opacity: isEmpty ? 0.02 : 0.08,
+        opacity: isEmpty ? 0.04 : 0.09,
         depthWrite: false
       });
       const planeMesh = new THREE.Mesh(planeGeom, planeMat);
@@ -177,9 +182,9 @@ export const UVCanvasView = observer(() => {
 
       const edges = new THREE.EdgesGeometry(planeGeom);
       const edgeMat = new THREE.LineBasicMaterial({
-        color: isEmpty ? 0x475569 : colorVal,
+        color: colorVal,
         transparent: true,
-        opacity: isEmpty ? 0.25 : 0.85,
+        opacity: isEmpty ? 0.45 : 0.85,
         linewidth: 1.5
       });
       const edgeLines = new THREE.LineSegments(edges, edgeMat);
@@ -207,6 +212,11 @@ export const UVCanvasView = observer(() => {
 
     if (modelStore.currentModel) {
       modelStore.pieces.forEach((piece) => {
+        // Skip explicitly hidden pieces
+        if (piece.visible === false) {
+          return;
+        }
+
         const mesh = piece.mesh;
         if (!mesh || !mesh.geometry) return;
         const geom = mesh.geometry;
@@ -588,11 +598,14 @@ export const UVCanvasView = observer(() => {
     rebuildUVMeshes();
     updateGizmoMesh();
   }, [
-    uvOrganizerStore.zones,
-    uvOrganizerStore.layoutVersion,
+    modelStore.currentModel,
     modelStore.pieces.length,
+    modelStore.visibilityVersion,
     modelStore.selectedPiece?.id,
     modelStore.selectedPieceIds.slice(),
+    uvOrganizerStore.zones,
+    uvOrganizerStore.layoutVersion,
+    uvOrganizerStore.zoneDisplayMode,
     updateZonesOverlay,
     rebuildUVMeshes,
     updateGizmoMesh

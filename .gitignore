@@ -15,8 +15,11 @@ dist-ssr
 last_transfer_debug.json
 *.backup
 
+
+
 # Heavy / Proprietary Assets & Databases (Preserved locally, excluded from git)
 public/fabric_library
+curated_t3d_export/
 public/thumbnails
 public/models
 public/models_storage

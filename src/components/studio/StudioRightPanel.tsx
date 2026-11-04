@@ -58,6 +58,16 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
               Bottomwear
             </button>
           </div>
+
+          {/* Zones Visibility Mode Toggle: All Canonical Zones vs Only Identified/Active Zones */}
+          <button
+            className={`btn-uv-sub-tab ${uvOrganizerStore.zoneDisplayMode === "all" ? "active" : ""}`}
+            style={{ marginLeft: "6px", fontSize: "10px", padding: "2px 8px" }}
+            onClick={() => uvOrganizerStore.toggleZoneDisplayMode()}
+            title={uvOrganizerStore.zoneDisplayMode === "all" ? "Displaying All Canonical Zones (Click to show Identified Zones only)" : "Displaying Identified Panel Zones only (Click to show All Zones)"}
+          >
+            {uvOrganizerStore.zoneDisplayMode === "all" ? "All Zones" : "Identified Only"}
+          </button>
         </div>
 
         {/* Right Topbar Actions: Auto Pack, Auto Detect, Focus Island, Reset Viewport & Fullscreen Viewport */}
@@ -71,8 +81,11 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
           </button>
           <button
             className="btn-uv-sub-tab"
-            onClick={() => uvOrganizerStore.autoDetectPatternAssignments(true)}
-            title="Auto-Detect Layout"
+            onClick={() => {
+              uvOrganizerStore.autoDetectPatternAssignments(true);
+              uvOrganizerStore.arrangeAssignedUVs();
+            }}
+            title="Auto-Detect Layout & Arrange into Canonical Zones"
           >
             Arrange
           </button>
@@ -182,6 +195,58 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({ col
               >
                 Export Blueprint (2K)
               </button>
+            </div>
+          </StudioCard>
+
+          {/* Card: Universal Fabric Normal Map Audit */}
+          <StudioCard title="Fabric Normal Audit" flex="0 0 auto">
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontSize: "10px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span style={{ color: "var(--text-secondary)", fontWeight: "500" }}>Jersey Normal:</span>
+                <button
+                  className="btn-uv-sub-tab"
+                  style={{
+                    padding: "2px 8px",
+                    background: modelStore.universalFabricNormalEnabled ? "rgba(56, 189, 248, 0.2)" : "rgba(255, 255, 255, 0.05)",
+                    color: modelStore.universalFabricNormalEnabled ? "var(--neon-cyan)" : "var(--text-muted)",
+                    borderColor: modelStore.universalFabricNormalEnabled ? "var(--neon-cyan)" : "transparent"
+                  }}
+                  onClick={() => {
+                    modelStore.universalFabricNormalEnabled = !modelStore.universalFabricNormalEnabled;
+                    if (modelStore.universalFabricNormalEnabled) {
+                      modelStore.applyUniversalFabricNormal();
+                    } else {
+                      // Revert to original normal map
+                      modelStore.pieces.forEach(p => {
+                        if (p.material && p.material.userData.originalNormalMap !== undefined) {
+                          p.material.normalMap = p.material.userData.originalNormalMap;
+                          p.material.needsUpdate = true;
+                        }
+                      });
+                    }
+                  }}
+                >
+                  {modelStore.universalFabricNormalEnabled ? "Enabled" : "Disabled"}
+                </button>
+              </div>
+
+              {modelStore.universalFabricNormalEnabled && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-muted)", fontSize: "9px" }}>
+                    <span>Tiling Repeat (Trims excluded)</span>
+                    <span style={{ color: "var(--neon-cyan)", fontWeight: "600" }}>{modelStore.universalNormalRepeat}x</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="80"
+                    step="1"
+                    value={modelStore.universalNormalRepeat}
+                    onChange={(e) => modelStore.setUniversalNormalRepeat(parseFloat(e.target.value))}
+                    style={{ width: "100%", accentColor: "var(--neon-cyan)", cursor: "pointer" }}
+                  />
+                </div>
+              )}
             </div>
           </StudioCard>
 

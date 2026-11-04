@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trikomi Studio - OBJ vs T3D Side-by-Side Visual Comparator</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/node_modules/three/build/three.module.js",
+        "three/addons/": "/node_modules/three/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0b0f19;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      padding: 10px 20px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #00f0ff;
+      letter-spacing: 0.05em;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    label { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+    input[type="range"] { accent-color: #00f0ff; width: 90px; }
+    .val-badge {
+      font-family: monospace;
+      color: #38bdf8;
+      background: #1e293b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .viewports-container {
+      display: flex;
+      flex: 1;
+      position: relative;
+    }
+    .viewport-box {
+      flex: 1;
+      position: relative;
+      border-right: 1px solid #1e293b;
+      overflow: hidden;
+    }
+    .viewport-box:last-child {
+      border-right: none;
+    }
+    .viewport-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .viewport-tag {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .viewport-tag.obj { border-color: #f59e0b; color: #fbbf24; }
+    .viewport-tag.t3d { border-color: #00f0ff; color: #00f0ff; }
+    .status-overlay {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid #334155;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: monospace;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>TRIKOMI 3D INSPECTOR</h1>
+      <span style="font-size: 11px; color: #64748b;">|</span>
+      <span style="font-size: 12px; color: #cbd5e1; font-weight: 600;">01jmm9pxnf0mysaf3yrpfabktn (Grey V-neck shock proof sports bra)</span>
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>Texture Tiling (Repeat):</label>
+        <input type="range" id="texRepeatSlider" min="1" max="100" step="1" value="1">
+        <span class="val-badge" id="texRepeatVal">1x</span>
+      </div>
+
+      <div class="control-group">
+        <label>Normal Scale:</label>
+        <input type="range" id="normalScaleSlider" min="0" max="3" step="0.05" value="1.0">
+        <span class="val-badge" id="normalScaleVal">1.0</span>
+      </div>
+
+      <div class="control-group">
+        <label>Light Intensity:</label>
+        <input type="range" id="lightIntensitySlider" min="0.2" max="3" step="0.1" value="1.2">
+        <span class="val-badge" id="lightIntensityVal">1.2</span>
+      </div>
+
+      <div class="control-group">
+        <label>Invert Normal Y:</label>
+        <input type="checkbox" id="invertYCheckbox">
+      </div>
+
+      <button id="resetCamBtn" style="background: #1e293b; color: #38bdf8; border: 1px solid #334155; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">
+        Reset View
+      </button>
+    </div>
+  </header>
+
+  <div class="viewports-container">
+    <!-- LEFT: ORIGINAL RAW OBJ -->
+    <div class="viewport-box" id="viewportObj">
+      <div class="viewport-tag obj">
+        <span>RAW OBJ (Standard Material & Textures)</span>
+      </div>
+      <div class="status-overlay" id="statusObj">Loading OBJ...</div>
+    </div>
+
+    <!-- RIGHT: ENCRYPTED T3D -->
+    <div class="viewport-box" id="viewportT3d">
+      <div class="viewport-tag t3d">
+        <span>TRIKOMI .T3D (AES-GCM-256 + 16-Bit Quantized)</span>
+      </div>
+      <div class="status-overlay" id="statusT3d">Loading T3D...</div>
+    </div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+
+    const GARMENT_ID = '01jmm9pxnf0mysaf3yrpfabktn';
+    const BASE_STORAGE = `/models_storage/${GARMENT_ID}`;
+
+    const domObj = document.getElementById('viewportObj');
+    const domT3d = document.getElementById('viewportT3d');
+
+    // Setup Shared Lighting & Camera
+    function createScene(container) {
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0e1320);
+
+      const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 1, 10000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.0;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      container.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+
+      // Lights
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x223344, 0.8);
+      scene.add(hemiLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+      dirLight1.position.set(200, 400, 300);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x88bbff, 0.6);
+      dirLight2.position.set(-200, -100, -200);
+      scene.add(dirLight2);
+
+      return { scene, camera, renderer, controls, hemiLight, dirLight1, dirLight2 };
+    }
+
+    const viewLeft = createScene(domObj);
+    const viewRight = createScene(domT3d);
+
+    // Synchronize Cameras
+    let isSyncing = false;
+    function syncCameras(sourceControls, targetCamera, targetControls) {
+      if (isSyncing) return;
+      isSyncing = true;
+      targetCamera.position.copy(sourceControls.object.position);
+      targetCamera.quaternion.copy(sourceControls.object.quaternion);
+      targetControls.target.copy(sourceControls.target);
+      targetControls.update();
+      isSyncing = false;
+    }
+
+    viewLeft.controls.addEventListener('change', () => syncCameras(viewLeft.controls, viewRight.camera, viewRight.controls));
+    viewRight.controls.addEventListener('change', () => syncCameras(viewRight.controls, viewLeft.camera, viewLeft.controls));
+
+    // Handle Window Resize
+    window.addEventListener('resize', () => {
+      [viewLeft, viewRight].forEach(v => {
+        const c = v.renderer.domElement.parentElement;
+        v.camera.aspect = c.clientWidth / c.clientHeight;
+        v.camera.updateProjectionMatrix();
+        v.renderer.setSize(c.clientWidth, c.clientHeight);
+      });
+    });
+
+    const texLoader = new THREE.TextureLoader();
+    texLoader.setCrossOrigin('anonymous');
+
+    // Materials References for Live Tuning
+    const activeMaterials = [];
+
+    async function loadAssets() {
+      // 1. Load Metadata
+      const metaRes = await fetch(`${BASE_STORAGE}/metadata.json`);
+      const meta = await metaRes.json();
+      const materialsMeta = meta.materials || {};
+
+      // 2. Load Raw OBJ into Left Viewport
+      const objRes = await fetch(`${BASE_STORAGE}/${GARMENT_ID}_thin.obj`);
+      const objText = await objRes.text();
+      const objLoader = new OBJLoader();
+      const objGroup = objLoader.parse(objText);
+
+      objGroup.traverse((child) => {
+        if (child.isMesh) {
+          const matName = child.material?.name || '';
+          const mtlInfo = materialsMeta[matName] || {};
+          
+          let col = 0xffffff;
+          if (mtlInfo.baseColor && Array.isArray(mtlInfo.baseColor)) {
+            const r = Math.round(mtlInfo.baseColor[0] * 255);
+            const g = Math.round(mtlInfo.baseColor[1] * 255);
+            const b = Math.round(mtlInfo.baseColor[2] * 255);
+            col = (r << 16) | (g << 8) | b;
+          }
+
+          const mat = new THREE.MeshStandardMaterial({
+            color: col,
+            roughness: mtlInfo.roughness ?? 0.54,
+            metalness: mtlInfo.metalness ?? 0.03,
+            side: THREE.DoubleSide
+          });
+
+          // Textures
+          const diffUrl = `${BASE_STORAGE}/${matName}_diffuse.jpg`;
+          const normUrl = `${BASE_STORAGE}/${matName}_normal.jpg`;
+
+          texLoader.load(diffUrl, (tex) => {
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            tex.colorSpace = THREE.SRGBColorSpace;
+            const rep = parseFloat(repSlider.value);
+            tex.repeat.set(rep, rep);
+            mat.map = tex;
+            mat.needsUpdate = true;
+          });
+
+          texLoader.load(normUrl, (tex) => {
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            mat.normalMap = tex;
+            const rep = parseFloat(repSlider.value);
+            tex.repeat.set(rep, rep);
+            const ns = mtlInfo.normalScale !== undefined ? mtlInfo.normalScale : 1.0;
+            mat.normalScale.set(ns, ns);
+            mat.userData.baseNormalScale = ns;
+            mat.needsUpdate = true;
+          });
+
+          child.material = mat;
+          activeMaterials.push(mat);
+        }
+      });
+
+      fitObjectInView(objGroup, viewLeft.camera, viewLeft.controls);
+      viewLeft.scene.add(objGroup);
+      document.getElementById('statusObj').innerText = `OBJ Ready (${objGroup.children.length} meshes)`;
+
+      // 3. Load Encrypted T3D into Right Viewport via T3DLoader
+      // We dynamically import T3DLoader from core
+      const { T3DLoader } = await import('/@fs/media/vijaykc/projects/trikomi/packages/core/src/protection/T3DLoader.ts');
+      const t3dRes = await fetch(`${BASE_STORAGE}/${GARMENT_ID}.t3d`);
+      const t3dBuffer = await t3dRes.arrayBuffer();
+      const t3dGroup = await T3DLoader.parse(t3dBuffer);
+
+      t3dGroup.traverse((child) => {
+        if (child.isMesh) {
+          const mat = child.material;
+          mat.side = THREE.DoubleSide;
+
+          const diffMapName = mat.userData?.mapName;
+          if (diffMapName) {
+            texLoader.load(`${BASE_STORAGE}/${diffMapName}`, (tex) => {
+              tex.wrapS = THREE.RepeatWrapping;
+              tex.wrapT = THREE.RepeatWrapping;
+              tex.colorSpace = THREE.SRGBColorSpace;
+              const rep = parseFloat(repSlider.value);
+              tex.repeat.set(rep, rep);
+              mat.map = tex;
+              mat.needsUpdate = true;
+            });
+          }
+
+          const normMapName = mat.userData?.normalMapName;
+          if (normMapName) {
+            texLoader.load(`${BASE_STORAGE}/${normMapName}`, (tex) => {
+              tex.wrapS = THREE.RepeatWrapping;
+              tex.wrapT = THREE.RepeatWrapping;
+              mat.normalMap = tex;
+              const rep = parseFloat(repSlider.value);
+              tex.repeat.set(rep, rep);
+              const ns = mat.userData?.normalScale !== undefined ? mat.userData.normalScale : 1.0;
+              mat.normalScale.set(ns, ns);
+              mat.userData.baseNormalScale = ns;
+              mat.needsUpdate = true;
+            });
+          }
+
+          activeMaterials.push(mat);
+        }
+      });
+
+      fitObjectInView(t3dGroup, viewRight.camera, viewRight.controls);
+      viewRight.scene.add(t3dGroup);
+      document.getElementById('statusT3d').innerText = `T3D Ready (${t3dGroup.children.length} meshes)`;
+
+      // Copy camera from left to right initially
+      syncCameras(viewLeft.controls, viewRight.camera, viewRight.controls);
+    }
+
+    function fitObjectInView(obj, camera, controls) {
+      const box = new THREE.Box3().setFromObject(obj);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z) || 100;
+
+      obj.position.x = -center.x;
+      obj.position.y = -center.y;
+      obj.position.z = -center.z;
+
+      camera.near = 1;
+      camera.far = Math.max(50000, maxDim * 20);
+      camera.updateProjectionMatrix();
+
+      const fov = camera.fov * (Math.PI / 180);
+      const cameraDist = Math.abs(maxDim / (2 * Math.tan(fov / 2))) * 1.5;
+      camera.position.set(0, maxDim * 0.1, cameraDist);
+      camera.lookAt(0, 0, 0);
+
+      controls.target.set(0, 0, 0);
+      controls.maxDistance = cameraDist * 10;
+      controls.minDistance = 1;
+      controls.update();
+    }
+
+    // Controls Tuning Listeners
+    const repSlider = document.getElementById('texRepeatSlider');
+    const repVal = document.getElementById('texRepeatVal');
+
+    function updateTiling() {
+      const rep = parseFloat(repSlider.value);
+      repVal.innerText = `${rep}x`;
+      console.log(`[Tuning] Setting texture repeat to ${rep}x across ${activeMaterials.length} materials`);
+      activeMaterials.forEach(m => {
+        if (m.map) {
+          m.map.repeat.set(rep, rep);
+          m.map.updateMatrix();
+          m.map.needsUpdate = true;
+        }
+        if (m.normalMap) {
+          m.normalMap.repeat.set(rep, rep);
+          m.normalMap.updateMatrix();
+          m.normalMap.needsUpdate = true;
+        }
+        m.needsUpdate = true;
+      });
+    }
+    repSlider.addEventListener('input', updateTiling);
+
+    const normSlider = document.getElementById('normalScaleSlider');
+    const normVal = document.getElementById('normalScaleVal');
+    const invertYBox = document.getElementById('invertYCheckbox');
+
+    function updateNormals() {
+      const mult = parseFloat(normSlider.value);
+      normVal.innerText = mult.toFixed(2);
+      const invertY = invertYBox.checked ? -1 : 1;
+
+      activeMaterials.forEach(m => {
+        if (m.normalMap) {
+          const base = m.userData.baseNormalScale || 1.0;
+          const s = base * mult;
+          m.normalScale.set(s, s * invertY);
+          m.needsUpdate = true;
+        }
+      });
+    }
+
+    normSlider.addEventListener('input', updateNormals);
+    invertYBox.addEventListener('change', updateNormals);
+
+    const lightSlider = document.getElementById('lightIntensitySlider');
+    const lightVal = document.getElementById('lightIntensityVal');
+    lightSlider.addEventListener('input', () => {
+      const val = parseFloat(lightSlider.value);
+      lightVal.innerText = val.toFixed(1);
+      [viewLeft, viewRight].forEach(v => {
+        v.dirLight1.intensity = val;
+        v.dirLight2.intensity = val * 0.5;
+      });
+    });
+
+    document.getElementById('resetCamBtn').addEventListener('click', () => {
+      viewLeft.camera.position.set(0, 30, 480);
+      viewLeft.controls.target.set(0, 0, 0);
+      viewLeft.controls.update();
+      syncCameras(viewLeft.controls, viewRight.camera, viewRight.controls);
+    });
+
+    // Render loop
+    function animate() {
+      requestAnimationFrame(animate);
+      viewLeft.controls.update();
+      viewRight.controls.update();
+      viewLeft.renderer.render(viewLeft.scene, viewLeft.camera);
+      viewRight.renderer.render(viewRight.scene, viewRight.camera);
+    }
+
+    loadAssets().then(() => animate());
+  </script>
+</body>
+</html>

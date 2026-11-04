@@ -1,0 +1,4217 @@
+[
+  {
+    "id": "01jmm9pxnf0mysaf3yrpfabktn",
+    "name": "Grey V-neck shock proof sports bra",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 80.208,
+    "materials": {
+      "默认织物复制1": {
+        "texWidth": 15.996063,
+        "texHeight": 15.996063,
+        "normalScale": 1.1,
+        "repeatX": 40.114,
+        "repeatY": 40.114
+      },
+      "默认织物": {
+        "texWidth": 15.996063,
+        "texHeight": 15.996063,
+        "normalScale": 2,
+        "repeatX": 40.114,
+        "repeatY": 40.114
+      }
+    }
+  },
+  {
+    "id": "01jmv8ns4bj9y7w7x3mttjkcbv",
+    "name": "Light purple stand collar knitted long sleeved T-shirt",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 3.748,
+    "materials": {
+      "图片10": {
+        "texWidth": 26.621586,
+        "texHeight": 325.315796,
+        "normalScale": 1,
+        "repeatX": 1.126,
+        "repeatY": 0.092
+      },
+      "默认明线复制1": {
+        "texWidth": 3.001818,
+        "texHeight": 4.729018,
+        "normalScale": 0.2,
+        "repeatX": 9.989,
+        "repeatY": 6.34
+      },
+      "默认明线": {
+        "texWidth": 3.001818,
+        "texHeight": 4.729019,
+        "normalScale": 0.2,
+        "repeatX": 9.989,
+        "repeatY": 6.34
+      },
+      "默认织物复制1": {
+        "texWidth": 349.721527,
+        "texHeight": 349.721527,
+        "normalScale": 2,
+        "repeatX": 0.086,
+        "repeatY": 0.086
+      },
+      "默认织物": {
+        "texWidth": 349.721527,
+        "texHeight": 349.721527,
+        "normalScale": 2,
+        "repeatX": 0.086,
+        "repeatY": 0.086
+      }
+    }
+  },
+  {
+    "id": "01jmmm4a2060z9tygk241hfe74",
+    "name": "Athletic Wear",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 6.877,
+    "materials": {
+      "卫衣_黑复制1": {
+        "texWidth": 128.05833435,
+        "texHeight": 177.0944519,
+        "normalScale": 1,
+        "repeatX": 0.43,
+        "repeatY": 0.311
+      },
+      "附件2_默认拉链_slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "附件3_默认拉链_slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "默认拉链_teeth": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.75,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "卫衣_黑": {
+        "texWidth": 128.05833435,
+        "texHeight": 177.0944519,
+        "normalScale": 1,
+        "repeatX": 0.43,
+        "repeatY": 0.311
+      },
+      "默认拉链_slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "默认明线复制1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "默认明线复制2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      },
+      "卫衣_红": {
+        "texWidth": 288.2194519,
+        "texHeight": 154.5166626,
+        "normalScale": 1,
+        "repeatX": 0.191,
+        "repeatY": 0.356
+      },
+      "卫衣_黑复制2": {
+        "texWidth": 128.05833435,
+        "texHeight": 177.0944519,
+        "normalScale": 1,
+        "repeatX": 0.43,
+        "repeatY": 0.311
+      },
+      "卫衣_灰": {
+        "texWidth": 324.55554199,
+        "texHeight": 243.06388855,
+        "normalScale": 1,
+        "repeatX": 0.17,
+        "repeatY": 0.226
+      },
+      "默认拉链_bottomStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 55.015,
+        "repeatY": 55.015
+      }
+    }
+  },
+  {
+    "id": "01jmmm3k9scajhejexa8ydnd8y",
+    "name": "Women's sportswear",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 6.431,
+    "materials": {
+      "附件7_End_Stopper_47": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 51.446,
+        "repeatY": 51.446
+      },
+      "附件4_Eyelet08": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 51.446,
+        "repeatY": 51.446
+      },
+      "短裤面料": {
+        "texWidth": 170.7444458,
+        "texHeight": 175.68331909,
+        "normalScale": 1,
+        "repeatX": 0.301,
+        "repeatY": 0.293
+      },
+      "End_Stopper_01_End_Stopper_47": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 51.446,
+        "repeatY": 51.446
+      },
+      "202_Singlethread_Chainstitch-F复制1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 51.446,
+        "repeatY": 51.446
+      },
+      "202_Singlethread_Chainstitch-F": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 51.446,
+        "repeatY": 51.446
+      },
+      "Eyelet02_Eyelet08": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 51.446,
+        "repeatY": 51.446
+      },
+      "上衣面料": {
+        "texWidth": 221.54444885,
+        "texHeight": 237.41944885,
+        "normalScale": 1,
+        "repeatX": 0.232,
+        "repeatY": 0.217
+      },
+      "短裤面料复制1": {
+        "texWidth": 170.7444458,
+        "texHeight": 175.68331909,
+        "normalScale": 1,
+        "repeatX": 0.301,
+        "repeatY": 0.293
+      },
+      "上衣面料复制1": {
+        "texWidth": 221.54444885,
+        "texHeight": 237.41944885,
+        "normalScale": 1,
+        "repeatX": 0.232,
+        "repeatY": 0.217
+      }
+    }
+  },
+  {
+    "id": "01jmmh4kq1rzbyz1aacf69kgmj",
+    "name": "Yoga-skc-03",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 16.905,
+    "materials": {
+      "1": {
+        "texWidth": 90,
+        "texHeight": 88.09918213,
+        "normalScale": 1,
+        "repeatX": 1.503,
+        "repeatY": 1.535
+      },
+      "明线1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 135.24,
+        "repeatY": 135.24
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 135.24,
+        "repeatY": 135.24
+      },
+      "织物1": {
+        "texWidth": 50,
+        "texHeight": 50,
+        "normalScale": 1,
+        "repeatX": 2.705,
+        "repeatY": 2.705
+      },
+      "默认织物": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.69,
+        "repeatY": 1.69
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.69,
+        "repeatY": 1.69
+      },
+      "1x1_Cotton_Rib": {
+        "texWidth": 90,
+        "texHeight": 88.09918213,
+        "normalScale": 1,
+        "repeatX": 1.503,
+        "repeatY": 1.535
+      },
+      "明线1_拷贝_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 135.24,
+        "repeatY": 135.24
+      }
+    }
+  },
+  {
+    "id": "01jmmh3a089xj40xgzz8ahd4me",
+    "name": "Yoga-skc-05",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 13.117,
+    "materials": {
+      "默认织物Copy1": {
+        "texWidth": 874.88885498,
+        "texHeight": 749.29998779,
+        "normalScale": 1,
+        "repeatX": 0.12,
+        "repeatY": 0.14
+      },
+      "默认织物复制3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 2,
+        "repeatX": 104.937,
+        "repeatY": 104.937
+      },
+      "默认织物复制1": {
+        "texWidth": 45.0838089,
+        "texHeight": 47.95727158,
+        "normalScale": 2,
+        "repeatX": 2.328,
+        "repeatY": 2.188
+      },
+      "默认织物复制2": {
+        "texWidth": 75.3181076,
+        "texHeight": 80.11858368,
+        "normalScale": 2,
+        "repeatX": 1.393,
+        "repeatY": 1.31
+      },
+      "默认织物": {
+        "texWidth": 80,
+        "texHeight": 85.09888458,
+        "normalScale": 2,
+        "repeatX": 1.312,
+        "repeatY": 1.233
+      }
+    }
+  },
+  {
+    "id": "01jmmh371x32dy9kx3hzktkp7b",
+    "name": "Yoga-skc-02",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 17.407,
+    "materials": {
+      "大身复制3": {
+        "texWidth": 58.45060349,
+        "texHeight": 78.34216309,
+        "normalScale": 1.27999997,
+        "repeatX": 2.383,
+        "repeatY": 1.778
+      },
+      "默认明线复制4": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "默认拉链-teeth": {
+        "texWidth": 4.01715899,
+        "texHeight": 6.87227488,
+        "normalScale": 1,
+        "repeatX": 34.666,
+        "repeatY": 20.264
+      },
+      "默认明线复制3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "默认拉链_topStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "默认拉链-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "大身复制4": {
+        "texWidth": 58.45060349,
+        "texHeight": 78.34216309,
+        "normalScale": 1.27999997,
+        "repeatX": 2.383,
+        "repeatY": 1.778
+      },
+      "大身复制1": {
+        "texWidth": 58.45060349,
+        "texHeight": 78.34216309,
+        "normalScale": 1.27999997,
+        "repeatX": 2.383,
+        "repeatY": 1.778
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "默认明线复制2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 139.26,
+        "repeatY": 139.26
+      },
+      "大身复制2": {
+        "texWidth": 58.45060349,
+        "texHeight": 78.34216309,
+        "normalScale": 1.27999997,
+        "repeatX": 2.383,
+        "repeatY": 1.778
+      },
+      "大身": {
+        "texWidth": 58.45060349,
+        "texHeight": 78.34216309,
+        "normalScale": 1.27999997,
+        "repeatX": 2.383,
+        "repeatY": 1.778
+      }
+    }
+  },
+  {
+    "id": "01jmmh35htm6zejx1fmfdgb7h6",
+    "name": "Yoga-skc-01",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 26.93,
+    "materials": {
+      "kjkf": {
+        "texWidth": 1267.59191895,
+        "texHeight": 579.44226074,
+        "normalScale": 1.27999997,
+        "repeatX": 0.17,
+        "repeatY": 0.372
+      },
+      "默认织物Copy1": {
+        "texWidth": 874.88885498,
+        "texHeight": 749.29998779,
+        "normalScale": 1,
+        "repeatX": 0.246,
+        "repeatY": 0.288
+      },
+      "默认织物复制1": {
+        "texWidth": 46.09551239,
+        "texHeight": 46.09551239,
+        "normalScale": 1.40999997,
+        "repeatX": 4.674,
+        "repeatY": 4.674
+      },
+      "Default_FabricCopy1": {
+        "texWidth": 60,
+        "texHeight": 60,
+        "normalScale": 1,
+        "repeatX": 3.591,
+        "repeatY": 3.591
+      },
+      "fsggf": {
+        "texWidth": 60,
+        "texHeight": 60,
+        "normalScale": 1,
+        "repeatX": 3.591,
+        "repeatY": 3.591
+      }
+    }
+  },
+  {
+    "id": "01jmmh33akan9vvz53ttaq4cce",
+    "name": "Yoga-Skc-03",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 78.712,
+    "materials": {
+      "面料1复制1": {
+        "texWidth": 16.36683464,
+        "texHeight": 9.25082016,
+        "normalScale": 1,
+        "repeatX": 38.474,
+        "repeatY": 68.069
+      },
+      "面料4": {
+        "texWidth": 94.58469391,
+        "texHeight": 110.29281616,
+        "normalScale": 0.28999999,
+        "repeatX": 6.657,
+        "repeatY": 5.709
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 629.693,
+        "repeatY": 629.693
+      },
+      "面料4_对称": {
+        "texWidth": 94.58469391,
+        "texHeight": 110.29281616,
+        "normalScale": 0.28999999,
+        "repeatX": 6.657,
+        "repeatY": 5.709
+      },
+      "面料2复制1": {
+        "texWidth": 21.16666603,
+        "texHeight": 28.92777634,
+        "normalScale": 1,
+        "repeatX": 29.749,
+        "repeatY": 21.768
+      },
+      "面料5_对称": {
+        "texWidth": 78.73999786,
+        "texHeight": 78.73999786,
+        "normalScale": 0.2,
+        "repeatX": 7.997,
+        "repeatY": 7.997
+      },
+      "默认拉链_teeth": {
+        "texWidth": 3.99890113,
+        "texHeight": 11.77509785,
+        "normalScale": 1,
+        "repeatX": 157.466,
+        "repeatY": 53.477
+      },
+      "默认拉链_slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 629.693,
+        "repeatY": 629.693
+      },
+      "面料1": {
+        "texWidth": 16.36683464,
+        "texHeight": 9.25082016,
+        "normalScale": 1,
+        "repeatX": 38.474,
+        "repeatY": 68.069
+      },
+      "面料5": {
+        "texWidth": 78.73999786,
+        "texHeight": 78.73999786,
+        "normalScale": 0.2,
+        "repeatX": 7.997,
+        "repeatY": 7.997
+      },
+      "面料2": {
+        "texWidth": 21.16666603,
+        "texHeight": 28.92777634,
+        "normalScale": 1,
+        "repeatX": 29.749,
+        "repeatY": 21.768
+      }
+    }
+  },
+  {
+    "id": "01jmmh2nytvynddkg0anb99mg2",
+    "name": "Yoga-Skc-05",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 16.868,
+    "materials": {
+      "侧面面料": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.686,
+        "repeatY": 1.686
+      },
+      "小网眼": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 134.943,
+        "repeatY": 134.943
+      },
+      "嵌条": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.686,
+        "repeatY": 1.686
+      },
+      "前胸BP点修改2": {
+        "texWidth": 402.84399414,
+        "texHeight": 544.57598877,
+        "normalScale": 1,
+        "repeatX": 0.335,
+        "repeatY": 0.248
+      },
+      "条纹加密_": {
+        "texWidth": 59.38410187,
+        "texHeight": 60,
+        "normalScale": 1,
+        "repeatX": 2.272,
+        "repeatY": 2.249
+      },
+      "条纹密": {
+        "texWidth": 95.99674225,
+        "texHeight": 60,
+        "normalScale": 1,
+        "repeatX": 1.406,
+        "repeatY": 2.249
+      },
+      "底色": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.686,
+        "repeatY": 1.686
+      },
+      "腰部颜色": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.686,
+        "repeatY": 1.686
+      },
+      "上半身图案": {
+        "texWidth": 80.02954102,
+        "texHeight": 80.02954102,
+        "normalScale": 1,
+        "repeatX": 1.686,
+        "repeatY": 1.686
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 134.943,
+        "repeatY": 134.943
+      },
+      "图案_1": {
+        "texWidth": 418.25332642,
+        "texHeight": 525.7800293,
+        "normalScale": 1,
+        "repeatX": 0.323,
+        "repeatY": 0.257
+      },
+      "图案_2": {
+        "texWidth": 131.58972168,
+        "texHeight": 55.00374222,
+        "normalScale": 1,
+        "repeatX": 1.025,
+        "repeatY": 2.453
+      },
+      "大网眼": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 134.943,
+        "repeatY": 134.943
+      }
+    }
+  },
+  {
+    "id": "01jmmh0jgtcgjdyd8eshafzb33",
+    "name": "Yoga-skc-01",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 118.838,
+    "materials": {
+      "默认织物复制2": {
+        "texWidth": 30,
+        "texHeight": 28.61250305,
+        "normalScale": 1,
+        "repeatX": 31.69,
+        "repeatY": 33.227
+      },
+      "明线_1复制1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 950.706,
+        "repeatY": 950.706
+      },
+      "空气层纯棉针织TRED-0015复制1": {
+        "texWidth": 78.19999695,
+        "texHeight": 78.19999695,
+        "normalScale": 0.60000002,
+        "repeatX": 12.157,
+        "repeatY": 12.157
+      },
+      "附件3_内层_front": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 950.706,
+        "repeatY": 950.706
+      },
+      "明线_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 950.706,
+        "repeatY": 950.706
+      },
+      "空气层纯棉针织TRED-0015复制3": {
+        "texWidth": 10.5,
+        "texHeight": 15.29479408,
+        "normalScale": 0.51999998,
+        "repeatX": 90.543,
+        "repeatY": 62.159
+      },
+      "rizikou_织物_1_front": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 950.706,
+        "repeatY": 950.706
+      },
+      "默认织物": {
+        "texWidth": 40,
+        "texHeight": 40,
+        "normalScale": 1,
+        "repeatX": 23.768,
+        "repeatY": 23.768
+      },
+      "空气层纯棉针织TRED-0015复制2": {
+        "texWidth": 78.19999695,
+        "texHeight": 78.19999695,
+        "normalScale": 0.60000002,
+        "repeatX": 12.157,
+        "repeatY": 12.157
+      },
+      "附件7_内层_front": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 950.706,
+        "repeatY": 950.706
+      },
+      "明线_1复制2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 950.706,
+        "repeatY": 950.706
+      }
+    }
+  },
+  {
+    "id": "01jmmh0bbewq923s6z4qttnm72",
+    "name": "Yoga-Skc-08",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 12.881,
+    "materials": {
+      "里": {
+        "texWidth": 220.42033386,
+        "texHeight": 220.42033386,
+        "normalScale": 1.20000005,
+        "repeatX": 0.467,
+        "repeatY": 0.467
+      },
+      "外": {
+        "texWidth": 100.03691864,
+        "texHeight": 100.03691864,
+        "normalScale": 1.76999998,
+        "repeatX": 1.03,
+        "repeatY": 1.03
+      }
+    }
+  },
+  {
+    "id": "01jmmf0nmhzd7tdxae2rn133tp",
+    "name": "Mesh tights Leggings",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 71.067,
+    "materials": {
+      "纱复制1": {
+        "texWidth": 25,
+        "texHeight": 15,
+        "normalScale": 1,
+        "repeatX": 22.741,
+        "repeatY": 37.902
+      },
+      "边": {
+        "texWidth": 29.99953651,
+        "texHeight": 29.99953651,
+        "normalScale": 1,
+        "repeatX": 18.951,
+        "repeatY": 18.951
+      }
+    }
+  },
+  {
+    "id": "01jmmd5sfgkkbw1kxhzwbjxaka",
+    "name": "Apricot printed hooded casual sweater",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 38.517,
+    "materials": {
+      "Eyelet01_拷贝_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 308.135,
+        "repeatY": 308.135
+      },
+      "袖子": {
+        "texWidth": 40,
+        "texHeight": 40.55776596,
+        "normalScale": 2,
+        "repeatX": 7.703,
+        "repeatY": 7.597
+      },
+      "165063452D": {
+        "texWidth": 4,
+        "texHeight": 6,
+        "normalScale": 1,
+        "repeatX": 77.034,
+        "repeatY": 51.356
+      },
+      "前幅": {
+        "texWidth": 319.44152832,
+        "texHeight": 212.96112061,
+        "normalScale": 1,
+        "repeatX": 0.965,
+        "repeatY": 1.447
+      },
+      "默认明线": {
+        "texWidth": 2.4016211,
+        "texHeight": 0.6000002,
+        "normalScale": 0.2,
+        "repeatX": 128.303,
+        "repeatY": 513.558
+      },
+      "默认织物": {
+        "texWidth": 40,
+        "texHeight": 40.55776596,
+        "normalScale": 2,
+        "repeatX": 7.703,
+        "repeatY": 7.597
+      },
+      "后幅": {
+        "texWidth": 299.75878906,
+        "texHeight": 199.83926392,
+        "normalScale": 1,
+        "repeatX": 1.028,
+        "repeatY": 1.542
+      },
+      "Eyelet01": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 308.135,
+        "repeatY": 308.135
+      }
+    }
+  },
+  {
+    "id": "01jmmcfxrx1fqpr2x5ggf0dhfd",
+    "name": "Dark gray laser strap decorative sports coat",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 105.156,
+    "materials": {
+      "默认拉链-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 841.249,
+        "repeatY": 841.249
+      },
+      "明线1": {
+        "texWidth": 2.7272718,
+        "texHeight": 0.70000035,
+        "normalScale": 0.2,
+        "repeatX": 308.458,
+        "repeatY": 1201.784
+      },
+      "附件4": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 841.249,
+        "repeatY": 841.249
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 841.249,
+        "repeatY": 841.249
+      },
+      "冲锋衣": {
+        "texWidth": 37.36142731,
+        "texHeight": 37.36142731,
+        "normalScale": 1.60000002,
+        "repeatX": 22.517,
+        "repeatY": 22.517
+      },
+      "双头-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 841.249,
+        "repeatY": 841.249
+      },
+      "双头-teeth": {
+        "texWidth": 4.03069687,
+        "texHeight": 6.69091272,
+        "normalScale": 1,
+        "repeatX": 208.711,
+        "repeatY": 125.73
+      },
+      "图案_2": {
+        "texWidth": 161.15898132,
+        "texHeight": 85.29582214,
+        "normalScale": 1,
+        "repeatX": 5.22,
+        "repeatY": 9.863
+      },
+      "默认拉链-teeth": {
+        "texWidth": 3.77721691,
+        "texHeight": 6.838871,
+        "normalScale": 1,
+        "repeatX": 222.717,
+        "repeatY": 123.01
+      },
+      "Denim_11.9OZ复制1": {
+        "texWidth": 12.81710339,
+        "texHeight": 17.00731087,
+        "normalScale": 1,
+        "repeatX": 65.635,
+        "repeatY": 49.464
+      },
+      "拼条": {
+        "texWidth": 17.24074173,
+        "texHeight": 17.24074173,
+        "normalScale": 1.60000002,
+        "repeatX": 48.794,
+        "repeatY": 48.794
+      },
+      "默认拉链_topStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 841.249,
+        "repeatY": 841.249
+      },
+      "附件1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 841.249,
+        "repeatY": 841.249
+      },
+      "拉链": {
+        "texWidth": 15.02833271,
+        "texHeight": 10.45633316,
+        "normalScale": 1.29999995,
+        "repeatX": 55.978,
+        "repeatY": 80.454
+      },
+      "里布": {
+        "texWidth": 17.24074173,
+        "texHeight": 17.24074173,
+        "normalScale": 1.60000002,
+        "repeatX": 48.794,
+        "repeatY": 48.794
+      },
+      "图案_1": {
+        "texWidth": 93.94603729,
+        "texHeight": 279.05395508,
+        "normalScale": 1,
+        "repeatX": 8.955,
+        "repeatY": 3.015
+      },
+      "Denim_11.9OZ": {
+        "texWidth": 13.97793007,
+        "texHeight": 18.54763794,
+        "normalScale": 1,
+        "repeatX": 60.184,
+        "repeatY": 45.356
+      },
+      "默认图案": {
+        "texWidth": 59.05351257,
+        "texHeight": 33.17071152,
+        "normalScale": 1,
+        "repeatX": 14.246,
+        "repeatY": 25.361
+      }
+    }
+  },
+  {
+    "id": "01jmmcfbaxd6ph31jmw2w60ax8",
+    "name": "Khaki color patchwork sports long-sleeved bottom shirt",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 28.801,
+    "materials": {
+      "袖子": {
+        "texWidth": 44.99930954,
+        "texHeight": 44.99930954,
+        "normalScale": 1,
+        "repeatX": 5.12,
+        "repeatY": 5.12
+      },
+      "拼接黑色": {
+        "texWidth": 44.99930954,
+        "texHeight": 44.99930954,
+        "normalScale": 1,
+        "repeatX": 5.12,
+        "repeatY": 5.12
+      },
+      "402_Interlock_Double_Stitch-0.3": {
+        "texWidth": 2.0042913,
+        "texHeight": 4.23949194,
+        "normalScale": 1.5,
+        "repeatX": 114.958,
+        "repeatY": 54.348
+      },
+      "大身": {
+        "texWidth": 44.99930954,
+        "texHeight": 44.99930954,
+        "normalScale": 1,
+        "repeatX": 5.12,
+        "repeatY": 5.12
+      },
+      "默认图案": {
+        "texWidth": 65.87215424,
+        "texHeight": 65.87215424,
+        "normalScale": 1,
+        "repeatX": 3.498,
+        "repeatY": 3.498
+      }
+    }
+  },
+  {
+    "id": "01jmmcezrsm6jv3a1npbw7qa7m",
+    "name": "Black panel printed basketball tank top",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 22.422,
+    "materials": {
+      "100D_Singlethread_Chainstitch-F复制2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.80000001,
+        "repeatX": 179.373,
+        "repeatY": 179.373
+      },
+      "织物_3复制3": {
+        "texWidth": 114.30000305,
+        "texHeight": 114.30000305,
+        "normalScale": 1.5,
+        "repeatX": 1.569,
+        "repeatY": 1.569
+      },
+      "100D_Singlethread_Chainstitch-F复制3": {
+        "texWidth": 2.43650103,
+        "texHeight": 0.38100001,
+        "normalScale": 1.85000002,
+        "repeatX": 73.619,
+        "repeatY": 470.796
+      },
+      "织物_3复制2": {
+        "texWidth": 114.30000305,
+        "texHeight": 114.30000305,
+        "normalScale": 1.5,
+        "repeatX": 1.569,
+        "repeatY": 1.569
+      },
+      "图案_1": {
+        "texWidth": 310.28591919,
+        "texHeight": 394.73681641,
+        "normalScale": 1.5,
+        "repeatX": 0.578,
+        "repeatY": 0.454
+      },
+      "织物_3": {
+        "texWidth": 114.30000305,
+        "texHeight": 114.30000305,
+        "normalScale": 1.89999998,
+        "repeatX": 1.569,
+        "repeatY": 1.569
+      },
+      "100D_Singlethread_Chainstitch-F复制1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.80000001,
+        "repeatX": 179.373,
+        "repeatY": 179.373
+      },
+      "100D_Singlethread_Chainstitch-F": {
+        "texWidth": 2.51585197,
+        "texHeight": 0.38100007,
+        "normalScale": 1.85000002,
+        "repeatX": 71.297,
+        "repeatY": 470.796
+      },
+      "图案_1_拷贝_1": {
+        "texWidth": 310.28640747,
+        "texHeight": 394.73745728,
+        "normalScale": 1.5,
+        "repeatX": 0.578,
+        "repeatY": 0.454
+      },
+      "织物_1": {
+        "texWidth": 45.72000122,
+        "texHeight": 67.65503693,
+        "normalScale": 1.97000003,
+        "repeatX": 3.923,
+        "repeatY": 2.651
+      }
+    }
+  },
+  {
+    "id": "01jmmcecfx0vqpyw74xjxhnsw9",
+    "name": "Grass green webbing sports shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 81.213,
+    "materials": {
+      "0": {
+        "texWidth": 2.40162611,
+        "texHeight": 0.27674988,
+        "normalScale": 0.2,
+        "repeatX": 270.526,
+        "repeatY": 2347.615
+      },
+      "buckle_31": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 649.702,
+        "repeatY": 649.702
+      },
+      "默认图案": {
+        "texWidth": 95.59560394,
+        "texHeight": 29.24100494,
+        "normalScale": 1,
+        "repeatX": 6.796,
+        "repeatY": 22.219
+      },
+      "附件3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 649.702,
+        "repeatY": 649.702
+      },
+      "织物_1": {
+        "texWidth": 5.48745584,
+        "texHeight": 6.03620148,
+        "normalScale": 0.80000001,
+        "repeatX": 118.398,
+        "repeatY": 107.634
+      },
+      "附件11": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 649.702,
+        "repeatY": 649.702
+      },
+      "侧缝": {
+        "texWidth": 35.92486191,
+        "texHeight": 35.92486191,
+        "normalScale": 0.75,
+        "repeatX": 18.085,
+        "repeatY": 18.085
+      },
+      "附件8": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 649.702,
+        "repeatY": 649.702
+      }
+    }
+  },
+  {
+    "id": "01jmmcbqyyzd96exkdts8nmsz2",
+    "name": "Brown brushed drawcord hoodie sweater",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1347.985,
+    "materials": {
+      "带子": {
+        "texWidth": 66.01421356,
+        "texHeight": 60.93434143,
+        "normalScale": 1.27999997,
+        "repeatX": 163.357,
+        "repeatY": 176.975
+      },
+      "织物_3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10783.884,
+        "repeatY": 10783.884
+      },
+      "止口": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10783.884,
+        "repeatY": 10783.884
+      },
+      "分割": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10783.884,
+        "repeatY": 10783.884
+      },
+      "织物_2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10783.884,
+        "repeatY": 10783.884
+      },
+      "织物_2复制1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10783.884,
+        "repeatY": 10783.884
+      },
+      "帽子": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10783.884,
+        "repeatY": 10783.884
+      },
+      "明线1": {
+        "texWidth": 2.40162206,
+        "texHeight": 0.39999983,
+        "normalScale": 0.2,
+        "repeatX": 4490.25,
+        "repeatY": 26959.72
+      }
+    }
+  },
+  {
+    "id": "01jmmbt8r0gvwdd4vddwmfqfvb",
+    "name": "Grey hooded zippered European cardigan coat",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 87.462,
+    "materials": {
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      },
+      "默认拉链-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      },
+      "门禁-teeth": {
+        "texWidth": 6.01031494,
+        "texHeight": 17.51924706,
+        "normalScale": 1,
+        "repeatX": 116.416,
+        "repeatY": 39.939
+      },
+      "门禁-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      },
+      "默认明线": {
+        "texWidth": 1.99999464,
+        "texHeight": 0.27675003,
+        "normalScale": 0.2,
+        "repeatX": 349.851,
+        "repeatY": 2528.272
+      },
+      "织物_2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      },
+      "默认拉链-teeth": {
+        "texWidth": 4.00215054,
+        "texHeight": 11.59341717,
+        "normalScale": 1,
+        "repeatX": 174.831,
+        "repeatY": 60.353
+      },
+      "baked_texture_2AA0DF45EF949BE3CB97CCA217D81D4F": {
+        "texWidth": 159.56808472,
+        "texHeight": 159.56808472,
+        "normalScale": 1,
+        "repeatX": 4.385,
+        "repeatY": 4.385
+      },
+      "门禁_bottomStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      },
+      "织物_4": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      },
+      "默认拉链_bottomStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 699.699,
+        "repeatY": 699.699
+      }
+    }
+  },
+  {
+    "id": "01jmmbd2bk9h9t13r8429kavmv",
+    "name": "Light blue long sleeve one-piece tights",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 26.392,
+    "materials": {
+      "image": {
+        "texWidth": 52.90222931,
+        "texHeight": 52.90222931,
+        "normalScale": 1,
+        "repeatX": 3.991,
+        "repeatY": 3.991
+      },
+      "附件1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 211.135,
+        "repeatY": 211.135
+      },
+      "领子": {
+        "texWidth": 15,
+        "texHeight": 15,
+        "normalScale": 1.27999997,
+        "repeatX": 14.076,
+        "repeatY": 14.076
+      },
+      "默认明线复制1": {
+        "texWidth": 2.5,
+        "texHeight": 3.5999999,
+        "normalScale": 0.2,
+        "repeatX": 84.454,
+        "repeatY": 58.649
+      },
+      "大身": {
+        "texWidth": 58.45060349,
+        "texHeight": 78.34216309,
+        "normalScale": 1.27999997,
+        "repeatX": 3.612,
+        "repeatY": 2.695
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 211.135,
+        "repeatY": 422.27
+      },
+      "默认明线复制2": {
+        "texWidth": 1,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 211.135,
+        "repeatY": 422.27
+      }
+    }
+  },
+  {
+    "id": "01jmmbb7g0sfgz54ghqy16vdte",
+    "name": "Pink zip hooded European jacket",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 28.229,
+    "materials": {
+      "螺纹": {
+        "texWidth": 43.29999924,
+        "texHeight": 43.29999924,
+        "normalScale": 1,
+        "repeatX": 5.215,
+        "repeatY": 5.215
+      },
+      "默认拉链-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 225.829,
+        "repeatY": 225.829
+      },
+      "织带": {
+        "texWidth": 35.56868744,
+        "texHeight": 35.56868744,
+        "normalScale": 1,
+        "repeatX": 6.349,
+        "repeatY": 6.349
+      },
+      "默认明线": {
+        "texWidth": 2.40161371,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 94.032,
+        "repeatY": 225.829
+      },
+      "里布": {
+        "texWidth": 41.80817032,
+        "texHeight": 40.30952835,
+        "normalScale": 0.5,
+        "repeatX": 5.402,
+        "repeatY": 5.602
+      },
+      "默认拉链-teeth": {
+        "texWidth": 6.0301342,
+        "texHeight": 17.35667229,
+        "normalScale": 1,
+        "repeatX": 37.45,
+        "repeatY": 13.011
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 225.829,
+        "repeatY": 225.829
+      },
+      "面布": {
+        "texWidth": 51.2193718,
+        "texHeight": 54.48389435,
+        "normalScale": 0.69999999,
+        "repeatX": 4.409,
+        "repeatY": 4.145
+      }
+    }
+  },
+  {
+    "id": "01jmmb73n7a187gdbgznxdxe2y",
+    "name": "White shiny European shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 896.64,
+    "materials": {
+      "0": {
+        "texWidth": 2.40159845,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 2986.81,
+        "repeatY": 14346.236
+      },
+      "1": {
+        "texWidth": 2.40162587,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 2986.776,
+        "repeatY": 14346.236
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 7173.118,
+        "repeatY": 7173.118
+      },
+      "默认扣眼": {
+        "texWidth": 20,
+        "texHeight": 20,
+        "normalScale": 0.2,
+        "repeatX": 358.656,
+        "repeatY": 358.656
+      },
+      "Bartack": {
+        "texWidth": 1.60157597,
+        "texHeight": 2,
+        "normalScale": 0.2,
+        "repeatX": 4478.787,
+        "repeatY": 3586.559
+      },
+      "默认明线": {
+        "texWidth": 79.99884033,
+        "texHeight": 15,
+        "normalScale": 0.2,
+        "repeatX": 89.665,
+        "repeatY": 478.208
+      },
+      "2复制1": {
+        "texWidth": 2.40162492,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 2986.777,
+        "repeatY": 14346.236
+      },
+      "默认织物": {
+        "texWidth": 102.52059174,
+        "texHeight": 50.59077454,
+        "normalScale": 1,
+        "repeatX": 69.968,
+        "repeatY": 141.787
+      },
+      "透明": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 7173.118,
+        "repeatY": 7173.118
+      },
+      "织物_1": {
+        "texWidth": 60.00969696,
+        "texHeight": 60.00969696,
+        "normalScale": 1,
+        "repeatX": 119.533,
+        "repeatY": 119.533
+      },
+      "图片1": {
+        "texWidth": 104.01318359,
+        "texHeight": 104.01318359,
+        "normalScale": 1,
+        "repeatX": 68.964,
+        "repeatY": 68.964
+      }
+    }
+  },
+  {
+    "id": "01jmmb6c8nx5tns3kq755v190p",
+    "name": "Sky blue nylon printed loose shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 433.557,
+    "materials": {
+      "1": {
+        "texWidth": 72.90129852,
+        "texHeight": 60.25627899,
+        "normalScale": 0.1,
+        "repeatX": 47.577,
+        "repeatY": 57.562
+      },
+      "默认明线": {
+        "texWidth": 2.40162492,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 1444.212,
+        "repeatY": 12532.816
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3468.457,
+        "repeatY": 3468.457
+      },
+      "图片3": {
+        "texWidth": 182.88139343,
+        "texHeight": 182.88139343,
+        "normalScale": 1,
+        "repeatX": 18.966,
+        "repeatY": 18.966
+      }
+    }
+  },
+  {
+    "id": "01jmmajjv5y600e48s4v07aj5z",
+    "name": "Black two piece casual sweatpants",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1125.362,
+    "materials": {
+      "腰头网布": {
+        "texWidth": 40,
+        "texHeight": 59.19075394,
+        "normalScale": 1,
+        "repeatX": 225.072,
+        "repeatY": 152.1
+      },
+      "默认拉链-teeth": {
+        "texWidth": 4.00326967,
+        "texHeight": 6.75462008,
+        "normalScale": 1,
+        "repeatX": 2248.885,
+        "repeatY": 1332.85
+      },
+      "压烫": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 9002.893,
+        "repeatY": 9002.893
+      },
+      "里层": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 900.289,
+        "repeatY": 900.289
+      },
+      "默认拉链-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 9002.893,
+        "repeatY": 9002.893
+      },
+      "默认拉链-puller": {
+        "texWidth": 27.30009651,
+        "texHeight": 26.48785973,
+        "normalScale": 0.1,
+        "repeatX": 329.775,
+        "repeatY": 339.888
+      },
+      "默认拉链_topStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 9002.893,
+        "repeatY": 9002.893
+      },
+      "明线1": {
+        "texWidth": 5.40000057,
+        "texHeight": 5,
+        "normalScale": 0.2,
+        "repeatX": 1667.202,
+        "repeatY": 1800.579
+      },
+      "唛头": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 9002.893,
+        "repeatY": 9002.893
+      },
+      "Stopper02": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 9002.893,
+        "repeatY": 9002.893
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 9002.893,
+        "repeatY": 9002.893
+      },
+      "腰头": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 900.289,
+        "repeatY": 900.289
+      },
+      "主料": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 900.289,
+        "repeatY": 900.289
+      },
+      "默认明线": {
+        "texWidth": 5.4000001,
+        "texHeight": 2.70000005,
+        "normalScale": 0.2,
+        "repeatX": 1667.202,
+        "repeatY": 3334.405
+      }
+    }
+  },
+  {
+    "id": "01jmmahrvh8rq7dzjrfxyst4zg",
+    "name": "Black drawstring waist shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 13.709,
+    "materials": {
+      "img20210701_16465705": {
+        "texWidth": 100,
+        "texHeight": 135.60832214,
+        "normalScale": 1,
+        "repeatX": 1.097,
+        "repeatY": 0.809
+      },
+      "纽扣_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 109.673,
+        "repeatY": 109.673
+      },
+      "附件4": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 109.673,
+        "repeatY": 109.673
+      },
+      "默认拉链_bottomStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 109.673,
+        "repeatY": 109.673
+      },
+      "织物_1": {
+        "texWidth": 100,
+        "texHeight": 100,
+        "normalScale": 1,
+        "repeatX": 1.097,
+        "repeatY": 1.097
+      },
+      "明线_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 109.673,
+        "repeatY": 109.673
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 109.673,
+        "repeatY": 109.673
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 109.673,
+        "repeatY": 109.673
+      },
+      "默认拉链-teeth": {
+        "texWidth": 4.02185249,
+        "texHeight": 11.01299381,
+        "normalScale": 1,
+        "repeatX": 27.269,
+        "repeatY": 9.959
+      }
+    }
+  },
+  {
+    "id": "01jmmahaxrs17szejysk9kgxtq",
+    "name": "Green European American Sports Casual Pants",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 19.929,
+    "materials": {
+      "附件7": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 159.436,
+        "repeatY": 159.436
+      },
+      "Eyelet01": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 159.436,
+        "repeatY": 159.436
+      },
+      "YY22023850加厚全棉真卫衣(绿色)": {
+        "texWidth": 50,
+        "texHeight": 58.75232697,
+        "normalScale": 1.40999997,
+        "repeatX": 3.189,
+        "repeatY": 2.714
+      },
+      "织物_1": {
+        "texWidth": 7.4821701,
+        "texHeight": 11.22325611,
+        "normalScale": 1.16999996,
+        "repeatX": 21.309,
+        "repeatY": 14.206
+      }
+    }
+  },
+  {
+    "id": "01jmmab4r4x6tmyenjzfckrrzh",
+    "name": "Pink Hooded Loose Coat",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 18.272,
+    "materials": {
+      "YKK-QuickFree®快脱拉链-slider": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 146.177,
+        "repeatY": 146.177
+      },
+      "Knit_French_Terry1": {
+        "texWidth": 71.199997,
+        "texHeight": 75.738014,
+        "normalScale": 1.04,
+        "repeatX": 2.053,
+        "repeatY": 1.93
+      },
+      "默认明线": {
+        "texWidth": 2.401625,
+        "texHeight": 0.8,
+        "normalScale": 0.2,
+        "repeatX": 60.866,
+        "repeatY": 182.721
+      },
+      "默认图案": {
+        "texWidth": 282.899994,
+        "texHeight": 282.899994,
+        "normalScale": 1,
+        "repeatX": 0.517,
+        "repeatY": 0.517
+      },
+      "YKK-QuickFree®快脱拉链_topStopperLeft": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 146.177,
+        "repeatY": 146.177
+      },
+      "Knit_Rib_2x2": {
+        "texWidth": 70,
+        "texHeight": 70,
+        "normalScale": 1,
+        "repeatX": 2.088,
+        "repeatY": 2.088
+      },
+      "YKK-QuickFree®快脱拉链-teeth": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 146.177,
+        "repeatY": 146.177
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 146.177,
+        "repeatY": 146.177
+      },
+      "Knit_French_Terry1复制1": {
+        "texWidth": 71.199997,
+        "texHeight": 75.738014,
+        "normalScale": 1.04,
+        "repeatX": 2.053,
+        "repeatY": 1.93
+      }
+    }
+  },
+  {
+    "id": "01jmm935y79zj24bt7jqhy7ymb",
+    "name": "Blue knitted tight shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 14.811,
+    "materials": {
+      "默认明线": {
+        "texWidth": 2.401626,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 49.336,
+        "repeatY": 236.973
+      },
+      "Chemical_Lurex": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1.1,
+        "repeatX": 1.481,
+        "repeatY": 1.481
+      },
+      "默认织物复制2": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1.35,
+        "repeatX": 1.481,
+        "repeatY": 1.481
+      }
+    }
+  },
+  {
+    "id": "01jmm92whscpe7x9acdm2yt07h",
+    "name": "Purple Knitted Pleated Tank Top",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 52.222,
+    "materials": {
+      "默认明线": {
+        "texWidth": 2.401626,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 173.957,
+        "repeatY": 835.558
+      },
+      "Chemical_Lurex": {
+        "texWidth": 25,
+        "texHeight": 27.122164,
+        "normalScale": 1.5,
+        "repeatX": 16.711,
+        "repeatY": 15.404
+      }
+    }
+  },
+  {
+    "id": "01jmm92mgxc1xq0jyysgh298zb",
+    "name": "Yellow green heteromorphic knitting yoga shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 81.328,
+    "materials": {
+      "默认织物": {
+        "texWidth": 15.996063,
+        "texHeight": 15.996063,
+        "normalScale": 1.1,
+        "repeatX": 40.674,
+        "repeatY": 40.674
+      }
+    }
+  },
+  {
+    "id": "01jmm924d64bfy1x8hjnjqejdd",
+    "name": "Yellow green knitting yoga vest",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 84.179,
+    "materials": {
+      "默认织物": {
+        "texWidth": 15.996063,
+        "texHeight": 15.996063,
+        "normalScale": 1.1,
+        "repeatX": 42.1,
+        "repeatY": 42.1
+      }
+    }
+  },
+  {
+    "id": "01jmm8nvv5ghhh2mvjpr45efry",
+    "name": "Light brown knitted hooded short sweater",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 10.61,
+    "materials": {
+      "螺纹_1": {
+        "texWidth": 120,
+        "texHeight": 119.999992,
+        "normalScale": 1,
+        "repeatX": 0.707,
+        "repeatY": 0.707
+      },
+      "Knit_Plainknit": {
+        "texWidth": 70,
+        "texHeight": 70,
+        "normalScale": 2,
+        "repeatX": 1.213,
+        "repeatY": 1.213
+      },
+      "默认明线": {
+        "texWidth": 2.800001,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 30.314,
+        "repeatY": 169.761
+      },
+      "明线_1": {
+        "texWidth": 3,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 28.294,
+        "repeatY": 84.881
+      },
+      "maozheng_": {
+        "texWidth": 70,
+        "texHeight": 70,
+        "normalScale": 1,
+        "repeatX": 1.213,
+        "repeatY": 1.213
+      },
+      "气眼": {
+        "texWidth": 0.5,
+        "texHeight": 3,
+        "normalScale": 0.2,
+        "repeatX": 169.761,
+        "repeatY": 28.294
+      },
+      "默认织物": {
+        "texWidth": 352.779999,
+        "texHeight": 352.779999,
+        "normalScale": 1,
+        "repeatX": 0.241,
+        "repeatY": 0.241
+      }
+    }
+  },
+  {
+    "id": "01jmm8ms8vrb1wcnm18rnr564n",
+    "name": "Light blue low neck tight yoga suit",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 81.021,
+    "materials": {
+      "默认织物": {
+        "texWidth": 15.996063,
+        "texHeight": 15.996063,
+        "normalScale": 1.1,
+        "repeatX": 40.521,
+        "repeatY": 40.521
+      }
+    }
+  },
+  {
+    "id": "01jmm8jksz96m4b8h9pjztbvf1",
+    "name": "Blue printing sling tight yoga suit",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 5.763,
+    "materials": {
+      "明线1_拷贝_1": {
+        "texWidth": 2.401626,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 19.197,
+        "repeatY": 76.839
+      },
+      "默认织物": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1,
+        "repeatX": 0.576,
+        "repeatY": 0.576
+      },
+      "织物1_拷贝_1": {
+        "texWidth": 50,
+        "texHeight": 50,
+        "normalScale": 1,
+        "repeatX": 0.922,
+        "repeatY": 0.922
+      },
+      "明线1": {
+        "texWidth": 2.401626,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 19.197,
+        "repeatY": 76.839
+      },
+      "默认明线": {
+        "texWidth": 2,
+        "texHeight": 5,
+        "normalScale": 0.2,
+        "repeatX": 23.052,
+        "repeatY": 9.221
+      },
+      "1x1_Cotton_Rib": {
+        "texWidth": 130,
+        "texHeight": 127.254364,
+        "normalScale": 0.55,
+        "repeatX": 0.355,
+        "repeatY": 0.362
+      },
+      "织物1": {
+        "texWidth": 677.333313,
+        "texHeight": 508,
+        "normalScale": 1,
+        "repeatX": 0.068,
+        "repeatY": 0.091
+      }
+    }
+  },
+  {
+    "id": "01jmm8hx335djmtcz6dp11x5cf",
+    "name": "Military green sling tight yoga suit",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 16.077,
+    "materials": {
+      "1": {
+        "texWidth": 90,
+        "texHeight": 88.099182,
+        "normalScale": 1,
+        "repeatX": 1.429,
+        "repeatY": 1.46
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1,
+        "repeatX": 1.607,
+        "repeatY": 1.607
+      },
+      "默认明线": {
+        "texWidth": 3.958198,
+        "texHeight": 9.604728,
+        "normalScale": 0.2,
+        "repeatX": 32.494,
+        "repeatY": 13.391
+      },
+      "1x1_Cotton_Rib": {
+        "texWidth": 90,
+        "texHeight": 88.099182,
+        "normalScale": 1,
+        "repeatX": 1.429,
+        "repeatY": 1.46
+      },
+      "默认织物": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1,
+        "repeatX": 1.607,
+        "repeatY": 1.607
+      },
+      "织物1": {
+        "texWidth": 50,
+        "texHeight": 50,
+        "normalScale": 1,
+        "repeatX": 2.572,
+        "repeatY": 2.572
+      },
+      "明线1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 53.554,
+        "repeatY": 214.361
+      },
+      "明线1_拷贝_1": {
+        "texWidth": 2.401626,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 53.554,
+        "repeatY": 214.361
+      }
+    }
+  },
+  {
+    "id": "01jmm8hw83x3s0ph48xt8kjbe8",
+    "name": "Blue skinny one-piece yoga suit",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 23.834,
+    "materials": {
+      "小": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1,
+        "repeatX": 2.383,
+        "repeatY": 2.383
+      },
+      "默认织物": {
+        "texWidth": 80.029541,
+        "texHeight": 80.029541,
+        "normalScale": 1,
+        "repeatX": 2.383,
+        "repeatY": 2.383
+      },
+      "默认明线": {
+        "texWidth": 3.800002,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 50.177,
+        "repeatY": 317.79
+      },
+      "1x1_Cotton_Rib_拷贝_1": {
+        "texWidth": 20,
+        "texHeight": 19.069288,
+        "normalScale": -0.45,
+        "repeatX": 9.534,
+        "repeatY": 9.999
+      }
+    }
+  },
+  {
+    "id": "01jmm8a98j2dfq7n7zkmgbs7nt",
+    "name": "Pink Design Fit Long Sleeve T-Shirt",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 12.754,
+    "materials": {
+      "默认织物复制1": {
+        "texWidth": 100,
+        "texHeight": 99.609375,
+        "normalScale": 1,
+        "repeatX": 1.02,
+        "repeatY": 1.024
+      },
+      "默认明线复制1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 42.483,
+        "repeatY": 170.047
+      },
+      "默认织物复制2": {
+        "texWidth": 100,
+        "texHeight": 99.609375,
+        "normalScale": 1,
+        "repeatX": 1.02,
+        "repeatY": 1.024
+      },
+      "默认明线": {
+        "texWidth": 2.401625,
+        "texHeight": 0.6,
+        "normalScale": 0.2,
+        "repeatX": 42.483,
+        "repeatY": 170.047
+      },
+      "默认织物": {
+        "texWidth": 100,
+        "texHeight": 99.609375,
+        "normalScale": 1,
+        "repeatX": 1.02,
+        "repeatY": 1.024
+      }
+    }
+  },
+  {
+    "id": "01jmm7jwn0yj7jtgp9ab9n8avz",
+    "name": "Brown Twill Split Fit Shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 6.3,
+    "materials": {
+      "0": {
+        "texWidth": 200,
+        "texHeight": 262.564117,
+        "normalScale": -2,
+        "repeatX": 0.252,
+        "repeatY": 0.192
+      },
+      "明线1": {
+        "texWidth": 25.653994,
+        "texHeight": 6.434667,
+        "normalScale": 2,
+        "repeatX": 1.965,
+        "repeatY": 7.833
+      },
+      "明线4_拷贝_1": {
+        "texWidth": 33.86668,
+        "texHeight": 20,
+        "normalScale": 0.2,
+        "repeatX": 1.488,
+        "repeatY": 2.52
+      },
+      "blinn2SG": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.75,
+        "repeatX": 50.403,
+        "repeatY": 50.403
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 25,
+        "texHeight": 15.099715,
+        "normalScale": 2,
+        "repeatX": 2.016,
+        "repeatY": 3.338
+      },
+      "默认明线": {
+        "texWidth": 2,
+        "texHeight": 0.7,
+        "normalScale": 0.2,
+        "repeatX": 25.202,
+        "repeatY": 72.005
+      },
+      "默认织物": {
+        "texWidth": 200,
+        "texHeight": 262.564117,
+        "normalScale": -2,
+        "repeatX": 0.252,
+        "repeatY": 0.192
+      },
+      "腰带": {
+        "texWidth": 250,
+        "texHeight": 328.205139,
+        "normalScale": -2,
+        "repeatX": 0.202,
+        "repeatY": 0.154
+      },
+      "明线4_拷贝_2": {
+        "texWidth": 33.866669,
+        "texHeight": 20,
+        "normalScale": 0.2,
+        "repeatX": 1.488,
+        "repeatY": 2.52
+      },
+      "明线4": {
+        "texWidth": 33.86668,
+        "texHeight": 25,
+        "normalScale": 0.2,
+        "repeatX": 1.488,
+        "repeatY": 2.016
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 2,
+        "texHeight": 0.7,
+        "normalScale": 0.2,
+        "repeatX": 25.202,
+        "repeatY": 72.005
+      },
+      "橡筋条": {
+        "texWidth": 250,
+        "texHeight": 328.205139,
+        "normalScale": -2,
+        "repeatX": 0.202,
+        "repeatY": 0.154
+      }
+    }
+  },
+  {
+    "id": "01jmm7j8aha6vrw0e3evd3h70c",
+    "name": "Beige twill panel loose shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 13.386,
+    "materials": {
+      "默认明线": {
+        "texWidth": 3,
+        "texHeight": 0.7,
+        "normalScale": 0.2,
+        "repeatX": 35.695,
+        "repeatY": 152.978
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 3,
+        "texHeight": 0.7,
+        "normalScale": 0.2,
+        "repeatX": 35.695,
+        "repeatY": 152.978
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 100,
+        "texHeight": 98.911835,
+        "normalScale": 1.57,
+        "repeatX": 1.071,
+        "repeatY": 1.083
+      },
+      "默认织物": {
+        "texWidth": 100,
+        "texHeight": 98.911835,
+        "normalScale": 1.57,
+        "repeatX": 1.071,
+        "repeatY": 1.083
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 107.084,
+        "repeatY": 107.084
+      },
+      "默认扣眼": {
+        "texWidth": 15,
+        "texHeight": 15,
+        "normalScale": 0.2,
+        "repeatX": 7.139,
+        "repeatY": 7.139
+      }
+    }
+  },
+  {
+    "id": "01jmm7bg9msc25ve6hb83523zj",
+    "name": "Red Knitted Panel Loose Shorts",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 34.083,
+    "materials": {
+      "明线1_拷贝_1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.8,
+        "normalScale": 0.2,
+        "repeatX": 113.534,
+        "repeatY": 340.832
+      },
+      "默认织物": {
+        "texWidth": 65,
+        "texHeight": 57.741528,
+        "normalScale": 0.8,
+        "repeatX": 4.195,
+        "repeatY": 4.722
+      },
+      "织物1": {
+        "texWidth": 6.5,
+        "texHeight": 6.5,
+        "normalScale": 1,
+        "repeatX": 41.949,
+        "repeatY": 41.949
+      },
+      "明线1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.8,
+        "normalScale": 0.2,
+        "repeatX": 113.534,
+        "repeatY": 340.832
+      },
+      "默认明线": {
+        "texWidth": 1.5,
+        "texHeight": 4,
+        "normalScale": 0.2,
+        "repeatX": 181.777,
+        "repeatY": 68.166
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 40,
+        "texHeight": 39.15519,
+        "normalScale": 1.05,
+        "repeatX": 6.817,
+        "repeatY": 6.964
+      }
+    }
+  },
+  {
+    "id": "01jmm78bvtz5yq9v011wvq0tap",
+    "name": "Blue woven panel tight yoga suit",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 68.666,
+    "materials": {
+      "织物16": {
+        "texWidth": 20,
+        "texHeight": 20.000002,
+        "normalScale": 1.4,
+        "repeatX": 27.466,
+        "repeatY": 27.466
+      },
+      "织物2_拷贝_1": {
+        "texWidth": 20,
+        "texHeight": 20.000002,
+        "normalScale": 1.4,
+        "repeatX": 27.466,
+        "repeatY": 27.466
+      },
+      "织物7": {
+        "texWidth": 20,
+        "texHeight": 20.000002,
+        "normalScale": 1.35,
+        "repeatX": 27.466,
+        "repeatY": 27.466
+      },
+      "织物2": {
+        "texWidth": 20,
+        "texHeight": 20.000002,
+        "normalScale": 1.4,
+        "repeatX": 27.466,
+        "repeatY": 27.466
+      },
+      "织物5": {
+        "texWidth": 20,
+        "texHeight": 20.000002,
+        "normalScale": 1.4,
+        "repeatX": 27.466,
+        "repeatY": 27.466
+      }
+    }
+  },
+  {
+    "id": "01jmm77r83yq83d4hfbrrxw7hb",
+    "name": "Black woven leggings slacks",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 29.57,
+    "materials": {
+      "织物10": {
+        "texWidth": 30,
+        "texHeight": 19.565218,
+        "normalScale": 2,
+        "repeatX": 7.885,
+        "repeatY": 12.091
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 236.564,
+        "repeatY": 236.564
+      },
+      "Material6": {
+        "texWidth": 3.00743,
+        "texHeight": 8.663843,
+        "normalScale": 1,
+        "repeatX": 78.66,
+        "repeatY": 27.305
+      },
+      "Material17": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 236.564,
+        "repeatY": 236.564
+      },
+      "织物12_拷贝_1": {
+        "texWidth": 30,
+        "texHeight": 19.565218,
+        "normalScale": 2,
+        "repeatX": 7.885,
+        "repeatY": 12.091
+      },
+      "织物12": {
+        "texWidth": 30,
+        "texHeight": 19.565218,
+        "normalScale": 2,
+        "repeatX": 7.885,
+        "repeatY": 12.091
+      },
+      "织物2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 236.564,
+        "repeatY": 236.564
+      }
+    }
+  },
+  {
+    "id": "01jmm71wr9vjgf97j02r245y3g",
+    "name": "Women/coat W-Sport-gyq-006",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 34.443,
+    "materials": {
+      "Stopper01": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 275.545,
+        "repeatY": 275.545
+      },
+      "Material17": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 275.545,
+        "repeatY": 275.545
+      },
+      "银色": {
+        "texWidth": 63.710495,
+        "texHeight": 39.713814,
+        "normalScale": 1,
+        "repeatX": 4.325,
+        "repeatY": 6.938
+      },
+      "默认明线_拷贝_2": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 114.733,
+        "repeatY": 995.647
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 275.545,
+        "repeatY": 275.545
+      },
+      "织物3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 275.545,
+        "repeatY": 275.545
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 114.733,
+        "repeatY": 995.647
+      },
+      "sanwen_fense_拷贝_2": {
+        "texWidth": 88.594315,
+        "texHeight": 78.701096,
+        "normalScale": 0.8,
+        "repeatX": 3.11,
+        "repeatY": 3.501
+      },
+      "default_material": {
+        "texWidth": 74.889275,
+        "texHeight": 74.657425,
+        "normalScale": 1.93,
+        "repeatX": 3.679,
+        "repeatY": 3.691
+      },
+      "织物1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 275.545,
+        "repeatY": 275.545
+      },
+      "织物2": {
+        "texWidth": 38.205246,
+        "texHeight": 37.398342,
+        "normalScale": 1,
+        "repeatX": 7.212,
+        "repeatY": 7.368
+      },
+      "default_material_拷贝_1": {
+        "texWidth": 124.137642,
+        "texHeight": 123.753319,
+        "normalScale": 1.86,
+        "repeatX": 2.22,
+        "repeatY": 2.227
+      },
+      "Material407": {
+        "texWidth": 4.004338,
+        "texHeight": 11.575466,
+        "normalScale": 1,
+        "repeatX": 68.812,
+        "repeatY": 23.804
+      }
+    }
+  },
+  {
+    "id": "01jmm6zjj03mk2svjn8dpa0xcf",
+    "name": "Men's/hoodie top-gyq-004",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 429.546,
+    "materials": {
+      "Stopper06": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "Qiyan3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.375,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "Rayon_Mesh": {
+        "texWidth": 69.5,
+        "texHeight": 91.728256,
+        "normalScale": 1,
+        "repeatX": 49.444,
+        "repeatY": 37.462
+      },
+      "Material6": {
+        "texWidth": 4.010475,
+        "texHeight": 11.528262,
+        "normalScale": 1,
+        "repeatX": 856.848,
+        "repeatY": 298.082
+      },
+      "织物1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "Material17": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "默认织物_拷贝_2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      },
+      "银色": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 3436.368,
+        "repeatY": 3436.368
+      }
+    }
+  },
+  {
+    "id": "01jmm64kyxp9gqj08085sq86ks",
+    "name": "LL Girls/Shorts G-Shorts 41",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 34.73,
+    "materials": {
+      "默认明线": {
+        "texWidth": 2.401625,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 115.69,
+        "repeatY": 277.844
+      },
+      "默认扣眼": {
+        "texWidth": 18,
+        "texHeight": 18,
+        "normalScale": 0.2,
+        "repeatX": 15.436,
+        "repeatY": 15.436
+      },
+      "默认织物": {
+        "texWidth": 37.959667,
+        "texHeight": 72.972374,
+        "normalScale": 1,
+        "repeatX": 7.319,
+        "repeatY": 3.808
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 277.844,
+        "repeatY": 277.844
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 37.959667,
+        "texHeight": 72.972374,
+        "normalScale": 1,
+        "repeatX": 7.319,
+        "repeatY": 3.808
+      }
+    }
+  },
+  {
+    "id": "01jmm5tca9ebm47npvbk3f90fw",
+    "name": "LL Men's/Shorts M-Shorts 2",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 7.386,
+    "materials": {
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 59.089,
+        "repeatY": 59.089
+      },
+      "默认织物": {
+        "texWidth": 170,
+        "texHeight": 223.179504,
+        "normalScale": 1,
+        "repeatX": 0.348,
+        "repeatY": 0.265
+      },
+      "默认明线": {
+        "texWidth": 2.401626,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 24.604,
+        "repeatY": 213.51
+      }
+    }
+  },
+  {
+    "id": "01jmm5qzpmxej61vz5d92n98t2",
+    "name": "SK/Women's yoga suit W-suite 9",
+    "category": "SUIT",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 14.976,
+    "materials": {
+      "默认明线": {
+        "texWidth": 3.003134,
+        "texHeight": 6,
+        "normalScale": 0.2,
+        "repeatX": 39.894,
+        "repeatY": 19.968
+      },
+      "明线1": {
+        "texWidth": 3.003134,
+        "texHeight": 3,
+        "normalScale": 0.2,
+        "repeatX": 39.894,
+        "repeatY": 39.936
+      },
+      "面料A": {
+        "texWidth": 78.739998,
+        "texHeight": 78.739998,
+        "normalScale": 0.2,
+        "repeatX": 1.522,
+        "repeatY": 1.522
+      }
+    }
+  },
+  {
+    "id": "01jmm5mk0z93yxcry762ap9dkt",
+    "name": "LL Men's/Shorts M-Shorts 1",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 4.579,
+    "materials": {
+      "默认扣眼": {
+        "texWidth": 22,
+        "texHeight": 5.5,
+        "normalScale": 0.2,
+        "repeatX": 1.665,
+        "repeatY": 6.66
+      },
+      "默认织物": {
+        "texWidth": 290,
+        "texHeight": 290,
+        "normalScale": 0.9,
+        "repeatX": 0.126,
+        "repeatY": 0.126
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 36.629,
+        "repeatY": 36.629
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 290,
+        "texHeight": 290,
+        "normalScale": 0.9,
+        "repeatX": 0.126,
+        "repeatY": 0.126
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 15.252,
+        "repeatY": 132.353
+      },
+      "默认明线": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 15.252,
+        "repeatY": 132.353
+      }
+    }
+  },
+  {
+    "id": "01jmm5mbgfg54c1p7hs78cdfwk",
+    "name": "Men's shorts M-shorts 104",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 832.572,
+    "materials": {
+      "KD001_拷贝_2": {
+        "texWidth": 120,
+        "texHeight": 120,
+        "normalScale": 1,
+        "repeatX": 55.505,
+        "repeatY": 55.505
+      },
+      "织物1": {
+        "texWidth": 55.957184,
+        "texHeight": 80.971268,
+        "normalScale": 1,
+        "repeatX": 119.03,
+        "repeatY": 82.258
+      },
+      "KD001_拷贝_4": {
+        "texWidth": 55.957184,
+        "texHeight": 80.971268,
+        "normalScale": 1,
+        "repeatX": 119.03,
+        "repeatY": 82.258
+      },
+      "KD001_拷贝_3": {
+        "texWidth": 55.957184,
+        "texHeight": 80.971268,
+        "normalScale": 1,
+        "repeatX": 119.03,
+        "repeatY": 82.258
+      },
+      "KD001": {
+        "texWidth": 55.957184,
+        "texHeight": 80.971268,
+        "normalScale": 1,
+        "repeatX": 119.03,
+        "repeatY": 82.258
+      },
+      "KD001_拷贝_1": {
+        "texWidth": 55.957184,
+        "texHeight": 80.971268,
+        "normalScale": 1,
+        "repeatX": 119.03,
+        "repeatY": 82.258
+      },
+      "Rayon_Mesh": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 6660.574,
+        "repeatY": 6660.574
+      }
+    }
+  },
+  {
+    "id": "01jmm5kr4agr0nvxv7r1qk7fb3",
+    "name": "Men's/shorts M-shorts 103",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 13.845,
+    "materials": {
+      "ZD": {
+        "texWidth": 100,
+        "texHeight": 131.282059,
+        "normalScale": 1,
+        "repeatX": 1.108,
+        "repeatY": 0.844
+      },
+      "YD": {
+        "texWidth": 100,
+        "texHeight": 100,
+        "normalScale": 1,
+        "repeatX": 1.108,
+        "repeatY": 1.108
+      },
+      "ZML": {
+        "texWidth": 100,
+        "texHeight": 100,
+        "normalScale": 1.1,
+        "repeatX": 1.108,
+        "repeatY": 1.108
+      },
+      "默认明线": {
+        "texWidth": 2,
+        "texHeight": 1,
+        "normalScale": 0.2,
+        "repeatX": 55.379,
+        "repeatY": 110.758
+      }
+    }
+  },
+  {
+    "id": "01jmm5fmrzs7y4vsqjxkt1zqy6",
+    "name": "Women/Tank Top W-Singlet 36",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 70.182,
+    "materials": {
+      "B料": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.5,
+        "repeatX": 561.456,
+        "repeatY": 561.456
+      },
+      "主料": {
+        "texWidth": 67.733337,
+        "texHeight": 67.733337,
+        "normalScale": 0.1,
+        "repeatX": 8.289,
+        "repeatY": 8.289
+      },
+      "默认明线": {
+        "texWidth": 2,
+        "texHeight": 0.3,
+        "normalScale": 0.2,
+        "repeatX": 280.728,
+        "repeatY": 1871.519
+      }
+    }
+  },
+  {
+    "id": "01jmm5f94hyzwb1fpfktb9y0gd",
+    "name": "Women/shorts W-shorts 111",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 725.262,
+    "materials": {
+      "B料": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.5,
+        "repeatX": 5802.096,
+        "repeatY": 5802.096
+      },
+      "默认明线": {
+        "texWidth": 2.401625,
+        "texHeight": 0.5,
+        "normalScale": 0.2,
+        "repeatX": 2415.904,
+        "repeatY": 11604.192
+      },
+      "主料": {
+        "texWidth": 59.052597,
+        "texHeight": 59.052597,
+        "normalScale": 0.5,
+        "repeatX": 98.253,
+        "repeatY": 98.253
+      },
+      "C料": {
+        "texWidth": 59.052597,
+        "texHeight": 59.052597,
+        "normalScale": 0.5,
+        "repeatX": 98.253,
+        "repeatY": 98.253
+      },
+      "默认扣眼": {
+        "texWidth": 27.037006,
+        "texHeight": 6.759252,
+        "normalScale": 0.2,
+        "repeatX": 214.598,
+        "repeatY": 858.393
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 5802.096,
+        "repeatY": 5802.096
+      }
+    }
+  },
+  {
+    "id": "01jmm5dcszf4k3k1hvpdkgszsj",
+    "name": "Boys/Shorts B-shorts 103",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1341.304,
+    "materials": {
+      "0": {
+        "texWidth": 5.400001,
+        "texHeight": 2.7,
+        "normalScale": 0.2,
+        "repeatX": 1987.117,
+        "repeatY": 3974.235
+      },
+      "QP002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10730.436,
+        "repeatY": 10730.436
+      },
+      "0_拷贝_1": {
+        "texWidth": 1.601971,
+        "texHeight": 1.802217,
+        "normalScale": 0.2,
+        "repeatX": 6698.271,
+        "repeatY": 5954.02
+      },
+      "MX002_拷贝_1": {
+        "texWidth": 2.997471,
+        "texHeight": 3.65406,
+        "normalScale": 0.2,
+        "repeatX": 3579.83,
+        "repeatY": 2936.579
+      },
+      "Stopper02": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10730.436,
+        "repeatY": 10730.436
+      },
+      "YT001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10730.436,
+        "repeatY": 10730.436
+      },
+      "Stopper03": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10730.436,
+        "repeatY": 10730.436
+      },
+      "0.6": {
+        "texWidth": 5.4,
+        "texHeight": 2.7,
+        "normalScale": 0.2,
+        "repeatX": 1987.118,
+        "repeatY": 3974.235
+      }
+    }
+  },
+  {
+    "id": "01jmm581e1re6zrrk91bh6te0w",
+    "name": "Women/Tank Top W-Singlet 27",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 20.827,
+    "materials": {
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 166.62,
+        "repeatY": 166.62
+      },
+      "默认织物_拷贝_3": {
+        "texWidth": 40,
+        "texHeight": 40.000004,
+        "normalScale": 1.4,
+        "repeatX": 4.165,
+        "repeatY": 4.165
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 200,
+        "texHeight": 200,
+        "normalScale": 1.4,
+        "repeatX": 0.833,
+        "repeatY": 0.833
+      },
+      "默认明线": {
+        "texWidth": 2,
+        "texHeight": 4,
+        "normalScale": 0.2,
+        "repeatX": 83.31,
+        "repeatY": 41.655
+      }
+    }
+  },
+  {
+    "id": "01jmm57mvs6rvjdp6qad9ynfdn",
+    "name": "Women/shorts W-shorts 104",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 12.564,
+    "materials": {
+      "YT": {
+        "texWidth": 100,
+        "texHeight": 100,
+        "normalScale": 1,
+        "repeatX": 1.005,
+        "repeatY": 1.005
+      },
+      "ML": {
+        "texWidth": 100,
+        "texHeight": 100,
+        "normalScale": 1.1,
+        "repeatX": 1.005,
+        "repeatY": 1.005
+      }
+    }
+  },
+  {
+    "id": "01jmm538b1av1c17hhwc4nn2sq",
+    "name": "G Women's T-shirt W-T-shirt 002",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 788.386,
+    "materials": {
+      "织物2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 6307.087,
+        "repeatY": 6307.087
+      },
+      "网眼": {
+        "texWidth": 40,
+        "texHeight": 52.79323959350586,
+        "normalScale": 1,
+        "repeatX": 157.677,
+        "repeatY": 119.468
+      },
+      "ZY-1612016": {
+        "texWidth": 24.999996185302734,
+        "texHeight": 31.074764251708984,
+        "normalScale": 1,
+        "repeatX": 252.284,
+        "repeatY": 202.965
+      },
+      "phong1SG": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 0.75,
+        "repeatX": 6307.087,
+        "repeatY": 6307.087
+      }
+    }
+  },
+  {
+    "id": "01jmm51av1qxmx80ccghbnyy49",
+    "name": "Women/T-shirt W-T shirt 155",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 4.417,
+    "materials": {
+      "默认明线": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 14.713,
+        "repeatY": 127.678
+      },
+      "Tshirt_Fabric": {
+        "texWidth": 300,
+        "texHeight": 424.30938720703125,
+        "normalScale": 1,
+        "repeatX": 0.118,
+        "repeatY": 0.083
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 14.713,
+        "repeatY": 127.678
+      }
+    }
+  },
+  {
+    "id": "01jmm50hb2y2n0qx7en5wgdfqv",
+    "name": "Women/T-shirt W-T shirt 153",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 12.698,
+    "materials": {
+      "BS": {
+        "texWidth": 100,
+        "texHeight": 131.2820587158203,
+        "normalScale": 1,
+        "repeatX": 1.016,
+        "repeatY": 0.774
+      },
+      "ZML": {
+        "texWidth": 100,
+        "texHeight": 131.2820587158203,
+        "normalScale": 1,
+        "repeatX": 1.016,
+        "repeatY": 0.774
+      }
+    }
+  },
+  {
+    "id": "01jmm4z6tyv42p6kkdxx82swh3",
+    "name": "Women/Tank Top W-Singlet 23",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 6.772,
+    "materials": {
+      "默认明线_拷贝_1": {
+        "texWidth": 7,
+        "texHeight": 1,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 7.739,
+        "repeatY": 54.174
+      },
+      "默认织物": {
+        "texWidth": 200,
+        "texHeight": 182.40000915527344,
+        "normalScale": 0.5,
+        "repeatX": 0.271,
+        "repeatY": 0.297
+      },
+      "默认明线": {
+        "texWidth": 7,
+        "texHeight": 1,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 7.739,
+        "repeatY": 54.174
+      }
+    }
+  },
+  {
+    "id": "01jmm4yygevw7c1az7ngdadv0z",
+    "name": "Women/T-shirt W-T shirt 144",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 8.782,
+    "materials": {
+      "包边条": {
+        "texWidth": 200,
+        "texHeight": 182.4000244140625,
+        "normalScale": 1,
+        "repeatX": 0.351,
+        "repeatY": 0.385
+      },
+      "包边条_拷贝_1": {
+        "texWidth": 49.290191650390625,
+        "texHeight": 16.58654022216797,
+        "normalScale": 1,
+        "repeatX": 1.425,
+        "repeatY": 4.235
+      },
+      "面料": {
+        "texWidth": 150,
+        "texHeight": 142.08596801757812,
+        "normalScale": -0.0020000000949949026,
+        "repeatX": 0.468,
+        "repeatY": 0.494
+      }
+    }
+  },
+  {
+    "id": "01jmm4yahnya4rdn9zwqdg5h7q",
+    "name": "Women/T-shirt W-T shirt 141",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 62.402,
+    "materials": {
+      "343434": {
+        "texWidth": 20,
+        "texHeight": 9.963053703308105,
+        "normalScale": 1.5,
+        "repeatX": 24.961,
+        "repeatY": 50.107
+      },
+      "织物2": {
+        "texWidth": 43.349334716796875,
+        "texHeight": 43.349334716796875,
+        "normalScale": 1,
+        "repeatX": 11.516,
+        "repeatY": 11.516
+      },
+      "343434_拷贝_1": {
+        "texWidth": 20,
+        "texHeight": 9.963053703308105,
+        "normalScale": 1.5,
+        "repeatX": 24.961,
+        "repeatY": 50.107
+      },
+      "默认明线": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 207.866,
+        "repeatY": 1803.849
+      }
+    }
+  },
+  {
+    "id": "01jmm4rhc2hpp29cy7pm9qwn1c",
+    "name": "Men's/T-shirt M-T shirt 117",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 19.837,
+    "materials": {
+      "默认织物_拷贝_1": {
+        "texWidth": 70,
+        "texHeight": 34.870689392089844,
+        "normalScale": 1,
+        "repeatX": 2.267,
+        "repeatY": 4.551
+      },
+      "0.15": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 66.077,
+        "repeatY": 573.415
+      },
+      "默认织物": {
+        "texWidth": 70,
+        "texHeight": 34.870689392089844,
+        "normalScale": 1,
+        "repeatX": 2.267,
+        "repeatY": 4.551
+      },
+      "0.6": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 66.077,
+        "repeatY": 573.415
+      },
+      "zhidai": {
+        "texWidth": 14.858999252319336,
+        "texHeight": 8.974666595458984,
+        "normalScale": 2,
+        "repeatX": 10.68,
+        "repeatY": 17.682
+      },
+      "织物1": {
+        "texWidth": 70,
+        "texHeight": 34.870689392089844,
+        "normalScale": 1,
+        "repeatX": 2.267,
+        "repeatY": 4.551
+      },
+      "2.5-0.6": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 66.077,
+        "repeatY": 573.415
+      },
+      "默认明线_拷贝_5": {
+        "texWidth": 5.400000095367432,
+        "texHeight": 6,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 29.388,
+        "repeatY": 26.449
+      },
+      "0.5": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 66.077,
+        "repeatY": 573.415
+      },
+      "默认织物_拷贝_2": {
+        "texWidth": 70,
+        "texHeight": 34.870689392089844,
+        "normalScale": 1,
+        "repeatX": 2.267,
+        "repeatY": 4.551
+      }
+    }
+  },
+  {
+    "id": "01jmm4nqbb7tmjmr316src86f6",
+    "name": "Men's/shorts M-Shorts 80",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 125.923,
+    "materials": {
+      "里层": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 100.739,
+        "repeatY": 100.739
+      },
+      "腰头": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 100.739,
+        "repeatY": 100.739
+      },
+      "默认织物_拷贝_2": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 100.739,
+        "repeatY": 100.739
+      },
+      "默认明线": {
+        "texWidth": 5.400000095367432,
+        "texHeight": 2.700000047683716,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 186.553,
+        "repeatY": 373.106
+      },
+      "主料": {
+        "texWidth": 10,
+        "texHeight": 10,
+        "normalScale": 1,
+        "repeatX": 100.739,
+        "repeatY": 100.739
+      },
+      "明线1": {
+        "texWidth": 5.400000095367432,
+        "texHeight": 5,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 186.553,
+        "repeatY": 201.477
+      }
+    }
+  },
+  {
+    "id": "01jmm4g94ej7tnddhrndt9nr2y",
+    "name": "Men's/T-shirt M-T shirt 113",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 29.826,
+    "materials": {
+      "罗纹": {
+        "texWidth": 17.209775924682617,
+        "texHeight": 5.711208820343018,
+        "normalScale": 1,
+        "repeatX": 13.865,
+        "repeatY": 41.779
+      },
+      "贴边": {
+        "texWidth": 27.907602310180664,
+        "texHeight": 30.208227157592773,
+        "normalScale": 1,
+        "repeatX": 8.55,
+        "repeatY": 7.899
+      },
+      "B料": {
+        "texWidth": 57.77526092529297,
+        "texHeight": 27.57274627685547,
+        "normalScale": 1,
+        "repeatX": 4.13,
+        "repeatY": 8.654
+      },
+      "明线1": {
+        "texWidth": 3.000200033187866,
+        "texHeight": 6.508909225463867,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 79.532,
+        "repeatY": 36.659
+      },
+      "明线2": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 99.354,
+        "repeatY": 862.188
+      },
+      "主料": {
+        "texWidth": 48.13753128051758,
+        "texHeight": 153.7630615234375,
+        "normalScale": 1,
+        "repeatX": 4.957,
+        "repeatY": 1.552
+      },
+      "默认明线": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 99.354,
+        "repeatY": 862.188
+      }
+    }
+  },
+  {
+    "id": "01jmm4adb6yvwhcqrvajdpskck",
+    "name": "Women/T-shirt W-T shirt 130",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 88.855,
+    "materials": {
+      "默认明线": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 295.983,
+        "repeatY": 2568.526
+      },
+      "主料": {
+        "texWidth": 15,
+        "texHeight": 15,
+        "normalScale": -0.10000000149011612,
+        "repeatX": 47.389,
+        "repeatY": 47.389
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 3.0029098987579346,
+        "texHeight": 6,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 236.717,
+        "repeatY": 118.473
+      },
+      "织带": {
+        "texWidth": 14.858999252319336,
+        "texHeight": 8.974666595458984,
+        "normalScale": 1,
+        "repeatX": 47.839,
+        "repeatY": 79.205
+      },
+      "B料": {
+        "texWidth": 15,
+        "texHeight": 15,
+        "normalScale": -0.10000000149011612,
+        "repeatX": 47.389,
+        "repeatY": 47.389
+      }
+    }
+  },
+  {
+    "id": "01jmm49z8rfwyykcxp2cfv289f",
+    "name": "Men's/T-shirt M-T shirt 96",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 54.444,
+    "materials": {
+      "XK": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 435.555,
+        "repeatY": 435.555
+      },
+      "MX001": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.5,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 181.358,
+        "repeatY": 871.11
+      },
+      "ML": {
+        "texWidth": 338.4148864746094,
+        "texHeight": 308.6344299316406,
+        "normalScale": 2,
+        "repeatX": 1.287,
+        "repeatY": 1.411
+      }
+    }
+  },
+  {
+    "id": "01jmm49tkqzrfha29t0vqx8q3p",
+    "name": "Men's/T-shirt M-T shirt 95",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 61.981,
+    "materials": {
+      "主料": {
+        "texWidth": 21.1843204498291,
+        "texHeight": 19.320100784301758,
+        "normalScale": 1,
+        "repeatX": 23.406,
+        "repeatY": 25.665
+      },
+      "B料": {
+        "texWidth": 21.1843204498291,
+        "texHeight": 19.320100784301758,
+        "normalScale": 1,
+        "repeatX": 23.406,
+        "repeatY": 25.665
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 3.000200033187866,
+        "texHeight": 6.508910179138184,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 165.272,
+        "repeatY": 76.18
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 495.85,
+        "repeatY": 495.85
+      },
+      "默认明线": {
+        "texWidth": 2.401624917984009,
+        "texHeight": 0.27674999833106995,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 206.464,
+        "repeatY": 1791.69
+      },
+      "Material94": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 495.85,
+        "repeatY": 495.85
+      }
+    }
+  },
+  {
+    "id": "01jmm49qg63z1a65aqjzed6mmk",
+    "name": "Men's/T-shirt M-T shirt 86",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 3.246,
+    "materials": {
+      "默认明线": {
+        "texWidth": 10,
+        "texHeight": 6,
+        "normalScale": 0.20000000298023224,
+        "repeatX": 2.597,
+        "repeatY": 4.328
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 400,
+        "texHeight": 503.3333435058594,
+        "normalScale": 0.5,
+        "repeatX": 0.065,
+        "repeatY": 0.052
+      }
+    }
+  },
+  {
+    "id": "01jmm47sa3dx873cc7eaqcabn6",
+    "name": "Women/T-shirt W-T shirt 64",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1309.329,
+    "materials": {
+      "默认织物_拷贝_5": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_10": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_7": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_6": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_4": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_9": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_2": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      },
+      "默认织物_拷贝_8": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10474.634,
+        "repeatY": 10474.634
+      }
+    }
+  },
+  {
+    "id": "01jmm47b69afbq4fp25ymjr1fz",
+    "name": "Women/Tank Top W-Singlet 14",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1240.204,
+    "materials": {
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 9921.634,
+        "repeatY": 9921.634
+      }
+    }
+  },
+  {
+    "id": "01jmm3yg7ppdkpemhxjd9q59h0",
+    "name": "Men's/Shorts M-Shorts 58",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1346.324,
+    "materials": {
+      "HP003": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "MX001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "PK001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "MX002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "HP001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "QP003": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "DG002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "QP002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "KD003": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "QP004": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "KD001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "YD001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "HP002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "HP004": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "KD002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      },
+      "HQ001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10770.593,
+        "repeatY": 10770.593
+      }
+    }
+  },
+  {
+    "id": "01jmm3xtvkv40zp92yda5z7183",
+    "name": "Women/Tank Top W-Singlet 2",
+    "category": "TOPWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 1289.208,
+    "materials": {
+      "明线1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "HP001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "QP001": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "HP002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "QP002": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "QP003": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      },
+      "QP004": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 10313.662,
+        "repeatY": 10313.662
+      }
+    }
+  },
+  {
+    "id": "01jmm3sw4cwxj0nya6bysjzs2q",
+    "name": "LGS080725 leggings",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 5.603,
+    "materials": {
+      "默认扣眼": {
+        "texWidth": 27.037006,
+        "texHeight": 27.037006,
+        "normalScale": 0.2,
+        "repeatX": 1.658,
+        "repeatY": 1.658
+      },
+      "默认纽扣": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 44.821,
+        "repeatY": 44.821
+      },
+      "默认织物": {
+        "texWidth": 300,
+        "texHeight": 214.114258,
+        "normalScale": 1,
+        "repeatX": 0.149,
+        "repeatY": 0.209
+      },
+      "织物4": {
+        "texWidth": 43.349335,
+        "texHeight": 43.349335,
+        "normalScale": 1,
+        "repeatX": 1.034,
+        "repeatY": 1.034
+      },
+      "织物3": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 44.821,
+        "repeatY": 44.821
+      },
+      "织物2": {
+        "texWidth": 300,
+        "texHeight": 214.114288,
+        "normalScale": 1,
+        "repeatX": 0.149,
+        "repeatY": 0.209
+      },
+      "明线1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 18.663,
+        "repeatY": 161.954
+      },
+      "织物1": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 44.821,
+        "repeatY": 44.821
+      },
+      "默认明线": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 44.821,
+        "repeatY": 44.821
+      }
+    }
+  },
+  {
+    "id": "01jmm2nfcb8yntzvcgt2hvtd40",
+    "name": "LL Men's/Shorts M-Shorts 33",
+    "category": "BOTTOMWEAR",
+    "hasOrigBak": true,
+    "isChanged": true,
+    "scaleRatio": 12.331,
+    "materials": {
+      "1": {
+        "texWidth": 107.949997,
+        "texHeight": 154.387085,
+        "normalScale": 1,
+        "repeatX": 0.914,
+        "repeatY": 0.639
+      },
+      "明线1": {
+        "texWidth": 1.601971,
+        "texHeight": 1.802217,
+        "normalScale": 0.2,
+        "repeatX": 61.581,
+        "repeatY": 54.739
+      },
+      "默认明线": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 41.077,
+        "repeatY": 356.464
+      },
+      "默认织物": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 98.651,
+        "repeatY": 98.651
+      },
+      "明线1_拷贝_1": {
+        "texWidth": 1.601971,
+        "texHeight": 1.802217,
+        "normalScale": 0.2,
+        "repeatX": 61.581,
+        "repeatY": 54.739
+      },
+      "Material6": {
+        "texWidth": 5.317743,
+        "texHeight": 11.665249,
+        "normalScale": 1,
+        "repeatX": 18.551,
+        "repeatY": 8.457
+      },
+      "默认明线_拷贝_1": {
+        "texWidth": 2.401625,
+        "texHeight": 0.27675,
+        "normalScale": 0.2,
+        "repeatX": 41.077,
+        "repeatY": 356.464
+      },
+      "Material17": {
+        "texWidth": 1,
+        "texHeight": 1,
+        "normalScale": 1,
+        "repeatX": 98.651,
+        "repeatY": 98.651
+      }
+    }
+  }
+]
