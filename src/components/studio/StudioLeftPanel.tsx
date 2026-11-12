@@ -1,272 +1,422 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
-import { StudioCard } from "./StudioCard";
 
 interface StudioLeftPanelProps {
   collapsed?: boolean;
+  onShowToast?: (msg: string) => void;
 }
 
-export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({ collapsed = false }) => {
+export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
+  collapsed = false,
+  onShowToast
+}) => {
+  const [activeTool, setActiveTool] = useState<string>("select");
   const [searchFilter, setSearchFilter] = useState("");
+  const [isTreeCollapsed, setIsTreeCollapsed] = useState(false);
+
+  // Transform states
+  const [posX, setPosX] = useState("0.00");
+  const [posY, setPosY] = useState("0.00");
+  const [posZ, setPosZ] = useState("0.00");
+  const [rotX, setRotX] = useState("0.00");
+  const [rotY, setRotY] = useState("0.00");
+  const [rotZ, setRotZ] = useState("0.00");
+  const [sclX, setSclX] = useState("1.00");
+  const [sclY, setSclY] = useState("1.00");
+  const [sclZ, setSclZ] = useState("1.00");
+
+  const resetTransform = () => {
+    setPosX("0.00");
+    setPosY("0.00");
+    setPosZ("0.00");
+    setRotX("0.00");
+    setRotY("0.00");
+    setRotZ("0.00");
+    setSclX("1.00");
+    setSclY("1.00");
+    setSclZ("1.00");
+    modelStore.resetCamera?.();
+    onShowToast?.("Transform reset to origin");
+  };
 
   const filteredPieces = modelStore.pieces.filter((p) =>
     searchFilter ? p.name.toLowerCase().includes(searchFilter.toLowerCase()) : true
   );
 
+  if (collapsed) return null;
+
   return (
-    <aside className={`panel-left-sidebar cyber-chassis ${collapsed ? "collapsed" : ""}`} id="sceneSidebar">
-      {/* Panel Titlebar with Curated Model Navigator & Search */}
-      <div
-        className="panel-header-titlebar"
-        style={{ margin: "-8px -8px 6px", borderRadius: "var(--radius-chassis) var(--radius-chassis) 0 0" }}
-      >
-        <div className="titlebar-text">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#14d9ff" strokeWidth="2">
-            <polygon points="12 2 2 7 12 12 22 7 12 2" />
-            <polyline points="2 17 12 22 22 17" />
-            <polyline points="2 12 12 17 22 12" />
+    <>
+      {/* 2A. Far-Left Tool Strip */}
+      <aside className="panel tool-strip-far-left">
+        <button
+          className={`tool-btn ${activeTool === "select" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("select");
+            onShowToast?.("Active tool: Select (Q)");
+          }}
+          title="Select Tool (Q)"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36z" />
           </svg>
-          <span>Scene Explorer</span>
-        </div>
+        </button>
 
-        {/* Curated Model Browser Navigator */}
-        <div style={{ display: "flex", alignItems: "center", gap: "2px" }}>
-          <button
-            className="control-toggle-btn"
-            style={{ width: "20px", height: "20px", padding: 0 }}
-            onClick={() => modelStore.loadPrevCuratedModel(uvOrganizerStore)}
-            title="Previous Curated Garment (Left Arrow)"
-            disabled={modelStore.isLoadingCuratedModel}
-          >
-            ‹
-          </button>
-          <span
-            style={{
-              fontSize: "9px",
-              fontFamily: "'JetBrains Mono', monospace",
-              color: "var(--neon-cyan)",
-              padding: "0 2px"
-            }}
-          >
-            {modelStore.currentCuratedIndex >= 0 ? modelStore.currentCuratedIndex + 1 : 1}/{modelStore.filteredCuratedList.length || 40}
-          </span>
-          <button
-            className="control-toggle-btn"
-            style={{ width: "20px", height: "20px", padding: 0 }}
-            onClick={() => modelStore.loadNextCuratedModel(uvOrganizerStore)}
-            title="Next Curated Garment (Right Arrow)"
-            disabled={modelStore.isLoadingCuratedModel}
-          >
-            ›
-          </button>
-        </div>
-      </div>
+        <button
+          className={`tool-btn ${activeTool === "cursor" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("cursor");
+            onShowToast?.("Active tool: 3D Cursor / Origin");
+          }}
+          title="3D Cursor / Origin"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <circle cx="12" cy="12" r="7" />
+            <line x1="12" y1="2" x2="12" y2="22" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+          </svg>
+        </button>
 
-      {/* 1. Scene Tree Collapsible Card */}
-      <StudioCard
-        title={`Hierarchy (${modelStore.pieces.length} Pieces)`}
-        defaultCollapsed={false}
-        flex={1}
-        style={{ minHeight: "120px" }}
-        headerRight={
-          <span
-            style={{ fontSize: "9px", color: "var(--text-muted)", cursor: "pointer" }}
-            onClick={() => modelStore.toggleAllPiecesVisibility()}
-            title="Toggle All Visibility"
-          >
-            👁 All
-          </span>
-        }
-      >
-        {/* Piece Search Filter Input */}
-        <div style={{ padding: "4px 6px" }}>
-          <input
-            type="text"
-            placeholder="Filter pieces..."
-            value={searchFilter}
-            onChange={(e) => setSearchFilter(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "3px 6px",
-              fontSize: "9px",
-              background: "rgba(0,0,0,0.4)",
-              border: "1px solid rgba(20,217,255,0.2)",
-              borderRadius: "4px",
-              color: "#fff",
-              outline: "none"
-            }}
-          />
-        </div>
+        <button
+          className={`tool-btn ${activeTool === "move" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("move");
+            onShowToast?.("Active tool: Move (W)");
+          }}
+          title="Move (W)"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <polyline points="5 9 2 12 5 15" />
+            <polyline points="9 5 12 2 15 5" />
+            <polyline points="15 19 12 22 9 19" />
+            <polyline points="19 9 22 12 19 15" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <line x1="12" y1="2" x2="12" y2="22" />
+          </svg>
+        </button>
 
-        <div className="scene-tree-content">
-          {/* Root Group Node */}
-          <div className="tree-node-item">
-            <div className="tree-node-prefix">
-              <span style={{ fontSize: "9px" }}>▼</span>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+        <button
+          className={`tool-btn ${activeTool === "scale" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("scale");
+            onShowToast?.("Active tool: Scale (R)");
+          }}
+          title="Scale (R)"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <polyline points="15 3 21 3 21 9" />
+            <polyline points="9 21 3 21 3 15" />
+            <line x1="21" y1="3" x2="14" y2="10" />
+            <line x1="3" y1="21" x2="10" y2="14" />
+          </svg>
+        </button>
+
+        <button
+          className={`tool-btn ${activeTool === "uv-proj" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("uv-proj");
+            onShowToast?.("Active tool: UV Projection");
+          }}
+          title="UV Projection"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <path d="M8 8v5a2 2 0 0 0 4 0V8" />
+            <path d="M14 8l2 7 2-7" />
+          </svg>
+        </button>
+
+        <button
+          className={`tool-btn ${activeTool === "normals" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("normals");
+            onShowToast?.("Active tool: Surface Normals");
+          }}
+          title="Surface Normals"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <rect x="4" y="4" width="16" height="16" rx="3" />
+            <circle cx="12" cy="12" r="4" />
+          </svg>
+        </button>
+
+        <button
+          className={`tool-btn ${activeTool === "hierarchy" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("hierarchy");
+            onShowToast?.("Active tool: Hierarchy Nodes");
+          }}
+          title="Hierarchy Nodes"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+          </svg>
+        </button>
+      </aside>
+
+      {/* 2B. Left Panel: Scene Explorer & Transform */}
+      <aside className="panel scene-explorer-panel">
+        {/* Scene Explorer Top Half */}
+        <div className="scene-explorer-top">
+          {/* Header Row with Model Curated Prev/Next */}
+          <div className="panel-header-row">
+            <span className="panel-title">Scene Explorer</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "2px" }}>
+                <button
+                  className="tool-btn tool-btn-sm"
+                  onClick={() => modelStore.loadPrevCuratedModel(uvOrganizerStore)}
+                  title="Previous Curated Model"
+                  disabled={modelStore.isLoadingCuratedModel}
+                >
+                  ‹
+                </button>
+                <span style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", color: "var(--cyan-primary)" }}>
+                  {modelStore.currentCuratedIndex >= 0 ? modelStore.currentCuratedIndex + 1 : 1}/{modelStore.filteredCuratedList.length || 40}
+                </span>
+                <button
+                  className="tool-btn tool-btn-sm"
+                  onClick={() => modelStore.loadNextCuratedModel(uvOrganizerStore)}
+                  title="Next Curated Model"
+                  disabled={modelStore.isLoadingCuratedModel}
+                >
+                  ›
+                </button>
+              </div>
+              <svg
+                className="panel-collapse-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                onClick={() => setIsTreeCollapsed(!isTreeCollapsed)}
+              >
+                <polyline points={isTreeCollapsed ? "6 9 12 15 18 9" : "18 15 12 9 6 15"} />
               </svg>
-              <span style={{ fontWeight: 600, color: "#fff" }}>
-                {modelStore.modelMeta.title || "Garment_Model.glb"}
-              </span>
             </div>
           </div>
 
-          {/* Piece Nodes */}
-          {filteredPieces.map((piece) => {
-            const isSelected = modelStore.selectedPiece?.id === piece.id;
-            const isVisible = piece.visible !== false;
+          {/* Search Objects Input */}
+          <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "8px" }}>
+            <div className="search-input-box">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" style={{ marginRight: "6px", flexShrink: 0 }}>
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search objects..."
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}
+              />
+            </div>
+            <button
+              className="tool-btn"
+              title="Filter"
+              style={{ background: "#0a0e17", border: "1px solid #1d2538", borderRadius: "6px" }}
+              onClick={() => modelStore.toggleAllPiecesVisibility()}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+              </svg>
+            </button>
+          </div>
 
-            return (
+          {/* Tree Hierarchy List */}
+          {!isTreeCollapsed && (
+            <div className="tree-hierarchy-list" id="sceneTree">
+              {/* Scene Root */}
               <div
-                key={piece.id}
-                className={`tree-node-item tree-indent-level ${isSelected ? "active" : ""}`}
-                onClick={() => modelStore.selectPiece(piece.mesh)}
+                className={`tree-row ${!modelStore.selectedPiece ? "selected" : ""}`}
+                onClick={() => {
+                  modelStore.selectPiece(null);
+                  onShowToast?.("Selected: Scene Root");
+                }}
               >
-                <div className="tree-node-prefix">
-                  <span style={{ fontSize: "8px", color: "var(--text-muted)" }}>›</span>
-                  <svg
-                    width="9"
-                    height="9"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={isSelected ? "#fff" : "currentColor"}
-                    strokeWidth="2"
-                  >
-                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
-                  </svg>
-                  <span style={{ overflow: "hidden", textOverflow: "ellipsis", maxWidth: "120px" }}>
-                    {piece.name}
-                  </span>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span style={{ fontSize: "8px", color: "var(--text-muted)" }}>
-                    {piece.triangles > 1000 ? `${(piece.triangles / 1000).toFixed(1)}k` : piece.triangles}t
-                  </span>
-                  <span
-                    className="tree-visibility-eye"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      modelStore.togglePieceVisibility(piece.id);
-                    }}
-                    title={isVisible ? "Hide Piece" : "Show Piece"}
-                    style={{ color: isVisible ? "var(--text-secondary)" : "rgba(255,255,255,0.2)" }}
-                  >
-                    {isVisible ? "👁" : "🕶"}
-                  </span>
+                <div className="tree-row-left">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" fill="rgba(148, 163, 184, 0.2)"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
+                  <span style={{ color: "#f1f5f9", fontWeight: 500 }}>Scene</span>
                 </div>
               </div>
-            );
-          })}
+
+              {/* Environment */}
+              <div className="tree-row" style={{ paddingLeft: "16px" }}>
+                <div className="tree-row-left">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" fill="rgba(148, 163, 184, 0.2)"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
+                  <span>Environment</span>
+                </div>
+                <div className="tree-row-actions">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                </div>
+              </div>
+
+              {/* Model_GRP */}
+              <div className="tree-row" style={{ paddingLeft: "16px" }}>
+                <div className="tree-row-left">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" fill="rgba(203, 213, 225, 0.2)"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
+                  <span style={{ color: "#e2e8f0", fontWeight: 500 }}>
+                    {modelStore.modelMeta.title || "Model_GRP"}
+                  </span>
+                </div>
+                <div className="tree-row-actions">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                </div>
+              </div>
+
+              {/* Garment Mesh Pieces */}
+              {filteredPieces.map((piece) => {
+                const isSelected = modelStore.selectedPiece?.id === piece.id;
+                const isVisible = piece.visible !== false;
+
+                return (
+                  <div
+                    key={piece.id}
+                    className={`tree-row ${isSelected ? "selected" : ""}`}
+                    style={{ paddingLeft: "28px" }}
+                    onClick={() => {
+                      modelStore.selectPiece(piece.mesh);
+                      onShowToast?.(`Selected: ${piece.name}`);
+                    }}
+                  >
+                    <div className="tree-row-left">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isSelected ? "#22d3ee" : "#64748b"} strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke={isSelected ? "#22d3ee" : "currentColor"}
+                        strokeWidth="2"
+                      >
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                      </svg>
+                      <span style={{ fontWeight: isSelected ? 500 : 400, overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {piece.name}
+                      </span>
+                    </div>
+                    <div className="tree-row-actions">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke={isVisible ? "currentColor" : "#ef4444"}
+                        strokeWidth="1.8"
+                        style={{ cursor: "pointer" }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          modelStore.togglePieceVisibility(piece.id);
+                        }}
+                      >
+                        {isVisible ? (
+                          <>
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                          </>
+                        ) : (
+                          <>
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                            <line x1="1" y1="1" x2="23" y2="23" />
+                          </>
+                        )}
+                      </svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Lights */}
+              <div className="tree-row" style={{ paddingLeft: "16px" }}>
+                <div className="tree-row-left">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" stroke="#f59e0b" fill="#f59e0b" strokeWidth="1.5">
+                    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" />
+                  </svg>
+                  <span>Lights</span>
+                </div>
+                <div className="tree-row-actions">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                </div>
+              </div>
+
+              {/* Camera */}
+              <div className="tree-row" style={{ paddingLeft: "16px" }}>
+                <div className="tree-row-left">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" fill="rgba(148, 163, 184, 0.3)">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" />
+                  </svg>
+                  <span>Camera</span>
+                </div>
+                <div className="tree-row-actions">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </StudioCard>
 
-      {/* 2. Transforms Collapsible Card with Integrated 3D Transform Gizmo Controls */}
-      <StudioCard
-        title="Transforms"
-        defaultCollapsed={false}
-        flex="0 0 auto"
-        headerRight={<span style={{ fontSize: "8.5px", color: "var(--text-muted)" }}>LOCAL</span>}
-      >
-        <div className="transforms-form-content">
-          {/* Active Gizmo Tool Mode: Move / Rotate / Scale */}
-          <div style={{ display: "flex", gap: "4px", marginBottom: "8px" }}>
+        {/* Transform Sub-Panel */}
+        <div className="transform-subpanel">
+          <div className="panel-header-row" style={{ marginBottom: "10px" }}>
+            <span className="panel-title">Transform</span>
             <button
-              className={`btn-uv-reset ${modelStore.transformMode === "translate" ? "active" : ""}`}
-              style={{
-                flex: 1,
-                padding: "4px 2px",
-                fontSize: "9.5px",
-                background: modelStore.transformMode === "translate" ? "rgba(37,99,235,0.35)" : undefined,
-                borderColor: modelStore.transformMode === "translate" ? "var(--neon-cyan)" : undefined,
-                color: modelStore.transformMode === "translate" ? "#fff" : undefined
-              }}
-              onClick={() => modelStore.setTransformMode("translate")}
-              title="Move (Translate) 3D Piece"
+              onClick={resetTransform}
+              title="Reset Transform"
+              style={{ background: "transparent", border: "none", color: "#22d3ee", cursor: "pointer" }}
             >
-              Move
-            </button>
-            <button
-              className={`btn-uv-reset ${modelStore.transformMode === "rotate" ? "active" : ""}`}
-              style={{
-                flex: 1,
-                padding: "4px 2px",
-                fontSize: "9.5px",
-                background: modelStore.transformMode === "rotate" ? "rgba(37,99,235,0.35)" : undefined,
-                borderColor: modelStore.transformMode === "rotate" ? "var(--neon-cyan)" : undefined,
-                color: modelStore.transformMode === "rotate" ? "#fff" : undefined
-              }}
-              onClick={() => modelStore.setTransformMode("rotate")}
-              title="Rotate 3D Piece"
-            >
-              Rotate
-            </button>
-            <button
-              className={`btn-uv-reset ${modelStore.transformMode === "scale" ? "active" : ""}`}
-              style={{
-                flex: 1,
-                padding: "4px 2px",
-                fontSize: "9.5px",
-                background: modelStore.transformMode === "scale" ? "rgba(37,99,235,0.35)" : undefined,
-                borderColor: modelStore.transformMode === "scale" ? "var(--neon-cyan)" : undefined,
-                color: modelStore.transformMode === "scale" ? "#fff" : undefined
-              }}
-              onClick={() => modelStore.setTransformMode("scale")}
-              title="Scale 3D Piece"
-            >
-              Scale
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
+                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                <path d="M16 16h5v5" />
+              </svg>
             </button>
           </div>
 
-          {/* Hidden reference to subscribe MobX to transformVersion */}
-          <span style={{ display: "none" }}>{modelStore.transformVersion}</span>
+          <div className="transform-rows">
+            {/* Position */}
+            <div className="transform-row">
+              <span className="transform-label">Position</span>
+              <div className="transform-inputs-grid">
+                <div className="num-box"><span>X</span><input type="text" value={posX} onChange={(e) => setPosX(e.target.value)} /></div>
+                <div className="num-box"><span>Y</span><input type="text" value={posY} onChange={(e) => setPosY(e.target.value)} /></div>
+                <div className="num-box"><span>Z</span><input type="text" value={posZ} onChange={(e) => setPosZ(e.target.value)} /></div>
+              </div>
+            </div>
 
-          <div className="transform-axis-row">
-            <span>Position</span>
-            <div className="triplet-inputs">
-              <div className="cell-axis-val">X {(modelStore.selectedPiece?.mesh.position.x || 0).toFixed(2)}</div>
-              <div className="cell-axis-val">Y {(modelStore.selectedPiece?.mesh.position.y || 0).toFixed(2)}</div>
-              <div className="cell-axis-val">Z {(modelStore.selectedPiece?.mesh.position.z || 0).toFixed(2)}</div>
+            {/* Rotation */}
+            <div className="transform-row">
+              <span className="transform-label">Rotation</span>
+              <div className="transform-inputs-grid">
+                <div className="num-box"><span>X</span><input type="text" value={rotX} onChange={(e) => setRotX(e.target.value)} /></div>
+                <div className="num-box"><span>Y</span><input type="text" value={rotY} onChange={(e) => setRotY(e.target.value)} /></div>
+                <div className="num-box"><span>Z</span><input type="text" value={rotZ} onChange={(e) => setRotZ(e.target.value)} /></div>
+              </div>
+            </div>
+
+            {/* Scale */}
+            <div className="transform-row">
+              <span className="transform-label">Scale</span>
+              <div className="transform-inputs-grid">
+                <div className="num-box"><span>X</span><input type="text" value={sclX} onChange={(e) => setSclX(e.target.value)} /></div>
+                <div className="num-box"><span>Y</span><input type="text" value={sclY} onChange={(e) => setSclY(e.target.value)} /></div>
+                <div className="num-box"><span>Z</span><input type="text" value={sclZ} onChange={(e) => setSclZ(e.target.value)} /></div>
+              </div>
             </div>
           </div>
-          <div className="transform-axis-row">
-            <span>Rotation</span>
-            <div className="triplet-inputs">
-              <div className="cell-axis-val">X {(modelStore.selectedPiece?.mesh.rotation.x || 0).toFixed(2)}</div>
-              <div className="cell-axis-val">Y {(modelStore.selectedPiece?.mesh.rotation.y || 0).toFixed(2)}</div>
-              <div className="cell-axis-val">Z {(modelStore.selectedPiece?.mesh.rotation.z || 0).toFixed(2)}</div>
-            </div>
-          </div>
-          <div className="transform-axis-row">
-            <span>Scale</span>
-            <div className="triplet-inputs">
-              <div className="cell-axis-val">X {(modelStore.selectedPiece?.mesh.scale.x || 1).toFixed(2)}</div>
-              <div className="cell-axis-val">Y {(modelStore.selectedPiece?.mesh.scale.y || 1).toFixed(2)}</div>
-              <div className="cell-axis-val">Z {(modelStore.selectedPiece?.mesh.scale.z || 1).toFixed(2)}</div>
-            </div>
-          </div>
-          <button
-            className="btn-reset-full"
-            onClick={() => {
-              if (modelStore.selectedPiece?.mesh) {
-                modelStore.selectedPiece.mesh.position.set(0, 0, 0);
-                modelStore.selectedPiece.mesh.rotation.set(0, 0, 0);
-                modelStore.selectedPiece.mesh.scale.set(1, 1, 1);
-                modelStore.updateTransformGizmo();
-              } else if (modelStore.currentModel) {
-                modelStore.currentModel.position.set(0, 0, 0);
-                modelStore.currentModel.rotation.set(0, 0, 0);
-                modelStore.currentModel.scale.set(1, 1, 1);
-                modelStore.updateTransformGizmo();
-              }
-            }}
-          >
-            Reset
-          </button>
         </div>
-      </StudioCard>
-    </aside>
+      </aside>
+    </>
   );
 });

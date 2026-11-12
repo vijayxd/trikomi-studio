@@ -10,53 +10,38 @@ import { StudioMaterialLibraryView } from "./components/studio/StudioMaterialLib
 import { UVZoneEditorModal } from "./components/UVZoneEditorModal";
 
 export const App = observer(() => {
-  // Studio Mode State: "model" (default) | "uv" | "material" | "validation"
+  // Studio Mode: "model" | "uv" | "material" | "validation"
   const [studioMode, setStudioMode] = useState<StudioMode>("model");
 
-  // Responsive Auto-Toggles
-  const [showLeftSidebar, setShowLeftSidebar] = useState<boolean>(true);
-  const [showRightPanel, setShowRightPanel] = useState<boolean>(true);
-  const [showBottomDock, setShowBottomDock] = useState<boolean>(true);
+  // Viewport Maximize state
   const [isViewportMaximized, setIsViewportMaximized] = useState<boolean>(false);
 
-  // Auto-collapse right panel in pure "model" mode if user desires maximum 3D view, or keep open based on toggle
-  const handleToggleLeft = () => {
-    setShowLeftSidebar(!showLeftSidebar);
-    setTimeout(() => modelStore.onResize?.(), 30);
+  // Turntable animation state
+  const [isTurntablePlaying, setIsTurntablePlaying] = useState<boolean>(false);
+
+  // Toast notification state
+  const [toastMessage, setToastMessage] = useState<string>("");
+  const [showToast, setShowToast] = useState<boolean>(false);
+
+  const triggerToast = (msg: string) => {
+    setToastMessage(msg);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2200);
   };
 
-  const handleToggleRight = () => {
-    setShowRightPanel(!showRightPanel);
-    setTimeout(() => modelStore.onResize?.(), 30);
-  };
-
-  const handleToggleBottom = () => {
-    setShowBottomDock(!showBottomDock);
-    setTimeout(() => modelStore.onResize?.(), 30);
+  const handleToggleTurntable = () => {
+    const nextState = !isTurntablePlaying;
+    setIsTurntablePlaying(nextState);
+    triggerToast(nextState ? "Turntable preview started" : "Turntable preview paused");
   };
 
   const handleToggleMaximize = () => {
     const nextMax = !isViewportMaximized;
     setIsViewportMaximized(nextMax);
-    if (nextMax) {
-      setShowLeftSidebar(false);
-      setShowRightPanel(false);
-      setShowBottomDock(false);
-    } else {
-      setShowLeftSidebar(true);
-      setShowRightPanel(true);
-      setShowBottomDock(true);
-    }
-    setTimeout(() => modelStore.onResize?.(), 50);
-  };
-
-  // Switch Modes
-  const handleSelectMode = (mode: StudioMode) => {
-    setStudioMode(mode);
-    if (mode === "uv") {
-      setShowRightPanel(true);
-    }
-    setTimeout(() => modelStore.onResize?.(), 30);
+    triggerToast(nextMax ? "Viewport maximized" : "Viewport restored");
+    setTimeout(() => modelStore.onResize?.(), 40);
   };
 
   // Keyboard navigation & Shortcuts (Arrow keys for cycling models)
@@ -70,11 +55,14 @@ export const App = observer(() => {
       if (e.key === "ArrowLeft") {
         e.preventDefault();
         modelStore.loadPrevCuratedModel(uvOrganizerStore);
+        triggerToast("Loaded previous model");
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
         modelStore.loadNextCuratedModel(uvOrganizerStore);
+        triggerToast("Loaded next model");
       } else if (e.key === "f" || e.key === "F") {
         modelStore.resetCamera?.();
+        triggerToast("Camera reset to Frame");
       }
     };
 
@@ -83,56 +71,64 @@ export const App = observer(() => {
   }, []);
 
   return (
-    <div className="studio-app">
-      {/* Ambient Backdrop Lighting Elements */}
-      <div className="ambient-glow-left" />
-      <div className="ambient-glow-right" />
-      <div className="sweep-light-line" />
-
-      {/* 1. TOP BAR: Brand, 4 Studio Modes, Auto-Toggles, Camera & Export */}
+    <div className="studio-shell">
+      {/* 1. TOP NAVIGATION BAR */}
       <StudioTopBar
         currentMode={studioMode}
-        onSelectMode={handleSelectMode}
-        showLeftSidebar={showLeftSidebar}
-        onToggleLeftSidebar={handleToggleLeft}
-        showRightPanel={showRightPanel}
-        onToggleRightPanel={handleToggleRight}
-        showBottomDock={showBottomDock}
-        onToggleBottomDock={handleToggleBottom}
+        onSelectMode={(mode) => {
+          setStudioMode(mode);
+          setTimeout(() => modelStore.onResize?.(), 30);
+        }}
+        isTurntablePlaying={isTurntablePlaying}
+        onToggleTurntable={handleToggleTurntable}
         onExportGLB={() => modelStore.exportGLB()}
+        onShowToast={triggerToast}
       />
 
-      {/* 2. MIDDLE WORKSPACE ROW (Fluid Flex Real-Estate) */}
+      {/* 2. MAIN WORKSPACE CONTAINER */}
       {studioMode === "material" ? (
-        <main className="workspace-row" style={{ padding: 0 }}>
+        <main className="studio-main-workspace" style={{ padding: 0 }}>
           <StudioMaterialLibraryView />
         </main>
       ) : (
-        <main className="workspace-row">
-          {/* Left Panel: Scene Explorer, Transforms, Quick Tools */}
-          <StudioLeftPanel collapsed={!showLeftSidebar} />
+        <main className="studio-main-workspace">
+          {/* Upper Workspace (65.5% Height) */}
+          <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""}`}>
+            {/* 2A & 2B. Far-Left Tool Strip + Scene Explorer & Transform */}
+            {!isViewportMaximized && (
+              <StudioLeftPanel onShowToast={triggerToast} />
+            )}
 
-          {/* Center 3D Viewport: Real Three.js Canvas, Pedestal, Viewport Toolbar */}
-          <StudioCenterViewport
-            isMaximized={isViewportMaximized}
-            onToggleMaximize={handleToggleMaximize}
-          />
+            {/* 2C. Center Panel: Interactive 3D Viewport */}
+            <StudioCenterViewport
+              isMaximized={isViewportMaximized}
+              onToggleMaximize={handleToggleMaximize}
+              onShowToast={triggerToast}
+            />
 
-          {/* Right Panel: UV Studio & 2D Inspector (Active in UV Mode, collapsible) */}
-          <StudioRightPanel collapsed={!showRightPanel} />
+            {/* 2D. Right Panel: UV Editor & Operations */}
+            {!isViewportMaximized && (
+              <StudioRightPanel onShowToast={triggerToast} />
+            )}
+          </section>
+
+          {/* Lower Workspace (34.5% Height) */}
+          {!isViewportMaximized && (
+            <StudioBottomDock
+              onExportGLB={() => modelStore.exportGLB()}
+              onShowToast={triggerToast}
+            />
+          )}
         </main>
-      )}
-
-      {/* 3. BOTTOM DOCK TRAY: 5 Dedicated Cards (Material, Geometry, Preview, Validation, Export) */}
-      {studioMode !== "material" && (
-        <StudioBottomDock
-          collapsed={!showBottomDock}
-          onExportGLB={() => modelStore.exportGLB()}
-        />
       )}
 
       {/* Canonical UV Blueprint Designer Modal */}
       {uvOrganizerStore.showZoneEditorModal && <UVZoneEditorModal />}
+
+      {/* Floating Status Toast Notification */}
+      <div className={`studio-toast ${showToast ? "show" : ""}`}>
+        {toastMessage}
+      </div>
     </div>
   );
 });
