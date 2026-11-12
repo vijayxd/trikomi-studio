@@ -52,6 +52,26 @@ export const App = observer(() => {
         return;
       }
 
+      // Undo / Redo Shortcuts (Ctrl+Z / Cmd+Z / Ctrl+Shift+Z / Cmd+Shift+Z / Ctrl+Y)
+      if ((e.ctrlKey || e.metaKey) && (e.key === "z" || e.key === "Z" || e.code === "KeyZ")) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.shiftKey) {
+          const success = uvOrganizerStore.redo();
+          triggerToast(success ? "Redid action (Ctrl+Shift+Z)" : "Nothing to redo");
+        } else {
+          const success = uvOrganizerStore.undo();
+          triggerToast(success ? "Undid last action (Ctrl+Z)" : "Nothing to undo");
+        }
+        return;
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === "y" || e.key === "Y" || e.code === "KeyY")) {
+        e.preventDefault();
+        e.stopPropagation();
+        const success = uvOrganizerStore.redo();
+        triggerToast(success ? "Redid action (Ctrl+Y)" : "Nothing to redo");
+        return;
+      }
+
       if (e.key === "ArrowLeft") {
         e.preventDefault();
         modelStore.loadPrevCuratedModel(uvOrganizerStore);

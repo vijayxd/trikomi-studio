@@ -748,6 +748,7 @@ export const UVCanvasView = observer(() => {
         if (b.maxV > gMaxV) gMaxV = b.maxV;
       });
 
+      uvOrganizerStore.pushHistorySnapshot("Scale UV Island");
       dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
       setTransformState({
         mode: gizmoMode,
@@ -791,6 +792,7 @@ export const UVCanvasView = observer(() => {
         if (b.maxV > gMaxV) gMaxV = b.maxV;
       });
 
+      uvOrganizerStore.pushHistorySnapshot("Scale UV Island");
       dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
       setTransformState({
         mode: "translate",

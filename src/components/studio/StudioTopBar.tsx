@@ -103,14 +103,14 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         {/* Undo / Redo */}
         <button
           className="tool-btn"
+          style={{ opacity: uvOrganizerStore.canUndo ? 1 : 0.45 }}
           title="Undo (Ctrl+Z)"
           onClick={() => {
             const success = uvOrganizerStore.undo();
             if (success) {
-              onShowToast?.("Undid last UV action");
+              onShowToast?.("Undid last action");
             } else {
-              modelStore.resetCamera?.();
-              onShowToast?.("Nothing to undo (camera reset)");
+              onShowToast?.("Nothing to undo");
             }
           }}
         >
@@ -121,11 +121,12 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         </button>
         <button
           className="tool-btn"
+          style={{ opacity: uvOrganizerStore.canRedo ? 1 : 0.45 }}
           title="Redo (Ctrl+Y)"
           onClick={() => {
             const success = uvOrganizerStore.redo();
             if (success) {
-              onShowToast?.("Redid UV action");
+              onShowToast?.("Redid action");
             } else {
               onShowToast?.("Nothing to redo");
             }

@@ -28,6 +28,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
   const handleTransformChange = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z", valStr: string) => {
     const num = parseFloat(valStr);
     if (isNaN(num) || !selectedMesh) return;
+    uvOrganizerStore.pushHistorySnapshot("Transform Mesh");
     if (type === "pos") selectedMesh.position[axis] = num;
     else if (type === "rot") selectedMesh.rotation[axis] = num * (Math.PI / 180);
     else if (type === "scl") selectedMesh.scale[axis] = num;
@@ -37,6 +38,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
 
   const resetTransform = () => {
     if (selectedMesh) {
+      uvOrganizerStore.pushHistorySnapshot("Reset Transform");
       selectedMesh.position.set(0, 0, 0);
       selectedMesh.rotation.set(0, 0, 0);
       selectedMesh.scale.set(1, 1, 1);
