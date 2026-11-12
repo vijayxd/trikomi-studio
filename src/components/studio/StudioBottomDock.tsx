@@ -132,90 +132,144 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
         </button>
       </aside>
 
-      {/* 3B. Bottom-Center Panel: Material Library */}
+      {/* 3B. Bottom-Center Panel: Material Library / Texture Channel Maps / Shaders */}
       <section className="panel material-library-panel">
-        {/* Top Header & Search Row */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: 1 }}>
-            <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9", flexShrink: 0 }}>
-              Material Library
-            </span>
-            <div className="search-input-box" style={{ maxWidth: "260px" }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" style={{ marginRight: "6px", flexShrink: 0 }}>
-                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search materials..."
-                value={matSearch}
-                onChange={(e) => setMatSearch(e.target.value)}
-              />
+        {/* Dynamic Header & Content based on activeBottomTool */}
+        {activeBottomTool === "textures" ? (
+          <div style={{ display: "flex", flexDirection: "column", height: "100%", gap: "8px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9" }}>
+                Texture Channels & Maps ({modelStore.selectedPiece?.name || "Garment Mesh"})
+              </span>
+              <span style={{ fontSize: "10px", color: "#38bdf8", background: "rgba(56, 189, 248, 0.15)", padding: "2px 6px", borderRadius: "4px" }}>
+                Active Maps
+              </span>
+            </div>
+
+            <div style={{ display: "flex", gap: "10px", overflowX: "auto", flex: 1, alignItems: "center" }}>
+              {/* Map 1: Base Color / Diffuse */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Diffuse (Color)</span>
+                <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#38bdf8" }}>
+                  2048 × 2048
+                </div>
+                <span style={{ fontSize: "8.5px", color: "#10b981" }}>RGB 8-bit</span>
+              </div>
+
+              {/* Map 2: Normal (Bump) */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Normal (Tangent)</span>
+                <div style={{ width: "100%", height: "48px", background: "linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%)", opacity: 0.8, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#fff", fontWeight: "600" }}>
+                  Tangent Space
+                </div>
+                <span style={{ fontSize: "8.5px", color: "#38bdf8" }}>OpenGL Normals</span>
+              </div>
+
+              {/* Map 3: Roughness / Gloss */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Roughness</span>
+                <div style={{ width: "100%", height: "48px", background: "#334155", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#cbd5e1" }}>
+                  Rough: 0.82
+                </div>
+                <span style={{ fontSize: "8.5px", color: "#94a3b8" }}>Grayscale G-channel</span>
+              </div>
+
+              {/* Map 4: Ambient Occlusion */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Occlusion (AO)</span>
+                <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
+                  Baked Seams
+                </div>
+                <span style={{ fontSize: "8.5px", color: "#94a3b8" }}>R-Channel AO</span>
+              </div>
             </div>
           </div>
-          <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="18 15 12 9 6 15" />
-          </svg>
-        </div>
-
-        {/* Category Filter Pills Row */}
-        <div style={{ display: "flex", alignItems: "center", gap: "6px", margin: "4px 0" }}>
-          <button
-            className={`mat-cat-btn ${activeCat === "all" ? "active" : ""}`}
-            onClick={() => setActiveCat("all")}
-          >
-            <span>All</span>
-            {activeCat === "all" && <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#67e8f9" }} />}
-          </button>
-          <button
-            className={`mat-cat-btn ${activeCat === "metal" ? "active" : ""}`}
-            onClick={() => setActiveCat("metal")}
-          >
-            Metals
-          </button>
-          <button
-            className={`mat-cat-btn ${activeCat === "plastic" ? "active" : ""}`}
-            onClick={() => setActiveCat("plastic")}
-          >
-            Plastics
-          </button>
-          <button
-            className={`mat-cat-btn ${activeCat === "fabric" ? "active" : ""}`}
-            onClick={() => setActiveCat("fabric")}
-          >
-            Fabric
-          </button>
-          <button
-            className={`mat-cat-btn ${activeCat === "glass" ? "active" : ""}`}
-            onClick={() => setActiveCat("glass")}
-          >
-            Glass
-          </button>
-          <button
-            className={`mat-cat-btn ${activeCat === "carbon" ? "active" : ""}`}
-            onClick={() => setActiveCat("carbon")}
-          >
-            Carbon
-          </button>
-        </div>
-
-        {/* 10 Shader Spheres Row */}
-        <div style={{ display: "flex", alignItems: "stretch", gap: "8px", overflowX: "auto", paddingBottom: "2px" }}>
-          {filteredSpheres.map((s) => {
-            const isActive = activeSphereName === s.name;
-            return (
-              <div
-                key={s.name}
-                className={`mat-card ${isActive ? "active" : ""}`}
-                onClick={() => handleApplySphere(s.name, s.cat)}
-              >
-                <div className={`sphere ${s.sphereClass}`} />
-                <span style={{ fontSize: "10.5px", color: isActive ? "#ffffff" : "#cbd5e1", fontWeight: 500, whiteSpace: "nowrap" }}>
-                  {s.name}
+        ) : (
+          <>
+            {/* Top Header & Search Row */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: 1 }}>
+                <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9", flexShrink: 0 }}>
+                  {activeBottomTool === "shaders" ? "PBR Shader Presets" : "Material Library"}
                 </span>
+                <div className="search-input-box" style={{ maxWidth: "260px" }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" style={{ marginRight: "6px", flexShrink: 0 }}>
+                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="Search materials..."
+                    value={matSearch}
+                    onChange={(e) => setMatSearch(e.target.value)}
+                  />
+                </div>
               </div>
-            );
-          })}
-        </div>
+              <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+            </div>
+
+            {/* Category Filter Pills Row */}
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", margin: "4px 0" }}>
+              <button
+                className={`mat-cat-btn ${activeCat === "all" ? "active" : ""}`}
+                onClick={() => setActiveCat("all")}
+              >
+                <span>All</span>
+                {activeCat === "all" && <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#67e8f9" }} />}
+              </button>
+              <button
+                className={`mat-cat-btn ${activeCat === "metal" ? "active" : ""}`}
+                onClick={() => setActiveCat("metal")}
+              >
+                Metals
+              </button>
+              <button
+                className={`mat-cat-btn ${activeCat === "plastic" ? "active" : ""}`}
+                onClick={() => setActiveCat("plastic")}
+              >
+                Plastics
+              </button>
+              <button
+                className={`mat-cat-btn ${activeCat === "fabric" ? "active" : ""}`}
+                onClick={() => setActiveCat("fabric")}
+              >
+                Fabric
+              </button>
+              <button
+                className={`mat-cat-btn ${activeCat === "glass" ? "active" : ""}`}
+                onClick={() => setActiveCat("glass")}
+              >
+                Glass
+              </button>
+              <button
+                className={`mat-cat-btn ${activeCat === "carbon" ? "active" : ""}`}
+                onClick={() => setActiveCat("carbon")}
+              >
+                Carbon
+              </button>
+            </div>
+
+            {/* 10 Shader Spheres Row */}
+            <div style={{ display: "flex", alignItems: "stretch", gap: "8px", overflowX: "auto", paddingBottom: "2px" }}>
+              {filteredSpheres.map((s) => {
+                const isActive = activeSphereName === s.name;
+                return (
+                  <div
+                    key={s.name}
+                    className={`mat-card ${isActive ? "active" : ""}`}
+                    onClick={() => handleApplySphere(s.name, s.cat)}
+                  >
+                    <div className={`sphere ${s.sphereClass}`} />
+                    <span style={{ fontSize: "10.5px", color: isActive ? "#ffffff" : "#cbd5e1", fontWeight: 500, whiteSpace: "nowrap" }}>
+                      {s.name}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </section>
 
       {/* 3C. Bottom-Right Panel: Geometry & Decimation */}
@@ -290,15 +344,30 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
               </div>
             </div>
 
-            <button
-              className="btn-decimation-apply"
-              onClick={() => {
-                modelStore.decimateModel?.(decimateVal / 100);
-                onShowToast?.(`Mesh decimation (${decimateVal}% reduction) applied`);
-              }}
-            >
-              Apply
-            </button>
+            <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
+              <button
+                className="btn-decimation-apply"
+                style={{ flex: 1 }}
+                onClick={() => {
+                  modelStore.decimateModel?.(decimateVal / 100);
+                  onShowToast?.(`Mesh decimation (${decimateVal}% reduction) applied`);
+                }}
+              >
+                Apply
+              </button>
+              <button
+                className="tool-btn"
+                style={{ padding: "6px 12px", borderRadius: "6px", fontSize: "11px", color: "#94a3b8" }}
+                title="Revert to Original Geometry"
+                onClick={() => {
+                  setDecimateVal(0);
+                  modelStore.revertDecimation?.();
+                  onShowToast?.("Reverted to 100% original geometry");
+                }}
+              >
+                Reset
+              </button>
+            </div>
           </div>
         </div>
       </aside>

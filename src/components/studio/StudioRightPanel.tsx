@@ -30,19 +30,26 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
       {/* UV Editor Top Tab Bar */}
       <div className="uv-top-tab-bar">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <span className="uv-tab-active-title">UV Editor</span>
+          <span className="uv-tab-active-title">UV Editor ({uvOrganizerStore.uvResolution}×{uvOrganizerStore.uvResolution})</span>
           <button
             style={{
-              background: "transparent",
-              border: "none",
-              color: "#94a3b8",
+              background: "#141c2e",
+              border: "1px solid #232f46",
+              borderRadius: "4px",
+              color: "#38bdf8",
               cursor: "pointer",
-              fontSize: "14px",
-              padding: "0 4px"
+              fontSize: "10px",
+              padding: "2px 6px"
             }}
-            onClick={() => onShowToast?.("Open New UV Viewport")}
+            title="Cycle UV Map Resolution (1K / 2K / 4K)"
+            onClick={() => {
+              const currentRes = uvOrganizerStore.uvResolution;
+              const nextRes = currentRes === 1024 ? 2048 : currentRes === 2048 ? 4096 : 1024;
+              uvOrganizerStore.setUVResolution(nextRes);
+              onShowToast?.(`UV Canvas Resolution: ${nextRes}×${nextRes}`);
+            }}
           >
-            +
+            {uvOrganizerStore.uvResolution === 1024 ? "1K" : uvOrganizerStore.uvResolution === 2048 ? "2K" : "4K"}
           </button>
         </div>
         <svg
@@ -65,7 +72,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             title="UV Island Selection"
             onClick={() => {
               setActiveUvTool("island");
-              onShowToast?.("UV Island Selection tool");
+              onShowToast?.("Active: UV Island Selection Mode");
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -75,10 +82,10 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
 
           <button
             className={`tool-btn tool-btn-sm ${activeUvTool === "face" ? "active" : ""}`}
-            title="Face Select"
+            title="Face Inspect"
             onClick={() => {
               setActiveUvTool("face");
-              onShowToast?.("Face Select tool");
+              onShowToast?.("Active: Panel Surface Inspect Mode");
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -91,7 +98,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             title="Move UV"
             onClick={() => {
               setActiveUvTool("move");
-              onShowToast?.("Move UV tool");
+              onShowToast?.("Active: UV Translation Mode");
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -104,7 +111,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             title="Scale UV"
             onClick={() => {
               setActiveUvTool("scale");
-              onShowToast?.("Scale UV tool");
+              onShowToast?.("Active: UV Isotropic Scale Mode");
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -114,11 +121,15 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
           </button>
 
           <button
-            className={`tool-btn tool-btn-sm ${activeUvTool === "pin" ? "active" : ""}`}
-            title="Pin Vertices"
+            className={`tool-btn tool-btn-sm ${targetIds[0] && uvOrganizerStore.isPiecePinned(targetIds[0]) ? "active" : ""}`}
+            title="Pin Island (Lock Position)"
             onClick={() => {
-              setActiveUvTool("pin");
-              onShowToast?.("Pin Vertices tool");
+              if (targetIds[0]) {
+                const pinned = uvOrganizerStore.togglePinPiece(targetIds[0]);
+                onShowToast?.(pinned ? "Pinned island position (locked)" : "Unpinned island");
+              } else {
+                onShowToast?.("Select an island to pin/unpin");
+              }
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -128,11 +139,11 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
           </button>
 
           <button
-            className={`tool-btn tool-btn-sm ${activeUvTool === "snap" ? "active" : ""}`}
-            title="Snap"
+            className={`tool-btn tool-btn-sm ${uvOrganizerStore.snappingEnabled ? "active" : ""}`}
+            title="Toggle Magnetic UV Snapping"
             onClick={() => {
-              setActiveUvTool("snap");
-              onShowToast?.("UV Snapping toggled");
+              const snap = uvOrganizerStore.toggleSnapping();
+              onShowToast?.(snap ? "Magnetic Snapping: Enabled" : "Magnetic Snapping: Disabled");
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -194,7 +205,20 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
         <div className="uv-ops-sidebar">
           {/* UV Operations */}
           <div>
-            <div className="uv-ops-section-title">UV Operations</div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
+              <div className="uv-ops-section-title" style={{ margin: 0 }}>UV Operations</div>
+              <button
+                className="tool-btn tool-btn-sm"
+                style={{ padding: "2px 6px", fontSize: "10px", color: "#22d3ee", border: "1px solid rgba(34, 211, 238, 0.3)" }}
+                title="Launch Canonical UV Blueprint Designer"
+                onClick={() => {
+                  uvOrganizerStore.setShowZoneEditorModal(true);
+                  onShowToast?.("Opened UV Blueprint Designer");
+                }}
+              >
+                Blueprint
+              </button>
+            </div>
             <button
               className="uv-op-btn"
               onClick={() => {
@@ -225,7 +249,10 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
 
             <button
               className="uv-op-btn"
-              onClick={() => onShowToast?.("Equalized texel density across all islands")}
+              onClick={() => {
+                const res = uvOrganizerStore.equalizeTexelDensity();
+                onShowToast?.(`Equalized texel density across ${res.updatedCount} islands`);
+              }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="2" style={{ flexShrink: 0 }}>
                 <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -242,8 +269,12 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
               <button
                 className="uv-grid-btn"
                 onClick={() => {
-                  if (targetIds[0]) uvOrganizerStore.rotatePieceUV(targetIds[0], 90);
-                  onShowToast?.("Rotated UV 90°");
+                  if (targetIds.length > 0) {
+                    uvOrganizerStore.rotatePiecesGroupUV(targetIds, 90);
+                    onShowToast?.(`Rotated ${targetIds.length} UV island(s) 90°`);
+                  } else {
+                    onShowToast?.("Select an island to rotate");
+                  }
                 }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -255,8 +286,12 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
               <button
                 className="uv-grid-btn"
                 onClick={() => {
-                  if (targetIds[0]) uvOrganizerStore.flipPieceUV(targetIds[0], "horizontal");
-                  onShowToast?.("Mirrored UV horizontally");
+                  if (targetIds.length > 0) {
+                    uvOrganizerStore.flipPiecesGroupUV(targetIds, "horizontal");
+                    onShowToast?.(`Mirrored ${targetIds.length} UV island(s) horizontally`);
+                  } else {
+                    onShowToast?.("Select an island to mirror");
+                  }
                 }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -268,8 +303,14 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
               <button
                 className="uv-grid-btn"
                 onClick={() => {
-                  uvOrganizerStore.focusSelectedIsland();
-                  onShowToast?.("Centered UV island");
+                  if (targetIds.length > 0) {
+                    uvOrganizerStore.centerPiecesGroupInZone(targetIds);
+                    uvOrganizerStore.focusSelectedIsland();
+                    onShowToast?.(`Centered ${targetIds.length} UV island(s)`);
+                  } else {
+                    uvOrganizerStore.focusSelectedIsland();
+                    onShowToast?.("Centered UV viewport");
+                  }
                 }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">

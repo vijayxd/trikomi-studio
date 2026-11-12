@@ -47,15 +47,16 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
     <section className="panel viewport-panel" id="viewportContainer">
       {/* Top Floating Viewport Bar */}
       <div className="viewport-top-floating-bar">
-        {/* Perspective Dropdown */}
+        {/* Perspective / Orthographic Toggle */}
         <button
           className="viewport-perspective-btn"
           onClick={() => {
-            modelStore.resetCamera?.();
-            onShowToast?.("Camera reset to Perspective");
+            const nextMode = modelStore.toggleCameraProjection?.();
+            onShowToast?.(`Camera Projection: ${nextMode === "orthographic" ? "Orthographic" : "Perspective"}`);
           }}
+          title="Toggle Perspective / Orthographic Projection"
         >
-          <span>Perspective</span>
+          <span>{modelStore.cameraProjection === "orthographic" ? "Orthographic" : "Perspective"}</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
             <polyline points="6 9 12 15 18 9" />
           </svg>
@@ -82,9 +83,10 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
           <button
             className={`tool-btn tool-btn-sm ${activeGizmoMode === "translate" ? "active" : ""}`}
-            title="Translate Gizmo"
+            title="Translate Gizmo (W)"
             onClick={() => {
               setActiveGizmoMode("translate");
+              modelStore.setTransformMode("translate");
               onShowToast?.("Translate Gizmo enabled");
             }}
           >
@@ -95,8 +97,11 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
           <button
             className="tool-btn tool-btn-sm"
-            title="Zoom"
-            onClick={() => onShowToast?.("Use wheel to Zoom")}
+            title="Zoom In (+20%)"
+            onClick={() => {
+              modelStore.zoomByFactor?.(0.8);
+              onShowToast?.("Zoomed in (+20%)");
+            }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -106,9 +111,13 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
           <button
             className={`tool-btn tool-btn-sm ${activeGizmoMode === "orbit" ? "active" : ""}`}
-            title="Orbit"
+            title="Orbit View (Left Drag)"
             onClick={() => {
               setActiveGizmoMode("orbit");
+              if (modelStore.transformControls) {
+                modelStore.transformControls.detach();
+                modelStore.transformControls.enabled = false;
+              }
               onShowToast?.("Orbit control active (Left drag)");
             }}
           >
@@ -135,8 +144,11 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
           <button
             className="tool-btn tool-btn-sm"
-            title="Pan Hand"
-            onClick={() => onShowToast?.("Pan: Right click or Shift + drag")}
+            title="Pan Hand (Center / Reset)"
+            onClick={() => {
+              modelStore.focusOnSelected?.();
+              onShowToast?.("Pan: Centered on garment (Shift + Right Drag to Pan)");
+            }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M18 11V6a2 2 0 0 0-4 0v4" /><path d="M14 10V4a2 2 0 0 0-4 0v6" />
@@ -146,8 +158,11 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
 
           <button
             className="tool-btn tool-btn-sm"
-            title="Studio Lighting"
-            onClick={() => onShowToast?.("Studio Lighting active")}
+            title="Cycle Studio Lighting Presets"
+            onClick={() => {
+              const preset = modelStore.toggleLightingPreset?.();
+              onShowToast?.(`Studio Lighting Preset: ${preset?.toUpperCase() || "STUDIO"}`);
+            }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="12" cy="12" r="5" />
@@ -159,9 +174,12 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
           </button>
 
           <button
-            className="tool-btn tool-btn-sm"
-            title="Show Grid"
-            onClick={() => onShowToast?.("Toggled Ground Grid")}
+            className={`tool-btn tool-btn-sm ${modelStore.showGrid ? "active" : ""}`}
+            title="Toggle Ground Grid"
+            onClick={() => {
+              modelStore.toggleGroundGrid?.();
+              onShowToast?.(modelStore.showGrid ? "Ground Grid: ON" : "Ground Grid: OFF");
+            }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
               <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -171,9 +189,12 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
           </button>
 
           <button
-            className="tool-btn tool-btn-sm"
-            title="Point Cloud"
-            onClick={() => onShowToast?.("Toggled Point Cloud")}
+            className={`tool-btn tool-btn-sm ${modelStore.pointCloudMode ? "active" : ""}`}
+            title="Toggle Vertex Point Cloud"
+            onClick={() => {
+              modelStore.togglePointCloud?.();
+              onShowToast?.(modelStore.pointCloudMode ? "Point Cloud: ON" : "Surface Mesh: ON");
+            }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <circle cx="6" cy="6" r="1.5" /><circle cx="12" cy="6" r="1.5" /><circle cx="18" cy="6" r="1.5" />
@@ -196,23 +217,35 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
         </button>
       </div>
 
-      {/* 3D Axis Gizmo Top-Right */}
-      <div className="viewport-axis-gizmo">
+      {/* 3D Axis Gizmo Top-Right with interactive orientation clicks */}
+      <div className="viewport-axis-gizmo" style={{ cursor: "pointer" }} title="Click axis to align view (Y: Top, X: Right, Z: Front)">
         <svg width="64" height="64" viewBox="0 0 64 64">
-          {/* Y Axis Green */}
-          <line x1="32" y1="36" x2="32" y2="12" stroke="#22c55e" strokeWidth="2" />
-          <polygon points="32,7 29,14 35,14" fill="#22c55e" />
-          <text x="29" y="6" fill="#22c55e" fontSize="9" fontWeight="700">Y</text>
-          {/* X Axis Red */}
-          <line x1="32" y1="36" x2="52" y2="44" stroke="#ef4444" strokeWidth="2" />
-          <polygon points="56,46 49,46 51,41" fill="#ef4444" />
-          <text x="57" y="49" fill="#ef4444" fontSize="9" fontWeight="700">X</text>
-          {/* Z Axis Cyan */}
-          <line x1="32" y1="36" x2="14" y2="44" stroke="#06b6d4" strokeWidth="2" />
-          <polygon points="10,46 15,41 17,46" fill="#06b6d4" />
-          <text x="2" y="49" fill="#06b6d4" fontSize="9" fontWeight="700">Z</text>
-          {/* Center Hub */}
-          <circle cx="32" cy="36" r="3" fill="#e2e8f0" />
+          {/* Y Axis Green (Top View) */}
+          <g onClick={() => { modelStore.setOrthogonalView?.("y"); onShowToast?.("View: Top (Y)"); }}>
+            <line x1="32" y1="36" x2="32" y2="12" stroke="#22c55e" strokeWidth="2.5" />
+            <polygon points="32,7 28,14 36,14" fill="#22c55e" />
+            <text x="28" y="6" fill="#22c55e" fontSize="9" fontWeight="700">Y</text>
+          </g>
+          {/* X Axis Red (Right View) */}
+          <g onClick={() => { modelStore.setOrthogonalView?.("x"); onShowToast?.("View: Right (X)"); }}>
+            <line x1="32" y1="36" x2="52" y2="44" stroke="#ef4444" strokeWidth="2.5" />
+            <polygon points="56,46 49,46 51,41" fill="#ef4444" />
+            <text x="57" y="49" fill="#ef4444" fontSize="9" fontWeight="700">X</text>
+          </g>
+          {/* Z Axis Cyan (Front View) */}
+          <g onClick={() => { modelStore.setOrthogonalView?.("z"); onShowToast?.("View: Front (Z)"); }}>
+            <line x1="32" y1="36" x2="14" y2="44" stroke="#06b6d4" strokeWidth="2.5" />
+            <polygon points="10,46 15,41 17,46" fill="#06b6d4" />
+            <text x="2" y="49" fill="#06b6d4" fontSize="9" fontWeight="700">Z</text>
+          </g>
+          {/* Center Hub (Reset Perspective Framing) */}
+          <circle
+            cx="32"
+            cy="36"
+            r="4.5"
+            fill="#e2e8f0"
+            onClick={() => { modelStore.resetCamera?.(); onShowToast?.("View: Perspective (Default)"); }}
+          />
         </svg>
       </div>
 

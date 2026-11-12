@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "@trikomi/core/studio";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 
-export type StudioMode = "model" | "uv" | "material" | "validation";
+export type StudioMode = "model" | "uv" | "material";
 
 interface StudioTopBarProps {
   currentMode: StudioMode;
@@ -21,6 +21,7 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
   onExportGLB,
   onShowToast
 }) => {
+  const [showInfoModal, setShowInfoModal] = useState(false);
   return (
     <header className="studio-header">
       {/* Left Logo + Studio Tabs */}
@@ -49,10 +50,11 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         <nav className="nav-tabs-group" aria-label="Studio Navigation">
           <div
             className={`nav-tab ${currentMode === "model" ? "active" : ""}`}
+            style={{ opacity: 0.65 }}
             onClick={() => {
-              onSelectMode("model");
-              onShowToast?.("Switched workspace to Model Studio");
+              onShowToast?.("Model Studio is pending implementation");
             }}
+            title="Model Studio (Pending)"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -60,6 +62,7 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
               <line x1="12" y1="22.08" x2="12" y2="12" />
             </svg>
             <span>Model Studio</span>
+            <span style={{ fontSize: "8.5px", padding: "1px 5px", borderRadius: "3px", background: "rgba(255, 255, 255, 0.08)", color: "#94a3b8", marginLeft: "4px" }}>Pending</span>
           </div>
 
           <div
@@ -92,20 +95,6 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
             </svg>
             <span>Material Studio</span>
           </div>
-
-          <div
-            className={`nav-tab ${currentMode === "validation" ? "active" : ""}`}
-            onClick={() => {
-              onSelectMode("validation");
-              onShowToast?.("Switched workspace to Asset Validator");
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              <polyline points="9 12 11 14 15 10" />
-            </svg>
-            <span>Asset Validator</span>
-          </div>
         </nav>
       </div>
 
@@ -114,10 +103,15 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         {/* Undo / Redo */}
         <button
           className="tool-btn"
-          title="Undo"
+          title="Undo (Ctrl+Z)"
           onClick={() => {
-            modelStore.resetCamera?.();
-            onShowToast?.("Undo action");
+            const success = uvOrganizerStore.undo();
+            if (success) {
+              onShowToast?.("Undid last UV action");
+            } else {
+              modelStore.resetCamera?.();
+              onShowToast?.("Nothing to undo (camera reset)");
+            }
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -127,8 +121,15 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         </button>
         <button
           className="tool-btn"
-          title="Redo"
-          onClick={() => onShowToast?.("Redo action")}
+          title="Redo (Ctrl+Y)"
+          onClick={() => {
+            const success = uvOrganizerStore.redo();
+            if (success) {
+              onShowToast?.("Redid UV action");
+            } else {
+              onShowToast?.("Nothing to redo");
+            }
+          }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
             <path d="M21 7v6h-6" />
@@ -168,7 +169,8 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         {/* User Profile Avatar */}
         <div
           className="user-avatar-pill"
-          onClick={() => onShowToast?.("User Profile: Trikomi Designer")}
+          onClick={() => setShowInfoModal(!showInfoModal)}
+          title="Studio Info & Hotkeys"
         >
           <svg viewBox="0 0 36 36" style={{ width: "100%", height: "100%", background: "#1e293b" }}>
             <defs>
@@ -183,6 +185,68 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
           </svg>
         </div>
       </div>
+
+      {/* Studio Info & Hotkeys Modal */}
+      {showInfoModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: "52px",
+            right: "16px",
+            width: "320px",
+            background: "#0c1220",
+            border: "1px solid #1e293b",
+            borderRadius: "8px",
+            padding: "16px",
+            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.7)",
+            zIndex: 1000,
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px"
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: "12px", fontWeight: "700", color: "#f8fafc" }}>Studio Info & Shortcuts</span>
+            <button
+              onClick={() => setShowInfoModal(false)}
+              style={{ background: "transparent", border: "none", color: "#64748b", cursor: "pointer", fontSize: "14px" }}
+            >
+              ✕
+            </button>
+          </div>
+
+          <div style={{ background: "#060911", padding: "8px 10px", borderRadius: "6px", border: "1px solid #162032", fontSize: "10px", display: "flex", flexDirection: "column", gap: "4px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#94a3b8" }}>Active Model:</span>
+              <span style={{ color: "#38bdf8", fontWeight: "600" }}>{modelStore.modelMeta.title || "Sportswear Garment"}</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#94a3b8" }}>Triangles:</span>
+              <span style={{ color: "#f1f5f9" }}>{(modelStore.modelMeta.triangles || 0).toLocaleString()}</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#94a3b8" }}>Garment Panels:</span>
+              <span style={{ color: "#f1f5f9" }}>{modelStore.pieces.length} panels</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#94a3b8" }}>Architecture:</span>
+              <span style={{ color: "#10b981" }}>ThreeViewer + TrikomiMeshNode</span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            <span style={{ fontSize: "10px", fontWeight: "600", color: "#94a3b8", textTransform: "uppercase" }}>Keyboard Shortcuts</span>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", fontSize: "10px" }}>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>Q</kbd> <span>Select</span></div>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>W</kbd> <span>Move</span></div>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>E</kbd> <span>Rotate</span></div>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>R</kbd> <span>Scale</span></div>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>F</kbd> <span>Focus</span></div>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>Ctrl+Z</kbd> <span>Undo</span></div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 });

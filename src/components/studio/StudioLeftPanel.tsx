@@ -15,29 +15,37 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
   const [searchFilter, setSearchFilter] = useState("");
   const [isTreeCollapsed, setIsTreeCollapsed] = useState(false);
 
-  // Transform states
-  const [posX, setPosX] = useState("0.00");
-  const [posY, setPosY] = useState("0.00");
-  const [posZ, setPosZ] = useState("0.00");
-  const [rotX, setRotX] = useState("0.00");
-  const [rotY, setRotY] = useState("0.00");
-  const [rotZ, setRotZ] = useState("0.00");
-  const [sclX, setSclX] = useState("1.00");
-  const [sclY, setSclY] = useState("1.00");
-  const [sclZ, setSclZ] = useState("1.00");
+  const selectedMesh = modelStore.selectedPiece?.mesh;
+
+  const getTransformVal = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z"): string => {
+    if (!selectedMesh) return type === "scl" ? "1.00" : "0.00";
+    if (type === "pos") return selectedMesh.position[axis].toFixed(2);
+    if (type === "rot") return (selectedMesh.rotation[axis] * (180 / Math.PI)).toFixed(1);
+    if (type === "scl") return selectedMesh.scale[axis].toFixed(2);
+    return "0.00";
+  };
+
+  const handleTransformChange = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z", valStr: string) => {
+    const num = parseFloat(valStr);
+    if (isNaN(num) || !selectedMesh) return;
+    if (type === "pos") selectedMesh.position[axis] = num;
+    else if (type === "rot") selectedMesh.rotation[axis] = num * (Math.PI / 180);
+    else if (type === "scl") selectedMesh.scale[axis] = num;
+
+    modelStore.updateTransformGizmo?.();
+  };
 
   const resetTransform = () => {
-    setPosX("0.00");
-    setPosY("0.00");
-    setPosZ("0.00");
-    setRotX("0.00");
-    setRotY("0.00");
-    setRotZ("0.00");
-    setSclX("1.00");
-    setSclY("1.00");
-    setSclZ("1.00");
-    modelStore.resetCamera?.();
-    onShowToast?.("Transform reset to origin");
+    if (selectedMesh) {
+      selectedMesh.position.set(0, 0, 0);
+      selectedMesh.rotation.set(0, 0, 0);
+      selectedMesh.scale.set(1, 1, 1);
+      modelStore.updateTransformGizmo?.();
+      onShowToast?.(`Transform reset on ${modelStore.selectedPiece?.name || 'piece'}`);
+    } else {
+      modelStore.resetCamera?.();
+      onShowToast?.("Camera reset to origin");
+    }
   };
 
   const filteredPieces = modelStore.pieces.filter((p) =>
@@ -54,6 +62,10 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           className={`tool-btn ${activeTool === "select" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("select");
+            if (modelStore.transformControls) {
+              modelStore.transformControls.detach();
+              modelStore.transformControls.enabled = false;
+            }
             onShowToast?.("Active tool: Select (Q)");
           }}
           title="Select Tool (Q)"
@@ -67,9 +79,10 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           className={`tool-btn ${activeTool === "cursor" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("cursor");
-            onShowToast?.("Active tool: 3D Cursor / Origin");
+            modelStore.resetCamera?.();
+            onShowToast?.("3D Cursor: Centered to origin (0, 0, 0)");
           }}
-          title="3D Cursor / Origin"
+          title="3D Cursor / Origin (Center Camera)"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
             <circle cx="12" cy="12" r="7" />
@@ -82,6 +95,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           className={`tool-btn ${activeTool === "move" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("move");
+            modelStore.setTransformMode("translate");
             onShowToast?.("Active tool: Move (W)");
           }}
           title="Move (W)"
@@ -97,9 +111,25 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         </button>
 
         <button
+          className={`tool-btn ${activeTool === "rotate" ? "active" : ""}`}
+          onClick={() => {
+            setActiveTool("rotate");
+            modelStore.setTransformMode("rotate");
+            onShowToast?.("Active tool: Rotate (E)");
+          }}
+          title="Rotate (E)"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+            <polyline points="21 3 21 8 16 8" />
+          </svg>
+        </button>
+
+        <button
           className={`tool-btn ${activeTool === "scale" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("scale");
+            modelStore.setTransformMode("scale");
             onShowToast?.("Active tool: Scale (R)");
           }}
           title="Scale (R)"
@@ -116,9 +146,10 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           className={`tool-btn ${activeTool === "uv-proj" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("uv-proj");
-            onShowToast?.("Active tool: UV Projection");
+            const res = uvOrganizerStore.arrangeAssignedUVs();
+            onShowToast?.(`Canonical UV Projection applied (${res.packedCount} islands packed)`);
           }}
-          title="UV Projection"
+          title="Canonical UV Auto-Projection & Unwrap"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
             <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -131,9 +162,10 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           className={`tool-btn ${activeTool === "normals" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("normals");
-            onShowToast?.("Active tool: Surface Normals");
+            const count = modelStore.recomputeNormals?.();
+            onShowToast?.(`Recomputed vertex normals across ${count} panels`);
           }}
-          title="Surface Normals"
+          title="Recompute Surface Normals & Tangents"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
             <rect x="4" y="4" width="16" height="16" rx="3" />
@@ -145,9 +177,10 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           className={`tool-btn ${activeTool === "hierarchy" ? "active" : ""}`}
           onClick={() => {
             setActiveTool("hierarchy");
-            onShowToast?.("Active tool: Hierarchy Nodes");
+            setIsTreeCollapsed(!isTreeCollapsed);
+            onShowToast?.(isTreeCollapsed ? "Expanded Scene Graph" : "Collapsed Scene Graph");
           }}
-          title="Hierarchy Nodes"
+          title="Toggle Hierarchy Tree"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
             <circle cx="12" cy="12" r="3" />
@@ -250,7 +283,25 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                   <span>Environment</span>
                 </div>
                 <div className="tree-row-actions">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <span
+                    title="Toggle Environment Lighting"
+                    style={{ display: "inline-flex", cursor: "pointer" }}
+                    onClick={() => {
+                      modelStore.toggleEnvironmentVisibility?.();
+                      onShowToast?.(modelStore.environmentVisible ? "Environment IBL: Visible" : "Environment IBL: Hidden");
+                    }}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke={modelStore.environmentVisible ? "currentColor" : "#ef4444"}
+                      strokeWidth="1.8"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                 </div>
               </div>
@@ -265,7 +316,25 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                   </span>
                 </div>
                 <div className="tree-row-actions">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <span
+                    title="Toggle Garment Visibility"
+                    style={{ display: "inline-flex", cursor: "pointer" }}
+                    onClick={() => {
+                      modelStore.toggleAllPiecesVisibility?.();
+                      onShowToast?.("Toggled all garment pieces");
+                    }}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                 </div>
               </div>
@@ -327,7 +396,27 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                           </>
                         )}
                       </svg>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                      <span
+                        title={modelStore.isPieceLocked?.(piece.id) ? "Unlock piece" : "Lock piece from transform"}
+                        style={{ display: "inline-flex", cursor: "pointer" }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const locked = modelStore.togglePieceLock?.(piece.id);
+                          onShowToast?.(locked ? `Locked ${piece.name}` : `Unlocked ${piece.name}`);
+                        }}
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke={modelStore.isPieceLocked?.(piece.id) ? "#22d3ee" : "currentColor"}
+                          strokeWidth="1.8"
+                        >
+                          <rect x="3" y="11" width="18" height="11" rx="2" />
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 );
@@ -343,7 +432,25 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                   <span>Lights</span>
                 </div>
                 <div className="tree-row-actions">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <span
+                    title="Toggle Directional Scene Lights"
+                    style={{ display: "inline-flex", cursor: "pointer" }}
+                    onClick={() => {
+                      modelStore.toggleDirectionalLights?.();
+                      onShowToast?.(modelStore.lightsVisible ? "Directional Lights: ON" : "Directional Lights: OFF");
+                    }}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke={modelStore.lightsVisible ? "currentColor" : "#ef4444"}
+                      strokeWidth="1.8"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                 </div>
               </div>
@@ -358,7 +465,25 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                   <span>Camera</span>
                 </div>
                 <div className="tree-row-actions">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <span
+                    title="Reset Camera Framing"
+                    style={{ display: "inline-flex", cursor: "pointer" }}
+                    onClick={() => {
+                      modelStore.resetCamera?.();
+                      onShowToast?.("Camera reset to default view");
+                    }}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                 </div>
               </div>
@@ -389,9 +514,9 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
             <div className="transform-row">
               <span className="transform-label">Position</span>
               <div className="transform-inputs-grid">
-                <div className="num-box"><span>X</span><input type="text" value={posX} onChange={(e) => setPosX(e.target.value)} /></div>
-                <div className="num-box"><span>Y</span><input type="text" value={posY} onChange={(e) => setPosY(e.target.value)} /></div>
-                <div className="num-box"><span>Z</span><input type="text" value={posZ} onChange={(e) => setPosZ(e.target.value)} /></div>
+                <div className="num-box"><span>X</span><input type="text" value={getTransformVal("pos", "x")} onChange={(e) => handleTransformChange("pos", "x", e.target.value)} /></div>
+                <div className="num-box"><span>Y</span><input type="text" value={getTransformVal("pos", "y")} onChange={(e) => handleTransformChange("pos", "y", e.target.value)} /></div>
+                <div className="num-box"><span>Z</span><input type="text" value={getTransformVal("pos", "z")} onChange={(e) => handleTransformChange("pos", "z", e.target.value)} /></div>
               </div>
             </div>
 
@@ -399,9 +524,9 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
             <div className="transform-row">
               <span className="transform-label">Rotation</span>
               <div className="transform-inputs-grid">
-                <div className="num-box"><span>X</span><input type="text" value={rotX} onChange={(e) => setRotX(e.target.value)} /></div>
-                <div className="num-box"><span>Y</span><input type="text" value={rotY} onChange={(e) => setRotY(e.target.value)} /></div>
-                <div className="num-box"><span>Z</span><input type="text" value={rotZ} onChange={(e) => setRotZ(e.target.value)} /></div>
+                <div className="num-box"><span>X</span><input type="text" value={getTransformVal("rot", "x")} onChange={(e) => handleTransformChange("rot", "x", e.target.value)} /></div>
+                <div className="num-box"><span>Y</span><input type="text" value={getTransformVal("rot", "y")} onChange={(e) => handleTransformChange("rot", "y", e.target.value)} /></div>
+                <div className="num-box"><span>Z</span><input type="text" value={getTransformVal("rot", "z")} onChange={(e) => handleTransformChange("rot", "z", e.target.value)} /></div>
               </div>
             </div>
 
@@ -409,9 +534,9 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
             <div className="transform-row">
               <span className="transform-label">Scale</span>
               <div className="transform-inputs-grid">
-                <div className="num-box"><span>X</span><input type="text" value={sclX} onChange={(e) => setSclX(e.target.value)} /></div>
-                <div className="num-box"><span>Y</span><input type="text" value={sclY} onChange={(e) => setSclY(e.target.value)} /></div>
-                <div className="num-box"><span>Z</span><input type="text" value={sclZ} onChange={(e) => setSclZ(e.target.value)} /></div>
+                <div className="num-box"><span>X</span><input type="text" value={getTransformVal("scl", "x")} onChange={(e) => handleTransformChange("scl", "x", e.target.value)} /></div>
+                <div className="num-box"><span>Y</span><input type="text" value={getTransformVal("scl", "y")} onChange={(e) => handleTransformChange("scl", "y", e.target.value)} /></div>
+                <div className="num-box"><span>Z</span><input type="text" value={getTransformVal("scl", "z")} onChange={(e) => handleTransformChange("scl", "z", e.target.value)} /></div>
               </div>
             </div>
           </div>

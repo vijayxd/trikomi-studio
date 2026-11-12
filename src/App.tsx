@@ -10,8 +10,8 @@ import { StudioMaterialLibraryView } from "./components/studio/StudioMaterialLib
 import { UVZoneEditorModal } from "./components/UVZoneEditorModal";
 
 export const App = observer(() => {
-  // Studio Mode: "model" | "uv" | "material" | "validation"
-  const [studioMode, setStudioMode] = useState<StudioMode>("model");
+  // Studio Mode: "uv" (current view) | "model" (pending) | "material"
+  const [studioMode, setStudioMode] = useState<StudioMode>("uv");
 
   // Viewport Maximize state
   const [isViewportMaximized, setIsViewportMaximized] = useState<boolean>(false);
@@ -32,9 +32,9 @@ export const App = observer(() => {
   };
 
   const handleToggleTurntable = () => {
-    const nextState = !isTurntablePlaying;
+    const nextState = modelStore.toggleTurntable();
     setIsTurntablePlaying(nextState);
-    triggerToast(nextState ? "Turntable preview started" : "Turntable preview paused");
+    triggerToast(nextState ? "Turntable spin started" : "Turntable spin paused");
   };
 
   const handleToggleMaximize = () => {
@@ -66,6 +66,21 @@ export const App = observer(() => {
         modelStore.focusOnSelected?.();
         uvOrganizerStore.focusSelectedIsland?.();
         triggerToast(hasSelection ? "Focused on selected piece" : "Framed entire model");
+      } else if (e.key === "w" || e.key === "W") {
+        modelStore.setTransformMode("translate");
+        triggerToast("Translate gizmo (W)");
+      } else if (e.key === "e" || e.key === "E") {
+        modelStore.setTransformMode("rotate");
+        triggerToast("Rotate gizmo (E)");
+      } else if (e.key === "r" || e.key === "R") {
+        modelStore.setTransformMode("scale");
+        triggerToast("Scale gizmo (R)");
+      } else if (e.key === "q" || e.key === "Q") {
+        if (modelStore.transformControls) {
+          modelStore.transformControls.detach();
+          modelStore.transformControls.enabled = false;
+        }
+        triggerToast("Select mode (Q)");
       }
     };
 
