@@ -482,6 +482,7 @@ export const UVCanvasView = observer(() => {
         if (hasSelection) {
           e.preventDefault();
           focusSelectedIsland();
+          modelStore.focusOnSelected?.();
         }
       }
     };

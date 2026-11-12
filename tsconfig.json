@@ -13,6 +13,8 @@
     "strict": false,
     "noImplicitAny": false,
     "paths": {
+      "three": ["../trikomi/node_modules/@types/three"],
+      "@runtime-sdk/core": ["../trikomi-runtime/packages/core/src/index.ts"],
       "@trikomi/core/studio": ["../trikomi/packages/core/src/studio/index.ts"],
       "@trikomi/core": ["../trikomi/packages/core/src/index.ts"],
       "@trikomi/sportswear": ["../trikomi/packages/sportswear/src/index.ts"]

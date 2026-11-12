@@ -19,9 +19,11 @@ const dynamicAlias = useLocalSdk ? [
   { find: '@trikomi/core/studio', replacement: path.resolve(localSdkRoot, 'core/src/studio/index.ts') },
   { find: '@trikomi/core', replacement: localCoreEntry },
   { find: '@trikomi/sportswear', replacement: path.resolve(localSdkRoot, 'sportswear/src/index.ts') },
+  { find: '@runtime-sdk/core', replacement: path.resolve(__dirname, '../trikomi-runtime/packages/core/src/index.ts') },
   { find: /^three$/, replacement: path.resolve(localSdkRoot, 'core/node_modules/three/build/three.module.js') },
   { find: 'three/addons', replacement: path.resolve(localSdkRoot, 'core/node_modules/three/examples/jsm') },
-  { find: 'mobx', replacement: path.resolve(__dirname, 'node_modules/mobx') }
+  { find: /^mobx$/, replacement: path.resolve(__dirname, 'node_modules/mobx/dist/mobx.esm.js') },
+  { find: /^mobx-react-lite$/, replacement: path.resolve(__dirname, 'node_modules/mobx-react-lite/es/index.js') }
 ] : [];
 
 let activeTransfer = null;
@@ -354,7 +356,8 @@ function style3dBridgePlugin() {
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: dynamicAlias
+    alias: dynamicAlias,
+    dedupe: ['mobx', 'mobx-react-lite', 'three']
   },
   define: {
     'process.env.SECURITY_CODE': '""',

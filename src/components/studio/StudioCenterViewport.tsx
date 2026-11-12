@@ -65,10 +65,11 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
         <div className="viewport-modes-cluster">
           <button
             className="tool-btn tool-btn-sm"
-            title="Focus Origin (F)"
+            title="Focus Selected (F)"
             onClick={() => {
-              modelStore.resetCamera?.();
-              onShowToast?.("Focused on origin");
+              const hasSelection = modelStore.selectedPiece || modelStore.selectedPieceIds.length > 0;
+              modelStore.focusOnSelected?.();
+              onShowToast?.(hasSelection ? "Focused on selected piece" : "Framed entire model");
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">

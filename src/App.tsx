@@ -61,8 +61,11 @@ export const App = observer(() => {
         modelStore.loadNextCuratedModel(uvOrganizerStore);
         triggerToast("Loaded next model");
       } else if (e.key === "f" || e.key === "F") {
-        modelStore.resetCamera?.();
-        triggerToast("Camera reset to Frame");
+        e.preventDefault();
+        const hasSelection = modelStore.selectedPiece || modelStore.selectedPieceIds.length > 0;
+        modelStore.focusOnSelected?.();
+        uvOrganizerStore.focusSelectedIsland?.();
+        triggerToast(hasSelection ? "Focused on selected piece" : "Framed entire model");
       }
     };
 
