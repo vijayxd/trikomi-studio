@@ -122,7 +122,7 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
         <button
           className="tool-btn"
           style={{ opacity: uvOrganizerStore.canRedo ? 1 : 0.45 }}
-          title="Redo (Ctrl+Y)"
+          title="Redo (Ctrl+Shift+Z / Ctrl+Y)"
           onClick={() => {
             const success = uvOrganizerStore.redo();
             if (success) {
@@ -244,6 +244,7 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>R</kbd> <span>Scale</span></div>
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>F</kbd> <span>Focus</span></div>
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>Ctrl+Z</kbd> <span>Undo</span></div>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>Ctrl+Shift+Z</kbd> <span>Redo</span></div>
             </div>
           </div>
         </div>
