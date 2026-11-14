@@ -17,7 +17,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const [activeBottomTool, setActiveBottomTool] = useState<"materials" | "textures">("materials");
   const [activeCat, setActiveCat] = useState<string>("all");
   const [matSearch, setMatSearch] = useState<string>("");
-  const [activeSphereName, setActiveSphereName] = useState<string>("Metallic Blue");
+  const [onlyActiveMaps, setOnlyActiveMaps] = useState<boolean>(false);
   const [decimateVal, setDecimateVal] = useState<number>(72);
   const [isMaterialCollapsed, setIsMaterialCollapsed] = useState<boolean>(false);
   const [isDecimateCollapsed, setIsDecimateCollapsed] = useState<boolean>(false);
@@ -60,41 +60,26 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
     </div>
   );
 
-  const handleApplySphere = (name: string, cat: string) => {
-    setActiveSphereName(name);
+  const activeCuratedMat = modelStore.curatedMaterialsList.find(m => m.id === modelStore.selectedMaterialId) || modelStore.curatedMaterialsList[0];
 
-    // Apply via Trikomi Core modelStore
-    const matchingCurated = modelStore.curatedMaterialsList.find(m =>
-      m.name.toLowerCase().includes(name.toLowerCase()) ||
-      m.category?.toLowerCase() === cat.toLowerCase()
-    );
-
-    if (matchingCurated) {
-      if (modelStore.selectedPiece) {
-        modelStore.applyCuratedMaterialToPiece(modelStore.selectedPiece.mesh, matchingCurated);
-      } else {
-        modelStore.switchCuratedMaterial(matchingCurated.id);
-      }
+  const handleApplyCuratedMat = (mat: any) => {
+    if (modelStore.selectedPiece) {
+      modelStore.applyCuratedMaterialToPiece(modelStore.selectedPiece.mesh, mat);
+    } else {
+      modelStore.switchCuratedMaterial(mat.id);
     }
-    onShowToast?.(`Applied "${name}" shader to active garment`);
+    onShowToast?.(`Applied "${mat.name}" to garment`);
   };
 
-  const spherePresets = [
-    { name: "Metallic Blue", cat: "metal", sphereClass: "sphere-metallic-blue" },
-    { name: "Carbon Fiber", cat: "carbon", sphereClass: "sphere-carbon" },
-    { name: "Brushed Metal", cat: "metal", sphereClass: "sphere-brushed" },
-    { name: "Leather", cat: "fabric", sphereClass: "sphere-leather" },
-    { name: "Glossy Plastic", cat: "plastic", sphereClass: "sphere-plastic" },
-    { name: "Matte Metal", cat: "metal", sphereClass: "sphere-matte" },
-    { name: "Fabric Weave", cat: "fabric", sphereClass: "sphere-fabric" },
-    { name: "Neon Glow", cat: "plastic", sphereClass: "sphere-neon" },
-    { name: "Glass", cat: "glass", sphereClass: "sphere-glass" },
-    { name: "Gold", cat: "metal", sphereClass: "sphere-gold" }
+  // Distinct categories from actual curated materials
+  const availableCategories = [
+    "all",
+    ...Array.from(new Set(modelStore.curatedMaterialsList.map((m: any) => m.category).filter(Boolean)))
   ];
 
-  const filteredSpheres = spherePresets.filter(s => {
-    const matchesCat = activeCat === "all" || s.cat === activeCat;
-    const matchesSearch = !matSearch || s.name.toLowerCase().includes(matSearch.toLowerCase());
+  const filteredCuratedMaterials = modelStore.curatedMaterialsList.filter((m: any) => {
+    const matchesCat = activeCat === "all" || m.category === activeCat;
+    const matchesSearch = !matSearch || m.name?.toLowerCase().includes(matSearch.toLowerCase()) || m.category?.toLowerCase().includes(matSearch.toLowerCase());
     return matchesCat && matchesSearch;
   });
 
@@ -139,9 +124,20 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
               </div>
 
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontSize: "10px", color: "#38bdf8", background: "rgba(56, 189, 248, 0.15)", padding: "2px 6px", borderRadius: "4px" }}>
-                  Active Maps
-                </span>
+                <button
+                  className="studio-btn-secondary"
+                  style={{
+                    padding: "2px 8px",
+                    fontSize: "10px",
+                    background: onlyActiveMaps ? "rgba(6, 182, 212, 0.2)" : "#0f172a",
+                    border: onlyActiveMaps ? "1px solid #22d3ee" : "1px solid #1e293b",
+                    color: onlyActiveMaps ? "#22d3ee" : "#94a3b8"
+                  }}
+                  onClick={() => setOnlyActiveMaps(!onlyActiveMaps)}
+                  title="Toggle between showing all channels vs only loaded/active maps"
+                >
+                  <span>{onlyActiveMaps ? "Filter: Active Only" : "Show All Maps"}</span>
+                </button>
                 <button
                   className="tool-btn tool-btn-sm"
                   title="Collapse Material Library"
@@ -154,42 +150,154 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "10px", overflowX: "auto", flex: 1, alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "10px", overflowX: "auto", flex: 1, alignItems: "flex-start", justifyContent: "flex-start" }}>
               {/* Map 1: Base Color / Diffuse */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
-                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Diffuse (Color)</span>
-                <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#38bdf8" }}>
-                  2048 × 2048
+              {(!onlyActiveMaps || activeCuratedMat?.diffuseMapUrl) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "120px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Diffuse (Color)</span>
+                    <span style={{ fontSize: "8px", color: activeCuratedMat?.diffuseMapUrl ? "#10b981" : "#64748b" }}>
+                      {activeCuratedMat?.diffuseMapUrl ? "Active" : "None"}
+                    </span>
+                  </div>
+                  {activeCuratedMat?.diffuseMapUrl ? (
+                    <img
+                      src={activeCuratedMat.diffuseMapUrl}
+                      alt="diffuse"
+                      style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
+                      No Diffuse Map
+                    </div>
+                  )}
+                  <span style={{ fontSize: "8px", color: "#64748b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {activeCuratedMat?.name || "Active Garment"}
+                  </span>
                 </div>
-                <span style={{ fontSize: "8.5px", color: "#10b981" }}>RGB 8-bit</span>
-              </div>
+              )}
 
               {/* Map 2: Normal (Bump) */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
-                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Normal (Tangent)</span>
-                <div style={{ width: "100%", height: "48px", background: "linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%)", opacity: 0.8, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#fff", fontWeight: "600" }}>
-                  Tangent Space
+              {(!onlyActiveMaps || activeCuratedMat?.normalMapUrl) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "120px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Normal (Tangent)</span>
+                    <span style={{ fontSize: "8px", color: activeCuratedMat?.normalMapUrl ? "#00e5ff" : "#64748b" }}>
+                      {activeCuratedMat?.normalMapUrl ? "Tangent" : "None"}
+                    </span>
+                  </div>
+                  {activeCuratedMat?.normalMapUrl ? (
+                    <img
+                      src={activeCuratedMat.normalMapUrl}
+                      alt="normal"
+                      style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
+                      No Normal Map
+                    </div>
+                  )}
+                  <span style={{ fontSize: "8px", color: "#64748b" }}>
+                    Scale: {activeCuratedMat?.normalStrength?.toFixed(2) ?? "1.00"}
+                  </span>
                 </div>
-                <span style={{ fontSize: "8.5px", color: "#38bdf8" }}>OpenGL Normals</span>
-              </div>
+              )}
 
               {/* Map 3: Roughness / Gloss */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
-                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Roughness</span>
-                <div style={{ width: "100%", height: "48px", background: "#334155", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#cbd5e1" }}>
-                  Rough: 0.82
+              {(!onlyActiveMaps || activeCuratedMat?.maps?.glossiness) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "120px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Roughness</span>
+                    <span style={{ fontSize: "8px", color: activeCuratedMat?.maps?.glossiness ? "#fbbf24" : "#64748b" }}>
+                      {activeCuratedMat?.maps?.glossiness ? "Map Active" : `${((activeCuratedMat?.roughness ?? 0.65) * 100).toFixed(0)}%`}
+                    </span>
+                  </div>
+                  {activeCuratedMat?.maps?.glossiness ? (
+                    <img
+                      src={activeCuratedMat.maps.glossiness}
+                      alt="roughness"
+                      style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#cbd5e1" }}>
+                      Uniform Val: {activeCuratedMat?.roughness?.toFixed(2) ?? "0.65"}
+                    </div>
+                  )}
+                  <span style={{ fontSize: "8px", color: "#64748b" }}>Micro-facet roughness</span>
                 </div>
-                <span style={{ fontSize: "8.5px", color: "#94a3b8" }}>Grayscale G-channel</span>
-              </div>
+              )}
 
-              {/* Map 4: Ambient Occlusion */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "110px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b" }}>
-                <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Occlusion (AO)</span>
-                <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
-                  Baked Seams
+              {/* Map 4: Ambient Occlusion / Displacement */}
+              {(!onlyActiveMaps || activeCuratedMat?.maps?.displacement) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "120px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Displacement / AO</span>
+                    <span style={{ fontSize: "8px", color: activeCuratedMat?.maps?.displacement ? "#34d399" : "#64748b" }}>
+                      {activeCuratedMat?.maps?.displacement ? "Active" : "Baked"}
+                    </span>
+                  </div>
+                  {activeCuratedMat?.maps?.displacement ? (
+                    <img
+                      src={activeCuratedMat.maps.displacement}
+                      alt="displacement"
+                      style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
+                      Standard AO
+                    </div>
+                  )}
+                  <span style={{ fontSize: "8px", color: "#64748b" }}>Depth displacement</span>
                 </div>
-                <span style={{ fontSize: "8.5px", color: "#94a3b8" }}>R-Channel AO</span>
-              </div>
+              )}
+
+              {/* Map 5: Metalness Map (if present) */}
+              {(!onlyActiveMaps || activeCuratedMat?.maps?.metalness) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "120px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Metalness</span>
+                    <span style={{ fontSize: "8px", color: activeCuratedMat?.maps?.metalness ? "#a78bfa" : "#64748b" }}>
+                      {activeCuratedMat?.maps?.metalness ? "Active" : "Dielectric"}
+                    </span>
+                  </div>
+                  {activeCuratedMat?.maps?.metalness ? (
+                    <img
+                      src={activeCuratedMat.maps.metalness}
+                      alt="metalness"
+                      style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
+                      Non-Metallic (0.0)
+                    </div>
+                  )}
+                  <span style={{ fontSize: "8px", color: "#64748b" }}>Conductor reflection</span>
+                </div>
+              )}
+
+              {/* Map 6: Alpha / Opacity Mask (if present) */}
+              {(!onlyActiveMaps || activeCuratedMat?.maps?.alpha) && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "120px", background: "#0a0e17", padding: "6px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Alpha / Opacity</span>
+                    <span style={{ fontSize: "8px", color: activeCuratedMat?.maps?.alpha ? "#38bdf8" : "#64748b" }}>
+                      {activeCuratedMat?.maps?.alpha ? "Active" : "Opaque"}
+                    </span>
+                  </div>
+                  {activeCuratedMat?.maps?.alpha ? (
+                    <img
+                      src={activeCuratedMat.maps.alpha}
+                      alt="alpha"
+                      style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "48px", background: "#1e293b", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "9px", color: "#64748b" }}>
+                      Fully Opaque
+                    </div>
+                  )}
+                  <span style={{ fontSize: "8px", color: "#64748b" }}>Transparency cutout</span>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -230,59 +338,65 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             </div>
 
             {/* Category Filter Pills Row */}
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", margin: "4px 0" }}>
-              <button
-                className={`mat-cat-btn ${activeCat === "all" ? "active" : ""}`}
-                onClick={() => setActiveCat("all")}
-              >
-                <span>All</span>
-                {activeCat === "all" && <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#67e8f9" }} />}
-              </button>
-              <button
-                className={`mat-cat-btn ${activeCat === "metal" ? "active" : ""}`}
-                onClick={() => setActiveCat("metal")}
-              >
-                Metals
-              </button>
-              <button
-                className={`mat-cat-btn ${activeCat === "plastic" ? "active" : ""}`}
-                onClick={() => setActiveCat("plastic")}
-              >
-                Plastics
-              </button>
-              <button
-                className={`mat-cat-btn ${activeCat === "fabric" ? "active" : ""}`}
-                onClick={() => setActiveCat("fabric")}
-              >
-                Fabric
-              </button>
-              <button
-                className={`mat-cat-btn ${activeCat === "glass" ? "active" : ""}`}
-                onClick={() => setActiveCat("glass")}
-              >
-                Glass
-              </button>
-              <button
-                className={`mat-cat-btn ${activeCat === "carbon" ? "active" : ""}`}
-                onClick={() => setActiveCat("carbon")}
-              >
-                Carbon
-              </button>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", margin: "4px 0", overflowX: "auto" }}>
+              {availableCategories.map((cat) => {
+                const isActive = activeCat === cat;
+                return (
+                  <button
+                    key={cat}
+                    className={`mat-cat-btn ${isActive ? "active" : ""}`}
+                    onClick={() => setActiveCat(cat)}
+                    style={{ whiteSpace: "nowrap", textTransform: "capitalize" }}
+                  >
+                    <span>{cat}</span>
+                    {isActive && <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#67e8f9" }} />}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* 10 Shader Spheres Row */}
-            <div style={{ display: "flex", alignItems: "stretch", gap: "8px", overflowX: "auto", paddingBottom: "2px" }}>
-              {filteredSpheres.map((s) => {
-                const isActive = activeSphereName === s.name;
+            {/* Curated Fabric Material Cards Row */}
+            <div style={{ display: "flex", alignItems: "stretch", justifyContent: "flex-start", gap: "8px", overflowX: "auto", paddingBottom: "2px" }}>
+              {filteredCuratedMaterials.map((m: any) => {
+                const isActive = modelStore.selectedMaterialId === m.id;
+                const thumb = m.sphereThumbnailUrl || m.thumbnailUrl;
                 return (
                   <div
-                    key={s.name}
+                    key={m.id}
                     className={`mat-card ${isActive ? "active" : ""}`}
-                    onClick={() => handleApplySphere(s.name, s.cat)}
+                    onClick={() => handleApplyCuratedMat(m)}
+                    title={`${m.name} (${m.category})`}
+                    style={{ minWidth: "90px", display: "flex", flexDirection: "column", alignItems: "center", padding: "6px 8px", flexShrink: 0 }}
                   >
-                    <div className={`sphere ${s.sphereClass}`} />
-                    <span style={{ fontSize: "10.5px", color: isActive ? "#ffffff" : "#cbd5e1", fontWeight: 500, whiteSpace: "nowrap" }}>
-                      {s.name}
+                    {thumb ? (
+                      <img
+                        src={thumb}
+                        alt={m.name}
+                        style={{
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          border: isActive ? "2px solid #00e5ff" : "1px solid rgba(255, 255, 255, 0.15)",
+                          boxShadow: isActive ? "0 0 10px rgba(0, 229, 255, 0.4)" : "none"
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "50%",
+                          background: "linear-gradient(135deg, #0284c7 0%, #0f172a 100%)",
+                          border: isActive ? "2px solid #00e5ff" : "1px solid rgba(255, 255, 255, 0.15)"
+                        }}
+                      />
+                    )}
+                    <span style={{ fontSize: "10px", color: isActive ? "#ffffff" : "#cbd5e1", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "80px", marginTop: "4px" }}>
+                      {m.name}
+                    </span>
+                    <span style={{ fontSize: "8px", color: "#64748b", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "80px" }}>
+                      {m.category}
                     </span>
                   </div>
                 );
