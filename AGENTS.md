@@ -62,3 +62,10 @@
 
 ### 11. Zero TypeScript Warnings & Zero Build Errors:
 - Always verify changes with `npx tsc --noEmit && pnpm run build` inside `trikomi-studio`.
+
+### 12. Strict Metadata & Targeted Navigation (No Blind File Exploration):
+- Strictly NO blind scanning or reading files chunk-by-chunk.
+- Always use symbol outline / metadata indexing first to locate the origin function, symbol, or hook.
+- Obtain exact start and end line boundaries of the target function before any file read or edit.
+- Read only the target function's full line range once, perform minimal atomic edits, and verify directly.
+

@@ -40,8 +40,15 @@
   display: none !important;
 }
 
-.upper-workspace-section.maximized-3d {
+.upper-workspace-section.maximized-3d,
+.upper-workspace-section.maximized-uv {
   height: 100% !important;
+}
+
+.upper-workspace-section.maximized-uv .uv-editor-panel {
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .bottom-workspace-section {
@@ -574,14 +581,34 @@
 }
 
 .uv-ops-sidebar {
-  width: 132px;
-  padding: 8px;
+  width: 140px;
+  padding: 8px 6px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
   border-left: 1px solid #1e2638;
   background: rgba(14, 19, 32, 0.5);
   flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+}
+
+.uv-ops-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.uv-ops-sidebar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.uv-ops-sidebar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+.uv-ops-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan-primary);
 }
 
 .uv-ops-section-title {

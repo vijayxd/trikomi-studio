@@ -146,22 +146,6 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         </button>
 
         <button
-          className={`tool-btn ${activeTool === "uv-proj" ? "active" : ""}`}
-          onClick={() => {
-            modelStore.setActiveTool("uv-proj");
-            const res = uvOrganizerStore.arrangeAssignedUVs();
-            onShowToast?.(`Canonical UV Projection applied (${res.packedCount} islands packed)`);
-          }}
-          title="Canonical UV Auto-Projection & Unwrap"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <path d="M8 8v5a2 2 0 0 0 4 0V8" />
-            <path d="M14 8l2 7 2-7" />
-          </svg>
-        </button>
-
-        <button
           className={`tool-btn ${activeTool === "normals" ? "active" : ""}`}
           onClick={() => {
             modelStore.setActiveTool("normals");

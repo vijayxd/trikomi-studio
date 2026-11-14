@@ -76,6 +76,37 @@ export const UVCanvasView = observer(() => {
   });
   const animFrameIdRef = useRef<number | null>(null);
 
+  // Read authentic 1:1 piece bounds without padding directly from geometry vertex buffer
+  const getLivePieceBounds = useCallback((): PieceBounds2D[] => {
+    const list: PieceBounds2D[] = [];
+    if (!modelStore.pieces || modelStore.pieces.length === 0) return list;
+
+    modelStore.pieces.forEach(p => {
+      if (p.visible === false) return;
+      const geom = p.mesh?.geometry;
+      if (!geom) return;
+      const uvAttr = geom.attributes.uv;
+      if (!(uvAttr instanceof THREE.BufferAttribute) || uvAttr.array.length < 2) return;
+
+      const arr = uvAttr.array;
+      let minU = arr[0]!, maxU = arr[0]!;
+      let minV = arr[1]!, maxV = arr[1]!;
+
+      for (let i = 2; i < arr.length; i += 2) {
+        const u = arr[i]!;
+        const v = arr[i + 1]!;
+        if (u < minU) minU = u;
+        if (u > maxU) maxU = u;
+        if (v < minV) minV = v;
+        if (v > maxV) maxV = v;
+      }
+      list.push({ id: p.id, minU, maxU, minV, maxV });
+    });
+
+    cachedBoundsRef.current = list;
+    return list;
+  }, []);
+
   // Fast GPU Render trigger
   const requestRender = useCallback(() => {
     if (animFrameIdRef.current !== null) return;
@@ -308,7 +339,7 @@ export const UVCanvasView = observer(() => {
       return;
     }
 
-    const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
+    const selectedBounds = getLivePieceBounds().filter(b => activeSelectedIds.includes(b.id));
     if (selectedBounds.length === 0) {
       requestRender();
       return;
@@ -322,11 +353,11 @@ export const UVCanvasView = observer(() => {
       if (b.maxV > gMaxV) gMaxV = b.maxV;
     });
 
-    const pad = 0.008;
-    const u0 = gMinU - pad;
-    const u1 = gMaxU + pad;
-    const v0 = gMinV - pad;
-    const v1 = gMaxV + pad;
+    // Pure 1:1 authentic bounds without padding
+    const u0 = gMinU;
+    const u1 = gMaxU;
+    const v0 = gMinV;
+    const v1 = gMaxV;
     const cU = (u0 + u1) * 0.5;
     const cV = (v0 + v1) * 0.5;
 
@@ -336,7 +367,10 @@ export const UVCanvasView = observer(() => {
     const arrowHead = 0.018 / zoom;
     const handleSize = 0.016 / zoom;
 
-    // --- Bounding Box Outline (Cyan Dashed Feel) ---
+    // Check if entire selection is pinned
+    const isAllPinned = activeSelectedIds.length > 0 && activeSelectedIds.every(id => uvOrganizerStore.isPiecePinned(id));
+
+    // --- Bounding Box Outline (Cyan Dashed Feel, or Amber/Orange if Pinned) ---
     const bboxGeom = new THREE.BufferGeometry();
     bboxGeom.setAttribute("position", new THREE.Float32BufferAttribute([
       u0, v0, 0.4,  u1, v0, 0.4,
@@ -344,8 +378,29 @@ export const UVCanvasView = observer(() => {
       u1, v1, 0.4,  u0, v1, 0.4,
       u0, v1, 0.4,  u0, v0, 0.4
     ], 3));
-    const bboxMat = new THREE.LineBasicMaterial({ color: 0x14d9ff, linewidth: 2, depthTest: false });
+    const bboxColor = isAllPinned ? 0xf59e0b : 0x14d9ff;
+    const bboxMat = new THREE.LineBasicMaterial({ color: bboxColor, linewidth: 2, depthTest: false });
     group.add(new THREE.LineSegments(bboxGeom, bboxMat));
+
+    // If all selected pieces are pinned, render lock pin badge icon instead of transform handles
+    if (isAllPinned) {
+      const pinHeadGeom = new THREE.CircleGeometry(handleSize * 0.9, 16);
+      const pinHeadMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, depthTest: false });
+      const pinHeadMesh = new THREE.Mesh(pinHeadGeom, pinHeadMat);
+      pinHeadMesh.position.set(cU, cV + handleSize * 0.8, 0.8);
+      group.add(pinHeadMesh);
+
+      const pinNeedleGeom = new THREE.BufferGeometry();
+      pinNeedleGeom.setAttribute("position", new THREE.Float32BufferAttribute([
+        cU, cV + handleSize * 0.8, 0.85,
+        cU, cV - handleSize * 0.8, 0.85
+      ], 3));
+      const pinNeedle = new THREE.Line(pinNeedleGeom, new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2.5, depthTest: false }));
+      group.add(pinNeedle);
+
+      requestRender();
+      return;
+    }
 
     // --- 4 Corner Scale Handles ---
     const corners = [
@@ -631,11 +686,12 @@ export const UVCanvasView = observer(() => {
     const coords = getUVFromClient(clientX, clientY);
     if (!coords) return null;
     const { u: clickU, v: clickV } = coords;
-    const pad = 0.015 / viewStateRef.current.zoom;
 
-    for (let i = cachedBoundsRef.current.length - 1; i >= 0; i--) {
-      const b = cachedBoundsRef.current[i];
-      if (clickU >= b.minU - pad && clickU <= b.maxU + pad && clickV >= b.minV - pad && clickV <= b.maxV + pad) {
+    // Use live bounds without padding
+    const bounds = getLivePieceBounds();
+    for (let i = bounds.length - 1; i >= 0; i--) {
+      const b = bounds[i]!;
+      if (clickU >= b.minU && clickU <= b.maxU && clickV >= b.minV && clickV <= b.maxV) {
         return b.id;
       }
     }
@@ -654,7 +710,7 @@ export const UVCanvasView = observer(() => {
 
     if (activeSelectedIds.length === 0) return null;
 
-    const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
+    const selectedBounds = getLivePieceBounds().filter(b => activeSelectedIds.includes(b.id));
     if (selectedBounds.length === 0) return null;
 
     let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
@@ -665,8 +721,7 @@ export const UVCanvasView = observer(() => {
       if (b.maxV > gMaxV) gMaxV = b.maxV;
     });
 
-    const pad = 0.008;
-    const u0 = gMinU - pad, u1 = gMaxU + pad, v0 = gMinV - pad, v1 = gMaxV + pad;
+    const u0 = gMinU, u1 = gMaxU, v0 = gMinV, v1 = gMaxV;
     const cU = (u0 + u1) * 0.5, cV = (v0 + v1) * 0.5;
 
     const zoom = viewStateRef.current.zoom;
@@ -739,7 +794,12 @@ export const UVCanvasView = observer(() => {
         ? [...modelStore.selectedPieceIds] 
         : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
 
-      const selectedBounds = cachedBoundsRef.current.filter(b => activeIds.includes(b.id));
+      const movableIds = activeIds.filter(id => !uvOrganizerStore.isPiecePinned(id));
+      if (movableIds.length === 0) {
+        return;
+      }
+
+      const selectedBounds = getLivePieceBounds().filter(b => activeIds.includes(b.id));
       let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
       selectedBounds.forEach(b => {
         if (b.minU < gMinU) gMinU = b.minU;
@@ -752,7 +812,7 @@ export const UVCanvasView = observer(() => {
       dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
       setTransformState({
         mode: gizmoMode,
-        pieceIds: activeIds,
+        pieceIds: movableIds,
         startMouseX: e.clientX,
         startMouseY: e.clientY,
         origBounds: { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV },
@@ -783,7 +843,7 @@ export const UVCanvasView = observer(() => {
         ? [...modelStore.selectedPieceIds]
         : [hitId];
 
-      const selectedBounds = cachedBoundsRef.current.filter(b => activeIds.includes(b.id));
+      const selectedBounds = getLivePieceBounds().filter(b => activeIds.includes(b.id));
       let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
       selectedBounds.forEach(b => {
         if (b.minU < gMinU) gMinU = b.minU;
@@ -792,11 +852,17 @@ export const UVCanvasView = observer(() => {
         if (b.maxV > gMaxV) gMaxV = b.maxV;
       });
 
+      // Check if all active pieces are pinned; if so, do not drag
+      const movableIds = activeIds.filter(id => !uvOrganizerStore.isPiecePinned(id));
+      if (movableIds.length === 0) {
+        return;
+      }
+
       uvOrganizerStore.pushHistorySnapshot("Scale UV Island");
       dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
       setTransformState({
         mode: "translate",
-        pieceIds: activeIds,
+        pieceIds: movableIds,
         startMouseX: e.clientX,
         startMouseY: e.clientY,
         origBounds: { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV },
@@ -864,10 +930,98 @@ export const UVCanvasView = observer(() => {
       const spanU = camera.right - camera.left;
       const spanV = camera.top - camera.bottom;
 
-      const currentDeltaU = ((e.clientX - transformState.startMouseX) / container.clientWidth) * spanU;
-      const currentDeltaV = -(((e.clientY - transformState.startMouseY) / container.clientHeight) * spanV);
+      let currentDeltaU = ((e.clientX - transformState.startMouseX) / container.clientWidth) * spanU;
+      let currentDeltaV = -(((e.clientY - transformState.startMouseY) / container.clientHeight) * spanV);
 
       if (transformState.mode === "translate") {
+        // Magnetic UV Snapping: Island-to-Island boundary snapping + Grid line snapping
+        if (uvOrganizerStore.snappingEnabled) {
+          const snapThreshold = 0.015;
+
+          const testMinU = transformState.origBounds.minU + currentDeltaU;
+          const testMaxU = transformState.origBounds.maxU + currentDeltaU;
+          const testCenterU = transformState.centerU + currentDeltaU;
+
+          const testMinV = transformState.origBounds.minV + currentDeltaV;
+          const testMaxV = transformState.origBounds.maxV + currentDeltaV;
+          const testCenterV = transformState.centerV + currentDeltaV;
+
+          // 1. Gather all idle pieces (any piece not currently moving) with live accurate bounds
+          const idleBounds = getLivePieceBounds().filter(b => !transformState.pieceIds.includes(b.id));
+
+          let snappedU = false;
+          let minSnapDistU = snapThreshold;
+          let snapAdjustU = 0;
+
+          // Compare active boundaries against idle neighbor boundaries
+          for (const idle of idleBounds) {
+            const idleTargetsU = [idle.minU, idle.maxU, (idle.minU + idle.maxU) * 0.5];
+            const activeTargetsU = [testMinU, testMaxU, testCenterU];
+
+            for (const act of activeTargetsU) {
+              for (const tgt of idleTargetsU) {
+                const dist = Math.abs(act - tgt);
+                if (dist < minSnapDistU) {
+                  minSnapDistU = dist;
+                  snapAdjustU = tgt - act;
+                  snappedU = true;
+                }
+              }
+            }
+          }
+
+          if (snappedU) {
+            currentDeltaU += snapAdjustU;
+          } else {
+            // Fallback to standard 0.05 / 0.10 UV grid lines
+            const snapStep = 0.05;
+            const candidatesU = [testMinU, testCenterU, testMaxU];
+            for (const cand of candidatesU) {
+              const nearest = Math.round(cand / snapStep) * snapStep;
+              if (Math.abs(cand - nearest) < snapThreshold) {
+                currentDeltaU += (nearest - cand);
+                break;
+              }
+            }
+          }
+
+          let snappedV = false;
+          let minSnapDistV = snapThreshold;
+          let snapAdjustV = 0;
+
+          // Compare active boundaries against idle neighbor boundaries along V
+          for (const idle of idleBounds) {
+            const idleTargetsV = [idle.minV, idle.maxV, (idle.minV + idle.maxV) * 0.5];
+            const activeTargetsV = [testMinV, testMaxV, testCenterV];
+
+            for (const act of activeTargetsV) {
+              for (const tgt of idleTargetsV) {
+                const dist = Math.abs(act - tgt);
+                if (dist < minSnapDistV) {
+                  minSnapDistV = dist;
+                  snapAdjustV = tgt - act;
+                  snappedV = true;
+                }
+              }
+            }
+          }
+
+          if (snappedV) {
+            currentDeltaV += snapAdjustV;
+          } else {
+            // Fallback to standard 0.05 / 0.10 UV grid lines
+            const snapStep = 0.05;
+            const candidatesV = [testMinV, testCenterV, testMaxV];
+            for (const cand of candidatesV) {
+              const nearest = Math.round(cand / snapStep) * snapStep;
+              if (Math.abs(cand - nearest) < snapThreshold) {
+                currentDeltaV += (nearest - cand);
+                break;
+              }
+            }
+          }
+        }
+
         dragDeltaRef.current.u = currentDeltaU;
         dragDeltaRef.current.v = currentDeltaV;
 

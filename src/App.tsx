@@ -13,8 +13,9 @@ export const App = observer(() => {
   // Studio Mode: "uv" (current view) | "model" (pending) | "material"
   const [studioMode, setStudioMode] = useState<StudioMode>("uv");
 
-  // Viewport Maximize state
+  // Viewport Maximize state (3D and UV)
   const [isViewportMaximized, setIsViewportMaximized] = useState<boolean>(false);
+  const [isUVMaximized, setIsUVMaximized] = useState<boolean>(false);
 
   // Turntable animation state
   const [isTurntablePlaying, setIsTurntablePlaying] = useState<boolean>(false);
@@ -40,8 +41,17 @@ export const App = observer(() => {
   const handleToggleMaximize = () => {
     const nextMax = !isViewportMaximized;
     setIsViewportMaximized(nextMax);
-    triggerToast(nextMax ? "Viewport maximized" : "Viewport restored");
+    if (nextMax) setIsUVMaximized(false);
+    triggerToast(nextMax ? "3D Viewport maximized" : "3D Viewport restored");
     setTimeout(() => modelStore.onResize?.(), 40);
+  };
+
+  const handleToggleUVMaximize = () => {
+    const nextMax = !isUVMaximized;
+    setIsUVMaximized(nextMax);
+    if (nextMax) setIsViewportMaximized(false);
+    triggerToast(nextMax ? "UV Viewport maximized" : "UV Viewport restored");
+    setTimeout(() => uvOrganizerStore.resetUVViewport?.(), 40);
   };
 
   // Keyboard navigation & Shortcuts (Arrow keys for cycling models)
@@ -127,28 +137,34 @@ export const App = observer(() => {
         </main>
       ) : (
         <main className="studio-main-workspace">
-          {/* Upper Workspace (65.5% Height) */}
-          <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""}`}>
+          {/* Upper Workspace */}
+          <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""} ${isUVMaximized ? "maximized-uv" : ""}`}>
             {/* 2A & 2B. Far-Left Tool Strip + Scene Explorer & Transform */}
-            {!isViewportMaximized && (
+            {!isViewportMaximized && !isUVMaximized && (
               <StudioLeftPanel onShowToast={triggerToast} />
             )}
 
             {/* 2C. Center Panel: Interactive 3D Viewport */}
-            <StudioCenterViewport
-              isMaximized={isViewportMaximized}
-              onToggleMaximize={handleToggleMaximize}
-              onShowToast={triggerToast}
-            />
+            {!isUVMaximized && (
+              <StudioCenterViewport
+                isMaximized={isViewportMaximized}
+                onToggleMaximize={handleToggleMaximize}
+                onShowToast={triggerToast}
+              />
+            )}
 
             {/* 2D. Right Panel: UV Editor & Operations */}
             {!isViewportMaximized && (
-              <StudioRightPanel onShowToast={triggerToast} />
+              <StudioRightPanel
+                isMaximized={isUVMaximized}
+                onToggleMaximize={handleToggleUVMaximize}
+                onShowToast={triggerToast}
+              />
             )}
           </section>
 
           {/* Lower Workspace (34.5% Height) */}
-          {!isViewportMaximized && (
+          {!isViewportMaximized && !isUVMaximized && (
             <StudioBottomDock
               onExportGLB={() => modelStore.exportGLB()}
               onShowToast={triggerToast}

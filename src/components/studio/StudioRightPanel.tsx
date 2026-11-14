@@ -6,13 +6,16 @@ import { UVCanvasView } from "../UVCanvasView";
 interface StudioRightPanelProps {
   collapsed?: boolean;
   onShowToast?: (msg: string) => void;
+  isMaximized?: boolean;
+  onToggleMaximize?: () => void;
 }
 
 export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
   collapsed = false,
-  onShowToast
+  onShowToast,
+  isMaximized = false,
+  onToggleMaximize
 }) => {
-  const [activeUvTool, setActiveUvTool] = useState<string>("island");
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
 
   const getTargetPieceIds = (): string[] => {
@@ -52,74 +55,33 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             {uvOrganizerStore.uvResolution === 1024 ? "1K" : uvOrganizerStore.uvResolution === 2048 ? "2K" : "4K"}
           </button>
         </div>
-        <svg
-          className="panel-collapse-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          onClick={() => setIsPanelCollapsed(true)}
-        >
-          <polyline points="18 15 12 9 6 15" />
-        </svg>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <button
+            className="tool-btn tool-btn-sm"
+            style={{ background: "#141c2e", border: "1px solid #232f46" }}
+            title={isMaximized ? "Exit Fullscreen (UV)" : "Fullscreen UV Viewport"}
+            onClick={onToggleMaximize}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+            </svg>
+          </button>
+          <svg
+            className="panel-collapse-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            onClick={() => setIsPanelCollapsed(true)}
+          >
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </div>
       </div>
 
       {/* UV Sub-Toolbar */}
       <div className="uv-sub-toolbar">
         <div className="uv-sub-toolbar-cluster">
-          <button
-            className={`tool-btn tool-btn-sm ${activeUvTool === "island" ? "active" : ""}`}
-            title="UV Island Selection"
-            onClick={() => {
-              setActiveUvTool("island");
-              onShowToast?.("Active: UV Island Selection Mode");
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="4" y="4" width="16" height="16" rx="1" strokeDasharray="4 2" />
-            </svg>
-          </button>
-
-          <button
-            className={`tool-btn tool-btn-sm ${activeUvTool === "face" ? "active" : ""}`}
-            title="Face Inspect"
-            onClick={() => {
-              setActiveUvTool("face");
-              onShowToast?.("Active: Panel Surface Inspect Mode");
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <rect x="4" y="4" width="16" height="16" rx="2" />
-            </svg>
-          </button>
-
-          <button
-            className={`tool-btn tool-btn-sm ${activeUvTool === "move" ? "active" : ""}`}
-            title="Move UV"
-            onClick={() => {
-              setActiveUvTool("move");
-              onShowToast?.("Active: UV Translation Mode");
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20" />
-            </svg>
-          </button>
-
-          <button
-            className={`tool-btn tool-btn-sm ${activeUvTool === "scale" ? "active" : ""}`}
-            title="Scale UV"
-            onClick={() => {
-              setActiveUvTool("scale");
-              onShowToast?.("Active: UV Isotropic Scale Mode");
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
-            </svg>
-          </button>
-
           <button
             className={`tool-btn tool-btn-sm ${targetIds[0] && uvOrganizerStore.isPiecePinned(targetIds[0]) ? "active" : ""}`}
             title="Pin Island (Lock Position)"
@@ -175,20 +137,6 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             <span>100%</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
               <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
-
-          <button
-            className="tool-btn tool-btn-sm"
-            style={{ background: "#141c2e", border: "1px solid #232f46" }}
-            title="Frame Viewport"
-            onClick={() => {
-              uvOrganizerStore.focusSelectedIsland?.();
-              onShowToast?.("Framed selected UV island");
-            }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
             </svg>
           </button>
         </div>
@@ -322,9 +270,10 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
               <button
                 className="uv-grid-btn"
                 onClick={() => {
-                  uvOrganizerStore.resetUVViewport();
-                  onShowToast?.("UV layout reset");
+                  const count = uvOrganizerStore.resetAllPiecesToOriginalFactoryUV();
+                  onShowToast?.(`Restored original UV layout across ${count} pieces`);
                 }}
+                title="Reset to Original Mesh UV Layout"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" />
