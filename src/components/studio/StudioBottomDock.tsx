@@ -14,7 +14,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   onToggleCollapse,
   onShowToast
 }) => {
-  const [activeBottomTool, setActiveBottomTool] = useState<string>("materials");
+  const [activeBottomTool, setActiveBottomTool] = useState<"materials" | "textures">("materials");
   const [activeCat, setActiveCat] = useState<string>("all");
   const [matSearch, setMatSearch] = useState<string>("");
   const [activeSphereName, setActiveSphereName] = useState<string>("Metallic Blue");
@@ -34,6 +34,31 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
     if (decimateVal >= 25) return "Good";
     return "Heavy";
   };
+
+  const renderSegmentedTabs = () => (
+    <div style={{ display: "flex", background: "#0a0e17", padding: "2px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+      <button
+        className={`mat-cat-btn ${activeBottomTool === "materials" ? "active" : ""}`}
+        style={{ borderRadius: "4px", padding: "3px 10px", fontSize: "11px" }}
+        onClick={() => {
+          setActiveBottomTool("materials");
+          onShowToast?.("Material Library view");
+        }}
+      >
+        Materials
+      </button>
+      <button
+        className={`mat-cat-btn ${activeBottomTool === "textures" ? "active" : ""}`}
+        style={{ borderRadius: "4px", padding: "3px 10px", fontSize: "11px" }}
+        onClick={() => {
+          setActiveBottomTool("textures");
+          onShowToast?.("Texture Maps view");
+        }}
+      >
+        Texture Maps
+      </button>
+    </div>
+  );
 
   const handleApplySphere = (name: string, cat: string) => {
     setActiveSphereName(name);
@@ -77,65 +102,6 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
 
   return (
     <section className="bottom-workspace-section">
-      {/* 3A. Bottom-Left Vertical Tool Strip */}
-      <aside className="panel tool-strip-far-left">
-        <button
-          className={`tool-btn ${activeBottomTool === "shaders" ? "active" : ""}`}
-          onClick={() => {
-            setActiveBottomTool("shaders");
-            onShowToast?.("Shader Presets tool");
-          }}
-          title="Shader Presets"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 0 0 18" />
-          </svg>
-        </button>
-
-        <button
-          className={`tool-btn ${activeBottomTool === "materials" ? "active" : ""}`}
-          onClick={() => {
-            setActiveBottomTool("materials");
-            onShowToast?.("Material Library tool");
-          }}
-          title="Material Library"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-        </button>
-
-        <button
-          className={`tool-btn ${activeBottomTool === "textures" ? "active" : ""}`}
-          onClick={() => {
-            setActiveBottomTool("textures");
-            onShowToast?.("Texture Maps tool");
-          }}
-          title="Texture Maps"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <polyline points="21 15 16 10 5 21" />
-          </svg>
-        </button>
-
-        <button
-          className={`tool-btn ${activeBottomTool === "decimate" ? "active" : ""}`}
-          onClick={() => {
-            setActiveBottomTool("decimate");
-            onShowToast?.("Mesh Decimation tool");
-          }}
-          title="Mesh Decimation"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" />
-          </svg>
-        </button>
-      </aside>
-
       {/* 3B. Bottom-Center Panel: Material Library / Texture Channel Maps / Shaders */}
       <section className={`panel material-library-panel ${isMaterialCollapsed ? "collapsed" : ""}`}>
         {isMaterialCollapsed ? (
@@ -157,16 +123,21 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
               </svg>
             </button>
             <span className="panel-title-vertical">
-              {activeBottomTool === "shaders" ? "PBR Shaders" : activeBottomTool === "textures" ? "Texture Maps" : "Material Library"}
+              {activeBottomTool === "textures" ? "Texture Maps" : "Material Library"}
             </span>
             <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#38bdf8" }} />
           </div>
         ) : activeBottomTool === "textures" ? (
           <div style={{ display: "flex", flexDirection: "column", height: "100%", gap: "8px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9" }}>
-                Texture Channels & Maps ({modelStore.selectedPiece?.name || "Garment Mesh"})
-              </span>
+              {/* Left Side: Segmented Mode Tabs */}
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                {renderSegmentedTabs()}
+                <span style={{ fontSize: "11px", color: "#64748b", marginLeft: "4px" }}>
+                  ({modelStore.selectedPiece?.name || "Garment Mesh"})
+                </span>
+              </div>
+
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span style={{ fontSize: "10px", color: "#38bdf8", background: "rgba(56, 189, 248, 0.15)", padding: "2px 6px", borderRadius: "4px" }}>
                   Active Maps
@@ -226,9 +197,9 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             {/* Top Header & Search Row */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: 1 }}>
-                <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9", flexShrink: 0 }}>
-                  {activeBottomTool === "shaders" ? "PBR Shader Presets" : "Material Library"}
-                </span>
+                {/* Segmented Mode Tabs */}
+                {renderSegmentedTabs()}
+
                 <div className="search-input-box" style={{ maxWidth: "260px" }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" style={{ marginRight: "6px", flexShrink: 0 }}>
                     <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
