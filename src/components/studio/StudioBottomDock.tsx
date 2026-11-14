@@ -4,12 +4,14 @@ import { modelStore } from "@trikomi/core/studio";
 
 interface StudioBottomDockProps {
   collapsed?: boolean;
+  onToggleCollapse?: () => void;
   onExportGLB: () => void;
   onShowToast?: (msg: string) => void;
 }
 
 export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   collapsed = false,
+  onToggleCollapse,
   onShowToast
 }) => {
   const [activeBottomTool, setActiveBottomTool] = useState<string>("materials");
@@ -17,6 +19,8 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const [matSearch, setMatSearch] = useState<string>("");
   const [activeSphereName, setActiveSphereName] = useState<string>("Metallic Blue");
   const [decimateVal, setDecimateVal] = useState<number>(72);
+  const [isMaterialCollapsed, setIsMaterialCollapsed] = useState<boolean>(false);
+  const [isDecimateCollapsed, setIsDecimateCollapsed] = useState<boolean>(false);
 
   // Decimation live stats calculation
   const baseTriangles = modelStore.modelMeta.triangles || 842730;
@@ -133,17 +137,50 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
       </aside>
 
       {/* 3B. Bottom-Center Panel: Material Library / Texture Channel Maps / Shaders */}
-      <section className="panel material-library-panel">
-        {/* Dynamic Header & Content based on activeBottomTool */}
-        {activeBottomTool === "textures" ? (
+      <section className={`panel material-library-panel ${isMaterialCollapsed ? "collapsed" : ""}`}>
+        {isMaterialCollapsed ? (
+          <div
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "space-between", padding: "4px 0" }}
+            onClick={() => setIsMaterialCollapsed(false)}
+            title="Expand Material Library"
+          >
+            <button
+              className="tool-btn tool-btn-sm"
+              title="Expand Material Library"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMaterialCollapsed(false);
+              }}
+            >
+              <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+            <span className="panel-title-vertical">
+              {activeBottomTool === "shaders" ? "PBR Shaders" : activeBottomTool === "textures" ? "Texture Maps" : "Material Library"}
+            </span>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#38bdf8" }} />
+          </div>
+        ) : activeBottomTool === "textures" ? (
           <div style={{ display: "flex", flexDirection: "column", height: "100%", gap: "8px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9" }}>
                 Texture Channels & Maps ({modelStore.selectedPiece?.name || "Garment Mesh"})
               </span>
-              <span style={{ fontSize: "10px", color: "#38bdf8", background: "rgba(56, 189, 248, 0.15)", padding: "2px 6px", borderRadius: "4px" }}>
-                Active Maps
-              </span>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ fontSize: "10px", color: "#38bdf8", background: "rgba(56, 189, 248, 0.15)", padding: "2px 6px", borderRadius: "4px" }}>
+                  Active Maps
+                </span>
+                <button
+                  className="tool-btn tool-btn-sm"
+                  title="Collapse Material Library"
+                  onClick={() => setIsMaterialCollapsed(true)}
+                >
+                  <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             <div style={{ display: "flex", gap: "10px", overflowX: "auto", flex: 1, alignItems: "center" }}>
@@ -204,9 +241,21 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   />
                 </div>
               </div>
-              <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
+              <button
+                className="tool-btn tool-btn-sm"
+                title="Collapse Material Library"
+                onClick={() => setIsMaterialCollapsed(true)}
+              >
+                <svg
+                  className="panel-collapse-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
             </div>
 
             {/* Category Filter Pills Row */}
@@ -273,103 +322,140 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
       </section>
 
       {/* 3C. Bottom-Right Panel: Geometry & Decimation */}
-      <aside className="panel geometry-decimation-panel">
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9" }}>
-            Geometry & Decimation
-          </span>
-          <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="18 15 12 9 6 15" />
-          </svg>
-        </div>
-
-        {/* 2-Column Body */}
-        <div className="stats-2col-layout">
-          {/* Left Stats Column */}
-          <div className="stats-col-left">
-            <div className="stat-item-row">
-              <span className="stat-key">Triangles</span>
-              <span className="stat-val">{liveTriangles.toLocaleString()}</span>
-            </div>
-            <div className="stat-item-row">
-              <span className="stat-key">Vertices</span>
-              <span className="stat-val">{liveVertices.toLocaleString()}</span>
-            </div>
-            <div className="stat-item-row">
-              <span className="stat-key">Reduction</span>
-              <span className="stat-val" style={{ color: "#34d399", fontWeight: 600 }}>{decimateVal}%</span>
-            </div>
-
-            <div className="stat-divider" />
-
-            <div className="stat-item-row">
-              <span className="stat-key">File Size</span>
-              <span className="stat-val">{liveFileSize} MB</span>
-            </div>
-            <div className="stat-item-row">
-              <span className="stat-key">Est. Perf.</span>
-              <span className="stat-perf-tag">
-                <span className="stat-perf-indicator" />
-                <span>{getPerfLabel()}</span>
-              </span>
-            </div>
+      <aside className={`panel geometry-decimation-panel ${isDecimateCollapsed ? "collapsed" : ""}`}>
+        {isDecimateCollapsed ? (
+          <div
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", height: "100%", justifyContent: "space-between", padding: "4px 0" }}
+            onClick={() => setIsDecimateCollapsed(false)}
+            title="Expand Geometry & Decimation"
+          >
+            <button
+              className="tool-btn tool-btn-sm"
+              title="Expand Geometry & Decimation"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDecimateCollapsed(false);
+              }}
+            >
+              <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <span className="panel-title-vertical">Decimation & Geometry</span>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#34d399" }} />
           </div>
-
-          {/* Right Slider + Apply Button Column */}
-          <div className="stats-col-right">
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "8px" }}>
-              <input
-                type="range"
-                min="5"
-                max="95"
-                value={decimateVal}
-                className="cyber-slider"
-                onChange={(e) => setDecimateVal(parseInt(e.target.value, 10))}
-              />
-              <div
-                style={{
-                  padding: "4px 8px",
-                  borderRadius: "4px",
-                  background: "#0a0e17",
-                  border: "1px solid #222d42",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "11px",
-                  color: "#e2e8f0",
-                  minWidth: "42px",
-                  textAlign: "center"
-                }}
+        ) : (
+          <>
+            {/* Header */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ fontWeight: 600, fontSize: "12.5px", color: "#f1f5f9" }}>
+                Geometry & Decimation
+              </span>
+              <button
+                className="tool-btn tool-btn-sm"
+                title="Collapse Geometry & Decimation"
+                onClick={() => setIsDecimateCollapsed(true)}
               >
-                {decimateVal}%
+                <svg
+                  className="panel-collapse-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+
+            {/* 2-Column Body */}
+            <div className="stats-2col-layout">
+              {/* Left Stats Column */}
+              <div className="stats-col-left">
+                <div className="stat-item-row">
+                  <span className="stat-key">Triangles</span>
+                  <span className="stat-val">{liveTriangles.toLocaleString()}</span>
+                </div>
+                <div className="stat-item-row">
+                  <span className="stat-key">Vertices</span>
+                  <span className="stat-val">{liveVertices.toLocaleString()}</span>
+                </div>
+                <div className="stat-item-row">
+                  <span className="stat-key">Reduction</span>
+                  <span className="stat-val" style={{ color: "#34d399", fontWeight: 600 }}>{decimateVal}%</span>
+                </div>
+
+                <div className="stat-divider" />
+
+                <div className="stat-item-row">
+                  <span className="stat-key">File Size</span>
+                  <span className="stat-val">{liveFileSize} MB</span>
+                </div>
+                <div className="stat-item-row">
+                  <span className="stat-key">Est. Perf.</span>
+                  <span className="stat-perf-tag">
+                    <span className="stat-perf-indicator" />
+                    <span>{getPerfLabel()}</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Slider + Apply Button Column */}
+              <div className="stats-col-right">
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "8px" }}>
+                  <input
+                    type="range"
+                    min="5"
+                    max="95"
+                    value={decimateVal}
+                    className="cyber-slider"
+                    onChange={(e) => setDecimateVal(parseInt(e.target.value, 10))}
+                  />
+                  <div
+                    style={{
+                      padding: "4px 8px",
+                      borderRadius: "4px",
+                      background: "#0a0e17",
+                      border: "1px solid #222d42",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "11px",
+                      color: "#e2e8f0",
+                      minWidth: "42px",
+                      textAlign: "center"
+                    }}
+                  >
+                    {decimateVal}%
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
+                  <button
+                    className="btn-decimation-apply"
+                    style={{ flex: 1 }}
+                    onClick={() => {
+                      modelStore.decimateModel?.(decimateVal / 100);
+                      onShowToast?.(`Mesh decimation (${decimateVal}% reduction) applied`);
+                    }}
+                  >
+                    Apply
+                  </button>
+                  <button
+                    className="tool-btn"
+                    style={{ padding: "6px 12px", borderRadius: "6px", fontSize: "11px", color: "#94a3b8" }}
+                    title="Revert to Original Geometry"
+                    onClick={() => {
+                      setDecimateVal(0);
+                      modelStore.revertDecimation?.();
+                      onShowToast?.("Reverted to 100% original geometry");
+                    }}
+                  >
+                    Reset
+                  </button>
+                </div>
               </div>
             </div>
-
-            <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
-              <button
-                className="btn-decimation-apply"
-                style={{ flex: 1 }}
-                onClick={() => {
-                  modelStore.decimateModel?.(decimateVal / 100);
-                  onShowToast?.(`Mesh decimation (${decimateVal}% reduction) applied`);
-                }}
-              >
-                Apply
-              </button>
-              <button
-                className="tool-btn"
-                style={{ padding: "6px 12px", borderRadius: "6px", fontSize: "11px", color: "#94a3b8" }}
-                title="Revert to Original Geometry"
-                onClick={() => {
-                  setDecimateVal(0);
-                  modelStore.revertDecimation?.();
-                  onShowToast?.("Reverted to 100% original geometry");
-                }}
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </aside>
     </section>
   );

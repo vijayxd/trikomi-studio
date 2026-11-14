@@ -11,6 +11,12 @@ interface StudioTopBarProps {
   onToggleTurntable?: () => void;
   onExportGLB: () => void;
   onShowToast?: (msg: string) => void;
+  isLeftPanelVisible?: boolean;
+  onToggleLeftPanel?: () => void;
+  isUVPanelVisible?: boolean;
+  onToggleUVPanel?: () => void;
+  isBottomDockVisible?: boolean;
+  onToggleBottomDock?: () => void;
 }
 
 export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
@@ -19,7 +25,13 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
   isTurntablePlaying = false,
   onToggleTurntable,
   onExportGLB,
-  onShowToast
+  onShowToast,
+  isLeftPanelVisible = true,
+  onToggleLeftPanel,
+  isUVPanelVisible = true,
+  onToggleUVPanel,
+  isBottomDockVisible = true,
+  onToggleBottomDock
 }) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
   return (
@@ -150,6 +162,49 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
             <polygon points="6 4 20 12 6 20 6 4" />
           </svg>
         </button>
+
+        <div className="divider-vertical" />
+
+        {/* Panel Visibility Toggles: Left Scene Explorer, Bottom Dock, UV Panel */}
+        <div style={{ display: "flex", alignItems: "center", gap: "3px", background: "rgba(15, 23, 42, 0.6)", padding: "2px 4px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+          {/* Toggle Left Sidebar */}
+          <button
+            className={`tool-btn tool-btn-sm ${isLeftPanelVisible ? "active" : ""}`}
+            title={isLeftPanelVisible ? "Hide Scene Explorer (Left Panel)" : "Show Scene Explorer (Left Panel)"}
+            onClick={onToggleLeftPanel}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <line x1="9" y1="3" x2="9" y2="21" />
+            </svg>
+          </button>
+
+          {/* Toggle Bottom Dock */}
+          <button
+            className={`tool-btn tool-btn-sm ${isBottomDockVisible ? "active" : ""}`}
+            title={isBottomDockVisible ? "Hide Asset / Material Dock (Bottom)" : "Show Asset / Material Dock (Bottom)"}
+            onClick={onToggleBottomDock}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <line x1="3" y1="15" x2="21" y2="15" />
+            </svg>
+          </button>
+
+          {/* Toggle UV Right Panel */}
+          <button
+            className={`tool-btn tool-btn-sm ${isUVPanelVisible ? "active" : ""}`}
+            title={isUVPanelVisible ? "Hide UV Editor (Right Panel)" : "Show UV Editor (Right Panel)"}
+            onClick={onToggleUVPanel}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <line x1="15" y1="3" x2="15" y2="21" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="divider-vertical" />
 
         {/* Export Button */}
         <button

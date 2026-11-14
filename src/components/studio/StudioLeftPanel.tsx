@@ -4,11 +4,13 @@ import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 
 interface StudioLeftPanelProps {
   collapsed?: boolean;
+  onToggleCollapse?: () => void;
   onShowToast?: (msg: string) => void;
 }
 
 export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
   collapsed = false,
+  onToggleCollapse,
   onShowToast
 }) => {
   const [searchFilter, setSearchFilter] = useState("");
@@ -186,16 +188,27 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                   ›
                 </button>
               </div>
-              <svg
-                className="panel-collapse-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                onClick={() => setIsTreeCollapsed(!isTreeCollapsed)}
+              <button
+                className="tool-btn tool-btn-sm"
+                title="Collapse Scene Explorer Panel"
+                onClick={() => {
+                  if (onToggleCollapse) {
+                    onToggleCollapse();
+                  } else {
+                    setIsTreeCollapsed(!isTreeCollapsed);
+                  }
+                }}
               >
-                <polyline points={isTreeCollapsed ? "6 9 12 15 18 9" : "18 15 12 9 6 15"} />
-              </svg>
+                <svg
+                  className="panel-collapse-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
             </div>
           </div>
 

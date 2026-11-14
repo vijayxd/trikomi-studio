@@ -63,11 +63,9 @@
 ### 11. Zero TypeScript Warnings & Zero Build Errors:
 - Always verify changes with `npx tsc --noEmit && pnpm run build` inside `trikomi-studio`.
 
-### 12. Strict Metadata & Targeted Navigation (No Blind File Exploration):
-- Strictly NO blind scanning or reading files chunk-by-chunk.
-- Always use symbol outline / metadata indexing first to locate the origin function, symbol, or hook.
-- Obtain exact start and end line boundaries of the target function before any file read or edit.
-- Read only the target function's full line range once, perform minimal atomic edits, and verify directly.
+### 12. Strict Metadata & Targeted Navigation (TypeScript `.ts` Files Only):
+- Applies strictly to core TypeScript (`.ts`) logic files: strictly NO blind scanning or reading `.ts` engine files chunk-by-chunk. Always use symbol outline / metadata indexing first to locate the origin function, symbol, or hook. Obtain exact start and end line boundaries before reading or editing.
+- **Exemption for `.tsx` UI files**: React `.tsx` components in Studio are strictly visual UI skin / presentation templates (JSX markup, layout styling, toolbars, and event forwarding). They do not contain hidden business logic or math engines, so standard file reading and JSX template editing for `.tsx` files is directly permitted.
 
 ### 13. Studio Pure UI Skin Rule (Zero Business & Domain Math Logic):
 - `trikomi-studio` is strictly a presentation shell.

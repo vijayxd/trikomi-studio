@@ -5,6 +5,7 @@ import { UVCanvasView } from "../UVCanvasView";
 
 interface StudioRightPanelProps {
   collapsed?: boolean;
+  onToggleCollapse?: () => void;
   onShowToast?: (msg: string) => void;
   isMaximized?: boolean;
   onToggleMaximize?: () => void;
@@ -12,12 +13,11 @@ interface StudioRightPanelProps {
 
 export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
   collapsed = false,
+  onToggleCollapse,
   onShowToast,
   isMaximized = false,
   onToggleMaximize
 }) => {
-  const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
-
   const getTargetPieceIds = (): string[] => {
     if (modelStore.selectedPieceIds.length > 0) return [...modelStore.selectedPieceIds];
     if (modelStore.selectedPiece) return [modelStore.selectedPiece.id];
@@ -26,7 +26,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
 
   const targetIds = getTargetPieceIds();
 
-  if (collapsed || isPanelCollapsed) return null;
+  if (collapsed) return null;
 
   return (
     <aside className="panel uv-editor-panel" id="uvStudio">
@@ -66,16 +66,22 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
               <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
             </svg>
           </button>
-          <svg
-            className="panel-collapse-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            onClick={() => setIsPanelCollapsed(true)}
+          <button
+            className="tool-btn tool-btn-sm"
+            style={{ background: "#141c2e", border: "1px solid #232f46" }}
+            title="Collapse UV Panel"
+            onClick={onToggleCollapse}
           >
-            <polyline points="18 15 12 9 6 15" />
-          </svg>
+            <svg
+              className="panel-collapse-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
       </div>
 

@@ -17,6 +17,11 @@ export const App = observer(() => {
   const [isViewportMaximized, setIsViewportMaximized] = useState<boolean>(false);
   const [isUVMaximized, setIsUVMaximized] = useState<boolean>(false);
 
+  // Panel Collapsible / Visibility state (Left Scene Explorer, UV Panel, Bottom Dock)
+  const [isLeftPanelVisible, setIsLeftPanelVisible] = useState<boolean>(true);
+  const [isUVPanelVisible, setIsUVPanelVisible] = useState<boolean>(true);
+  const [isBottomDockVisible, setIsBottomDockVisible] = useState<boolean>(true);
+
   // Turntable animation state
   const [isTurntablePlaying, setIsTurntablePlaying] = useState<boolean>(false);
 
@@ -128,6 +133,30 @@ export const App = observer(() => {
         onToggleTurntable={handleToggleTurntable}
         onExportGLB={() => modelStore.exportGLB()}
         onShowToast={triggerToast}
+        isLeftPanelVisible={isLeftPanelVisible}
+        onToggleLeftPanel={() => {
+          const next = !isLeftPanelVisible;
+          setIsLeftPanelVisible(next);
+          triggerToast(next ? "Scene Explorer shown" : "Scene Explorer collapsed");
+          setTimeout(() => modelStore.onResize?.(), 40);
+        }}
+        isUVPanelVisible={isUVPanelVisible}
+        onToggleUVPanel={() => {
+          const next = !isUVPanelVisible;
+          setIsUVPanelVisible(next);
+          triggerToast(next ? "UV Editor shown" : "UV Editor collapsed");
+          setTimeout(() => {
+            modelStore.onResize?.();
+            uvOrganizerStore.resetUVViewport?.();
+          }, 40);
+        }}
+        isBottomDockVisible={isBottomDockVisible}
+        onToggleBottomDock={() => {
+          const next = !isBottomDockVisible;
+          setIsBottomDockVisible(next);
+          triggerToast(next ? "Bottom Dock shown" : "Bottom Dock collapsed");
+          setTimeout(() => modelStore.onResize?.(), 40);
+        }}
       />
 
       {/* 2. MAIN WORKSPACE CONTAINER */}
@@ -138,10 +167,18 @@ export const App = observer(() => {
       ) : (
         <main className="studio-main-workspace">
           {/* Upper Workspace */}
-          <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""} ${isUVMaximized ? "maximized-uv" : ""}`}>
+          <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""} ${isUVMaximized ? "maximized-uv" : ""} ${!isBottomDockVisible ? "bottom-collapsed" : ""}`}>
             {/* 2A & 2B. Far-Left Tool Strip + Scene Explorer & Transform */}
             {!isViewportMaximized && !isUVMaximized && (
-              <StudioLeftPanel onShowToast={triggerToast} />
+              <StudioLeftPanel
+                collapsed={!isLeftPanelVisible}
+                onToggleCollapse={() => {
+                  setIsLeftPanelVisible(false);
+                  triggerToast("Scene Explorer collapsed");
+                  setTimeout(() => modelStore.onResize?.(), 40);
+                }}
+                onShowToast={triggerToast}
+              />
             )}
 
             {/* 2C. Center Panel: Interactive 3D Viewport */}
@@ -156,6 +193,12 @@ export const App = observer(() => {
             {/* 2D. Right Panel: UV Editor & Operations */}
             {!isViewportMaximized && (
               <StudioRightPanel
+                collapsed={!isUVPanelVisible}
+                onToggleCollapse={() => {
+                  setIsUVPanelVisible(false);
+                  triggerToast("UV Editor collapsed");
+                  setTimeout(() => modelStore.onResize?.(), 40);
+                }}
                 isMaximized={isUVMaximized}
                 onToggleMaximize={handleToggleUVMaximize}
                 onShowToast={triggerToast}
@@ -166,6 +209,12 @@ export const App = observer(() => {
           {/* Lower Workspace (34.5% Height) */}
           {!isViewportMaximized && !isUVMaximized && (
             <StudioBottomDock
+              collapsed={!isBottomDockVisible}
+              onToggleCollapse={() => {
+                setIsBottomDockVisible(false);
+                triggerToast("Bottom Dock collapsed");
+                setTimeout(() => modelStore.onResize?.(), 40);
+              }}
               onExportGLB={() => modelStore.exportGLB()}
               onShowToast={triggerToast}
             />
