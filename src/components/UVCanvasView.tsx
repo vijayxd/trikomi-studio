@@ -38,10 +38,9 @@ export const UVCanvasView = observer(() => {
   }, [
     modelStore.currentModel,
     modelStore.pieces.length,
-    modelStore.pieces,
     modelStore.visibilityVersion,
     modelStore.selectedPiece?.id,
-    modelStore.selectedPieceIds.slice(),
+    modelStore.selectedPieceIds.join(","),
     uvOrganizerStore.zones,
     uvOrganizerStore.layoutVersion,
     uvOrganizerStore.zoneDisplayMode

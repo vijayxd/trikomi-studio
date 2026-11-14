@@ -25,10 +25,10 @@ export const StudioMaterialLibraryView: React.FC = observer(() => {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    materialLibraryStore.initViewer(containerRef.current);
+    materialLibraryStore.attachToContainer(containerRef.current);
 
     return () => {
-      materialLibraryStore.dispose();
+      materialLibraryStore.detachFromContainer();
     };
   }, []);
 

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import { when } from "mobx";
 import { modelStore, uvOrganizerStore, studioViewerManager } from "@trikomi/core/studio";
 
 interface StudioCenterViewportProps {
@@ -29,19 +30,19 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
     // Bind modelStore to Trikomi ThreeViewer scene, camera & plugins
     modelStore.attachViewer(viewer);
 
-    // Initial model load into persistent viewer if not already populated
-    const tryLoad = () => {
-      if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
-        modelStore.loadCuratedModelByIndex(0, uvOrganizerStore);
-      } else if (!modelStore.currentModel) {
-        setTimeout(tryLoad, 250);
-      }
-    };
+    // Initial model load into persistent viewer via MobX reactive predicate (zero timer polling)
+    let cancelPredicate: (() => void) | undefined;
     if (!modelStore.currentModel) {
-      setTimeout(tryLoad, 100);
+      cancelPredicate = when(
+        () => !modelStore.currentModel && modelStore.curatedCatalog.length > 0,
+        () => {
+          modelStore.loadCuratedModelByIndex(0, uvOrganizerStore);
+        }
+      );
     }
 
     return () => {
+      cancelPredicate?.();
       // Detach canvas from DOM on unmount without destroying the viewer or model in memory
       studioViewerManager.detachFromContainer();
     };
