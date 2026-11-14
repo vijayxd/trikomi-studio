@@ -46,6 +46,18 @@
   display: none !important;
 }
 
+.upper-workspace-section.maximized-3d .viewport-panel {
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.upper-workspace-section.maximized-uv .tool-strip-far-left,
+.upper-workspace-section.maximized-uv .scene-explorer-panel,
+.upper-workspace-section.maximized-uv .viewport-panel {
+  display: none !important;
+}
+
 .upper-workspace-section.maximized-3d,
 .upper-workspace-section.maximized-uv {
   height: 100% !important;

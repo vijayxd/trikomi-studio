@@ -26,10 +26,12 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
 
   const targetIds = getTargetPieceIds();
 
-  if (collapsed) return null;
-
   return (
-    <aside className="panel uv-editor-panel" id="uvStudio">
+    <aside
+      className="panel uv-editor-panel"
+      id="uvStudio"
+      style={{ display: collapsed ? "none" : undefined }}
+    >
       {/* UV Editor Top Tab Bar */}
       <div className="uv-top-tab-bar">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>

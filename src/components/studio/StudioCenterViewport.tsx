@@ -20,8 +20,8 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Mandatory instantiation of Trikomi Core ThreeViewer with core plugins
-    const viewer = studioViewerManager.init({
+    // Adopt headless Trikomi ThreeViewer canvas into container
+    const viewer = studioViewerManager.attachToContainer({
       container: containerRef.current,
       backgroundColor: modelStore.backgroundColor
     });
@@ -29,7 +29,7 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
     // Bind modelStore to Trikomi ThreeViewer scene, camera & plugins
     modelStore.attachViewer(viewer);
 
-    // Load curated model into Trikomi ThreeViewer scene
+    // Initial model load into persistent viewer if not already populated
     const tryLoad = () => {
       if (!modelStore.currentModel && modelStore.curatedCatalog.length > 0) {
         modelStore.loadCuratedModelByIndex(0, uvOrganizerStore);
@@ -37,10 +37,13 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
         setTimeout(tryLoad, 250);
       }
     };
-    setTimeout(tryLoad, 100);
+    if (!modelStore.currentModel) {
+      setTimeout(tryLoad, 100);
+    }
 
     return () => {
-      studioViewerManager.dispose();
+      // Detach canvas from DOM on unmount without destroying the viewer or model in memory
+      studioViewerManager.detachFromContainer();
     };
   }, []);
 

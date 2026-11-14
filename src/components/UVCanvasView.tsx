@@ -1,42 +1,44 @@
 import React, { useRef, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { uvOrganizerStore, modelStore, UVViewport } from "@trikomi/core/studio";
+import { uvOrganizerStore, modelStore, studioViewerManager, UVViewerPlugin } from "@trikomi/core/studio";
 
 /**
  * Pure Presentation Skin for the 2D UV Canvas View.
- * 100% free of raw WebGL math, Three.js scenes, render loops, and drag state machines.
- * Delegates all lifecycle and interaction to the headless UVViewport engine in @trikomi/core/studio.
+ * 100% free of ad-hoc WebGL scenes and render loops.
+ * Exclusively instantiates Trikomi Core ThreeViewer with the UVViewerPlugin.
  */
 export const UVCanvasView = observer(() => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const viewportRef = useRef<UVViewport | null>(null);
+  const pluginRef = useRef<UVViewerPlugin | null>(null);
   const [, setTick] = useState(0);
 
-  // Mount Headless UVViewport on DOM container
+  // Mount/Adopt Trikomi ThreeViewer with UVViewerPlugin
   useEffect(() => {
     if (!containerRef.current) return;
-    const viewport = new UVViewport(
-      containerRef.current,
-      uvOrganizerStore,
+    const { plugin } = studioViewerManager.attachUVToContainer({
+      container: containerRef.current,
+      uvStore: uvOrganizerStore,
       modelStore,
-      () => setTick(t => t + 1)
-    );
-    viewportRef.current = viewport;
+      onStateChange: () => setTick(t => t + 1)
+    });
+    pluginRef.current = plugin;
 
     return () => {
-      viewport.dispose();
-      viewportRef.current = null;
+      // Detach UV canvas element on unmount without destroying the UVViewer or scenes
+      studioViewerManager.detachUVFromContainer();
+      pluginRef.current = null;
     };
   }, []);
 
   // Sync external reactive MobX triggers
   useEffect(() => {
-    viewportRef.current?.updateZonesOverlay();
-    viewportRef.current?.rebuildUVMeshes();
-    viewportRef.current?.updateGizmoMesh();
+    pluginRef.current?.updateZonesOverlay();
+    pluginRef.current?.rebuildUVMeshes();
+    pluginRef.current?.updateGizmoMesh();
   }, [
     modelStore.currentModel,
     modelStore.pieces.length,
+    modelStore.pieces,
     modelStore.visibilityVersion,
     modelStore.selectedPiece?.id,
     modelStore.selectedPieceIds.slice(),
@@ -48,13 +50,13 @@ export const UVCanvasView = observer(() => {
   // External Reset & Focus triggers from store
   useEffect(() => {
     if (uvOrganizerStore.uvViewportResetTrigger > 0) {
-      viewportRef.current?.resetView();
+      pluginRef.current?.resetView();
     }
   }, [uvOrganizerStore.uvViewportResetTrigger]);
 
   useEffect(() => {
     if (uvOrganizerStore.uvViewportFocusTrigger > 0) {
-      viewportRef.current?.focusSelectedIsland();
+      pluginRef.current?.focusSelectedIsland();
     }
   }, [uvOrganizerStore.uvViewportFocusTrigger]);
 
@@ -65,7 +67,7 @@ export const UVCanvasView = observer(() => {
       if (e.key === "f" || e.key === "F") {
         if (modelStore.selectedPiece || modelStore.selectedPieceIds.length > 0) {
           e.preventDefault();
-          viewportRef.current?.focusSelectedIsland();
+          pluginRef.current?.focusSelectedIsland();
           modelStore.focusOnSelected?.();
         }
       }
@@ -74,10 +76,10 @@ export const UVCanvasView = observer(() => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const viewport = viewportRef.current;
-  const marquee = viewport?.marqueeState;
+  const plugin = pluginRef.current;
+  const marquee = plugin?.marqueeState;
   const hoveredPieceId = modelStore.hoveredPieceId;
-  const zoomPercent = viewport ? Math.round(viewport.viewState.zoom * 100) : 100;
+  const zoomPercent = plugin ? Math.round(plugin.viewState.zoom * 100) : 100;
 
   return (
     <div
@@ -86,18 +88,18 @@ export const UVCanvasView = observer(() => {
         width: "100%",
         height: "100%",
         overflow: "hidden",
-        cursor: viewport ? viewport.getCursor() : "default"
+        cursor: plugin ? plugin.getCursor() : "default"
       }}
       onContextMenu={(e) => e.preventDefault()}
     >
       {/* 2D Canvas Mount */}
       <div
         ref={containerRef}
-        onPointerDown={(e) => viewport?.onPointerDown(e.nativeEvent)}
-        onPointerMove={(e) => viewport?.onPointerMove(e.nativeEvent)}
+        onPointerDown={(e) => plugin?.onPointerDown(e.nativeEvent)}
+        onPointerMove={(e) => plugin?.onPointerMove(e.nativeEvent)}
         onPointerLeave={() => {
-          if (viewport) {
-            viewport.activeGizmoHandle = null;
+          if (plugin) {
+            plugin.activeGizmoHandle = null;
             modelStore.setHoveredPieceId(null);
             setTick(t => t + 1);
           }
@@ -169,7 +171,7 @@ export const UVCanvasView = observer(() => {
       }}>
         <span>Zoom: {zoomPercent}%</span>
         <button
-          onClick={() => viewport?.resetView()}
+          onClick={() => plugin?.resetView()}
           style={{
             background: "none",
             border: "none",
@@ -186,3 +188,4 @@ export const UVCanvasView = observer(() => {
     </div>
   );
 });
+export default UVCanvasView;

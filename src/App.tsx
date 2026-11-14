@@ -48,7 +48,10 @@ export const App = observer(() => {
     setIsViewportMaximized(nextMax);
     if (nextMax) setIsUVMaximized(false);
     triggerToast(nextMax ? "3D Viewport maximized" : "3D Viewport restored");
-    setTimeout(() => modelStore.onResize?.(), 40);
+    setTimeout(() => {
+      modelStore.onResize?.();
+      uvOrganizerStore.resetUVViewport?.();
+    }, 40);
   };
 
   const handleToggleUVMaximize = () => {
@@ -56,7 +59,10 @@ export const App = observer(() => {
     setIsUVMaximized(nextMax);
     if (nextMax) setIsViewportMaximized(false);
     triggerToast(nextMax ? "UV Viewport maximized" : "UV Viewport restored");
-    setTimeout(() => uvOrganizerStore.resetUVViewport?.(), 40);
+    setTimeout(() => {
+      modelStore.onResize?.();
+      uvOrganizerStore.resetUVViewport?.();
+    }, 40);
   };
 
   // Keyboard navigation & Shortcuts (Arrow keys for cycling models)
@@ -181,41 +187,35 @@ export const App = observer(() => {
         {/* Upper Workspace */}
         <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""} ${isUVMaximized ? "maximized-uv" : ""} ${!isBottomDockVisible ? "bottom-collapsed" : ""}`}>
           {/* 2A & 2B. Far-Left Tool Strip + Scene Explorer & Transform */}
-          {!isViewportMaximized && !isUVMaximized && (
-            <StudioLeftPanel
-              collapsed={!isLeftPanelVisible}
-              onToggleCollapse={() => {
-                setIsLeftPanelVisible(false);
-                triggerToast("Scene Explorer collapsed");
-                setTimeout(() => modelStore.onResize?.(), 40);
-              }}
-              onShowToast={triggerToast}
-            />
-          )}
+          <StudioLeftPanel
+            collapsed={!isLeftPanelVisible || isViewportMaximized || isUVMaximized}
+            onToggleCollapse={() => {
+              setIsLeftPanelVisible(false);
+              triggerToast("Scene Explorer collapsed");
+              setTimeout(() => modelStore.onResize?.(), 40);
+            }}
+            onShowToast={triggerToast}
+          />
 
           {/* 2C. Center Panel: Interactive 3D Viewport */}
-          {!isUVMaximized && (
-            <StudioCenterViewport
-              isMaximized={isViewportMaximized}
-              onToggleMaximize={handleToggleMaximize}
-              onShowToast={triggerToast}
-            />
-          )}
+          <StudioCenterViewport
+            isMaximized={isViewportMaximized}
+            onToggleMaximize={handleToggleMaximize}
+            onShowToast={triggerToast}
+          />
 
           {/* 2D. Right Panel: UV Editor & Operations */}
-          {!isViewportMaximized && (
-            <StudioRightPanel
-              collapsed={!isUVPanelVisible}
-              onToggleCollapse={() => {
-                setIsUVPanelVisible(false);
-                triggerToast("UV Editor collapsed");
-                setTimeout(() => modelStore.onResize?.(), 40);
-              }}
-              isMaximized={isUVMaximized}
-              onToggleMaximize={handleToggleUVMaximize}
-              onShowToast={triggerToast}
-            />
-          )}
+          <StudioRightPanel
+            collapsed={!isUVPanelVisible}
+            onToggleCollapse={() => {
+              setIsUVPanelVisible(false);
+              triggerToast("UV Editor collapsed");
+              setTimeout(() => modelStore.onResize?.(), 40);
+            }}
+            isMaximized={isUVMaximized}
+            onToggleMaximize={handleToggleUVMaximize}
+            onShowToast={triggerToast}
+          />
         </section>
 
         {/* Lower Workspace (34.5% Height) */}
