@@ -55,7 +55,31 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             {uvOrganizerStore.uvResolution === 1024 ? "1K" : uvOrganizerStore.uvResolution === 2048 ? "2K" : "4K"}
           </button>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <button
+            className="tool-btn tool-btn-sm"
+            style={{
+              padding: "2px 8px",
+              width: "auto",
+              fontSize: "11px",
+              fontWeight: 500,
+              gap: "4px",
+              color: "#22d3ee",
+              background: "rgba(6, 182, 212, 0.12)",
+              border: "1px solid rgba(34, 211, 238, 0.35)"
+            }}
+            title="Launch Canonical UV Blueprint Designer"
+            onClick={() => {
+              uvOrganizerStore.setShowZoneEditorModal(true);
+              onShowToast?.("Opened Canonical UV Slots Designer");
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M3 9h18M9 21V9" />
+            </svg>
+            <span>Blueprint</span>
+          </button>
           <button
             className="tool-btn tool-btn-sm"
             style={{ background: "#141c2e", border: "1px solid #232f46" }}
@@ -159,20 +183,7 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
         <div className="uv-ops-sidebar">
           {/* UV Operations */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
-              <div className="uv-ops-section-title" style={{ margin: 0 }}>UV Operations</div>
-              <button
-                className="tool-btn tool-btn-sm"
-                style={{ padding: "2px 6px", fontSize: "10px", color: "#22d3ee", border: "1px solid rgba(34, 211, 238, 0.3)" }}
-                title="Launch Canonical UV Blueprint Designer"
-                onClick={() => {
-                  uvOrganizerStore.setShowZoneEditorModal(true);
-                  onShowToast?.("Opened UV Blueprint Designer");
-                }}
-              >
-                Blueprint
-              </button>
-            </div>
+            <div className="uv-ops-section-title">UV Operations</div>
             <button
               className="uv-op-btn"
               onClick={() => {

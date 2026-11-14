@@ -14,6 +14,8 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
   onShowToast
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [showViewDropdown, setShowViewDropdown] = useState(false);
+  const [activeViewLabel, setActiveViewLabel] = useState("Perspective");
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -46,20 +48,72 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
     <section className="panel viewport-panel" id="viewportContainer">
       {/* Top Floating Viewport Bar */}
       <div className="viewport-top-floating-bar">
-        {/* Perspective / Orthographic Toggle */}
-        <button
-          className="viewport-perspective-btn"
-          onClick={() => {
-            const nextMode = modelStore.toggleCameraProjection?.();
-            onShowToast?.(`Camera Projection: ${nextMode === "orthographic" ? "Orthographic" : "Perspective"}`);
-          }}
-          title="Toggle Perspective / Orthographic Projection"
-        >
-          <span>{modelStore.cameraProjection === "orthographic" ? "Orthographic" : "Perspective"}</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
+        {/* Camera Views Dropdown (Perspective, Front, Back, Left, Right, Top, Bottom) */}
+        <div style={{ position: "relative" }}>
+          <button
+            className="viewport-perspective-btn"
+            onClick={() => setShowViewDropdown(!showViewDropdown)}
+            title="Switch View Alignment / Camera Orientation"
+          >
+            <span>{activeViewLabel}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+
+          {showViewDropdown && (
+            <div
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                marginTop: "4px",
+                background: "#0d131f",
+                border: "1px solid #1e293b",
+                borderRadius: "6px",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
+                display: "flex",
+                flexDirection: "column",
+                minWidth: "140px",
+                zIndex: 50,
+                overflow: "hidden"
+              }}
+            >
+              {[
+                { label: "Perspective", action: () => { modelStore.resetCamera?.(); setActiveViewLabel("Perspective"); } },
+                { label: "Front (Z)", action: () => { modelStore.setOrthogonalView?.("z"); setActiveViewLabel("Front (Z)"); } },
+                { label: "Back (-Z)", action: () => { modelStore.setOrthogonalView?.("-z"); setActiveViewLabel("Back (-Z)"); } },
+                { label: "Left (-X)", action: () => { modelStore.setOrthogonalView?.("-x"); setActiveViewLabel("Left (-X)"); } },
+                { label: "Right (X)", action: () => { modelStore.setOrthogonalView?.("x"); setActiveViewLabel("Right (X)"); } },
+                { label: "Top (Y)", action: () => { modelStore.setOrthogonalView?.("y"); setActiveViewLabel("Top (Y)"); } },
+                { label: "Bottom (-Y)", action: () => { modelStore.setOrthogonalView?.("-y"); setActiveViewLabel("Bottom (-Y)"); } }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  style={{
+                    padding: "7px 12px",
+                    background: activeViewLabel === item.label ? "rgba(56, 189, 248, 0.15)" : "transparent",
+                    color: activeViewLabel === item.label ? "#38bdf8" : "#cbd5e1",
+                    border: "none",
+                    textAlign: "left",
+                    fontSize: "11px",
+                    cursor: "pointer",
+                    transition: "background 0.15s"
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = activeViewLabel === item.label ? "rgba(56, 189, 248, 0.15)" : "transparent")}
+                  onClick={() => {
+                    item.action();
+                    setShowViewDropdown(false);
+                    onShowToast?.(`View: ${item.label}`);
+                  }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Fullscreen Button */}
         <button
@@ -72,38 +126,6 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
             <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
           </svg>
         </button>
-      </div>
-
-      {/* 3D Axis Gizmo Top-Right with interactive orientation clicks */}
-      <div className="viewport-axis-gizmo" style={{ cursor: "pointer" }} title="Click axis to align view (Y: Top, X: Right, Z: Front)">
-        <svg width="64" height="64" viewBox="0 0 64 64">
-          {/* Y Axis Green (Top View) */}
-          <g onClick={() => { modelStore.setOrthogonalView?.("y"); onShowToast?.("View: Top (Y)"); }}>
-            <line x1="32" y1="36" x2="32" y2="12" stroke="#22c55e" strokeWidth="2.5" />
-            <polygon points="32,7 28,14 36,14" fill="#22c55e" />
-            <text x="28" y="6" fill="#22c55e" fontSize="9" fontWeight="700">Y</text>
-          </g>
-          {/* X Axis Red (Right View) */}
-          <g onClick={() => { modelStore.setOrthogonalView?.("x"); onShowToast?.("View: Right (X)"); }}>
-            <line x1="32" y1="36" x2="52" y2="44" stroke="#ef4444" strokeWidth="2.5" />
-            <polygon points="56,46 49,46 51,41" fill="#ef4444" />
-            <text x="57" y="49" fill="#ef4444" fontSize="9" fontWeight="700">X</text>
-          </g>
-          {/* Z Axis Cyan (Front View) */}
-          <g onClick={() => { modelStore.setOrthogonalView?.("z"); onShowToast?.("View: Front (Z)"); }}>
-            <line x1="32" y1="36" x2="14" y2="44" stroke="#06b6d4" strokeWidth="2.5" />
-            <polygon points="10,46 15,41 17,46" fill="#06b6d4" />
-            <text x="2" y="49" fill="#06b6d4" fontSize="9" fontWeight="700">Z</text>
-          </g>
-          {/* Center Hub (Reset Perspective Framing) */}
-          <circle
-            cx="32"
-            cy="36"
-            r="4.5"
-            fill="#e2e8f0"
-            onClick={() => { modelStore.resetCamera?.(); onShowToast?.("View: Perspective (Default)"); }}
-          />
-        </svg>
       </div>
 
       {/* Mandatory Trikomi Core ThreeViewer Canvas Stage */}

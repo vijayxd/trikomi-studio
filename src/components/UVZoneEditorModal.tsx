@@ -21,6 +21,8 @@ export const UVZoneEditorModal = observer(() => {
   const jsonFileInputRef = useRef<HTMLInputElement | null>(null);
   const [activeDrag, setActiveDrag] = useState<ZoneDragState | null>(null);
   const [newZoneName, setNewZoneName] = useState("");
+  const [showAddCategoryInput, setShowAddCategoryInput] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
 
   useEffect(() => {
     if (activeDrag) {
@@ -103,98 +105,120 @@ export const UVZoneEditorModal = observer(() => {
     setNewZoneName("");
   };
 
+  const handleAddCategorySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newCategoryName.trim()) {
+      uvOrganizerStore.addCustomGarmentCategory(newCategoryName.trim());
+      setNewCategoryName("");
+      setShowAddCategoryInput(false);
+    }
+  };
+
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0, 0, 0, 0.8)",
-        backdropFilter: "blur(12px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 100
-      }}
+      className="studio-modal-backdrop"
       onClick={() => uvOrganizerStore.setShowZoneEditorModal(false)}
     >
       <div
-        style={{
-          width: "920px",
-          height: "640px",
-          background: "#0b0f19",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
-          borderRadius: "16px",
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "0 25px 60px rgba(0,0,0,0.8)",
-          overflow: "hidden"
-        }}
+        className="studio-modal-card"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div
-          style={{
-            padding: "14px 20px",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            background: "rgba(15, 23, 42, 0.6)"
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <LayoutGrid size={20} color="#38bdf8" />
+        <div className="studio-modal-header">
+          <div style={{ display: "flex", alignItems: "center", gap: "14px", flex: 1, overflow: "hidden" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+              <LayoutGrid size={18} color="#00e5ff" />
               <div>
-                <div style={{ fontWeight: "700", fontSize: "14px", color: "#f8fafc" }}>
+                <div style={{ fontWeight: "600", fontSize: "13px", color: "#f8fafc" }}>
                   Canonical UV Slots Designer
                 </div>
-                <div style={{ fontSize: "11px", color: "#94a3b8" }}>
+                <div style={{ fontSize: "10.5px", color: "#94a3b8" }}>
                   Fixed slot zones for standardized pattern mapping
                 </div>
               </div>
             </div>
 
-            {/* Category Switcher Tabs: Topwear vs Bottomwear */}
-            <div style={{ display: "flex", background: "rgba(30, 41, 59, 0.8)", padding: "3px", borderRadius: "8px", border: "1px solid rgba(255, 255, 255, 0.1)" }}>
-              <button
-                type="button"
-                onClick={() => uvOrganizerStore.switchGarmentType(GARMENT_TYPES.TOPWEAR)}
-                style={{
-                  padding: "5px 12px",
-                  borderRadius: "6px",
-                  fontSize: "11px",
-                  fontWeight: "700",
-                  cursor: "pointer",
-                  border: "none",
-                  background: uvOrganizerStore.activeGarmentType === GARMENT_TYPES.TOPWEAR ? "#0284c7" : "transparent",
-                  color: uvOrganizerStore.activeGarmentType === GARMENT_TYPES.TOPWEAR ? "#fff" : "#94a3b8",
-                  transition: "all 0.15s ease"
-                }}
-              >
-                👕 Topwear (T-Shirt/Hoodie/Tops)
-              </button>
-              <button
-                type="button"
-                onClick={() => uvOrganizerStore.switchGarmentType(GARMENT_TYPES.BOTTOMWEAR)}
-                style={{
-                  padding: "5px 12px",
-                  borderRadius: "6px",
-                  fontSize: "11px",
-                  fontWeight: "700",
-                  cursor: "pointer",
-                  border: "none",
-                  background: uvOrganizerStore.activeGarmentType === GARMENT_TYPES.BOTTOMWEAR ? "#0284c7" : "transparent",
-                  color: uvOrganizerStore.activeGarmentType === GARMENT_TYPES.BOTTOMWEAR ? "#fff" : "#94a3b8",
-                  transition: "all 0.15s ease"
-                }}
-              >
-                👖 Bottomwear (Pants/Shorts)
-              </button>
+            {/* Category Switcher Tabs: Topwear, Bottomwear, + New Wear Sets */}
+            <div className="studio-segmented-group" style={{ overflowX: "auto", flexShrink: 0, maxWidth: "420px" }}>
+              {uvOrganizerStore.allGarmentTypes.map((cat) => {
+                const isActive = uvOrganizerStore.activeGarmentType === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => uvOrganizerStore.switchGarmentType(cat.id)}
+                    className={`studio-segmented-item ${isActive ? "active" : ""}`}
+                    title={cat.label}
+                  >
+                    <span>{cat.icon || "✨"}</span>
+                    <span>{cat.label}</span>
+                    {cat.isCustom && (
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          uvOrganizerStore.removeCustomGarmentCategory(cat.id);
+                        }}
+                        style={{ marginLeft: "4px", opacity: 0.6, fontSize: "10px" }}
+                        title="Delete custom set"
+                      >
+                        ×
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+
+              {/* + Add New Wear Set Button */}
+              {showAddCategoryInput ? (
+                <form onSubmit={handleAddCategorySubmit} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                  <input
+                    type="text"
+                    placeholder="e.g. Hats, Bags"
+                    value={newCategoryName}
+                    autoFocus
+                    onChange={(e) => setNewCategoryName(e.target.value)}
+                    style={{
+                      background: "#080c14",
+                      border: "1px solid #38bdf8",
+                      borderRadius: "4px",
+                      color: "#fff",
+                      fontSize: "10.5px",
+                      padding: "2px 6px",
+                      width: "80px",
+                      outline: "none"
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className="studio-btn-primary"
+                    style={{ padding: "2px 6px", fontSize: "10px" }}
+                  >
+                    ✓
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowAddCategoryInput(false)}
+                    style={{ background: "transparent", border: "none", color: "#94a3b8", cursor: "pointer", fontSize: "12px" }}
+                  >
+                    ×
+                  </button>
+                </form>
+              ) : (
+                <button
+                  type="button"
+                  className="studio-segmented-item"
+                  style={{ color: "#38bdf8", border: "1px dashed rgba(56, 189, 248, 0.4)" }}
+                  title="Create new wear set (e.g. Hats, Bags, Gloves)"
+                  onClick={() => setShowAddCategoryInput(true)}
+                >
+                  <Plus size={12} />
+                  <span>Add Set</span>
+                </button>
+              )}
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
             <input
               type="file"
               ref={jsonFileInputRef}
@@ -204,28 +228,25 @@ export const UVZoneEditorModal = observer(() => {
             />
 
             <button
-              className="btn btn-secondary"
-              style={{ padding: "6px 10px", fontSize: "11px", gap: "5px" }}
+              className="studio-btn-secondary"
               onClick={() => uvOrganizerStore.exportZonesAsJSON()}
               title="Download safe JSON backup of this canonical layout"
             >
               <Download size={13} color="#38bdf8" />
-              <span>Export JSON</span>
+              <span>Export</span>
             </button>
 
             <button
-              className="btn btn-secondary"
-              style={{ padding: "6px 10px", fontSize: "11px", gap: "5px" }}
+              className="studio-btn-secondary"
               onClick={() => jsonFileInputRef.current?.click()}
               title="Upload and restore a saved UV layout JSON file"
             >
               <Upload size={13} color="#34d399" />
-              <span>Import JSON</span>
+              <span>Import</span>
             </button>
 
             <button
-              className="btn btn-secondary"
-              style={{ padding: "6px 10px", fontSize: "11px", gap: "5px" }}
+              className="studio-btn-secondary"
               onClick={() => uvOrganizerStore.resetZonesToDefault()}
               title="Reset to default template"
             >
@@ -234,22 +255,23 @@ export const UVZoneEditorModal = observer(() => {
             </button>
 
             <button
-              className="btn btn-primary"
-              style={{ padding: "6px 14px", fontSize: "12px", gap: "6px" }}
+              className="studio-btn-primary"
               onClick={() => {
                 uvOrganizerStore.setShowZoneEditorModal(false);
                 uvOrganizerStore.arrangeAssignedUVs();
               }}
             >
               <Check size={14} />
-              <span>Apply & Save</span>
+              <span>Apply</span>
             </button>
 
             <button
-              style={{ background: "transparent", border: "none", color: "#94a3b8", cursor: "pointer", padding: "4px" }}
+              className="tool-btn tool-btn-sm"
+              style={{ marginLeft: "4px" }}
+              title="Close modal"
               onClick={() => uvOrganizerStore.setShowZoneEditorModal(false)}
             >
-              <X size={18} />
+              <X size={16} />
             </button>
           </div>
         </div>
@@ -354,36 +376,28 @@ export const UVZoneEditorModal = observer(() => {
           </div>
 
           {/* Right Control Panel */}
-          <div style={{ flex: 1, padding: "20px", display: "flex", flexDirection: "column", gap: "16px", overflowY: "auto" }}>
+          <div style={{ flex: 1, padding: "16px", display: "flex", flexDirection: "column", gap: "14px", overflowY: "auto" }}>
             <form onSubmit={handleCreateZone} style={{ display: "flex", gap: "8px" }}>
               <input
                 type="text"
                 placeholder="New zone (e.g. Pocket, Hood)"
                 value={newZoneName}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewZoneName(e.target.value)}
-                style={{
-                  flex: 1,
-                  background: "rgba(30, 41, 59, 0.6)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  borderRadius: "6px",
-                  padding: "8px 12px",
-                  color: "#fff",
-                  fontSize: "12px",
-                  outline: "none"
-                }}
+                className="studio-input"
+                style={{ flex: 1 }}
               />
-              <button className="btn btn-primary" type="submit" style={{ padding: "8px 12px", fontSize: "12px" }}>
-                <Plus size={14} />
+              <button className="studio-btn-primary" type="submit">
+                <Plus size={13} />
                 <span>Add</span>
               </button>
             </form>
 
             {selectedZone && (
-              <div style={{ background: "rgba(30, 41, 59, 0.4)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: "10px", padding: "14px" }}>
+              <div className="studio-card-panel">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <div style={{ width: "12px", height: "12px", borderRadius: "3px", background: selectedZone.color }} />
-                    <span style={{ fontWeight: "700", fontSize: "13px", color: "#f8fafc" }}>
+                    <span style={{ fontWeight: "700", fontSize: "12.5px", color: "#f8fafc" }}>
                       {selectedZone.label}
                     </span>
                   </div>
@@ -398,7 +412,7 @@ export const UVZoneEditorModal = observer(() => {
 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
                   <div>
-                    <label style={{ fontSize: "10px", color: "#94a3b8" }}>U Min (Left)</label>
+                    <label style={{ fontSize: "10px", color: "#94a3b8", display: "block", marginBottom: "4px" }}>U Min (Left)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -406,11 +420,12 @@ export const UVZoneEditorModal = observer(() => {
                       max={selectedZone.uMax - 0.04}
                       value={selectedZone.uMin}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => uvOrganizerStore.updateZoneBounds(selectedZone.id, { uMin: parseFloat(e.target.value) })}
-                      style={{ width: "100%", background: "#0f172a", border: "1px solid #334155", color: "#fff", padding: "4px 8px", borderRadius: "4px", fontSize: "11px" }}
+                      className="studio-input studio-input-sm"
+                      style={{ width: "100%" }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: "10px", color: "#94a3b8" }}>U Max (Right)</label>
+                    <label style={{ fontSize: "10px", color: "#94a3b8", display: "block", marginBottom: "4px" }}>U Max (Right)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -418,11 +433,12 @@ export const UVZoneEditorModal = observer(() => {
                       max="1"
                       value={selectedZone.uMax}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => uvOrganizerStore.updateZoneBounds(selectedZone.id, { uMax: parseFloat(e.target.value) })}
-                      style={{ width: "100%", background: "#0f172a", border: "1px solid #334155", color: "#fff", padding: "4px 8px", borderRadius: "4px", fontSize: "11px" }}
+                      className="studio-input studio-input-sm"
+                      style={{ width: "100%" }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: "10px", color: "#94a3b8" }}>V Min (Bottom)</label>
+                    <label style={{ fontSize: "10px", color: "#94a3b8", display: "block", marginBottom: "4px" }}>V Min (Bottom)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -430,11 +446,12 @@ export const UVZoneEditorModal = observer(() => {
                       max={selectedZone.vMax - 0.04}
                       value={selectedZone.vMin}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => uvOrganizerStore.updateZoneBounds(selectedZone.id, { vMin: parseFloat(e.target.value) })}
-                      style={{ width: "100%", background: "#0f172a", border: "1px solid #334155", color: "#fff", padding: "4px 8px", borderRadius: "4px", fontSize: "11px" }}
+                      className="studio-input studio-input-sm"
+                      style={{ width: "100%" }}
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: "10px", color: "#94a3b8" }}>V Max (Top)</label>
+                    <label style={{ fontSize: "10px", color: "#94a3b8", display: "block", marginBottom: "4px" }}>V Max (Top)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -442,48 +459,40 @@ export const UVZoneEditorModal = observer(() => {
                       max="1"
                       value={selectedZone.vMax}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => uvOrganizerStore.updateZoneBounds(selectedZone.id, { vMax: parseFloat(e.target.value) })}
-                      style={{ width: "100%", background: "#0f172a", border: "1px solid #334155", color: "#fff", padding: "4px 8px", borderRadius: "4px", fontSize: "11px" }}
+                      className="studio-input studio-input-sm"
+                      style={{ width: "100%" }}
                     />
                   </div>
                 </div>
 
-                <div style={{ marginTop: "10px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <div style={{ marginTop: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
                   <label style={{ fontSize: "10px", color: "#94a3b8" }}>Color Tag:</label>
                   <input
                     type="color"
                     value={selectedZone.color}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => uvOrganizerStore.updateZoneBounds(selectedZone.id, { color: e.target.value })}
-                    style={{ width: "24px", height: "24px", borderRadius: "4px", border: "none", cursor: "pointer", background: "transparent" }}
+                    style={{ width: "24px", height: "24px", borderRadius: "4px", border: "1px solid #1e293b", cursor: "pointer", background: "transparent", padding: 0 }}
                   />
                 </div>
               </div>
             )}
 
             <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "6px" }}>
-              <span style={{ fontSize: "11px", fontWeight: "700", color: "#94a3b8", textTransform: "uppercase" }}>
+              <span style={{ fontSize: "10.5px", fontWeight: "700", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 Active Slots ({zonesList.length})
               </span>
               {zonesList.map((z) => (
                 <div
                   key={z.id}
                   onClick={() => uvOrganizerStore.setSelectedZone(z.id)}
-                  style={{
-                    padding: "8px 10px",
-                    borderRadius: "6px",
-                    background: selectedZone?.id === z.id ? "rgba(56, 189, 248, 0.15)" : "rgba(30, 41, 59, 0.3)",
-                    border: selectedZone?.id === z.id ? "1px solid #38bdf8" : "1px solid rgba(255, 255, 255, 0.05)",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between"
-                  }}
+                  className={`studio-slot-item ${selectedZone?.id === z.id ? "active" : ""}`}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <div style={{ width: "10px", height: "10px", borderRadius: "3px", background: z.color }} />
-                    <span style={{ fontSize: "12px", color: "#f8fafc", fontWeight: "600" }}>{z.label}</span>
+                    <span style={{ fontSize: "11.5px", color: "#f8fafc", fontWeight: "600" }}>{z.label}</span>
                   </div>
                   <span style={{ fontSize: "10px", color: "#64748b" }}>
-                    U: [{z.uMin}-{z.uMax}], V: [{z.vMin}-{z.vMax}]
+                    U: [{z.uMin.toFixed(2)}-{z.uMax.toFixed(2)}], V: [{z.vMin.toFixed(2)}-{z.vMax.toFixed(2)}]
                   </span>
                 </div>
               ))}
