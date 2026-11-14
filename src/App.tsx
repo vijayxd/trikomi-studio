@@ -87,19 +87,16 @@ export const App = observer(() => {
         uvOrganizerStore.focusSelectedIsland?.();
         triggerToast(hasSelection ? "Focused on selected piece" : "Framed entire model");
       } else if (e.key === "w" || e.key === "W") {
-        modelStore.setTransformMode("translate");
+        modelStore.setActiveTool("move");
         triggerToast("Translate gizmo (W)");
       } else if (e.key === "e" || e.key === "E") {
-        modelStore.setTransformMode("rotate");
+        modelStore.setActiveTool("rotate");
         triggerToast("Rotate gizmo (E)");
       } else if (e.key === "r" || e.key === "R") {
-        modelStore.setTransformMode("scale");
+        modelStore.setActiveTool("scale");
         triggerToast("Scale gizmo (R)");
       } else if (e.key === "q" || e.key === "Q") {
-        if (modelStore.transformControls) {
-          modelStore.transformControls.detach();
-          modelStore.transformControls.enabled = false;
-        }
+        modelStore.setActiveTool("select");
         triggerToast("Select mode (Q)");
       }
     };

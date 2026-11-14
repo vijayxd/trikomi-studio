@@ -11,37 +11,45 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
   collapsed = false,
   onShowToast
 }) => {
-  const [activeTool, setActiveTool] = useState<string>("select");
   const [searchFilter, setSearchFilter] = useState("");
   const [isTreeCollapsed, setIsTreeCollapsed] = useState(false);
 
-  const selectedMesh = modelStore.selectedPiece?.mesh;
+  const activeTool = modelStore.activeTool;
+  // Use reactive TrikomiMeshNode directly as the state entity
+  const selectedNode = modelStore.selectedPiece?.meshNode || (modelStore.viewer?.runtimeRoot?.selectedNode as any);
+  const selectedMesh = modelStore.selectedPiece?.mesh || selectedNode?.nativeObject;
 
   const getTransformVal = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z"): string => {
-    if (!selectedMesh) return type === "scl" ? "1.00" : "0.00";
-    if (type === "pos") return selectedMesh.position[axis].toFixed(2);
-    if (type === "rot") return (selectedMesh.rotation[axis] * (180 / Math.PI)).toFixed(1);
-    if (type === "scl") return selectedMesh.scale[axis].toFixed(2);
+    // Establish reactive dependency on transformVersion so panel updates live during gizmo interactions & undo/redo
+    void modelStore.transformVersion;
+    if (!selectedNode && !selectedMesh) return type === "scl" ? "1.00" : "0.00";
+    const target = selectedNode || selectedMesh;
+    if (type === "pos") return target.position[axis].toFixed(2);
+    if (type === "rot") return (target.rotation[axis] * (180 / Math.PI)).toFixed(1);
+    if (type === "scl") return target.scale[axis].toFixed(2);
     return "0.00";
   };
 
   const handleTransformChange = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z", valStr: string) => {
     const num = parseFloat(valStr);
-    if (isNaN(num) || !selectedMesh) return;
+    if (isNaN(num)) return;
+    const target = selectedNode || selectedMesh;
+    if (!target) return;
     uvOrganizerStore.pushHistorySnapshot("Transform Mesh");
-    if (type === "pos") selectedMesh.position[axis] = num;
-    else if (type === "rot") selectedMesh.rotation[axis] = num * (Math.PI / 180);
-    else if (type === "scl") selectedMesh.scale[axis] = num;
+    if (type === "pos") target.position[axis] = num;
+    else if (type === "rot") target.rotation[axis] = num * (Math.PI / 180);
+    else if (type === "scl") target.scale[axis] = num;
 
     modelStore.updateTransformGizmo?.();
   };
 
   const resetTransform = () => {
-    if (selectedMesh) {
+    const target = selectedNode || selectedMesh;
+    if (target) {
       uvOrganizerStore.pushHistorySnapshot("Reset Transform");
-      selectedMesh.position.set(0, 0, 0);
-      selectedMesh.rotation.set(0, 0, 0);
-      selectedMesh.scale.set(1, 1, 1);
+      target.position.set(0, 0, 0);
+      target.rotation.set(0, 0, 0);
+      target.scale.set(1, 1, 1);
       modelStore.updateTransformGizmo?.();
       onShowToast?.(`Transform reset on ${modelStore.selectedPiece?.name || 'piece'}`);
     } else {
@@ -63,11 +71,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "select" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("select");
-            if (modelStore.transformControls) {
-              modelStore.transformControls.detach();
-              modelStore.transformControls.enabled = false;
-            }
+            modelStore.setActiveTool("select");
             onShowToast?.("Active tool: Select (Q)");
           }}
           title="Select Tool (Q)"
@@ -80,7 +84,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "cursor" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("cursor");
+            modelStore.setActiveTool("cursor");
             modelStore.resetCamera?.();
             onShowToast?.("3D Cursor: Centered to origin (0, 0, 0)");
           }}
@@ -96,8 +100,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "move" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("move");
-            modelStore.setTransformMode("translate");
+            modelStore.setActiveTool("move");
             onShowToast?.("Active tool: Move (W)");
           }}
           title="Move (W)"
@@ -115,8 +118,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "rotate" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("rotate");
-            modelStore.setTransformMode("rotate");
+            modelStore.setActiveTool("rotate");
             onShowToast?.("Active tool: Rotate (E)");
           }}
           title="Rotate (E)"
@@ -130,8 +132,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "scale" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("scale");
-            modelStore.setTransformMode("scale");
+            modelStore.setActiveTool("scale");
             onShowToast?.("Active tool: Scale (R)");
           }}
           title="Scale (R)"
@@ -147,7 +148,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "uv-proj" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("uv-proj");
+            modelStore.setActiveTool("uv-proj");
             const res = uvOrganizerStore.arrangeAssignedUVs();
             onShowToast?.(`Canonical UV Projection applied (${res.packedCount} islands packed)`);
           }}
@@ -163,7 +164,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "normals" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("normals");
+            modelStore.setActiveTool("normals");
             const count = modelStore.recomputeNormals?.();
             onShowToast?.(`Recomputed vertex normals across ${count} panels`);
           }}
@@ -178,7 +179,7 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
         <button
           className={`tool-btn ${activeTool === "hierarchy" ? "active" : ""}`}
           onClick={() => {
-            setActiveTool("hierarchy");
+            modelStore.setActiveTool("hierarchy");
             setIsTreeCollapsed(!isTreeCollapsed);
             onShowToast?.(isTreeCollapsed ? "Expanded Scene Graph" : "Collapsed Scene Graph");
           }}
