@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
-import { uvOrganizerStore, modelStore } from "@trikomi/core/studio";
+import { uvOrganizerStore, modelStore, UVViewportEngine } from "@trikomi/core/studio";
 import * as THREE from "three";
 
 interface PieceBounds2D {
@@ -76,37 +76,6 @@ export const UVCanvasView = observer(() => {
   });
   const animFrameIdRef = useRef<number | null>(null);
 
-  // Read authentic 1:1 piece bounds without padding directly from geometry vertex buffer
-  const getLivePieceBounds = useCallback((): PieceBounds2D[] => {
-    const list: PieceBounds2D[] = [];
-    if (!modelStore.pieces || modelStore.pieces.length === 0) return list;
-
-    modelStore.pieces.forEach(p => {
-      if (p.visible === false) return;
-      const geom = p.mesh?.geometry;
-      if (!geom) return;
-      const uvAttr = geom.attributes.uv;
-      if (!(uvAttr instanceof THREE.BufferAttribute) || uvAttr.array.length < 2) return;
-
-      const arr = uvAttr.array;
-      let minU = arr[0]!, maxU = arr[0]!;
-      let minV = arr[1]!, maxV = arr[1]!;
-
-      for (let i = 2; i < arr.length; i += 2) {
-        const u = arr[i]!;
-        const v = arr[i + 1]!;
-        if (u < minU) minU = u;
-        if (u > maxU) maxU = u;
-        if (v < minV) minV = v;
-        if (v > maxV) maxV = v;
-      }
-      list.push({ id: p.id, minU, maxU, minV, maxV });
-    });
-
-    cachedBoundsRef.current = list;
-    return list;
-  }, []);
-
   // Fast GPU Render trigger
   const requestRender = useCallback(() => {
     if (animFrameIdRef.current !== null) return;
@@ -118,212 +87,82 @@ export const UVCanvasView = observer(() => {
     });
   }, []);
 
-  // Update Camera Viewport Projection with Pan & Zoom
+  // Update Camera Viewport Projection with Pan & Zoom via UVViewportEngine
   const updateCameraBounds = useCallback(() => {
     if (!containerRef.current || !cameraRef.current) return;
     const { clientWidth, clientHeight } = containerRef.current;
     if (clientWidth === 0 || clientHeight === 0) return;
 
     const camera = cameraRef.current;
-    const aspect = clientWidth / clientHeight;
     const { centerU, centerV, zoom } = viewStateRef.current;
+    const frustum = UVViewportEngine.calculateCameraFrustum(clientWidth, clientHeight, centerU, centerV, zoom);
 
-    const halfSpan = 0.55 / zoom;
-    if (aspect >= 1.0) {
-      const halfU = halfSpan * aspect;
-      const halfV = halfSpan;
-      camera.left = centerU - halfU;
-      camera.right = centerU + halfU;
-      camera.top = centerV + halfV;
-      camera.bottom = centerV - halfV;
-    } else {
-      const halfU = halfSpan;
-      const halfV = halfSpan / aspect;
-      camera.left = centerU - halfU;
-      camera.right = centerU + halfU;
-      camera.top = centerV + halfV;
-      camera.bottom = centerV - halfV;
-    }
+    camera.left = frustum.left;
+    camera.right = frustum.right;
+    camera.top = frustum.top;
+    camera.bottom = frustum.bottom;
     camera.updateProjectionMatrix();
     requestRender();
   }, [requestRender]);
 
-  // 1. Rebuild Zones Overlay in WebGL
+  // 1. Rebuild Zones Overlay in WebGL via UVViewportEngine
   const updateZonesOverlay = useCallback(() => {
     if (!zonesGroupRef.current) return;
     const group = zonesGroupRef.current;
     
     while (group.children.length > 0) {
-      const child = group.children[0];
+      const child = group.children[0]!;
       group.remove(child);
       if (child instanceof THREE.Mesh) {
         child.geometry.dispose();
       }
     }
 
-    // Grid lines (10x10)
-    const gridPositions: number[] = [];
-    for (let i = 0; i <= 10; i++) {
-      const p = i / 10;
-      gridPositions.push(p, 0, -1, p, 1, -1);
-      gridPositions.push(0, p, -1, 1, p, -1);
+    const overlay = UVViewportEngine.createZonesOverlayGroup(
+      uvOrganizerStore.zones,
+      modelStore.pieces,
+      uvOrganizerStore.zoneDisplayMode
+    );
+    while (overlay.children.length > 0) {
+      group.add(overlay.children[0]!);
     }
-    const gridGeom = new THREE.BufferGeometry();
-    gridGeom.setAttribute("position", new THREE.Float32BufferAttribute(gridPositions, 3));
-    const gridMat = new THREE.LineBasicMaterial({ color: 0x1e293b, transparent: true, opacity: 0.5 });
-    group.add(new THREE.LineSegments(gridGeom, gridMat));
-
-    // Outer UV Unit Square [0, 1] x [0, 1] Border Glow
-    const borderGeom = new THREE.BufferGeometry();
-    borderGeom.setAttribute("position", new THREE.Float32BufferAttribute([
-      0, 0, -0.9,  1, 0, -0.9,
-      1, 0, -0.9,  1, 1, -0.9,
-      1, 1, -0.9,  0, 1, -0.9,
-      0, 1, -0.9,  0, 0, -0.9
-    ], 3));
-    const borderMat = new THREE.LineBasicMaterial({ color: 0x14d9ff, transparent: true, opacity: 0.35, linewidth: 2 });
-    group.add(new THREE.LineSegments(borderGeom, borderMat));
-
-    // Canonical zone rectangles
-    Object.values(uvOrganizerStore.zones).forEach((zone) => {
-      const zW = zone.uMax - zone.uMin;
-      const zH = zone.vMax - zone.vMin;
-      const zX = zone.uMin + zW * 0.5;
-      const zY = zone.vMin + zH * 0.5;
-
-      const assignedCount = modelStore.pieces.filter(p => p.assignedZoneId === zone.id).length;
-      const isEmpty = assignedCount === 0;
-
-      // If user chose "Identified Zones Only", hide empty zones completely
-      if (isEmpty && uvOrganizerStore.zoneDisplayMode === "identified") {
-        return;
-      }
-
-      const planeGeom = new THREE.PlaneGeometry(zW, zH);
-      const colorVal = new THREE.Color(zone.color);
-      const planeMat = new THREE.MeshBasicMaterial({
-        color: colorVal,
-        transparent: true,
-        opacity: isEmpty ? 0.04 : 0.09,
-        depthWrite: false
-      });
-      const planeMesh = new THREE.Mesh(planeGeom, planeMat);
-      planeMesh.position.set(zX, zY, -0.5);
-      group.add(planeMesh);
-
-      const edges = new THREE.EdgesGeometry(planeGeom);
-      const edgeMat = new THREE.LineBasicMaterial({
-        color: colorVal,
-        transparent: true,
-        opacity: isEmpty ? 0.45 : 0.85,
-        linewidth: 1.5
-      });
-      const edgeLines = new THREE.LineSegments(edges, edgeMat);
-      edgeLines.position.set(zX, zY, -0.4);
-      group.add(edgeLines);
-    });
 
     requestRender();
   }, [requestRender]);
 
-  // 2. Build GPU UV Meshes
+  // 2. Build GPU UV Meshes via UVViewportEngine
   const rebuildUVMeshes = useCallback(() => {
     if (!meshesGroupRef.current) return;
     const group = meshesGroupRef.current;
 
     while (group.children.length > 0) {
-      const child = group.children[0];
+      const child = group.children[0]!;
       group.remove(child);
       if (child instanceof THREE.Mesh) {
         child.geometry.dispose();
       }
     }
 
-    const boundsList: PieceBounds2D[] = [];
-
     if (modelStore.currentModel) {
       modelStore.pieces.forEach((piece) => {
-        // Skip explicitly hidden pieces
-        if (piece.visible === false) {
-          return;
-        }
-
-        const mesh = piece.mesh;
-        if (!mesh || !mesh.geometry) return;
-        const geom = mesh.geometry;
-        const uvAttr = geom.attributes.uv;
-        const indexAttr = geom.index;
-        if (!(uvAttr instanceof THREE.BufferAttribute)) return;
-
-        const arr = uvAttr.array;
-        if (arr.length < 2) return;
-
-        let minU = arr[0], maxU = arr[0];
-        let minV = arr[1], maxV = arr[1];
-        for (let i = 2; i < arr.length; i += 2) {
-          const u = arr[i];
-          const v = arr[i + 1];
-          if (u < minU) minU = u;
-          if (u > maxU) maxU = u;
-          if (v < minV) minV = v;
-          if (v > maxV) maxV = v;
-        }
-        boundsList.push({ id: piece.id, minU, maxU, minV, maxV });
-
         const assignedZone = piece.assignedZoneId ? uvOrganizerStore.zones[piece.assignedZoneId] : null;
-        const zoneColor = assignedZone ? new THREE.Color(assignedZone.color) : new THREE.Color(0x38bdf8);
-
-        const uvGeom = new THREE.BufferGeometry();
-        const vCount = uvAttr.count;
-        const posArray = new Float32Array(vCount * 3);
-
-        for (let i = 0; i < vCount; i++) {
-          posArray[i * 3] = uvAttr.getX(i);
-          posArray[i * 3 + 1] = uvAttr.getY(i);
-          posArray[i * 3 + 2] = 0;
+        const uvMesh = UVViewportEngine.createPieceUVMesh(piece, assignedZone);
+        if (uvMesh) {
+          group.add(uvMesh);
         }
-
-        uvGeom.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
-        if (indexAttr) {
-          uvGeom.setIndex(indexAttr.clone());
-        }
-
-        // Shaded surface fill
-        const fillMat = new THREE.MeshBasicMaterial({
-          color: zoneColor,
-          transparent: true,
-          opacity: 0.35,
-          side: THREE.DoubleSide,
-          depthWrite: false
-        });
-        const uvMesh = new THREE.Mesh(uvGeom, fillMat);
-        uvMesh.name = piece.id;
-
-        // Clean wireframe lines overlay
-        const wireMat = new THREE.MeshBasicMaterial({
-          color: zoneColor,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.65
-        });
-        const wireMesh = new THREE.Mesh(uvGeom, wireMat);
-        uvMesh.add(wireMesh);
-
-        group.add(uvMesh);
       });
     }
 
-    cachedBoundsRef.current = boundsList;
     requestRender();
   }, [requestRender]);
 
-  // 3. Build & Update 2D Move & Scale Gizmo (Mockup Precision)
+  // 3. Build & Update 2D Move & Scale Gizmo via UVViewportEngine
   const updateGizmoMesh = useCallback(() => {
     if (!gizmoGroupRef.current || !cameraRef.current) return;
     const group = gizmoGroupRef.current;
 
     while (group.children.length > 0) {
-      const child = group.children[0];
+      const child = group.children[0]!;
       group.remove(child);
       if (child instanceof THREE.Mesh) {
         child.geometry.dispose();
@@ -339,135 +178,22 @@ export const UVCanvasView = observer(() => {
       return;
     }
 
-    const selectedBounds = getLivePieceBounds().filter(b => activeSelectedIds.includes(b.id));
-    if (selectedBounds.length === 0) {
+    const groupBounds = uvOrganizerStore.getGroupUVBounds(activeSelectedIds);
+    if (!groupBounds) {
       requestRender();
       return;
     }
 
-    let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-    selectedBounds.forEach(b => {
-      if (b.minU < gMinU) gMinU = b.minU;
-      if (b.maxU > gMaxU) gMaxU = b.maxU;
-      if (b.minV < gMinV) gMinV = b.minV;
-      if (b.maxV > gMaxV) gMaxV = b.maxV;
-    });
-
-    // Pure 1:1 authentic bounds without padding
-    const u0 = gMinU;
-    const u1 = gMaxU;
-    const v0 = gMinV;
-    const v1 = gMaxV;
-    const cU = (u0 + u1) * 0.5;
-    const cV = (v0 + v1) * 0.5;
-
-    // Viewport relative scale for crisp handles
-    const zoom = viewStateRef.current.zoom;
-    const arrowLen = 0.07 / zoom;
-    const arrowHead = 0.018 / zoom;
-    const handleSize = 0.016 / zoom;
-
-    // Check if entire selection is pinned
     const isAllPinned = activeSelectedIds.length > 0 && activeSelectedIds.every(id => uvOrganizerStore.isPiecePinned(id));
-
-    // --- Bounding Box Outline (Cyan Dashed Feel, or Amber/Orange if Pinned) ---
-    const bboxGeom = new THREE.BufferGeometry();
-    bboxGeom.setAttribute("position", new THREE.Float32BufferAttribute([
-      u0, v0, 0.4,  u1, v0, 0.4,
-      u1, v0, 0.4,  u1, v1, 0.4,
-      u1, v1, 0.4,  u0, v1, 0.4,
-      u0, v1, 0.4,  u0, v0, 0.4
-    ], 3));
-    const bboxColor = isAllPinned ? 0xf59e0b : 0x14d9ff;
-    const bboxMat = new THREE.LineBasicMaterial({ color: bboxColor, linewidth: 2, depthTest: false });
-    group.add(new THREE.LineSegments(bboxGeom, bboxMat));
-
-    // If all selected pieces are pinned, render lock pin badge icon instead of transform handles
-    if (isAllPinned) {
-      const pinHeadGeom = new THREE.CircleGeometry(handleSize * 0.9, 16);
-      const pinHeadMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, depthTest: false });
-      const pinHeadMesh = new THREE.Mesh(pinHeadGeom, pinHeadMat);
-      pinHeadMesh.position.set(cU, cV + handleSize * 0.8, 0.8);
-      group.add(pinHeadMesh);
-
-      const pinNeedleGeom = new THREE.BufferGeometry();
-      pinNeedleGeom.setAttribute("position", new THREE.Float32BufferAttribute([
-        cU, cV + handleSize * 0.8, 0.85,
-        cU, cV - handleSize * 0.8, 0.85
-      ], 3));
-      const pinNeedle = new THREE.Line(pinNeedleGeom, new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 2.5, depthTest: false }));
-      group.add(pinNeedle);
-
-      requestRender();
-      return;
+    const gizmo = UVViewportEngine.createGizmoGroup(groupBounds, viewStateRef.current.zoom, isAllPinned);
+    while (gizmo.children.length > 0) {
+      group.add(gizmo.children[0]!);
     }
-
-    // --- 4 Corner Scale Handles ---
-    const corners = [
-      { name: "handle-scale-bl", x: u0, y: v0 },
-      { name: "handle-scale-br", x: u1, y: v0 },
-      { name: "handle-scale-tr", x: u1, y: v1 },
-      { name: "handle-scale-tl", x: u0, y: v1 }
-    ];
-
-    corners.forEach(c => {
-      const handleGeom = new THREE.PlaneGeometry(handleSize, handleSize);
-      const handleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, depthTest: false });
-      const handleMesh = new THREE.Mesh(handleGeom, handleMat);
-      handleMesh.position.set(c.x, c.y, 0.6);
-      handleMesh.name = c.name;
-      group.add(handleMesh);
-
-      // Dark border on handle
-      const hBorder = new THREE.LineSegments(
-        new THREE.EdgesGeometry(handleGeom),
-        new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1.5, depthTest: false })
-      );
-      hBorder.position.set(c.x, c.y, 0.65);
-      group.add(hBorder);
-    });
-
-    // --- 2D Move Translation Arrows (Red X / Green Y per Mockup) ---
-    // Red Arrow: +U (X-Axis)
-    const redGeom = new THREE.BufferGeometry();
-    redGeom.setAttribute("position", new THREE.Float32BufferAttribute([
-      cU, cV, 0.7,  cU + arrowLen, cV, 0.7
-    ], 3));
-    const redLine = new THREE.Line(redGeom, new THREE.LineBasicMaterial({ color: 0xef4444, linewidth: 3, depthTest: false }));
-    group.add(redLine);
-
-    const redHeadGeom = new THREE.ConeGeometry(arrowHead * 0.5, arrowHead, 4);
-    redHeadGeom.rotateZ(-Math.PI / 2);
-    const redHead = new THREE.Mesh(redHeadGeom, new THREE.MeshBasicMaterial({ color: 0xef4444, depthTest: false }));
-    redHead.position.set(cU + arrowLen, cV, 0.7);
-    redHead.name = "handle-move-x";
-    group.add(redHead);
-
-    // Green Arrow: +V (Y-Axis)
-    const greenGeom = new THREE.BufferGeometry();
-    greenGeom.setAttribute("position", new THREE.Float32BufferAttribute([
-      cU, cV, 0.7,  cU, cV + arrowLen, 0.7
-    ], 3));
-    const greenLine = new THREE.Line(greenGeom, new THREE.LineBasicMaterial({ color: 0x22c55e, linewidth: 3, depthTest: false }));
-    group.add(greenLine);
-
-    const greenHeadGeom = new THREE.ConeGeometry(arrowHead * 0.5, arrowHead, 4);
-    const greenHead = new THREE.Mesh(greenHeadGeom, new THREE.MeshBasicMaterial({ color: 0x22c55e, depthTest: false }));
-    greenHead.position.set(cU, cV + arrowLen, 0.7);
-    greenHead.name = "handle-move-y";
-    group.add(greenHead);
-
-    // Center Pivot White Box (Mockup Center Pivot Box)
-    const pivotGeom = new THREE.PlaneGeometry(handleSize * 0.7, handleSize * 0.7);
-    const pivotMesh = new THREE.Mesh(pivotGeom, new THREE.MeshBasicMaterial({ color: 0xffffff, depthTest: false }));
-    pivotMesh.position.set(cU, cV, 0.8);
-    pivotMesh.name = "handle-move-center";
-    group.add(pivotMesh);
 
     requestRender();
   }, [requestRender]);
 
-  // Focus on Selected Island
+  // Focus on Selected Island via UVViewportEngine
   const focusSelectedIsland = useCallback(() => {
     const activeSelectedIds = modelStore.selectedPieceIds.length > 0
       ? modelStore.selectedPieceIds
@@ -475,32 +201,10 @@ export const UVCanvasView = observer(() => {
     
     if (activeSelectedIds.length === 0) return;
 
-    const selectedBounds = cachedBoundsRef.current.filter(b => activeSelectedIds.includes(b.id));
-    if (selectedBounds.length === 0) return;
+    const groupBounds = uvOrganizerStore.getGroupUVBounds(activeSelectedIds);
+    if (!groupBounds) return;
 
-    let minU = Infinity, maxU = -Infinity, minV = Infinity, maxV = -Infinity;
-    for (const b of selectedBounds) {
-      minU = Math.min(minU, b.minU);
-      maxU = Math.max(maxU, b.maxU);
-      minV = Math.min(minV, b.minV);
-      maxV = Math.max(maxV, b.maxV);
-    }
-
-    const cU = (minU + maxU) / 2;
-    const cV = (minV + maxV) / 2;
-    const w = Math.max(0.04, maxU - minU);
-    const h = Math.max(0.04, maxV - minV);
-    const maxDim = Math.max(w, h);
-
-    // Frame zoom level with margins
-    const targetZoom = Math.max(0.6, Math.min(8.0, 0.75 / maxDim));
-
-    viewStateRef.current = {
-      centerU: cU,
-      centerV: cV,
-      zoom: targetZoom
-    };
-
+    viewStateRef.current = UVViewportEngine.calculateIslandFocusView(groupBounds);
     updateCameraBounds();
     updateGizmoMesh();
   }, [updateCameraBounds, updateGizmoMesh]);
@@ -685,17 +389,7 @@ export const UVCanvasView = observer(() => {
   const getPieceAtCanvasCoords = (clientX: number, clientY: number): string | null => {
     const coords = getUVFromClient(clientX, clientY);
     if (!coords) return null;
-    const { u: clickU, v: clickV } = coords;
-
-    // Use live bounds without padding
-    const bounds = getLivePieceBounds();
-    for (let i = bounds.length - 1; i >= 0; i--) {
-      const b = bounds[i]!;
-      if (clickU >= b.minU && clickU <= b.maxU && clickV >= b.minV && clickV <= b.maxV) {
-        return b.id;
-      }
-    }
-    return null;
+    return uvOrganizerStore.hitTestPieceUV(coords.u, coords.v);
   };
 
   // Hit-test Gizmo Handles
@@ -710,19 +404,11 @@ export const UVCanvasView = observer(() => {
 
     if (activeSelectedIds.length === 0) return null;
 
-    const selectedBounds = getLivePieceBounds().filter(b => activeSelectedIds.includes(b.id));
-    if (selectedBounds.length === 0) return null;
+    const bounds = uvOrganizerStore.getGroupUVBounds(activeSelectedIds);
+    if (!bounds) return null;
 
-    let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-    selectedBounds.forEach(b => {
-      if (b.minU < gMinU) gMinU = b.minU;
-      if (b.maxU > gMaxU) gMaxU = b.maxU;
-      if (b.minV < gMinV) gMinV = b.minV;
-      if (b.maxV > gMaxV) gMaxV = b.maxV;
-    });
-
-    const u0 = gMinU, u1 = gMaxU, v0 = gMinV, v1 = gMaxV;
-    const cU = (u0 + u1) * 0.5, cV = (v0 + v1) * 0.5;
+    const u0 = bounds.minU, u1 = bounds.maxU, v0 = bounds.minV, v1 = bounds.maxV;
+    const cU = bounds.centerU, cV = bounds.centerV;
 
     const zoom = viewStateRef.current.zoom;
     const handleR = 0.015 / zoom;
@@ -799,14 +485,8 @@ export const UVCanvasView = observer(() => {
         return;
       }
 
-      const selectedBounds = getLivePieceBounds().filter(b => activeIds.includes(b.id));
-      let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-      selectedBounds.forEach(b => {
-        if (b.minU < gMinU) gMinU = b.minU;
-        if (b.maxU > gMaxU) gMaxU = b.maxU;
-        if (b.minV < gMinV) gMinV = b.minV;
-        if (b.maxV > gMaxV) gMaxV = b.maxV;
-      });
+      const groupBounds = uvOrganizerStore.getGroupUVBounds(activeIds);
+      if (!groupBounds) return;
 
       uvOrganizerStore.pushHistorySnapshot("Scale UV Island");
       dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
@@ -815,9 +495,9 @@ export const UVCanvasView = observer(() => {
         pieceIds: movableIds,
         startMouseX: e.clientX,
         startMouseY: e.clientY,
-        origBounds: { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV },
-        centerU: (gMinU + gMaxU) * 0.5,
-        centerV: (gMinV + gMaxV) * 0.5
+        origBounds: { minU: groupBounds.minU, maxU: groupBounds.maxU, minV: groupBounds.minV, maxV: groupBounds.maxV },
+        centerU: groupBounds.centerU,
+        centerV: groupBounds.centerV
       });
       return;
     }
@@ -843,20 +523,13 @@ export const UVCanvasView = observer(() => {
         ? [...modelStore.selectedPieceIds]
         : [hitId];
 
-      const selectedBounds = getLivePieceBounds().filter(b => activeIds.includes(b.id));
-      let gMinU = Infinity, gMaxU = -Infinity, gMinV = Infinity, gMaxV = -Infinity;
-      selectedBounds.forEach(b => {
-        if (b.minU < gMinU) gMinU = b.minU;
-        if (b.maxU > gMaxU) gMaxU = b.maxU;
-        if (b.minV < gMinV) gMinV = b.minV;
-        if (b.maxV > gMaxV) gMaxV = b.maxV;
-      });
-
-      // Check if all active pieces are pinned; if so, do not drag
       const movableIds = activeIds.filter(id => !uvOrganizerStore.isPiecePinned(id));
       if (movableIds.length === 0) {
         return;
       }
+
+      const groupBounds = uvOrganizerStore.getGroupUVBounds(activeIds);
+      if (!groupBounds) return;
 
       uvOrganizerStore.pushHistorySnapshot("Scale UV Island");
       dragDeltaRef.current = { u: 0, v: 0, scaleX: 1, scaleY: 1 };
@@ -865,9 +538,9 @@ export const UVCanvasView = observer(() => {
         pieceIds: movableIds,
         startMouseX: e.clientX,
         startMouseY: e.clientY,
-        origBounds: { minU: gMinU, maxU: gMaxU, minV: gMinV, maxV: gMaxV },
-        centerU: (gMinU + gMaxU) * 0.5,
-        centerV: (gMinV + gMaxV) * 0.5
+        origBounds: { minU: groupBounds.minU, maxU: groupBounds.maxU, minV: groupBounds.minV, maxV: groupBounds.maxV },
+        centerU: groupBounds.centerU,
+        centerV: groupBounds.centerV
       });
     } else {
       // Empty space pointerdown: initiate Marquee Box Selection
@@ -934,93 +607,17 @@ export const UVCanvasView = observer(() => {
       let currentDeltaV = -(((e.clientY - transformState.startMouseY) / container.clientHeight) * spanV);
 
       if (transformState.mode === "translate") {
-        // Magnetic UV Snapping: Island-to-Island boundary snapping + Grid line snapping
-        if (uvOrganizerStore.snappingEnabled) {
-          const snapThreshold = 0.015;
-
-          const testMinU = transformState.origBounds.minU + currentDeltaU;
-          const testMaxU = transformState.origBounds.maxU + currentDeltaU;
-          const testCenterU = transformState.centerU + currentDeltaU;
-
-          const testMinV = transformState.origBounds.minV + currentDeltaV;
-          const testMaxV = transformState.origBounds.maxV + currentDeltaV;
-          const testCenterV = transformState.centerV + currentDeltaV;
-
-          // 1. Gather all idle pieces (any piece not currently moving) with live accurate bounds
-          const idleBounds = getLivePieceBounds().filter(b => !transformState.pieceIds.includes(b.id));
-
-          let snappedU = false;
-          let minSnapDistU = snapThreshold;
-          let snapAdjustU = 0;
-
-          // Compare active boundaries against idle neighbor boundaries
-          for (const idle of idleBounds) {
-            const idleTargetsU = [idle.minU, idle.maxU, (idle.minU + idle.maxU) * 0.5];
-            const activeTargetsU = [testMinU, testMaxU, testCenterU];
-
-            for (const act of activeTargetsU) {
-              for (const tgt of idleTargetsU) {
-                const dist = Math.abs(act - tgt);
-                if (dist < minSnapDistU) {
-                  minSnapDistU = dist;
-                  snapAdjustU = tgt - act;
-                  snappedU = true;
-                }
-              }
-            }
-          }
-
-          if (snappedU) {
-            currentDeltaU += snapAdjustU;
-          } else {
-            // Fallback to standard 0.05 / 0.10 UV grid lines
-            const snapStep = 0.05;
-            const candidatesU = [testMinU, testCenterU, testMaxU];
-            for (const cand of candidatesU) {
-              const nearest = Math.round(cand / snapStep) * snapStep;
-              if (Math.abs(cand - nearest) < snapThreshold) {
-                currentDeltaU += (nearest - cand);
-                break;
-              }
-            }
-          }
-
-          let snappedV = false;
-          let minSnapDistV = snapThreshold;
-          let snapAdjustV = 0;
-
-          // Compare active boundaries against idle neighbor boundaries along V
-          for (const idle of idleBounds) {
-            const idleTargetsV = [idle.minV, idle.maxV, (idle.minV + idle.maxV) * 0.5];
-            const activeTargetsV = [testMinV, testMaxV, testCenterV];
-
-            for (const act of activeTargetsV) {
-              for (const tgt of idleTargetsV) {
-                const dist = Math.abs(act - tgt);
-                if (dist < minSnapDistV) {
-                  minSnapDistV = dist;
-                  snapAdjustV = tgt - act;
-                  snappedV = true;
-                }
-              }
-            }
-          }
-
-          if (snappedV) {
-            currentDeltaV += snapAdjustV;
-          } else {
-            // Fallback to standard 0.05 / 0.10 UV grid lines
-            const snapStep = 0.05;
-            const candidatesV = [testMinV, testCenterV, testMaxV];
-            for (const cand of candidatesV) {
-              const nearest = Math.round(cand / snapStep) * snapStep;
-              if (Math.abs(cand - nearest) < snapThreshold) {
-                currentDeltaV += (nearest - cand);
-                break;
-              }
-            }
-          }
-        }
+        // Delegate magnetic snapping math directly to @trikomi/core/studio
+        const snapResult = uvOrganizerStore.calculateMagneticSnap(
+          transformState.pieceIds,
+          currentDeltaU,
+          currentDeltaV,
+          transformState.origBounds,
+          transformState.centerU,
+          transformState.centerV
+        );
+        currentDeltaU = snapResult.deltaU;
+        currentDeltaV = snapResult.deltaV;
 
         dragDeltaRef.current.u = currentDeltaU;
         dragDeltaRef.current.v = currentDeltaV;

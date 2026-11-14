@@ -20,37 +20,18 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
   const selectedMesh = modelStore.selectedPiece?.mesh || selectedNode?.nativeObject;
 
   const getTransformVal = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z"): string => {
-    // Establish reactive dependency on transformVersion so panel updates live during gizmo interactions & undo/redo
-    void modelStore.transformVersion;
-    if (!selectedNode && !selectedMesh) return type === "scl" ? "1.00" : "0.00";
-    const target = selectedNode || selectedMesh;
-    if (type === "pos") return target.position[axis].toFixed(2);
-    if (type === "rot") return (target.rotation[axis] * (180 / Math.PI)).toFixed(1);
-    if (type === "scl") return target.scale[axis].toFixed(2);
-    return "0.00";
+    return modelStore.getSelectedTransformVal(type, axis);
   };
 
   const handleTransformChange = (type: "pos" | "rot" | "scl", axis: "x" | "y" | "z", valStr: string) => {
-    const num = parseFloat(valStr);
-    if (isNaN(num)) return;
-    const target = selectedNode || selectedMesh;
-    if (!target) return;
     uvOrganizerStore.pushHistorySnapshot("Transform Mesh");
-    if (type === "pos") target.position[axis] = num;
-    else if (type === "rot") target.rotation[axis] = num * (Math.PI / 180);
-    else if (type === "scl") target.scale[axis] = num;
-
-    modelStore.updateTransformGizmo?.();
+    modelStore.setSelectedTransformVal(type, axis, valStr);
   };
 
   const resetTransform = () => {
-    const target = selectedNode || selectedMesh;
-    if (target) {
-      uvOrganizerStore.pushHistorySnapshot("Reset Transform");
-      target.position.set(0, 0, 0);
-      target.rotation.set(0, 0, 0);
-      target.scale.set(1, 1, 1);
-      modelStore.updateTransformGizmo?.();
+    uvOrganizerStore.pushHistorySnapshot("Reset Transform");
+    const wasReset = modelStore.resetSelectedTransform();
+    if (wasReset) {
       onShowToast?.(`Transform reset on ${modelStore.selectedPiece?.name || 'piece'}`);
     } else {
       modelStore.resetCamera?.();

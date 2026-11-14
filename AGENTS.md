@@ -69,3 +69,9 @@
 - Obtain exact start and end line boundaries of the target function before any file read or edit.
 - Read only the target function's full line range once, perform minimal atomic edits, and verify directly.
 
+### 13. Studio Pure UI Skin Rule (Zero Business & Domain Math Logic):
+- `trikomi-studio` is strictly a presentation shell.
+- ALL domain logic, math calculations, bounding queries, coordinate transformations, and magnetic snapping algorithms belong exclusively in `@trikomi/core/studio` (`packages/core/src/studio/`).
+- React components must only bind to MobX stores and delegate user interaction events. No raw math or geometry processing in components.
+
+

@@ -87,39 +87,7 @@ export const UVZoneEditorModal = observer(() => {
     const deltaU = (e.clientX - startX) / rectW;
     const deltaV = -((e.clientY - startY) / rectH);
 
-    const minSize = 0.04;
-    let newMinU: number = origMinU;
-    let newMaxU: number = origMaxU;
-    let newMinV: number = origMinV;
-    let newMaxV: number = origMaxV;
-
-    if (mode === "move") {
-      const w = origMaxU - origMinU;
-      const h = origMaxV - origMinV;
-      newMinU = Math.max(0, Math.min(1 - w, origMinU + deltaU));
-      newMaxU = newMinU + w;
-      newMinV = Math.max(0, Math.min(1 - h, origMinV + deltaV));
-      newMaxV = newMinV + h;
-    } else if (mode === "se") {
-      newMaxU = Math.max(origMinU + minSize, Math.min(1, origMaxU + deltaU));
-      newMinV = Math.max(0, Math.min(origMaxV - minSize, origMinV + deltaV));
-    } else if (mode === "nw") {
-      newMinU = Math.max(0, Math.min(origMaxU - minSize, origMinU + deltaU));
-      newMaxV = Math.max(origMinV + minSize, Math.min(1, origMaxV + deltaV));
-    } else if (mode === "ne") {
-      newMaxU = Math.max(origMinU + minSize, Math.min(1, origMaxU + deltaU));
-      newMaxV = Math.max(origMinV + minSize, Math.min(1, origMaxV + deltaV));
-    } else if (mode === "sw") {
-      newMinU = Math.max(0, Math.min(origMaxU - minSize, origMinU + deltaU));
-      newMinV = Math.max(0, Math.min(origMaxV - minSize, origMinV + deltaV));
-    }
-
-    uvOrganizerStore.updateZoneBounds(zoneId, {
-      uMin: parseFloat(newMinU.toFixed(3)),
-      uMax: parseFloat(newMaxU.toFixed(3)),
-      vMin: parseFloat(newMinV.toFixed(3)),
-      vMax: parseFloat(newMaxV.toFixed(3))
-    });
+    uvOrganizerStore.resizeZoneByDelta(zoneId, mode, origMinU, origMaxU, origMinV, origMaxV, deltaU, deltaV);
   };
 
   const handlePointerUp = () => {
