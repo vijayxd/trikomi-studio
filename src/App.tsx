@@ -160,67 +160,78 @@ export const App = observer(() => {
       />
 
       {/* 2. MAIN WORKSPACE CONTAINER */}
-      {studioMode === "material" ? (
-        <main className="studio-main-workspace" style={{ padding: 0 }}>
-          <StudioMaterialLibraryView />
-        </main>
-      ) : (
-        <main className="studio-main-workspace">
-          {/* Upper Workspace */}
-          <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""} ${isUVMaximized ? "maximized-uv" : ""} ${!isBottomDockVisible ? "bottom-collapsed" : ""}`}>
-            {/* 2A & 2B. Far-Left Tool Strip + Scene Explorer & Transform */}
-            {!isViewportMaximized && !isUVMaximized && (
-              <StudioLeftPanel
-                collapsed={!isLeftPanelVisible}
-                onToggleCollapse={() => {
-                  setIsLeftPanelVisible(false);
-                  triggerToast("Scene Explorer collapsed");
-                  setTimeout(() => modelStore.onResize?.(), 40);
-                }}
-                onShowToast={triggerToast}
-              />
-            )}
+      {/* 2A. Material Studio View (Kept mounted, toggled via display for zero-delay persistence) */}
+      <main
+        className="studio-main-workspace"
+        style={{
+          padding: 0,
+          display: studioMode === "material" ? "flex" : "none"
+        }}
+      >
+        <StudioMaterialLibraryView />
+      </main>
 
-            {/* 2C. Center Panel: Interactive 3D Viewport */}
-            {!isUVMaximized && (
-              <StudioCenterViewport
-                isMaximized={isViewportMaximized}
-                onToggleMaximize={handleToggleMaximize}
-                onShowToast={triggerToast}
-              />
-            )}
-
-            {/* 2D. Right Panel: UV Editor & Operations */}
-            {!isViewportMaximized && (
-              <StudioRightPanel
-                collapsed={!isUVPanelVisible}
-                onToggleCollapse={() => {
-                  setIsUVPanelVisible(false);
-                  triggerToast("UV Editor collapsed");
-                  setTimeout(() => modelStore.onResize?.(), 40);
-                }}
-                isMaximized={isUVMaximized}
-                onToggleMaximize={handleToggleUVMaximize}
-                onShowToast={triggerToast}
-              />
-            )}
-          </section>
-
-          {/* Lower Workspace (34.5% Height) */}
+      {/* 2B. UV / Model Studio Workspace (Preserved across tab switches so 3D model & UV viewport are never lost) */}
+      <main
+        className="studio-main-workspace"
+        style={{
+          display: studioMode !== "material" ? "flex" : "none"
+        }}
+      >
+        {/* Upper Workspace */}
+        <section className={`upper-workspace-section ${isViewportMaximized ? "maximized-3d" : ""} ${isUVMaximized ? "maximized-uv" : ""} ${!isBottomDockVisible ? "bottom-collapsed" : ""}`}>
+          {/* 2A & 2B. Far-Left Tool Strip + Scene Explorer & Transform */}
           {!isViewportMaximized && !isUVMaximized && (
-            <StudioBottomDock
-              collapsed={!isBottomDockVisible}
+            <StudioLeftPanel
+              collapsed={!isLeftPanelVisible}
               onToggleCollapse={() => {
-                setIsBottomDockVisible(false);
-                triggerToast("Bottom Dock collapsed");
+                setIsLeftPanelVisible(false);
+                triggerToast("Scene Explorer collapsed");
                 setTimeout(() => modelStore.onResize?.(), 40);
               }}
-              onExportGLB={() => modelStore.exportGLB()}
               onShowToast={triggerToast}
             />
           )}
-        </main>
-      )}
+
+          {/* 2C. Center Panel: Interactive 3D Viewport */}
+          {!isUVMaximized && (
+            <StudioCenterViewport
+              isMaximized={isViewportMaximized}
+              onToggleMaximize={handleToggleMaximize}
+              onShowToast={triggerToast}
+            />
+          )}
+
+          {/* 2D. Right Panel: UV Editor & Operations */}
+          {!isViewportMaximized && (
+            <StudioRightPanel
+              collapsed={!isUVPanelVisible}
+              onToggleCollapse={() => {
+                setIsUVPanelVisible(false);
+                triggerToast("UV Editor collapsed");
+                setTimeout(() => modelStore.onResize?.(), 40);
+              }}
+              isMaximized={isUVMaximized}
+              onToggleMaximize={handleToggleUVMaximize}
+              onShowToast={triggerToast}
+            />
+          )}
+        </section>
+
+        {/* Lower Workspace (34.5% Height) */}
+        {!isViewportMaximized && !isUVMaximized && (
+          <StudioBottomDock
+            collapsed={!isBottomDockVisible}
+            onToggleCollapse={() => {
+              setIsBottomDockVisible(false);
+              triggerToast("Bottom Dock collapsed");
+              setTimeout(() => modelStore.onResize?.(), 40);
+            }}
+            onExportGLB={() => modelStore.exportGLB()}
+            onShowToast={triggerToast}
+          />
+        )}
+      </main>
 
       {/* Canonical UV Blueprint Designer Modal */}
       {uvOrganizerStore.showZoneEditorModal && <UVZoneEditorModal />}
