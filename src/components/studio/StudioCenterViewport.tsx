@@ -147,9 +147,21 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
           </strong>
           {" "}• Drag to orbit, scroll to zoom
         </span>
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", color: "#64748b" }}>
-          60 FPS
-        </span>
+        <button
+          onClick={() => {
+            modelStore.toggleWireframe();
+            onShowToast?.(modelStore.wireframeMode ? "Wireframe mode enabled" : "Wireframe mode disabled");
+          }}
+          className={`viewport-wireframe-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
+          title="Toggle 3D Wireframe Topology"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+          <span>Wireframe</span>
+        </button>
       </div>
     </section>
   );
