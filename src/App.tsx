@@ -126,8 +126,87 @@ export const App = observer(() => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const [isDraggingFile, setIsDraggingFile] = useState(false);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isDraggingFile) setIsDraggingFile(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+  };
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+
+    const files = Array.from(e.dataTransfer.files);
+    const targetFile = files.find(f => {
+      const ext = f.name.split(".").pop()?.toLowerCase();
+      return ext === "t3d" || ext === "glb" || ext === "gltf" || ext === "obj";
+    });
+
+    if (targetFile) {
+      try {
+        triggerToast(`Importing dropped asset: ${targetFile.name}...`);
+        await modelStore.loadLocalFile(targetFile, uvOrganizerStore);
+        triggerToast(`Loaded ${targetFile.name} successfully!`);
+      } catch (err: any) {
+        console.error("[Drop] Error loading dropped file:", err);
+        triggerToast(`Error: ${err?.message || "Failed to load file"}`);
+      }
+    } else if (files.length > 0) {
+      triggerToast("Unsupported format. Please drop .t3d, .glb, or .obj files.");
+    }
+  };
+
   return (
-    <div className="studio-shell">
+    <div
+      className="studio-shell"
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      style={{ position: "relative" }}
+    >
+      {/* Drag & Drop Visual Overlay */}
+      {isDraggingFile && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(6, 182, 212, 0.25)",
+            backdropFilter: "blur(6px)",
+            border: "2px dashed #00e5ff",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+            color: "#f8fafc",
+            pointerEvents: "none"
+          }}
+        >
+          <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "rgba(0, 229, 255, 0.2)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #00e5ff" }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+          </div>
+          <span style={{ fontSize: "16px", fontWeight: "700", letterSpacing: "0.05em" }}>
+            Drop 3D Garment File Here
+          </span>
+          <span style={{ fontSize: "12px", color: "#94a3b8" }}>
+            Supports .t3d, .glb, .gltf, and .obj formats
+          </span>
+        </div>
+      )}
       {/* 1. TOP NAVIGATION BAR */}
       <StudioTopBar
         currentMode={studioMode}

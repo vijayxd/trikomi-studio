@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 
@@ -15,6 +15,22 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
 }) => {
   const [searchFilter, setSearchFilter] = useState("");
   const [isTreeCollapsed, setIsTreeCollapsed] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      onShowToast?.(`Importing local asset: ${file.name}...`);
+      await modelStore.loadLocalFile(file, uvOrganizerStore);
+      onShowToast?.(`Loaded ${file.name} successfully!`);
+    } catch (err: any) {
+      console.error("[Upload] Error loading file:", err);
+      onShowToast?.(`Error: ${err?.message || "Failed to load file"}`);
+    } finally {
+      if (e.target) e.target.value = "";
+    }
+  };
 
   const activeTool = modelStore.activeTool;
   // Use reactive TrikomiMeshNode directly as the state entity
@@ -155,6 +171,29 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
             <circle cx="12" cy="12" r="3" />
             <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+          </svg>
+        </button>
+
+        <div style={{ width: "18px", height: "1px", background: "rgba(255, 255, 255, 0.1)", margin: "4px 0" }} />
+
+        {/* Local 3D File Upload Button (Standalone Asset Manager) */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          accept=".t3d,.glb,.gltf,.obj"
+          onChange={handleFileUpload}
+        />
+        <button
+          className="tool-btn"
+          onClick={() => fileInputRef.current?.click()}
+          title="Import Local 3D Asset (.t3d, .glb, .obj)"
+          style={{ color: "#38bdf8" }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
           </svg>
         </button>
       </aside>

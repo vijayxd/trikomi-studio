@@ -34,6 +34,28 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
   onToggleBottomDock
 }) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [exportFormat, setExportFormat] = useState<"t3d" | "glb">("t3d");
+  const [includeTextures, setIncludeTextures] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExecuteExport = async () => {
+    setIsExporting(true);
+    try {
+      onShowToast?.(`Exporting ${exportFormat.toUpperCase()} (${includeTextures ? "With Textures" : "Pure Mesh"})...`);
+      await modelStore.exportAsset({
+        format: exportFormat,
+        includeTextures: includeTextures
+      });
+      onShowToast?.(`Export complete: ${modelStore.modelMeta.title || "Garment"}.${exportFormat}`);
+      setShowExportModal(false);
+    } catch (err: any) {
+      console.error("[Export] Failed:", err);
+      onShowToast?.(`Export failed: ${err?.message || "Unknown error"}`);
+    } finally {
+      setIsExporting(false);
+    }
+  };
   return (
     <header className="studio-header">
       {/* Left Logo + Studio Tabs */}
@@ -206,13 +228,11 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
 
         <div className="divider-vertical" />
 
-        {/* Export Button */}
+        {/* Export Button - Opens granular Export Modal */}
         <button
           className="btn-export-gradient"
-          onClick={() => {
-            onExportGLB();
-            onShowToast?.("Exporting Garment Asset...");
-          }}
+          onClick={() => setShowExportModal(true)}
+          title="Export Asset Options (.t3d / .glb)"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -300,6 +320,192 @@ export const StudioTopBar: React.FC<StudioTopBarProps> = observer(({
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>F</kbd> <span>Focus</span></div>
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>Ctrl+Z</kbd> <span>Undo</span></div>
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}><kbd style={{ background: "#1e293b", padding: "2px 5px", borderRadius: "3px", color: "#38bdf8" }}>Ctrl+Shift+Z</kbd> <span>Redo</span></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Export Asset Modal */}
+      {showExportModal && (
+        <div className="studio-modal-backdrop" onClick={() => setShowExportModal(false)}>
+          <div
+            className="studio-modal-card"
+            style={{ maxWidth: "480px", maxHeight: "auto", height: "auto" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="studio-modal-header">
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00e5ff" }} />
+                <span style={{ fontSize: "13px", fontWeight: "600", color: "#f8fafc" }}>
+                  Export 3D Garment Asset
+                </span>
+              </div>
+              <button
+                className="tool-btn tool-btn-sm"
+                onClick={() => setShowExportModal(false)}
+                title="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: "16px" }}>
+              {/* Active Model Info */}
+              <div style={{ background: "#060911", padding: "10px 12px", borderRadius: "6px", border: "1px solid #162032" }}>
+                <div style={{ fontSize: "11px", fontWeight: "600", color: "#38bdf8", marginBottom: "4px" }}>
+                  {modelStore.modelMeta.title || "Garment Asset"}
+                </div>
+                <div style={{ display: "flex", gap: "16px", fontSize: "10px", color: "#94a3b8" }}>
+                  <span>Triangles: {(modelStore.modelMeta.triangles || 0).toLocaleString()}</span>
+                  <span>Panels: {modelStore.pieces.length}</span>
+                  <span>Decimation: {Math.round((1 - (modelStore.decimationRatio || 1)) * 100)}%</span>
+                </div>
+              </div>
+
+              {/* Format Selection */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <label style={{ fontSize: "11px", fontWeight: "600", color: "#cbd5e1" }}>
+                  Export Format
+                </label>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+                  <div
+                    onClick={() => setExportFormat("t3d")}
+                    style={{
+                      padding: "10px 12px",
+                      borderRadius: "8px",
+                      border: exportFormat === "t3d" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      background: exportFormat === "t3d" ? "rgba(6, 182, 212, 0.12)" : "#0c1220",
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "3px"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "12px", fontWeight: "700", color: exportFormat === "t3d" ? "#38bdf8" : "#f1f5f9" }}>
+                        .t3d Format
+                      </span>
+                      <span style={{ fontSize: "9px", background: "#0369a1", color: "#ffffff", padding: "1px 5px", borderRadius: "3px" }}>
+                        Trikomi Binary
+                      </span>
+                    </div>
+                    <span style={{ fontSize: "9.5px", color: "#64748b" }}>
+                      Encrypted hardware stream, 16-bit quantization, protected against ripping.
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => setExportFormat("glb")}
+                    style={{
+                      padding: "10px 12px",
+                      borderRadius: "8px",
+                      border: exportFormat === "glb" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      background: exportFormat === "glb" ? "rgba(6, 182, 212, 0.12)" : "#0c1220",
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "3px"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "12px", fontWeight: "700", color: exportFormat === "glb" ? "#38bdf8" : "#f1f5f9" }}>
+                        .glb Format
+                      </span>
+                      <span style={{ fontSize: "9px", background: "#334155", color: "#ffffff", padding: "1px 5px", borderRadius: "3px" }}>
+                        Standard 3D
+                      </span>
+                    </div>
+                    <span style={{ fontSize: "9.5px", color: "#64748b" }}>
+                      Universal binary glTF, compatible with Blender, three.js, and web configurators.
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Texture Inclusion Toggle */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <label style={{ fontSize: "11px", fontWeight: "600", color: "#cbd5e1" }}>
+                  Texture Packaging
+                </label>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      padding: "10px 12px",
+                      borderRadius: "8px",
+                      border: !includeTextures ? "1px solid rgba(16, 185, 129, 0.4)" : "1px solid #1e293b",
+                      background: !includeTextures ? "rgba(16, 185, 129, 0.08)" : "#0c1220",
+                      cursor: "pointer"
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="texOption"
+                      checked={!includeTextures}
+                      onChange={() => setIncludeTextures(false)}
+                      style={{ marginTop: "2px" }}
+                    />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                      <span style={{ fontSize: "11px", fontWeight: "600", color: !includeTextures ? "#34d399" : "#cbd5e1" }}>
+                        Pure Mesh Only (0 Textures — Recommended)
+                      </span>
+                      <span style={{ fontSize: "9.5px", color: "#64748b" }}>
+                        Strips all heavy image bytes. Retains pure topology, UV channels, and clean PBR solid colors. Reusable fabric swatches remain in the shared library.
+                      </span>
+                    </div>
+                  </label>
+
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      padding: "10px 12px",
+                      borderRadius: "8px",
+                      border: includeTextures ? "1px solid rgba(56, 189, 248, 0.4)" : "1px solid #1e293b",
+                      background: includeTextures ? "rgba(56, 189, 248, 0.08)" : "#0c1220",
+                      cursor: "pointer"
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="texOption"
+                      checked={includeTextures}
+                      onChange={() => setIncludeTextures(true)}
+                      style={{ marginTop: "2px" }}
+                    />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                      <span style={{ fontSize: "11px", fontWeight: "600", color: includeTextures ? "#38bdf8" : "#cbd5e1" }}>
+                        Include Embedded / Referenced Textures
+                      </span>
+                      <span style={{ fontSize: "9.5px", color: "#64748b" }}>
+                        Bakes active diffuse and normal maps directly into the asset container. Use when garment has unique print artwork.
+                      </span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px", marginTop: "8px" }}>
+                <button
+                  className="studio-btn-secondary"
+                  onClick={() => setShowExportModal(false)}
+                  disabled={isExporting}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="studio-btn-primary"
+                  onClick={handleExecuteExport}
+                  disabled={isExporting}
+                  style={{ minWidth: "120px" }}
+                >
+                  {isExporting ? "Exporting..." : `Download .${exportFormat}`}
+                </button>
+              </div>
             </div>
           </div>
         </div>
