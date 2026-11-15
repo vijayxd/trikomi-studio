@@ -371,7 +371,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             </div>
 
             {/* Curated Fabric Material Cards Row */}
-            <div style={{ display: "flex", alignItems: "stretch", justifyContent: "flex-start", gap: "8px", overflowX: "auto", paddingBottom: "2px" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", gap: "8px", overflowX: "auto", paddingBottom: "4px" }}>
               {filteredCuratedMaterials.map((m: any) => {
                 const isActive = modelStore.selectedMaterialId === m.id;
                 const thumb = m.sphereThumbnailUrl || m.thumbnailUrl;
@@ -381,7 +381,6 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                     className={`mat-card ${isActive ? "active" : ""}`}
                     onClick={() => handleApplyCuratedMat(m)}
                     title={`${m.name} (${m.category})`}
-                    style={{ minWidth: "90px", display: "flex", flexDirection: "column", alignItems: "center", padding: "6px 8px", flexShrink: 0 }}
                   >
                     {thumb ? (
                       <img
