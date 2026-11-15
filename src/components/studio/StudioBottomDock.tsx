@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore } from "@trikomi/core/studio";
+import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
 
 interface StudioBottomDockProps {
   collapsed?: boolean;
@@ -19,11 +19,26 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const [matSearch, setMatSearch] = useState<string>("");
   const [onlyActiveMaps, setOnlyActiveMaps] = useState<boolean>(false);
   const [decimateVal, setDecimateVal] = useState<number>(72);
+  const [decimateScope, setDecimateScope] = useState<"all" | "selected">("all");
   const [isMaterialCollapsed, setIsMaterialCollapsed] = useState<boolean>(false);
   const [isDecimateCollapsed, setIsDecimateCollapsed] = useState<boolean>(false);
 
+  // Decimation target piece resolution
+  const activeSelectedIds = modelStore.selectedPieceIds.length > 0
+    ? modelStore.selectedPieceIds
+    : (modelStore.selectedPiece ? [modelStore.selectedPiece.id] : []);
+  const hasSelectedPiece = activeSelectedIds.length > 0;
+  const isSelectedScope = decimateScope === "selected" && hasSelectedPiece;
+
+  const targetPieces = isSelectedScope
+    ? modelStore.pieces.filter(p => activeSelectedIds.includes(p.id))
+    : modelStore.pieces;
+
   // Decimation live stats calculation
-  const baseTriangles = modelStore.modelMeta.triangles || 842730;
+  const baseTriangles = (targetPieces.length > 0
+    ? targetPieces.reduce((sum, p) => sum + (p.originalTriangles || p.triangles), 0)
+    : modelStore.modelMeta.triangles) || 842730;
+
   const remainingRatio = (100 - decimateVal) / 100;
   const liveTriangles = Math.round(baseTriangles * remainingRatio);
   const liveVertices = Math.round(liveTriangles / 2);
@@ -453,6 +468,38 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
               </button>
             </div>
 
+            {/* Scope Selector: Overall vs Selected Piece */}
+            <div style={{ display: "flex", gap: "4px", background: "#0a0e17", padding: "2px", borderRadius: "6px", border: "1px solid #1e293b", marginTop: "6px" }}>
+              <button
+                className={`mat-cat-btn ${decimateScope === "all" ? "active" : ""}`}
+                style={{ flex: 1, borderRadius: "4px", padding: "2px 8px", fontSize: "10.5px", textAlign: "center" }}
+                onClick={() => setDecimateScope("all")}
+              >
+                Overall
+              </button>
+              <button
+                className={`mat-cat-btn ${decimateScope === "selected" ? "active" : ""}`}
+                style={{
+                  flex: 1,
+                  borderRadius: "4px",
+                  padding: "2px 8px",
+                  fontSize: "10.5px",
+                  textAlign: "center",
+                  opacity: hasSelectedPiece ? 1 : 0.5
+                }}
+                onClick={() => {
+                  if (hasSelectedPiece) {
+                    setDecimateScope("selected");
+                  } else {
+                    onShowToast?.("Select a garment piece first");
+                  }
+                }}
+                title={hasSelectedPiece ? `Target: ${modelStore.selectedPiece?.name || "Selected piece"}` : "Select a piece in 3D viewport or explorer first"}
+              >
+                {hasSelectedPiece ? `Selected (${activeSelectedIds.length})` : "Selected Piece"}
+              </button>
+            </div>
+
             {/* 2-Column Body */}
             <div className="stats-2col-layout">
               {/* Left Stats Column */}
@@ -518,8 +565,14 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                     className="btn-decimation-apply"
                     style={{ flex: 1 }}
                     onClick={() => {
-                      modelStore.decimateModel?.(decimateVal / 100);
-                      onShowToast?.(`Mesh decimation (${decimateVal}% reduction) applied`);
+                      const remainingRatio = Math.max(0.05, Math.min(1.0, (100 - decimateVal) / 100));
+                      const targetIds = isSelectedScope ? activeSelectedIds : undefined;
+                      modelStore.decimateModel?.(remainingRatio, uvOrganizerStore, targetIds);
+                      onShowToast?.(
+                        isSelectedScope
+                          ? `Decimated selected piece (${decimateVal}% reduction)`
+                          : `Overall mesh decimation (${decimateVal}% reduction) applied`
+                      );
                     }}
                   >
                     Apply
@@ -530,8 +583,13 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                     title="Revert to Original Geometry"
                     onClick={() => {
                       setDecimateVal(0);
-                      modelStore.revertDecimation?.();
-                      onShowToast?.("Reverted to 100% original geometry");
+                      const targetIds = isSelectedScope ? activeSelectedIds : undefined;
+                      modelStore.revertDecimation?.(uvOrganizerStore, targetIds);
+                      onShowToast?.(
+                        isSelectedScope
+                          ? "Reverted selected piece to original geometry"
+                          : "Reverted overall model to 100% original geometry"
+                      );
                     }}
                   >
                     Reset
