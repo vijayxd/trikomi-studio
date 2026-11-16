@@ -147,21 +147,39 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
           </strong>
           {" "}• Drag to orbit, scroll to zoom
         </span>
-        <button
-          onClick={() => {
-            modelStore.toggleWireframe();
-            onShowToast?.(modelStore.wireframeMode ? "Wireframe mode enabled" : "Wireframe mode disabled");
-          }}
-          className={`viewport-wireframe-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
-          title="Toggle 3D Wireframe Topology"
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-            <path d="M2 17l10 5 10-5" />
-            <path d="M2 12l10 5 10-5" />
-          </svg>
-          <span>Wireframe</span>
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <button
+            onClick={() => {
+              modelStore.toggleWireframe();
+              onShowToast?.(modelStore.wireframeMode ? "Wireframe enabled" : "Wireframe disabled");
+            }}
+            className={`viewport-wireframe-toggle-btn ${modelStore.wireframeMode ? "active" : ""}`}
+            title="Toggle Wireframe Topology (W)"
+            style={{ padding: "4px 6px" }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+          </button>
+
+          <button
+            onClick={() => {
+              modelStore.toggleDoubleShading();
+              onShowToast?.(modelStore.doubleShadingMode ? "Double shading enabled" : "Double shading disabled");
+            }}
+            className={`viewport-wireframe-toggle-btn ${modelStore.doubleShadingMode ? "active" : ""}`}
+            title="Toggle Two-Sided Shading (DoubleSide)"
+            style={{ padding: "4px 6px" }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 3v18" />
+              <path d="M3 9l9-6 9 6" />
+              <path d="M3 15l9 6 9-6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
