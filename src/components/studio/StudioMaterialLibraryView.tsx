@@ -21,7 +21,7 @@ import {
 export const StudioMaterialLibraryView: React.FC = observer(() => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [activeUploadChannel, setActiveUploadChannel] = useState<'diffuse' | 'normal' | 'roughness' | 'metalness' | 'alpha' | null>(null);
+  const [activeUploadChannel, setActiveUploadChannel] = useState<'diffuse' | 'normal' | 'roughness' | 'metalness' | 'alpha' | 'ao' | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -43,7 +43,7 @@ export const StudioMaterialLibraryView: React.FC = observer(() => {
     }
   };
 
-  const triggerUploadFor = (channel: 'diffuse' | 'normal' | 'roughness' | 'metalness' | 'alpha') => {
+  const triggerUploadFor = (channel: 'diffuse' | 'normal' | 'roughness' | 'metalness' | 'alpha' | 'ao') => {
     setActiveUploadChannel(channel);
     fileInputRef.current?.click();
   };
@@ -398,7 +398,36 @@ export const StudioMaterialLibraryView: React.FC = observer(() => {
               </div>
             </div>
 
-            {/* 4. Alpha / Opacity Map */}
+            {/* 4. Metalness Map */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#0a0e17", padding: "6px 8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: 0 }}>
+                {activeMat.metalnessMapUrl ? (
+                  <img src={activeMat.metalnessMapUrl} alt="metalness" style={{ width: "26px", height: "26px", borderRadius: "3px", objectFit: "cover" }} />
+                ) : (
+                  <div style={{ width: "26px", height: "26px", borderRadius: "3px", background: "#1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Sliders size={12} color="#64748b" />
+                  </div>
+                )}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: "11px", fontWeight: "600", color: "#f8fafc" }}>Metalness Map</span>
+                  <span style={{ fontSize: "8.5px", color: activeMat.metalnessMapUrl ? "#38bdf8" : "#64748b" }}>
+                    {activeMat.metalnessMapUrl ? "Grayscale Active" : "Dielectric (0.0)"}
+                  </span>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: "4px" }}>
+                <button className="studio-btn-secondary" style={{ padding: "3px 6px", fontSize: "9.5px" }} onClick={() => triggerUploadFor("metalness")}>
+                  <Upload size={11} /> {activeMat.metalnessMapUrl ? "Replace" : "Upload"}
+                </button>
+                {activeMat.metalnessMapUrl && (
+                  <button className="tool-btn tool-btn-sm" onClick={() => materialLibraryStore.removeTextureMap("metalness")} title="Clear Map">
+                    <Trash2 size={11} color="#f87171" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* 5. Alpha / Opacity Map */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#0a0e17", padding: "6px 8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: 0 }}>
                 {activeMat.alphaMapUrl ? (
@@ -421,6 +450,35 @@ export const StudioMaterialLibraryView: React.FC = observer(() => {
                 </button>
                 {activeMat.alphaMapUrl && (
                   <button className="tool-btn tool-btn-sm" onClick={() => materialLibraryStore.removeTextureMap("alpha")} title="Clear Map">
+                    <Trash2 size={11} color="#f87171" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* 6. Ambient Occlusion (AO) Map */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#0a0e17", padding: "6px 8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: 0 }}>
+                {activeMat.aoMapUrl ? (
+                  <img src={activeMat.aoMapUrl} alt="ambient occlusion" style={{ width: "26px", height: "26px", borderRadius: "3px", objectFit: "cover" }} />
+                ) : (
+                  <div style={{ width: "26px", height: "26px", borderRadius: "3px", background: "#1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <ImageIcon size={12} color="#64748b" />
+                  </div>
+                )}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: "11px", fontWeight: "600", color: "#f8fafc" }}>Ambient Occlusion (AO)</span>
+                  <span style={{ fontSize: "8.5px", color: activeMat.aoMapUrl ? "#38bdf8" : "#64748b" }}>
+                    {activeMat.aoMapUrl ? "Shadow Crevices Active" : "Empty"}
+                  </span>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: "4px" }}>
+                <button className="studio-btn-secondary" style={{ padding: "3px 6px", fontSize: "9.5px" }} onClick={() => triggerUploadFor("ao")}>
+                  <Upload size={11} /> {activeMat.aoMapUrl ? "Replace" : "Upload"}
+                </button>
+                {activeMat.aoMapUrl && (
+                  <button className="tool-btn tool-btn-sm" onClick={() => materialLibraryStore.removeTextureMap("ao")} title="Clear Map">
                     <Trash2 size={11} color="#f87171" />
                   </button>
                 )}

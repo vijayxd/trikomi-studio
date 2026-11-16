@@ -26,7 +26,8 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
 
   // Hidden upload ref for active piece texture maps
   const pieceFileInputRef = React.useRef<HTMLInputElement | null>(null);
-  const [uploadTargetChannel, setUploadTargetChannel] = useState<"diffuse" | "normal" | null>(null);
+  const [uploadTargetChannel, setUploadTargetChannel] = useState<"diffuse" | "normal" | "roughness" | "metalness" | "alpha" | "ao" | null>(null);
+  const [activeTilingChannel, setActiveTilingChannel] = useState<"diffuse" | "normal" | "roughness" | "metalness" | "alpha" | "ao">("diffuse");
 
   // Decimation target piece resolution
   const activeSelectedIds = modelStore.selectedPieceIds.length > 0
@@ -122,8 +123,22 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const activePieceMat = selectedPiece?.material as any;
   const pieceDiffuseMap = activePieceMat?.map;
   const pieceNormalMap = activePieceMat?.normalMap;
-  const pieceRepeatX = pieceNormalMap?.repeat?.x ?? pieceDiffuseMap?.repeat?.x ?? 1;
-  const pieceRepeatY = pieceNormalMap?.repeat?.y ?? pieceDiffuseMap?.repeat?.y ?? 1;
+  const pieceRoughnessMap = activePieceMat?.roughnessMap;
+  const pieceMetalnessMap = activePieceMat?.metalnessMap;
+  const pieceAlphaMap = activePieceMat?.alphaMap;
+  const pieceAoMap = activePieceMat?.aoMap;
+
+  const channelMapRecord: Record<string, any> = {
+    diffuse: pieceDiffuseMap,
+    normal: pieceNormalMap,
+    roughness: pieceRoughnessMap,
+    metalness: pieceMetalnessMap,
+    alpha: pieceAlphaMap,
+    ao: pieceAoMap
+  };
+  const activeTilingTexture = channelMapRecord[activeTilingChannel];
+  const pieceRepeatX = activeTilingTexture?.repeat?.x ?? 1;
+  const pieceRepeatY = activeTilingTexture?.repeat?.y ?? 1;
   const pieceNormalScale = activePieceMat?.normalScale?.x ?? 1.0;
 
   const handlePieceFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -417,7 +432,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       className="studio-btn-secondary"
                       style={{
                         flex: 1,
-                        padding: "5px 8px",
+                        padding: "5px 6px",
                         fontSize: "10.5px",
                         background: "rgba(14, 165, 233, 0.15)",
                         border: "1px solid rgba(14, 165, 233, 0.4)",
@@ -440,6 +455,40 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                         <path d="M21 13v2a4 4 0 0 1-4 4H3" />
                       </svg>
                       <span>Flip Normals</span>
+                    </button>
+
+                    <button
+                      className="studio-btn-secondary"
+                      style={{
+                        flex: 1,
+                        padding: "5px 6px",
+                        fontSize: "10.5px",
+                        background: (modelStore as any).isPieceDoubleSide?.(selectedPiece.id)
+                          ? "rgba(168, 85, 247, 0.2)"
+                          : "#0f172a",
+                        border: (modelStore as any).isPieceDoubleSide?.(selectedPiece.id)
+                          ? "1px solid #a855f7"
+                          : "1px solid #334155",
+                        color: (modelStore as any).isPieceDoubleSide?.(selectedPiece.id)
+                          ? "#c084fc"
+                          : "#94a3b8",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "4px"
+                      }}
+                      title="Toggle Double-Sided rendering (disables backface culling)"
+                      onClick={() => {
+                        const nowDouble = (modelStore as any).togglePieceDoubleSide?.(selectedPiece.id);
+                        onShowToast?.(`Double-side: ${nowDouble ? "ON" : "OFF"} for "${selectedPiece.name}"`);
+                      }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 3v18" />
+                        <path d="M3 9l9-6 9 6" />
+                        <path d="M3 15l9 6 9-6" />
+                      </svg>
+                      <span>Double Side</span>
                     </button>
 
                     <button
@@ -472,18 +521,34 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                 </div>
 
-                {/* Section 2: Texture Channels (Diffuse & Normal) */}
-                <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
+                {/* Section 2: Texture Channels (Diffuse, Normal, Roughness, Metallic, Alpha, AO) */}
+                <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
                   {/* Diffuse Slot */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "135px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                  <div
+                    onClick={() => setActiveTilingChannel("diffuse")}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      minWidth: "130px",
+                      background: "#0a0e17",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: activeTilingChannel === "diffuse" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      cursor: "pointer",
+                      boxShadow: activeTilingChannel === "diffuse" ? "0 0 10px rgba(0, 229, 255, 0.2)" : "none"
+                    }}
+                  >
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Diffuse Texture</span>
+                      <span style={{ fontSize: "9.5px", color: activeTilingChannel === "diffuse" ? "#00e5ff" : "#94a3b8", fontWeight: "600" }}>
+                        Diffuse {activeTilingChannel === "diffuse" ? "●" : ""}
+                      </span>
                       <span style={{ fontSize: "8.5px", color: pieceDiffuseMap ? "#10b981" : "#64748b" }}>
                         {pieceDiffuseMap ? "Loaded" : "None"}
                       </span>
                     </div>
 
-                    <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "100%", height: "46px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {pieceDiffuseMap?.image?.src ? (
                         <img
                           src={pieceDiffuseMap.image.src}
@@ -495,7 +560,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       )}
                     </div>
 
-                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }}>
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }} onClick={(e) => e.stopPropagation()}>
                       <button
                         className="studio-btn-secondary"
                         style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
@@ -523,15 +588,31 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
 
                   {/* Normal Slot */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "135px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                  <div
+                    onClick={() => setActiveTilingChannel("normal")}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      minWidth: "130px",
+                      background: "#0a0e17",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: activeTilingChannel === "normal" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      cursor: "pointer",
+                      boxShadow: activeTilingChannel === "normal" ? "0 0 10px rgba(0, 229, 255, 0.2)" : "none"
+                    }}
+                  >
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Normal Map</span>
+                      <span style={{ fontSize: "9.5px", color: activeTilingChannel === "normal" ? "#00e5ff" : "#94a3b8", fontWeight: "600" }}>
+                        Normal {activeTilingChannel === "normal" ? "●" : ""}
+                      </span>
                       <span style={{ fontSize: "8.5px", color: pieceNormalMap ? "#00e5ff" : "#64748b" }}>
                         {pieceNormalMap ? "Tangent" : "None"}
                       </span>
                     </div>
 
-                    <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: "100%", height: "46px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {pieceNormalMap?.image?.src ? (
                         <img
                           src={pieceNormalMap.image.src}
@@ -543,7 +624,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       )}
                     </div>
 
-                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }}>
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }} onClick={(e) => e.stopPropagation()}>
                       <button
                         className="studio-btn-secondary"
                         style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
@@ -569,12 +650,273 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       )}
                     </div>
                   </div>
+
+                  {/* Roughness Slot */}
+                  <div
+                    onClick={() => setActiveTilingChannel("roughness")}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      minWidth: "130px",
+                      background: "#0a0e17",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: activeTilingChannel === "roughness" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      cursor: "pointer",
+                      boxShadow: activeTilingChannel === "roughness" ? "0 0 10px rgba(0, 229, 255, 0.2)" : "none"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9.5px", color: activeTilingChannel === "roughness" ? "#00e5ff" : "#94a3b8", fontWeight: "600" }}>
+                        Roughness {activeTilingChannel === "roughness" ? "●" : ""}
+                      </span>
+                      <span style={{ fontSize: "8.5px", color: pieceRoughnessMap ? "#fbbf24" : "#64748b" }}>
+                        {pieceRoughnessMap ? "Grayscale" : "Value"}
+                      </span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "46px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {pieceRoughnessMap?.image?.src ? (
+                        <img
+                          src={pieceRoughnessMap.image.src}
+                          alt="roughness map"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "9px", color: "#64748b" }}>No Map</span>
+                      )}
+                    </div>
+
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }} onClick={(e) => e.stopPropagation()}>
+                      <button
+                        className="studio-btn-secondary"
+                        style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
+                        onClick={() => {
+                          setUploadTargetChannel("roughness");
+                          pieceFileInputRef.current?.click();
+                        }}
+                      >
+                        Upload
+                      </button>
+                      {pieceRoughnessMap && (
+                        <button
+                          className="studio-btn-secondary"
+                          style={{ padding: "3px 6px", fontSize: "9.5px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.4)", color: "#f87171" }}
+                          title="Remove roughness map"
+                          onClick={() => {
+                            modelStore.removePieceTextureMap(selectedPiece.id, "roughness");
+                            onShowToast?.("Removed roughness map");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Metalness Slot */}
+                  <div
+                    onClick={() => setActiveTilingChannel("metalness")}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      minWidth: "130px",
+                      background: "#0a0e17",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: activeTilingChannel === "metalness" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      cursor: "pointer",
+                      boxShadow: activeTilingChannel === "metalness" ? "0 0 10px rgba(0, 229, 255, 0.2)" : "none"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9.5px", color: activeTilingChannel === "metalness" ? "#00e5ff" : "#94a3b8", fontWeight: "600" }}>
+                        Metallic {activeTilingChannel === "metalness" ? "●" : ""}
+                      </span>
+                      <span style={{ fontSize: "8.5px", color: pieceMetalnessMap ? "#38bdf8" : "#64748b" }}>
+                        {pieceMetalnessMap ? "Grayscale" : "Value"}
+                      </span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "46px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {pieceMetalnessMap?.image?.src ? (
+                        <img
+                          src={pieceMetalnessMap.image.src}
+                          alt="metallic map"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "9px", color: "#64748b" }}>No Map</span>
+                      )}
+                    </div>
+
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }} onClick={(e) => e.stopPropagation()}>
+                      <button
+                        className="studio-btn-secondary"
+                        style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
+                        onClick={() => {
+                          setUploadTargetChannel("metalness");
+                          pieceFileInputRef.current?.click();
+                        }}
+                      >
+                        Upload
+                      </button>
+                      {pieceMetalnessMap && (
+                        <button
+                          className="studio-btn-secondary"
+                          style={{ padding: "3px 6px", fontSize: "9.5px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.4)", color: "#f87171" }}
+                          title="Remove metallic map"
+                          onClick={() => {
+                            modelStore.removePieceTextureMap(selectedPiece.id, "metalness");
+                            onShowToast?.("Removed metallic map");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Alpha / Opacity Slot */}
+                  <div
+                    onClick={() => setActiveTilingChannel("alpha")}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      minWidth: "130px",
+                      background: "#0a0e17",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: activeTilingChannel === "alpha" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      cursor: "pointer",
+                      boxShadow: activeTilingChannel === "alpha" ? "0 0 10px rgba(0, 229, 255, 0.2)" : "none"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9.5px", color: activeTilingChannel === "alpha" ? "#00e5ff" : "#94a3b8", fontWeight: "600" }}>
+                        Alpha {activeTilingChannel === "alpha" ? "●" : ""}
+                      </span>
+                      <span style={{ fontSize: "8.5px", color: pieceAlphaMap ? "#a855f7" : "#64748b" }}>
+                        {pieceAlphaMap ? "Mask Active" : "Opaque"}
+                      </span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "46px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {pieceAlphaMap?.image?.src ? (
+                        <img
+                          src={pieceAlphaMap.image.src}
+                          alt="alpha map"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "9px", color: "#64748b" }}>No Map</span>
+                      )}
+                    </div>
+
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }} onClick={(e) => e.stopPropagation()}>
+                      <button
+                        className="studio-btn-secondary"
+                        style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
+                        onClick={() => {
+                          setUploadTargetChannel("alpha");
+                          pieceFileInputRef.current?.click();
+                        }}
+                      >
+                        Upload
+                      </button>
+                      {pieceAlphaMap && (
+                        <button
+                          className="studio-btn-secondary"
+                          style={{ padding: "3px 6px", fontSize: "9.5px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.4)", color: "#f87171" }}
+                          title="Remove alpha map"
+                          onClick={() => {
+                            modelStore.removePieceTextureMap(selectedPiece.id, "alpha");
+                            onShowToast?.("Removed alpha map");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Ambient Occlusion (AO) Slot */}
+                  <div
+                    onClick={() => setActiveTilingChannel("ao")}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      minWidth: "130px",
+                      background: "#0a0e17",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: activeTilingChannel === "ao" ? "1.5px solid #00e5ff" : "1px solid #1e293b",
+                      cursor: "pointer",
+                      boxShadow: activeTilingChannel === "ao" ? "0 0 10px rgba(0, 229, 255, 0.2)" : "none"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9.5px", color: activeTilingChannel === "ao" ? "#00e5ff" : "#94a3b8", fontWeight: "600" }}>
+                        AO {activeTilingChannel === "ao" ? "●" : ""}
+                      </span>
+                      <span style={{ fontSize: "8.5px", color: pieceAoMap ? "#10b981" : "#64748b" }}>
+                        {pieceAoMap ? "Occlusion" : "None"}
+                      </span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "46px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {pieceAoMap?.image?.src ? (
+                        <img
+                          src={pieceAoMap.image.src}
+                          alt="ao map"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "9px", color: "#64748b" }}>No Map</span>
+                      )}
+                    </div>
+
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }} onClick={(e) => e.stopPropagation()}>
+                      <button
+                        className="studio-btn-secondary"
+                        style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
+                        onClick={() => {
+                          setUploadTargetChannel("ao");
+                          pieceFileInputRef.current?.click();
+                        }}
+                      >
+                        Upload
+                      </button>
+                      {pieceAoMap && (
+                        <button
+                          className="studio-btn-secondary"
+                          style={{ padding: "3px 6px", fontSize: "9.5px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.4)", color: "#f87171" }}
+                          title="Remove ambient occlusion map"
+                          onClick={() => {
+                            modelStore.removePieceTextureMap(selectedPiece.id, "ao");
+                            onShowToast?.("Removed AO map");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
-                {/* Section 3: UV Tilings & Normal Strength Sliders */}
+                {/* Section 3: UV Tilings (for active map) & Normal Strength Sliders */}
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "220px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b", flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Texture Tilings (UV Repeat)</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                      <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Tiling:</span>
+                      <span style={{ fontSize: "9.5px", color: "#00e5ff", fontWeight: "700", textTransform: "capitalize" }}>
+                        {activeTilingChannel} Map
+                      </span>
+                    </div>
                     <button
                       className="studio-btn-secondary"
                       style={{
@@ -603,7 +945,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value);
                         const nextY = isTileLocked ? val : pieceRepeatY;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY, activeTilingChannel);
                       }}
                       style={{ flex: 1 }}
                     />
@@ -616,7 +958,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value) || 1;
                         const nextY = isTileLocked ? val : pieceRepeatY;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY, activeTilingChannel);
                       }}
                       style={{ width: "48px", padding: "2px 4px", fontSize: "10px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "3px", textAlign: "right" }}
                     />
@@ -634,7 +976,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value);
                         const nextX = isTileLocked ? val : pieceRepeatX;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val, activeTilingChannel);
                       }}
                       style={{ flex: 1 }}
                     />
@@ -647,7 +989,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value) || 1;
                         const nextX = isTileLocked ? val : pieceRepeatX;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val, activeTilingChannel);
                       }}
                       style={{ width: "48px", padding: "2px 4px", fontSize: "10px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "3px", textAlign: "right" }}
                     />
