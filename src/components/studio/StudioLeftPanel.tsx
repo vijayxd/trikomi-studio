@@ -337,6 +337,20 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                 </div>
                 <div className="tree-row-actions">
                   <span
+                    title="Center All Pivots (Align mesh piece gizmo pivots to piece centers)"
+                    style={{ display: "inline-flex", cursor: "pointer", color: "#38bdf8" }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      modelStore.centerAllPiecePivots();
+                      onShowToast?.("Centered pivots across all mesh pieces");
+                    }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="3" />
+                      <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
+                    </svg>
+                  </span>
+                  <span
                     title="Toggle Garment Visibility"
                     style={{ display: "inline-flex", cursor: "pointer" }}
                     onClick={() => {
@@ -391,6 +405,20 @@ export const StudioLeftPanel: React.FC<StudioLeftPanelProps> = observer(({
                       </span>
                     </div>
                     <div className="tree-row-actions">
+                      <span
+                        title="Center Pivot for this mesh piece"
+                        style={{ display: "inline-flex", cursor: "pointer", color: isSelected ? "#38bdf8" : "#94a3b8" }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          modelStore.centerPiecePivot(piece.id);
+                          onShowToast?.(`Centered pivot for ${piece.name}`);
+                        }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="12" cy="12" r="3" />
+                          <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
+                        </svg>
+                      </span>
                       <svg
                         width="14"
                         height="14"

@@ -14,7 +14,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   onToggleCollapse,
   onShowToast
 }) => {
-  const [activeBottomTool, setActiveBottomTool] = useState<"materials" | "textures">("materials");
+  const [activeBottomTool, setActiveBottomTool] = useState<"materials" | "textures" | "active">("materials");
   const [activeCat, setActiveCat] = useState<string>("all");
   const [matSearch, setMatSearch] = useState<string>("");
   const [onlyActiveMaps, setOnlyActiveMaps] = useState<boolean>(false);
@@ -22,6 +22,11 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   const [decimateScope, setDecimateScope] = useState<"all" | "selected">("all");
   const [isMaterialCollapsed, setIsMaterialCollapsed] = useState<boolean>(false);
   const [isDecimateCollapsed, setIsDecimateCollapsed] = useState<boolean>(false);
+  const [isTileLocked, setIsTileLocked] = useState<boolean>(true);
+
+  // Hidden upload ref for active piece texture maps
+  const pieceFileInputRef = React.useRef<HTMLInputElement | null>(null);
+  const [uploadTargetChannel, setUploadTargetChannel] = useState<"diffuse" | "normal" | null>(null);
 
   // Decimation target piece resolution
   const activeSelectedIds = modelStore.selectedPieceIds.length > 0
@@ -51,7 +56,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
   };
 
   const renderSegmentedTabs = () => (
-    <div style={{ display: "flex", background: "#0a0e17", padding: "2px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+    <div style={{ display: "flex", background: "#0a0e17", padding: "2px", borderRadius: "6px", border: "1px solid #1e293b", gap: "2px" }}>
       <button
         className={`mat-cat-btn ${activeBottomTool === "materials" ? "active" : ""}`}
         style={{ borderRadius: "4px", padding: "3px 10px", fontSize: "11px" }}
@@ -71,6 +76,19 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
         }}
       >
         Texture Maps
+      </button>
+      <button
+        className={`mat-cat-btn ${activeBottomTool === "active" ? "active" : ""}`}
+        style={{ borderRadius: "4px", padding: "3px 10px", fontSize: "11px", position: "relative" }}
+        onClick={() => {
+          setActiveBottomTool("active");
+          onShowToast?.("Active Piece Material inspector");
+        }}
+      >
+        <span>Active Material</span>
+        {modelStore.selectedPiece && (
+          <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#00e5ff", display: "inline-block", marginLeft: "4px" }} />
+        )}
       </button>
     </div>
   );
@@ -100,8 +118,34 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
 
   if (collapsed) return null;
 
+  const selectedPiece = modelStore.selectedPiece;
+  const activePieceMat = selectedPiece?.material as any;
+  const pieceDiffuseMap = activePieceMat?.map;
+  const pieceNormalMap = activePieceMat?.normalMap;
+  const pieceRepeatX = pieceNormalMap?.repeat?.x ?? pieceDiffuseMap?.repeat?.x ?? 1;
+  const pieceRepeatY = pieceNormalMap?.repeat?.y ?? pieceDiffuseMap?.repeat?.y ?? 1;
+  const pieceNormalScale = activePieceMat?.normalScale?.x ?? 1.0;
+
+  const handlePieceFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && selectedPiece && uploadTargetChannel) {
+      const url = URL.createObjectURL(file);
+      modelStore.setPieceTextureMap(selectedPiece.id, uploadTargetChannel, url);
+      onShowToast?.(`Updated ${uploadTargetChannel} texture on "${selectedPiece.name}"`);
+      setUploadTargetChannel(null);
+    }
+  };
+
   return (
     <section className="bottom-workspace-section">
+      {/* Hidden file input for texture map uploads on active piece */}
+      <input
+        ref={pieceFileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handlePieceFileUpload}
+      />
       {/* 3B. Bottom-Center Panel: Material Library / Texture Channel Maps / Shaders */}
       <section className={`panel material-library-panel ${isMaterialCollapsed ? "collapsed" : ""}`}>
         {isMaterialCollapsed ? (
@@ -123,7 +167,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
               </svg>
             </button>
             <span className="panel-title-vertical">
-              {activeBottomTool === "textures" ? "Texture Maps" : "Material Library"}
+              {activeBottomTool === "active" ? "Active Material" : activeBottomTool === "textures" ? "Texture Maps" : "Material Library"}
             </span>
             <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#38bdf8" }} />
           </div>
@@ -314,6 +358,327 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                 </div>
               )}
             </div>
+          </div>
+        ) : activeBottomTool === "active" ? (
+          /* Active Material Inspector View */
+          <div style={{ display: "flex", flexDirection: "column", height: "100%", gap: "8px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                {renderSegmentedTabs()}
+                {selectedPiece ? (
+                  <span style={{ fontSize: "11px", color: "#38bdf8", fontWeight: 500 }}>
+                    Active Piece: {selectedPiece.name}
+                  </span>
+                ) : (
+                  <span style={{ fontSize: "11px", color: "#64748b" }}>
+                    (No piece selected — select a mesh piece in viewport or Scene Explorer)
+                  </span>
+                )}
+              </div>
+              <button
+                className="tool-btn tool-btn-sm"
+                title="Collapse Material Library"
+                onClick={() => setIsMaterialCollapsed(true)}
+              >
+                <svg className="panel-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+            </div>
+
+            {selectedPiece ? (
+              <div style={{ display: "flex", gap: "16px", overflowX: "auto", flex: 1, alignItems: "stretch" }}>
+                {/* Section 1: Names & Normals Control */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "190px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <label style={{ fontSize: "9px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em" }}>Piece Name</label>
+                    <input
+                      type="text"
+                      className="studio-input"
+                      style={{ padding: "4px 6px", fontSize: "11px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "4px" }}
+                      value={selectedPiece.name}
+                      onChange={(e) => modelStore.updatePieceName(selectedPiece.id, e.target.value)}
+                    />
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <label style={{ fontSize: "9px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em" }}>Material Name</label>
+                    <input
+                      type="text"
+                      className="studio-input"
+                      style={{ padding: "4px 6px", fontSize: "11px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "4px" }}
+                      value={activePieceMat?.name || "PieceMaterial"}
+                      onChange={(e) => modelStore.updatePieceMaterialName(selectedPiece.id, e.target.value)}
+                    />
+                  </div>
+
+                  <div style={{ display: "flex", gap: "6px", marginTop: "auto" }}>
+                    <button
+                      className="studio-btn-secondary"
+                      style={{
+                        flex: 1,
+                        padding: "5px 8px",
+                        fontSize: "10.5px",
+                        background: "rgba(14, 165, 233, 0.15)",
+                        border: "1px solid rgba(14, 165, 233, 0.4)",
+                        color: "#38bdf8",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "4px"
+                      }}
+                      title="Flip surface vertex normals and winding order if mesh appears inside-out"
+                      onClick={() => {
+                        modelStore.flipPieceNormals(selectedPiece.id);
+                        onShowToast?.(`Flipped normals for "${selectedPiece.name}"`);
+                      }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="17 1 21 5 17 9" />
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                        <polyline points="7 23 3 19 7 15" />
+                        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                      </svg>
+                      <span>Flip Normals</span>
+                    </button>
+
+                    <button
+                      className="studio-btn-secondary"
+                      style={{
+                        padding: "5px 8px",
+                        fontSize: "10.5px",
+                        background: "#0f172a",
+                        border: "1px solid #334155",
+                        color: "#94a3b8",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                      }}
+                      title="Center pivot of this piece to its centroid"
+                      onClick={() => {
+                        modelStore.centerPiecePivot(selectedPiece.id);
+                        onShowToast?.(`Centered pivot for "${selectedPiece.name}"`);
+                      }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="3" />
+                        <line x1="12" y1="2" x2="12" y2="6" />
+                        <line x1="12" y1="18" x2="12" y2="22" />
+                        <line x1="2" y1="12" x2="6" y2="12" />
+                        <line x1="18" y1="12" x2="22" y2="12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Section 2: Texture Channels (Diffuse & Normal) */}
+                <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
+                  {/* Diffuse Slot */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "135px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Diffuse Texture</span>
+                      <span style={{ fontSize: "8.5px", color: pieceDiffuseMap ? "#10b981" : "#64748b" }}>
+                        {pieceDiffuseMap ? "Loaded" : "None"}
+                      </span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {pieceDiffuseMap?.image?.src ? (
+                        <img
+                          src={pieceDiffuseMap.image.src}
+                          alt="diffuse map"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "9px", color: "#64748b" }}>No Map</span>
+                      )}
+                    </div>
+
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }}>
+                      <button
+                        className="studio-btn-secondary"
+                        style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
+                        onClick={() => {
+                          setUploadTargetChannel("diffuse");
+                          pieceFileInputRef.current?.click();
+                        }}
+                      >
+                        Upload
+                      </button>
+                      {pieceDiffuseMap && (
+                        <button
+                          className="studio-btn-secondary"
+                          style={{ padding: "3px 6px", fontSize: "9.5px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.4)", color: "#f87171" }}
+                          title="Remove diffuse texture"
+                          onClick={() => {
+                            modelStore.removePieceTextureMap(selectedPiece.id, "diffuse");
+                            onShowToast?.("Removed diffuse map");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Normal Slot */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: "135px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Normal Map</span>
+                      <span style={{ fontSize: "8.5px", color: pieceNormalMap ? "#00e5ff" : "#64748b" }}>
+                        {pieceNormalMap ? "Tangent" : "None"}
+                      </span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "48px", background: "#0f172a", borderRadius: "4px", overflow: "hidden", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {pieceNormalMap?.image?.src ? (
+                        <img
+                          src={pieceNormalMap.image.src}
+                          alt="normal map"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "9px", color: "#64748b" }}>No Map</span>
+                      )}
+                    </div>
+
+                    <div style={{ display: "flex", gap: "4px", marginTop: "auto" }}>
+                      <button
+                        className="studio-btn-secondary"
+                        style={{ flex: 1, padding: "3px 6px", fontSize: "9.5px", background: "#1e293b", color: "#e2e8f0" }}
+                        onClick={() => {
+                          setUploadTargetChannel("normal");
+                          pieceFileInputRef.current?.click();
+                        }}
+                      >
+                        Upload
+                      </button>
+                      {pieceNormalMap && (
+                        <button
+                          className="studio-btn-secondary"
+                          style={{ padding: "3px 6px", fontSize: "9.5px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid rgba(239, 68, 68, 0.4)", color: "#f87171" }}
+                          title="Remove normal map"
+                          onClick={() => {
+                            modelStore.removePieceTextureMap(selectedPiece.id, "normal");
+                            onShowToast?.("Removed normal map");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section 3: UV Tilings & Normal Strength Sliders */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "220px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b", flex: 1 }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Texture Tilings (UV Repeat)</span>
+                    <button
+                      className="studio-btn-secondary"
+                      style={{
+                        padding: "2px 6px",
+                        fontSize: "9px",
+                        background: isTileLocked ? "rgba(6, 182, 212, 0.2)" : "#0f172a",
+                        border: isTileLocked ? "1px solid #22d3ee" : "1px solid #1e293b",
+                        color: isTileLocked ? "#22d3ee" : "#64748b"
+                      }}
+                      onClick={() => setIsTileLocked(!isTileLocked)}
+                      title="Keep 1:1 Isotropic Aspect Ratio (Repeat X = Repeat Y)"
+                    >
+                      {isTileLocked ? "🔗 Locked 1:1" : "Unlinked"}
+                    </button>
+                  </div>
+
+                  {/* Tile Repeat X */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "45px" }}>Tile X:</span>
+                    <input
+                      type="range"
+                      min="0.1"
+                      max="40"
+                      step="0.1"
+                      value={pieceRepeatX}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value);
+                        const nextY = isTileLocked ? val : pieceRepeatY;
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY);
+                      }}
+                      style={{ flex: 1 }}
+                    />
+                    <input
+                      type="number"
+                      min="0.01"
+                      max="100"
+                      step="0.1"
+                      value={Number(pieceRepeatX.toFixed(2))}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value) || 1;
+                        const nextY = isTileLocked ? val : pieceRepeatY;
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY);
+                      }}
+                      style={{ width: "48px", padding: "2px 4px", fontSize: "10px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "3px", textAlign: "right" }}
+                    />
+                  </div>
+
+                  {/* Tile Repeat Y */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "45px" }}>Tile Y:</span>
+                    <input
+                      type="range"
+                      min="0.1"
+                      max="40"
+                      step="0.1"
+                      value={pieceRepeatY}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value);
+                        const nextX = isTileLocked ? val : pieceRepeatX;
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val);
+                      }}
+                      style={{ flex: 1 }}
+                    />
+                    <input
+                      type="number"
+                      min="0.01"
+                      max="100"
+                      step="0.1"
+                      value={Number(pieceRepeatY.toFixed(2))}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value) || 1;
+                        const nextX = isTileLocked ? val : pieceRepeatX;
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val);
+                      }}
+                      style={{ width: "48px", padding: "2px 4px", fontSize: "10px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "3px", textAlign: "right" }}
+                    />
+                  </div>
+
+                  {/* Normal Scale / Strength */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "auto" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "45px" }}>Bump:</span>
+                    <input
+                      type="range"
+                      min="0.0"
+                      max="3.0"
+                      step="0.05"
+                      value={pieceNormalScale}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value);
+                        modelStore.setPieceNormalScale(selectedPiece.id, val);
+                      }}
+                      style={{ flex: 1 }}
+                    />
+                    <span style={{ width: "48px", fontSize: "10px", color: "#94a3b8", textAlign: "right" }}>
+                      {pieceNormalScale.toFixed(2)}x
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "80px", color: "#64748b", fontSize: "12px", background: "#0a0e17", borderRadius: "6px", border: "1px dashed #1e293b" }}>
+                Select any garment mesh piece to edit its material, tilings, textures, or flip surface normals.
+              </div>
+            )}
           </div>
         ) : (
           <>
