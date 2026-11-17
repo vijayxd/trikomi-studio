@@ -4,6 +4,10 @@ import './index.css'
 import './studio.css'
 import { App } from './App'
 import { modelStore, uvOrganizerStore, studioViewerManager } from '@trikomi/core/studio'
+import { initStudioData } from './services/studioAssetResolver'
+
+// Initialize direct Google Drive integration for GitHub Pages & standalone usage
+initStudioData(modelStore, uvOrganizerStore);
 
 // Expose stores for debug inspection & headless test simulations
 if (typeof window !== 'undefined') {

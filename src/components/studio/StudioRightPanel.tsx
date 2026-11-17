@@ -148,6 +148,20 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
             title="Save UV Layout delta directly to Google Drive"
             onClick={async () => {
               onShowToast?.("Saving UV layout to Google Drive...");
+              try {
+                const { GoogleDriveClient } = await import("../../services/GoogleDriveClient");
+                const delta = uvOrganizerStore.exportUVLayoutDelta();
+                if (delta) {
+                  const directRes = await GoogleDriveClient.saveUVLayoutDelta(delta);
+                  if (directRes.success) {
+                    onShowToast?.("UV layout saved to Google Drive successfully!");
+                    return;
+                  }
+                }
+              } catch (e) {
+                console.warn("[Studio] Direct save fallback to store:", e);
+              }
+
               const res = await uvOrganizerStore.saveUVLayoutToDisk();
               if (res.success) {
                 onShowToast?.("UV layout saved to Google Drive successfully!");
