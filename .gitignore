@@ -42,3 +42,9 @@ test_env
 *.sln
 *.sw?
 .git_backup*
+
+# Local Drive Cache & Service Account Secrets
+.fabric_cache/
+*.json.key
+*credentials*.json
+*victorshell*.json

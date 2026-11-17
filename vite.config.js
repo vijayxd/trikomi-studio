@@ -321,6 +321,7 @@ function style3dBridgePlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: process.env.VITE_BASE_URL || './',
   resolve: {
     alias: dynamicAlias,
     dedupe: ['mobx', 'mobx-react-lite', 'three']
