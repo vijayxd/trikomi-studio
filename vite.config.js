@@ -3,12 +3,11 @@ import { defineConfig } from 'vite';
 import fs from 'fs';
 import path from 'path';
 
-// --- Local Trikomi SDK Resolution (Matches trikomi-demo vite.config.ts) ---
+// --- Trikomi SDK Resolution (Matches trikomi-demo vite.config.ts) ---
 const localSdkRoot = path.resolve(__dirname, '../trikomi/packages');
 const localCoreEntry = path.resolve(localSdkRoot, 'core/src/index.ts');
-const useLocalSdk = fs.existsSync(localCoreEntry) || process.env.USE_LOCAL_SDK === 'true';
 
-const dynamicAlias = useLocalSdk ? [
+const getDynamicAlias = (useLocalSdk) => (useLocalSdk ? [
   { find: '@trikomi/core/8thwall', replacement: path.resolve(localSdkRoot, '8thwall/src/index.ts') },
   { find: '@trikomi/core/sportswear', replacement: path.resolve(localSdkRoot, 'sportswear/src/index.ts') },
   { find: '@trikomi/core/face-mocap', replacement: path.resolve(localSdkRoot, 'face-mocap/src/index.ts') },
@@ -24,7 +23,7 @@ const dynamicAlias = useLocalSdk ? [
   { find: 'three/addons', replacement: path.resolve(localSdkRoot, 'core/node_modules/three/examples/jsm') },
   { find: /^mobx$/, replacement: path.resolve(__dirname, 'node_modules/mobx/dist/mobx.esm.js') },
   { find: /^mobx-react-lite$/, replacement: path.resolve(__dirname, 'node_modules/mobx-react-lite/es/index.js') }
-] : [];
+] : []);
 
 let activeTransfer = null;
 let sseClients = [];
@@ -320,58 +319,65 @@ function style3dBridgePlugin() {
 }
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: process.env.VITE_BASE_URL || './',
-  resolve: {
-    alias: dynamicAlias,
-    dedupe: ['mobx', 'mobx-react-lite', 'three']
-  },
-  define: {
-    'process.env.SECURITY_CODE': '""',
-    'process.env': {}
-  },
-  optimizeDeps: {
-    exclude: ['@jitl/quickjs-wasmfile-release-sync']
-  },
-  server: {
-    fs: {
-      allow: ['..']
+export default defineConfig(({ command }) => {
+  // Dev mode always uses local SDK if available; build mode uses npm package unless USE_LOCAL_SDK=true is set
+  const isDev = command === 'serve';
+  const useLocalSdk = isDev ? fs.existsSync(localCoreEntry) : (process.env.USE_LOCAL_SDK === 'true');
+  const dynamicAlias = getDynamicAlias(useLocalSdk);
+
+  return {
+    base: process.env.VITE_BASE_URL || './',
+    resolve: {
+      alias: dynamicAlias,
+      dedupe: ['mobx', 'mobx-react-lite', 'three']
     },
-    watch: {
-      ignored: ['**/models_storage/**', '**/public/models_storage/**']
+    define: {
+      'process.env.SECURITY_CODE': '""',
+      'process.env': {}
     },
-    proxy: {
-      '/api/fabric_library': {
-        target: 'http://127.0.0.1:4001',
-        changeOrigin: true
+    optimizeDeps: {
+      exclude: ['@jitl/quickjs-wasmfile-release-sync']
+    },
+    server: {
+      fs: {
+        allow: ['..']
       },
-      '/api/models_storage': {
-        target: 'http://127.0.0.1:4001',
-        changeOrigin: true
+      watch: {
+        ignored: ['**/models_storage/**', '**/public/models_storage/**']
       },
-      '/api/data': {
-        target: 'http://127.0.0.1:4001',
-        changeOrigin: true
-      },
-      '/api/save-uv-layout': {
-        target: 'http://127.0.0.1:4001',
-        changeOrigin: true
-      },
-      '/api/get-uv-layout': {
-        target: 'http://127.0.0.1:4001',
-        changeOrigin: true
+      proxy: {
+        '/api/fabric_library': {
+          target: 'http://127.0.0.1:4001',
+          changeOrigin: true
+        },
+        '/api/models_storage': {
+          target: 'http://127.0.0.1:4001',
+          changeOrigin: true
+        },
+        '/api/data': {
+          target: 'http://127.0.0.1:4001',
+          changeOrigin: true
+        },
+        '/api/save-uv-layout': {
+          target: 'http://127.0.0.1:4001',
+          changeOrigin: true
+        },
+        '/api/get-uv-layout': {
+          target: 'http://127.0.0.1:4001',
+          changeOrigin: true
+        }
       }
-    }
-  },
-  assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.hdr', '**/*.exr', '**/*.obj'],
-  plugins: [react(), style3dBridgePlugin(), ...(useLocalSdk ? [serveSecurityTxtPlugin()] : [])],
-  build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-        catalog: path.resolve(__dirname, 'catalog.html'),
-        materials: path.resolve(__dirname, 'materials.html'),
+    },
+    assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.hdr', '**/*.exr', '**/*.obj'],
+    plugins: [react(), style3dBridgePlugin(), ...(useLocalSdk ? [serveSecurityTxtPlugin()] : [])],
+    build: {
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          catalog: path.resolve(__dirname, 'catalog.html'),
+          materials: path.resolve(__dirname, 'materials.html'),
+        },
       },
     },
-  },
+  };
 });
