@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { modelStore, uvOrganizerStore } from "@trikomi/core/studio";
+import { modelStore, uvOrganizerStore, getFabricAssetUrl } from "@trikomi/core/studio";
 
 interface StudioBottomDockProps {
   collapsed?: boolean;
@@ -119,6 +119,8 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
 
   if (collapsed) return null;
 
+  void (modelStore as any).materialVersion;
+
   const selectedPiece = modelStore.selectedPiece;
   const activePieceMat = selectedPiece?.material as any;
   const pieceDiffuseMap = activePieceMat?.map;
@@ -137,9 +139,21 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
     ao: pieceAoMap
   };
   const activeTilingTexture = channelMapRecord[activeTilingChannel];
-  const pieceRepeatX = activeTilingTexture?.repeat?.x ?? 1;
-  const pieceRepeatY = activeTilingTexture?.repeat?.y ?? 1;
+  const pieceRepeatX = activePieceMat?.userData?.repeatX 
+    ?? activeTilingTexture?.repeat?.x 
+    ?? activePieceMat?.map?.repeat?.x 
+    ?? activePieceMat?.normalMap?.repeat?.x 
+    ?? 1;
+  const pieceRepeatY = activePieceMat?.userData?.repeatY 
+    ?? activeTilingTexture?.repeat?.y 
+    ?? activePieceMat?.map?.repeat?.y 
+    ?? activePieceMat?.normalMap?.repeat?.y 
+    ?? 1;
   const pieceNormalScale = activePieceMat?.normalScale?.x ?? 1.0;
+  const pieceColorHex = activePieceMat?.color ? "#" + activePieceMat.color.getHexString() : "#ffffff";
+  const pieceRoughness = activePieceMat?.roughness !== undefined ? activePieceMat.roughness : 0.8;
+  const pieceMetalness = activePieceMat?.metalness !== undefined ? activePieceMat.metalness : 0.0;
+  const pieceOpacity = activePieceMat?.opacity !== undefined ? activePieceMat.opacity : 1.0;
 
   const handlePieceFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -236,7 +250,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                   {activeCuratedMat?.diffuseMapUrl ? (
                     <img
-                      src={activeCuratedMat.diffuseMapUrl}
+                      src={getFabricAssetUrl(activeCuratedMat.diffuseMapUrl)}
                       alt="diffuse"
                       style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
                     />
@@ -262,7 +276,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                   {activeCuratedMat?.normalMapUrl ? (
                     <img
-                      src={activeCuratedMat.normalMapUrl}
+                      src={getFabricAssetUrl(activeCuratedMat.normalMapUrl)}
                       alt="normal"
                       style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
                     />
@@ -288,7 +302,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                   {activeCuratedMat?.maps?.glossiness ? (
                     <img
-                      src={activeCuratedMat.maps.glossiness}
+                      src={getFabricAssetUrl(activeCuratedMat.maps.glossiness)}
                       alt="roughness"
                       style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
                     />
@@ -312,7 +326,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                   {activeCuratedMat?.maps?.displacement ? (
                     <img
-                      src={activeCuratedMat.maps.displacement}
+                      src={getFabricAssetUrl(activeCuratedMat.maps.displacement)}
                       alt="displacement"
                       style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
                     />
@@ -336,7 +350,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                   {activeCuratedMat?.maps?.metalness ? (
                     <img
-                      src={activeCuratedMat.maps.metalness}
+                      src={getFabricAssetUrl(activeCuratedMat.maps.metalness)}
                       alt="metalness"
                       style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
                     />
@@ -360,7 +374,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   </div>
                   {activeCuratedMat?.maps?.alpha ? (
                     <img
-                      src={activeCuratedMat.maps.alpha}
+                      src={getFabricAssetUrl(activeCuratedMat.maps.alpha)}
                       alt="alpha"
                       style={{ width: "100%", height: "48px", objectFit: "cover", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.1)" }}
                     />
@@ -518,6 +532,108 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                         <line x1="18" y1="12" x2="22" y2="12" />
                       </svg>
                     </button>
+                  </div>
+                </div>
+
+                {/* Section 1.5: Core PBR Material Properties (Color, Roughness, Metalness, Opacity) */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "205px", background: "#0a0e17", padding: "8px", borderRadius: "6px", border: "1px solid #1e293b", flexShrink: 0 }}>
+                  <span style={{ fontSize: "9.5px", color: "#38bdf8", fontWeight: "700", letterSpacing: "0.03em" }}>
+                    Core Properties
+                  </span>
+
+                  {/* Base Color Picker & Hex */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "50px" }}>Color:</span>
+                    <input
+                      type="color"
+                      value={pieceColorHex}
+                      onChange={(e) => modelStore.setPieceColor(selectedPiece.id, e.target.value)}
+                      style={{
+                        width: "24px",
+                        height: "22px",
+                        padding: "0",
+                        background: "none",
+                        border: "1px solid #334155",
+                        borderRadius: "4px",
+                        cursor: "pointer"
+                      }}
+                      title="Choose base tint color"
+                    />
+                    <input
+                      type="text"
+                      value={pieceColorHex.toUpperCase()}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (/^#[0-9A-F]{6}$/i.test(val)) {
+                          modelStore.setPieceColor(selectedPiece.id, val);
+                        }
+                      }}
+                      style={{
+                        width: "60px",
+                        padding: "2px 4px",
+                        fontSize: "10px",
+                        background: "#0f172a",
+                        border: "1px solid #334155",
+                        color: "#f8fafc",
+                        borderRadius: "3px",
+                        textAlign: "center",
+                        fontFamily: "monospace"
+                      }}
+                    />
+                  </div>
+
+                  {/* Roughness Slider */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "50px" }}>Rough:</span>
+                    <input
+                      type="range"
+                      min="0.0"
+                      max="1.0"
+                      step="0.01"
+                      value={pieceRoughness}
+                      onChange={(e) => modelStore.setPieceRoughness(selectedPiece.id, parseFloat(e.target.value))}
+                      style={{ flex: 1 }}
+                      title="Surface Roughness (0.0 = Glossy/Smooth, 1.0 = Matte/Rough)"
+                    />
+                    <span style={{ width: "28px", fontSize: "10px", color: "#94a3b8", textAlign: "right" }}>
+                      {pieceRoughness.toFixed(2)}
+                    </span>
+                  </div>
+
+                  {/* Metalness Slider */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "50px" }}>Metal:</span>
+                    <input
+                      type="range"
+                      min="0.0"
+                      max="1.0"
+                      step="0.01"
+                      value={pieceMetalness}
+                      onChange={(e) => modelStore.setPieceMetalness(selectedPiece.id, parseFloat(e.target.value))}
+                      style={{ flex: 1 }}
+                      title="Metallic Luster (0.0 = Dielectric Fabric, 1.0 = Metal/Chrome)"
+                    />
+                    <span style={{ width: "28px", fontSize: "10px", color: "#94a3b8", textAlign: "right" }}>
+                      {pieceMetalness.toFixed(2)}
+                    </span>
+                  </div>
+
+                  {/* Alpha / Opacity Slider */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "auto" }}>
+                    <span style={{ fontSize: "9.5px", color: "#cbd5e1", width: "50px" }}>Alpha:</span>
+                    <input
+                      type="range"
+                      min="0.0"
+                      max="1.0"
+                      step="0.01"
+                      value={pieceOpacity}
+                      onChange={(e) => modelStore.setPieceOpacity(selectedPiece.id, parseFloat(e.target.value))}
+                      style={{ flex: 1 }}
+                      title="Opacity / Transparency (1.0 = Fully Opaque, 0.0 = Transparent)"
+                    />
+                    <span style={{ width: "28px", fontSize: "10px", color: "#94a3b8", textAlign: "right" }}>
+                      {pieceOpacity.toFixed(2)}
+                    </span>
                   </div>
                 </div>
 
@@ -913,8 +1029,8 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                       <span style={{ fontSize: "9.5px", color: "#94a3b8", fontWeight: "600" }}>Tiling:</span>
-                      <span style={{ fontSize: "9.5px", color: "#00e5ff", fontWeight: "700", textTransform: "capitalize" }}>
-                        {activeTilingChannel} Map
+                      <span style={{ fontSize: "9.5px", color: "#00e5ff", fontWeight: "700" }}>
+                        All Maps
                       </span>
                     </div>
                     <button
@@ -945,7 +1061,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value);
                         const nextY = isTileLocked ? val : pieceRepeatY;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY, activeTilingChannel);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY, undefined, true);
                       }}
                       style={{ flex: 1 }}
                     />
@@ -958,7 +1074,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value) || 1;
                         const nextY = isTileLocked ? val : pieceRepeatY;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY, activeTilingChannel);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, val, nextY, undefined, true);
                       }}
                       style={{ width: "48px", padding: "2px 4px", fontSize: "10px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "3px", textAlign: "right" }}
                     />
@@ -976,7 +1092,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value);
                         const nextX = isTileLocked ? val : pieceRepeatX;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val, activeTilingChannel);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val, undefined, true);
                       }}
                       style={{ flex: 1 }}
                     />
@@ -989,7 +1105,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
                       onChange={(e) => {
                         const val = parseFloat(e.target.value) || 1;
                         const nextX = isTileLocked ? val : pieceRepeatX;
-                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val, activeTilingChannel);
+                        modelStore.setPieceTextureRepeat(selectedPiece.id, nextX, val, undefined, true);
                       }}
                       style={{ width: "48px", padding: "2px 4px", fontSize: "10px", background: "#0f172a", border: "1px solid #334155", color: "#f8fafc", borderRadius: "3px", textAlign: "right" }}
                     />
@@ -1081,7 +1197,7 @@ export const StudioBottomDock: React.FC<StudioBottomDockProps> = observer(({
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", gap: "8px", overflowX: "auto", paddingBottom: "4px" }}>
               {filteredCuratedMaterials.map((m: any) => {
                 const isActive = modelStore.selectedMaterialId === m.id;
-                const thumb = m.sphereThumbnailUrl || m.thumbnailUrl;
+                const thumb = getFabricAssetUrl(m.sphereThumbnailUrl || m.thumbnailUrl);
                 return (
                   <div
                     key={m.id}

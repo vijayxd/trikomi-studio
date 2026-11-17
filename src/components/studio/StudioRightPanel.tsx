@@ -136,6 +136,32 @@ export const StudioRightPanel: React.FC<StudioRightPanelProps> = observer(({
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
           </button>
+
+          {/* Save UV Layout to Google Drive Button */}
+          <button
+            className="tool-btn tool-btn-sm"
+            style={{
+              color: "#00f0ff",
+              borderColor: "rgba(0, 240, 255, 0.4)",
+              background: "rgba(0, 240, 255, 0.08)"
+            }}
+            title="Save UV Layout delta directly to Google Drive"
+            onClick={async () => {
+              onShowToast?.("Saving UV layout to Google Drive...");
+              const res = await uvOrganizerStore.saveUVLayoutToDisk();
+              if (res.success) {
+                onShowToast?.("UV layout saved to Google Drive successfully!");
+              } else {
+                onShowToast?.("Could not save UV layout");
+              }
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+          </button>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>

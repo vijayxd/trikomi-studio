@@ -235,47 +235,13 @@ function style3dBridgePlugin() {
           return;
         }
 
-        // Lightweight UV Layout Delta Persistence API
+        // Lightweight UV Layout Delta Persistence API (forwarded to proxy if running)
         if (req.url === '/api/save-uv-layout' && req.method === 'POST') {
-          let body = '';
-          req.on('data', chunk => { body += chunk; });
-          req.on('end', () => {
-            try {
-              const delta = JSON.parse(body);
-              if (!delta.garmentId) throw new Error('Missing garmentId');
-              const layoutDir = path.resolve(__dirname, 'public/data/uv_layouts');
-              if (!fs.existsSync(layoutDir)) fs.mkdirSync(layoutDir, { recursive: true });
-
-              const targetPath = path.join(layoutDir, `${delta.garmentId}.json`);
-              fs.writeFileSync(targetPath, JSON.stringify(delta, null, 2), 'utf8');
-
-              res.setHeader('Content-Type', 'application/json');
-              res.statusCode = 200;
-              res.end(JSON.stringify({ status: 'ok', savedAt: delta.updatedAt, path: targetPath }));
-              console.log(`[UV Layout API] Saved layout delta for ${delta.garmentId} (${Object.keys(delta.islands || {}).length} islands)`);
-            } catch (err) {
-              res.statusCode = 400;
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ error: err.message }));
-            }
-          });
-          return;
+          return next();
         }
 
         if (req.url?.startsWith('/api/get-uv-layout') && req.method === 'GET') {
-          const urlObj = new URL(req.url, 'http://localhost:5173');
-          const garmentId = urlObj.searchParams.get('id');
-          const layoutPath = path.resolve(__dirname, `public/data/uv_layouts/${garmentId}.json`);
-          if (garmentId && fs.existsSync(layoutPath)) {
-            const data = fs.readFileSync(layoutPath, 'utf8');
-            res.setHeader('Content-Type', 'application/json');
-            res.statusCode = 200;
-            res.end(data);
-          } else {
-            res.statusCode = 404;
-            res.end(JSON.stringify({ error: 'Layout delta not found' }));
-          }
-          return;
+          return next();
         }
 
         // Save Sphere Thumbnail Image (300x300 transparent PNG)
@@ -372,6 +338,28 @@ export default defineConfig({
     },
     watch: {
       ignored: ['**/models_storage/**', '**/public/models_storage/**']
+    },
+    proxy: {
+      '/api/fabric_library': {
+        target: 'http://127.0.0.1:4001',
+        changeOrigin: true
+      },
+      '/api/models_storage': {
+        target: 'http://127.0.0.1:4001',
+        changeOrigin: true
+      },
+      '/api/data': {
+        target: 'http://127.0.0.1:4001',
+        changeOrigin: true
+      },
+      '/api/save-uv-layout': {
+        target: 'http://127.0.0.1:4001',
+        changeOrigin: true
+      },
+      '/api/get-uv-layout': {
+        target: 'http://127.0.0.1:4001',
+        changeOrigin: true
+      }
     }
   },
   assetsInclude: ['**/*.gltf', '**/*.glb', '**/*.hdr', '**/*.exr', '**/*.obj'],

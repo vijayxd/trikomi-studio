@@ -138,6 +138,89 @@ export const StudioCenterViewport: React.FC<StudioCenterViewportProps> = observe
         className="viewport-canvas-mount"
       />
 
+      {/* Viewport Model Loading Progress Overlay */}
+      {modelStore.isLoadingCuratedModel && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(10, 15, 26, 0.72)",
+            backdropFilter: "blur(6px)",
+            zIndex: 40,
+            pointerEvents: "none",
+            gap: "14px"
+          }}
+        >
+          {/* Cyberpunk Progress Card */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "10px",
+              padding: "18px 24px",
+              background: "#0c1322",
+              border: "1px solid rgba(0, 240, 255, 0.3)",
+              borderRadius: "8px",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 240, 255, 0.15)",
+              minWidth: "280px"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00f0ff"
+                strokeWidth="2.5"
+                style={{ animation: "spin 1.2s linear infinite" }}
+              >
+                <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
+              </svg>
+              <span style={{ fontSize: "12px", fontWeight: "700", color: "#f8fafc", letterSpacing: "0.5px" }}>
+                STREAMING 3D ASSET
+              </span>
+            </div>
+
+            {/* Progress Bar Track */}
+            <div
+              style={{
+                width: "100%",
+                height: "6px",
+                background: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "3px",
+                overflow: "hidden"
+              }}
+            >
+              <div
+                style={{
+                  width: `${modelStore.loadingProgress}%`,
+                  height: "100%",
+                  background: "linear-gradient(90deg, #00f0ff, #a855f7)",
+                  transition: "width 0.15s ease",
+                  boxShadow: "0 0 8px #00f0ff"
+                }}
+              />
+            </div>
+
+            {/* Status Text and Percentage */}
+            <div style={{ display: "flex", justifyContent: "space-between", width: "100%", fontSize: "10.5px" }}>
+              <span style={{ color: "#94a3b8" }}>
+                {modelStore.loadingStatusMessage || "Downloading geometry..."}
+              </span>
+              <span style={{ color: "#00f0ff", fontWeight: "700" }}>
+                {Math.round(modelStore.loadingProgress)}%
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Bottom Status Overlay */}
       <div className="viewport-bottom-status-overlay">
         <span>
